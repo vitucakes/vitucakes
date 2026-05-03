@@ -20,9 +20,10 @@ export default function InsumosPage({ insumos, setInsumos }) {
   const [search, setSearch] = useState('')
   const [deleteId, setDeleteId] = useState(null)
 
-  const filtered = insumos.filter((i) =>
-    i.nombre.toLowerCase().includes(search.toLowerCase())
-  )
+  const filtered = insumos
+    .filter((i) => i.nombre.toLowerCase().includes(search.toLowerCase()))
+    .slice()
+    .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
 
   const openAdd = () => { setEditId(null); setForm({ ...EMPTY, fechaActualizacion: todayISO() }); setOpen(true) }
 
@@ -59,6 +60,7 @@ export default function InsumosPage({ insumos, setInsumos }) {
           unidad: form.unidad,
           precioPorUnidad: precio,
           fechaActualizacion: precioCambio ? (form.fechaActualizacion || todayISO()) : (i.fechaActualizacion ?? form.fechaActualizacion ?? todayISO()),
+          updatedAt: Date.now(),
         }
       }))
     } else {
@@ -68,6 +70,7 @@ export default function InsumosPage({ insumos, setInsumos }) {
         unidad: form.unidad,
         precioPorUnidad: precio,
         fechaActualizacion: form.fechaActualizacion || todayISO(),
+        updatedAt: Date.now(),
       }])
     }
     setOpen(false)

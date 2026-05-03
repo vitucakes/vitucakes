@@ -46,7 +46,10 @@ export default function App() {
             recetas={recetas}
             setRecetas={setRecetas}
             insumos={insumos}
-            onSelect={(id) => navigate('detalle', id)}
+            onSelect={(id) => {
+              setRecetas((prev) => prev.map((r) => r.id === id ? { ...r, updatedAt: Date.now() } : r))
+              navigate('detalle', id)
+            }}
           />
         )}
         {page === 'detalle' && selectedReceta && (
@@ -54,7 +57,7 @@ export default function App() {
             receta={selectedReceta}
             insumos={insumos}
             onBack={() => navigate('recetas')}
-            onUpdate={(updated) => setRecetas((prev) => prev.map((r) => r.id === updated.id ? updated : r))}
+            onUpdate={(updated) => setRecetas((prev) => prev.map((r) => r.id === updated.id ? { ...updated, updatedAt: Date.now() } : r))}
             onDelete={(id) => { setRecetas((prev) => prev.filter((r) => r.id !== id)); navigate('recetas') }}
           />
         )}

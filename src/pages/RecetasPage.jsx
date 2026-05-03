@@ -12,9 +12,10 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
   const [ingForm, setIngForm] = useState(EMPTY_ING)
   const [search, setSearch] = useState('')
 
-  const filteredRecetas = recetas.filter((r) =>
-    r.nombre.toLowerCase().includes(search.toLowerCase())
-  )
+  const filteredRecetas = recetas
+    .filter((r) => r.nombre.toLowerCase().includes(search.toLowerCase()))
+    .slice()
+    .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
 
   const openAdd = () => { setEditId(null); setForm(EMPTY_RECETA); setIngForm(EMPTY_ING); setOpen(true) }
 
@@ -44,7 +45,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
     const nombre = form.nombre.trim()
     const rinde = parseFloat(form.rinde)
     if (!nombre || isNaN(rinde) || rinde <= 0 || form.ingredientes.length === 0) return
-    const data = { nombre, rinde, unidadRinde: form.unidadRinde, ingredientes: form.ingredientes, margen: form.margen }
+    const data = { nombre, rinde, unidadRinde: form.unidadRinde, ingredientes: form.ingredientes, margen: form.margen, updatedAt: Date.now() }
     if (editId) {
       setRecetas((prev) => prev.map((r) => r.id === editId ? { ...r, ...data } : r))
     } else {
