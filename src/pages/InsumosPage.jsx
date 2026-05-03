@@ -3,7 +3,15 @@ import BottomSheet from '../components/BottomSheet'
 
 const UNIDADES = ['kg', 'g', 'l', 'ml', 'u', 'cdas', 'cdtas', 'taza', 'atado']
 
-const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
+const todayISO = () => new Date().toISOString().slice(0, 10)
+
+const formatDate = (iso) => {
+  if (!iso) return ''
+  const [y, m, d] = iso.split('-')
+  return `${d}/${m}/${y}`
+}
+
+const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '', fechaActualizacion: todayISO() }
 
 export default function InsumosPage({ insumos, setInsumos }) {
   const [open, setOpen] = useState(false)
@@ -16,11 +24,18 @@ export default function InsumosPage({ insumos, setInsumos }) {
     i.nombre.toLowerCase().includes(search.toLowerCase())
   )
 
-  const openAdd = () => { setEditId(null); setForm(EMPTY); setOpen(true) }
+  const openAdd = () => { setEditId(null); setForm({ ...EMPTY, fechaActualizacion: todayISO() }); setOpen(true) }
 
   const openEdit = (ins) => {
     setEditId(ins.id)
-    setForm({ nombre: ins.nombre, unidad: ins.unidad, precioPorUnidad: String(ins.precioPorUnidad), totalPagado: '', cantidadComprada: '' })
+    setForm({
+      nombre: ins.nombre,
+      unidad: ins.unidad,
+      precioPorUnidad: String(ins.precioPorUnidad),
+      totalPagado: '',
+      cantidadComprada: '',
+      fechaActualizacion: ins.fechaActualizacion ?? todayISO(),
+    })
     setOpen(true)
   }
 
@@ -35,9 +50,25 @@ export default function InsumosPage({ insumos, setInsumos }) {
     const precio = parseFloat(form.precioPorUnidad)
     if (!nombre || isNaN(precio) || precio <= 0) return
     if (editId) {
-      setInsumos((prev) => prev.map((i) => i.id === editId ? { ...i, nombre, unidad: form.unidad, precioPorUnidad: precio } : i))
+      setInsumos((prev) => prev.map((i) => {
+        if (i.id !== editId) return i
+        const precioCambio = i.precioPorUnidad !== precio
+        return {
+          ...i,
+          nombre,
+          unidad: form.unidad,
+          precioPorUnidad: precio,
+          fechaActualizacion: precioCambio ? (form.fechaActualizacion || todayISO()) : (i.fechaActualizacion ?? form.fechaActualizacion ?? todayISO()),
+        }
+      }))
     } else {
-      setInsumos((prev) => [...prev, { id: crypto.randomUUID(), nombre, unidad: form.unidad, precioPorUnidad: precio }])
+      setInsumos((prev) => [...prev, {
+        id: crypto.randomUUID(),
+        nombre,
+        unidad: form.unidad,
+        precioPorUnidad: precio,
+        fechaActualizacion: form.fechaActualizacion || todayISO(),
+      }])
     }
     setOpen(false)
   }
@@ -79,13 +110,16 @@ export default function InsumosPage({ insumos, setInsumos }) {
         )}
         {filtered.map((ins) => (
           <div key={ins.id} className="bg-white rounded-2xl px-4 py-3.5 flex items-center justify-between shadow-sm border border-brand-50">
-            <div>
-              <p className="font-semibold text-gray-800">{ins.nombre}</p>
+            <div className="flex-1 min-w-0">
+              <p className="font-semibold text-gray-800 truncate">{ins.nombre}</p>
               <p className="text-sm text-brand-500 font-medium mt-0.5">
                 ${ins.precioPorUnidad.toLocaleString('es-AR')} / {ins.unidad}
               </p>
+              {ins.fechaActualizacion && (
+                <p className="text-[11px] text-gray-400 mt-0.5">Actualizado: {formatDate(ins.fechaActualizacion)}</p>
+              )}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 ml-2">
               <button onClick={() => openEdit(ins)} className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base">✏️</button>
               <button onClick={() => confirmDelete(ins.id)} className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-base">🗑️</button>
             </div>
@@ -139,6 +173,12 @@ export default function InsumosPage({ insumos, setInsumos }) {
           <div>
             <label className="label">Precio por {form.unidad} ($)</label>
             <input type="number" {...field('precioPorUnidad')} placeholder="Ej: 1200" className="input font-semibold text-brand-600" />
+          </div>
+
+          <div>
+            <label className="label">Fecha de actualización</label>
+            <input type="date" {...field('fechaActualizacion')} className="input" />
+            <p className="text-xs text-gray-400 mt-1">Se actualiza automáticamente al cambiar el precio</p>
           </div>
 
           <button
