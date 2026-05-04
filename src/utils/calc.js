@@ -1,4 +1,5 @@
 export const GASTOS_INDIRECTOS = 0.10
+export const MARGEN = 3
 
 export const formatARS = (n) =>
   new Intl.NumberFormat('es-AR', {
