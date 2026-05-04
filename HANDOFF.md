@@ -41,9 +41,10 @@ Abre en `http://localhost:5173/vitucakes/`.
   nombre: string,
   rinde: number,                 // cuántas unidades produce
   unidadRinde: string,           // 'unidades', 'porciones', etc.
-  margen: number,                // multiplicador (3 = 200% ganancia)
   ingredientes: [{ insumoId: string, cantidad: number }],
   updatedAt: number,
+  // Nota: el campo `margen` quedó en recetas viejas pero ya no se usa.
+  // El margen es fijo (MARGEN = 3 en utils/calc.js).
 }
 ```
 
@@ -51,15 +52,15 @@ Abre en `http://localhost:5173/vitucakes/`.
 
 ```
 costoInsumos = sum(cantidad × precioPorUnidad)
-gastosIndirectos = costoInsumos × 0.10        // 10% fijo
+gastosIndirectos = costoInsumos × 0.10        // GASTOS_INDIRECTOS = 0.10
 costoTotal = costoInsumos × 1.10
 costoPorUnidad = costoTotal / rinde
-precioVenta = costoPorUnidad × margen         // margen siempre 3x
+precioVenta = costoPorUnidad × MARGEN         // MARGEN = 3 (fijo)
 ```
 
 ## Preferencias de la usuaria (importantes — respetar)
 
-- **Margen fijo en 3x** (200% de ganancia). Pidió sacar el selector. **Tarea a medio terminar**: agregué `MARGEN = 3` en `calc.js` pero **NO** removí los selectores UI en `RecetasPage.jsx` (form de receta) ni `RecetaDetail.jsx`. Hay que terminarlo: eliminar el bloque "Ajustar margen", usar `MARGEN` constante para todos los cálculos, y borrar `margen` del modelo de receta o ignorarlo.
+- **Margen fijo en 3x** (200% de ganancia). Selector de UI eliminado en PR #1 (mergeado). El cálculo usa la constante `MARGEN` de `calc.js` directamente.
 - **Gastos indirectos 10%** discriminados en el desglose de costos (ya implementado).
 - **Orden de listas**: por `updatedAt` descendente (las más recientes arriba). Se setea al crear, editar o **abrir** un detalle.
 - **Idioma**: español rioplatense (vos, "tocá", etc.).
@@ -117,14 +118,14 @@ Para extraer el `rinde`, regex sobre el nombre de la receta: `x N unidades`, `x 
 - Sort por última interacción (`updatedAt`)
 - Fecha de actualización por insumo (manual o auto al cambiar precio)
 - Deploy automático a GitHub Pages
+- **Quitar UI de margen** (PR #1 mergeado en `main`, deploy publicado)
 
 ## Pendiente / a terminar
 
-1. **Quitar UI de margen** (la usuaria pidió esto último — ver "Preferencias")
-2. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo)
-3. La usuaria quería un resumen en chat con costo + precio recomendado de cada receta (queda en el aire)
-4. Posible: botón "Recargar precarga" dentro de la app (lo ofrecí pero no lo implementé)
-5. Posible: usuaria mencionó tener `patriciovallerino-maker` como cuenta de GitHub pero el `gh` quedó autenticado con `patriciovallerino`
+1. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo)
+2. La usuaria quería un resumen en chat con costo + precio recomendado de cada receta (queda en el aire)
+3. Posible: botón "Recargar precarga" dentro de la app (lo ofrecí pero no lo implementé)
+4. Posible: usuaria mencionó tener `patriciovallerino-maker` como cuenta de GitHub pero el `gh` quedó autenticado con `patriciovallerino`
 
 ## Conversación previa relevante
 
@@ -136,7 +137,14 @@ Para extraer el `rinde`, regex sobre el nombre de la receta: `x N unidades`, `x 
 
 ## Si tenés que retomar
 
-1. Cloná el repo, `npm install`, `npm run dev`
+1. Cloná el repo (o si ya está local, `git pull`), `npm install`, `npm run dev`
 2. Lee este doc + scrolleá `src/App.jsx` para entender el flujo
-3. La tarea más fresca pendiente es quitar el selector de margen
+3. Revisá la sección **Pendiente / a terminar** de arriba
 4. Para deploy: cualquier push a `main` se publica solo en ~30s vía GitHub Actions
+
+## Último estado (2026-05-04)
+
+- PR #1 mergeado: selector de margen eliminado, `MARGEN = 3` fijo
+- `main` local sincronizado con `origin/main`
+- Sin tareas en curso
+- Carpeta del proyecto: `/Users/patriciomartinvallerino/Documents/General/Personal/vitucakes`
