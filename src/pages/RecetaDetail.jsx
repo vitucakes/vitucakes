@@ -1,25 +1,19 @@
 import { useState } from 'react'
-import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS } from '../utils/calc'
+import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
 
 export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDelete }) {
-  const [margen, setMargen] = useState(receta.margen)
   const [confirmDelete, setConfirmDelete] = useState(false)
 
   const costoInsumos = calcCostoInsumos(receta, insumos)
   const indirectos = calcGastosIndirectos(costoInsumos)
   const costo = calcCostoTotal(costoInsumos)
   const costoPorUnidad = receta.rinde > 0 ? costo / receta.rinde : 0
-  const precioVenta = costoPorUnidad * margen
+  const precioVenta = costoPorUnidad * MARGEN
 
   const insumosConProblema = receta.ingredientes.filter((ing) => {
     const ins = insumos.find((i) => i.id === ing.insumoId)
     return !ins || ins.precioPorUnidad <= 0
   })
-
-  const handleMargenChange = (m) => {
-    setMargen(m)
-    onUpdate({ ...receta, margen: m })
-  }
 
   return (
     <div className="flex flex-col min-h-full bg-brand-50">
@@ -72,34 +66,7 @@ export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDele
           <p className="text-4xl font-black">{formatARS(precioVenta)}</p>
           <div className="mt-3 pt-3 border-t border-white/20 flex justify-between text-sm">
             <span className="opacity-70">Costo / u: <span className="font-bold opacity-100">{formatARS(costoPorUnidad)}</span></span>
-            <span className="opacity-70">Margen: <span className="font-bold opacity-100">{margen}x</span></span>
-          </div>
-        </div>
-
-        {/* Margen selector */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Ajustar margen</p>
-          <div className="flex gap-2 mb-3">
-            {[2, 2.5, 3, 3.5, 4].map((m) => (
-              <button
-                key={m}
-                onClick={() => handleMargenChange(m)}
-                className={`flex-1 py-2 rounded-xl text-sm font-bold transition-colors ${
-                  margen === m ? 'bg-brand-400 text-white shadow-sm' : 'bg-brand-50 text-brand-600'
-                }`}
-              >
-                {m}x
-              </button>
-            ))}
-          </div>
-          <div className="flex items-center gap-2">
-            <input
-              type="number"
-              value={margen}
-              onChange={(e) => handleMargenChange(parseFloat(e.target.value) || 1)}
-              className="input flex-1 text-center font-bold text-brand-600"
-            />
-            <span className="text-sm text-gray-400 whitespace-nowrap">x costo</span>
+            <span className="opacity-70">Margen: <span className="font-bold opacity-100">{MARGEN}x</span></span>
           </div>
         </div>
 
