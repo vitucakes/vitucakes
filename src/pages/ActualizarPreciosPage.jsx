@@ -19,6 +19,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
   const [appliedToast, setAppliedToast] = useState(null)
   const [scraping, setScraping] = useState(false)
   const [progress, setProgress] = useState(null)
+  const [confirmando, setConfirmando] = useState(false)
 
   // Carga inicial: cache local primero, fallback al JSON del cron semanal
   useEffect(() => {
@@ -78,9 +79,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
       .sort((a, b) => (b.precioSugerido / b.precioActual) - (a.precioSugerido / a.precioActual))
   }, [data, insumos])
 
-  useEffect(() => {
-    setSelected(new Set(sugerencias.map((s) => s.insumoId)))
-  }, [sugerencias.length])
+  // Default: nada seleccionado. El user tilda lo que quiere aplicar.
 
   const toggle = (id) => {
     setSelected((prev) => {
@@ -112,8 +111,11 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     }))
     setAppliedToast(`Se actualizaron ${cantidad} insumo${cantidad !== 1 ? 's' : ''}`)
     setSelected(new Set())
+    setConfirmando(false)
     setTimeout(() => setAppliedToast(null), 2500)
   }
+
+  const sugerenciasSeleccionadas = sugerencias.filter((s) => selected.has(s.insumoId))
 
   return (
     <div className="flex flex-col min-h-full bg-brand-50">
@@ -211,12 +213,37 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
       {sugerencias.length > 0 && (
         <div className="sticky bottom-0 bg-white border-t border-brand-100 p-4 shadow-lg">
           <button
-            onClick={aplicar}
+            onClick={() => setConfirmando(true)}
             disabled={selected.size === 0}
             className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base disabled:opacity-40 active:scale-95 transition-transform"
           >
-            Aplicar {selected.size} {selected.size === 1 ? 'cambio' : 'cambios'}
+            {selected.size === 0
+              ? 'Seleccioná los que querés aplicar'
+              : `Revisar y aplicar (${selected.size})`}
           </button>
+        </div>
+      )}
+
+      {/* Confirm modal */}
+      {confirmando && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setConfirmando(false)} />
+          <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+            <p className="text-base font-bold text-gray-800 text-center mb-1">¿Aplicar {sugerenciasSeleccionadas.length} {sugerenciasSeleccionadas.length === 1 ? 'cambio' : 'cambios'}?</p>
+            <p className="text-xs text-gray-500 text-center mb-4">Se va a actualizar el precio y la fecha de:</p>
+            <div className="bg-brand-50 rounded-2xl p-3 max-h-56 overflow-y-auto mb-5 space-y-1.5">
+              {sugerenciasSeleccionadas.map((s) => (
+                <div key={s.insumoId} className="flex items-center justify-between gap-2 text-sm">
+                  <span className="text-gray-700 font-medium truncate">{s.nombre}</span>
+                  <span className="text-brand-600 font-semibold flex-shrink-0">{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => setConfirmando(false)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">Cancelar</button>
+              <button onClick={aplicar} className="flex-1 py-3 rounded-2xl bg-brand-500 text-white font-semibold">Confirmar</button>
+            </div>
+          </div>
         </div>
       )}
 

@@ -37,7 +37,7 @@ const QUERIES = [
   { nombre: 'Esencia de vainilla', unidad: 'ml', keywords: ['esencia-de-vainilla'], exclude: [] },
   { nombre: 'Dulce de leche', unidad: 'g', keywords: ['dulce-de-leche-vacalin','dulce-de-leche-el-mundo','dulce-de-leche-milkey'], exclude: ['vegano','alfajorero'] },
   { nombre: 'Crema de leche', unidad: 'g', keywords: ['crema-de-leche'], exclude: ['vegana','vegetal','condensada','chocolate'], allowMlToG: true },
-  { nombre: 'LECHE CONDENSADA', unidad: 'g', keywords: ['leche-condensada'], exclude: ['vegana'] },
+  { nombre: 'Leche condensada', unidad: 'g', keywords: ['leche-condensada'], exclude: ['vegana'] },
   { nombre: 'Avena', unidad: 'g', keywords: ['avena-'], exclude: ['leche'] },
   { nombre: 'Nutella', unidad: 'g', keywords: ['nutella'], exclude: [] },
   { nombre: 'Mermelada Frambuesa', unidad: 'g', keywords: ['mermelada-de-frambuesa','mermelada-frambuesa'], exclude: [] },
