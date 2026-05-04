@@ -13,7 +13,7 @@ const formatDate = (iso) => {
 
 const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
 
-export default function InsumosPage({ insumos, setInsumos }) {
+export default function InsumosPage({ insumos, setInsumos, onActualizarPrecios }) {
   const [open, setOpen] = useState(false)
   const [editId, setEditId] = useState(null)
   const [form, setForm] = useState(EMPTY)
@@ -93,7 +93,17 @@ export default function InsumosPage({ insumos, setInsumos }) {
       <div className="bg-white px-5 pt-14 pb-4 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center gap-3 mb-3">
           <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Vitucakes" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
-          <h1 className="text-2xl font-bold text-gray-800">Insumos</h1>
+          <h1 className="text-2xl font-bold text-gray-800 flex-1">Insumos</h1>
+          {onActualizarPrecios && (
+            <button
+              onClick={onActualizarPrecios}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-brand-50 text-brand-500 text-lg active:scale-95 transition-transform"
+              aria-label="Actualizar precios"
+              title="Actualizar precios desde El Granate"
+            >
+              ⟳
+            </button>
+          )}
         </div>
         <input
           type="text"

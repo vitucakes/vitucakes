@@ -1,0 +1,282 @@
+{
+  "generadoEn": "2026-05-04T04:42:25.482Z",
+  "fuente": "Distribuidora El Granate",
+  "items": [
+    {
+      "nombre": "Harina 000",
+      "precio": 0.95,
+      "unidad": "g",
+      "producto": "Harina 000 Chacabuco por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 950,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/harina-000-chacabuco-por-1-kilo/"
+    },
+    {
+      "nombre": "Harina 0000",
+      "precio": 1.2,
+      "unidad": "g",
+      "producto": "Harina 0000 Chacabuco por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 1200,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/harina-0000-chacabuco-por-1-kilo/"
+    },
+    {
+      "nombre": "Harina de almendras",
+      "precio": 10,
+      "unidad": "g",
+      "producto": "Harina de almendras sin piel por 500 gramos",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 5000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/harina-de-almendras-sin-piel-por-500-gramos/"
+    },
+    {
+      "nombre": "Harina leudante",
+      "precio": 1.5,
+      "unidad": "g",
+      "producto": "Harina Leudante Chacabuco por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 1500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/harina-leudante-chacabuco-por-1-kilo/"
+    },
+    {
+      "nombre": "Azúcar",
+      "precio": 1.4,
+      "unidad": "g",
+      "producto": "Azúcar Ledesma por 10 kilos",
+      "granateQty": 10000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 14000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/azucar-ledesma-por-10-kilos/"
+    },
+    {
+      "nombre": "Azúcar impalpable",
+      "precio": 3.8,
+      "unidad": "g",
+      "producto": "Azúcar impalpable Talco por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 3800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/azucar-impalpable-talco-por-1-kilo/"
+    },
+    {
+      "nombre": "Chocolate",
+      "precio": 11,
+      "unidad": "g",
+      "producto": "Chocolate alpino pins con leche por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 11000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/chocolate-alpino-pins-con-leche-por-1-kilo/"
+    },
+    {
+      "nombre": "Nuez",
+      "precio": 19,
+      "unidad": "g",
+      "producto": "nueces mariposas extra light por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 19000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/nueces-mariposas-extra-light-por-1-kilo/"
+    },
+    {
+      "nombre": "Caju",
+      "precio": 20,
+      "unidad": "g",
+      "producto": "castañas de cajú por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 20000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/castanas-de-caju-por-1-kilo/"
+    },
+    {
+      "nombre": "Levadura",
+      "precio": 8,
+      "unidad": "g",
+      "producto": "Levadura fresca por 500 gramos Calsa",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 4000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/levadura-fresca-por-500-gramos-calsa/"
+    },
+    {
+      "nombre": "Bicarbonato de sodio",
+      "precio": 5,
+      "unidad": "g",
+      "producto": "Bicarbonato de sodio por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 5000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/bicarbonato-de-sodio-por-1-kilo/"
+    },
+    {
+      "nombre": "Esencia de vainilla",
+      "precio": 2.1,
+      "unidad": "ml",
+      "producto": "esencia de vainilla por 2 litros",
+      "granateQty": 2000,
+      "granateUnit": "ml",
+      "granatePrecioTotal": 4200,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/esencia-de-vainilla-por-2-litros/"
+    },
+    {
+      "nombre": "Crema de leche",
+      "precio": 9.2,
+      "unidad": "g",
+      "producto": "Crema de leche ramolac por 5 litros",
+      "granateQty": 5000,
+      "granateUnit": "ml",
+      "granatePrecioTotal": 46000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/crema-de-leche-ramolac-por-5-litros/"
+    },
+    {
+      "nombre": "LECHE CONDENSADA",
+      "precio": 10.1266,
+      "unidad": "g",
+      "producto": "Leche condensada por 395grs",
+      "granateQty": 395,
+      "granateUnit": "g",
+      "granatePrecioTotal": 4000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/leche-condensada-por-395grs/"
+    },
+    {
+      "nombre": "Avena",
+      "precio": 3.5,
+      "unidad": "g",
+      "producto": "Harina de Avena por 1 KILO",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 3500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/harina-de-avena-por-1-kilo/"
+    },
+    {
+      "nombre": "Nutella",
+      "precio": 31.4286,
+      "unidad": "g",
+      "producto": "Nutella por 350 gramos.",
+      "granateQty": 350,
+      "granateUnit": "g",
+      "granatePrecioTotal": 11000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/nutella-por-350-gramos/"
+    },
+    {
+      "nombre": "Mermelada Frambuesa",
+      "precio": 8.5,
+      "unidad": "g",
+      "producto": "Mermelada de frambuesa manga por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 8500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/mermelada-de-frambuesa-manga-por-1-kilo/"
+    },
+    {
+      "nombre": "Miel",
+      "precio": 4.5,
+      "unidad": "ml",
+      "producto": "miel pura por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 4500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/miel-pura-por-1-kilo/"
+    },
+    {
+      "nombre": "Extracto de malta",
+      "precio": 10,
+      "unidad": "g",
+      "producto": "extracto de malta por 500 gramos",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 5000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/extracto-de-malta-por-500-gramos/"
+    },
+    {
+      "nombre": "Pasta ballina",
+      "precio": 7.6,
+      "unidad": "g",
+      "producto": "Pasta Ballina blanca por 500 gramos",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 3800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/pasta-ballina-blanca-por-500-gramos/"
+    },
+    {
+      "nombre": "Pasta de goma",
+      "precio": 9.6,
+      "unidad": "g",
+      "producto": "Pasta de goma Ballina por 500 gramos",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 4800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/pasta-de-goma-ballina-por-500-gramos/"
+    },
+    {
+      "nombre": "Mix frutos secos",
+      "precio": 20,
+      "unidad": "g",
+      "producto": "mix de frutos secos por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 20000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/productos/mix-de-frutos-secos-por-1-kilo/"
+    }
+  ],
+  "errores": [
+    {
+      "nombre": "Azucar Negra",
+      "error": "sin peso en slug",
+      "url": "https://www.distribuidoraelgranate.com.ar/productos/azucar-negra/"
+    },
+    {
+      "nombre": "Cacao",
+      "error": "sin candidatos"
+    },
+    {
+      "nombre": "Fecula de Mandioca",
+      "error": "sin peso en slug",
+      "url": "https://www.distribuidoraelgranate.com.ar/productos/fecula-de-mandioca-x-1-kilo/"
+    },
+    {
+      "nombre": "Manteca",
+      "error": "sin precio en página",
+      "url": "https://www.distribuidoraelgranate.com.ar/productos/manteca-vacalin-por-5-kilos/"
+    },
+    {
+      "nombre": "Margarina",
+      "error": "sin peso en slug",
+      "url": "https://www.distribuidoraelgranate.com.ar/productos/margarina-gran-hojaldre/"
+    },
+    {
+      "nombre": "Chips de chocolate",
+      "error": "sin candidatos"
+    },
+    {
+      "nombre": "Coco rayado",
+      "error": "sin peso en slug",
+      "url": "https://www.distribuidoraelgranate.com.ar/productos/coco-rallado-por-kilo/"
+    },
+    {
+      "nombre": "Almedras",
+      "error": "sin candidatos"
+    },
+    {
+      "nombre": "Polvo de hornear",
+      "error": "sin candidatos"
+    },
+    {
+      "nombre": "Gelatina Sin Sabor",
+      "error": "sin candidatos"
+    },
+    {
+      "nombre": "Dulce de leche",
+      "error": "sin precio en página",
+      "url": "https://www.distribuidoraelgranate.com.ar/productos/dulce-de-leche-vacalin-repostero-por-1-kilo/"
+    },
+    {
+      "nombre": "Salvado de trigo",
+      "error": "sin candidatos"
+    }
+  ]
+}
