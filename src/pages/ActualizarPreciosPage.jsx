@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { formatARS } from '../utils/calc'
+import { scrapeGranate } from '../utils/scrapeGranate'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const formatDate = (iso) => {
@@ -8,7 +9,7 @@ const formatDate = (iso) => {
   return `${d}/${m}/${y}`
 }
 
-const REPO_ACTIONS_URL = 'https://github.com/patriciovallerino/vitucakes/actions/workflows/update-prices.yml'
+const CACHE_KEY = 'vitucakes_precios_sugeridos_cache'
 
 export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
   const [data, setData] = useState(null)
@@ -16,19 +17,43 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
   const [error, setError] = useState(null)
   const [selected, setSelected] = useState(() => new Set())
   const [appliedToast, setAppliedToast] = useState(null)
+  const [scraping, setScraping] = useState(false)
+  const [progress, setProgress] = useState(null)
 
-  const load = (bust = false) => {
+  // Carga inicial: cache local primero, fallback al JSON del cron semanal
+  useEffect(() => {
     setLoading(true)
     setError(null)
-    const url = `${import.meta.env.BASE_URL}precios_sugeridos.json${bust ? `?t=${Date.now()}` : ''}`
-    fetch(url, { cache: bust ? 'no-store' : 'default' })
+    try {
+      const cached = localStorage.getItem(CACHE_KEY)
+      if (cached) {
+        setData(JSON.parse(cached))
+        setLoading(false)
+        return
+      }
+    } catch {}
+    fetch(`${import.meta.env.BASE_URL}precios_sugeridos.json`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('No se pudo cargar el archivo'))))
       .then((d) => setData(d))
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false))
-  }
+  }, [])
 
-  useEffect(() => { load(false) }, [])
+  const actualizarManualmente = async () => {
+    setScraping(true)
+    setError(null)
+    setProgress({ stage: 'sitemap', done: 0, total: 0 })
+    try {
+      const fresh = await scrapeGranate((p) => setProgress(p))
+      setData(fresh)
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)) } catch {}
+    } catch (e) {
+      setError(`No se pudo actualizar: ${e.message}`)
+    } finally {
+      setScraping(false)
+      setProgress(null)
+    }
+  }
 
   const sugerencias = useMemo(() => {
     if (!data?.items) return []
@@ -163,25 +188,21 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
           </>
         )}
 
-        {/* Botón de re-fetch / forzar scrape */}
-        <div className="bg-white rounded-2xl p-4 mt-6 shadow-sm border border-brand-50 space-y-3">
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">Buscar actualizaciones</p>
+        {/* Botón único: actualizar manualmente */}
+        <div className="bg-white rounded-2xl p-4 mt-6 shadow-sm border border-brand-50 space-y-2">
           <button
-            onClick={() => load(true)}
-            className="w-full py-3 rounded-xl bg-brand-50 text-brand-600 font-semibold text-sm active:scale-95 transition-transform"
+            onClick={actualizarManualmente}
+            disabled={scraping}
+            className="w-full py-3 rounded-xl bg-brand-50 text-brand-600 font-semibold text-sm disabled:opacity-60 active:scale-95 transition-transform"
           >
-            Refrescar archivo
+            {scraping
+              ? (progress?.stage === 'sitemap'
+                  ? 'Buscando productos...'
+                  : `Consultando precios... ${progress?.done ?? 0}/${progress?.total ?? '?'}`)
+              : 'Actualizar precios manualmente'}
           </button>
-          <a
-            href={REPO_ACTIONS_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="block w-full py-3 rounded-xl bg-gray-100 text-gray-700 font-semibold text-sm text-center active:scale-95 transition-transform"
-          >
-            Forzar nuevo scraping (GitHub)
-          </a>
           <p className="text-[11px] text-gray-400 leading-tight">
-            El scraping corre automáticamente los lunes a la noche. El botón "Refrescar" trae el último resultado. "Forzar" abre GitHub para ejecutar el workflow manualmente.
+            Los precios se actualizan solos los lunes a la noche. Si necesitás precios al día antes, tocá el botón.
           </p>
         </div>
       </div>
