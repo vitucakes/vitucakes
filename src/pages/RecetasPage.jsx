@@ -63,7 +63,8 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
     <div className="flex flex-col min-h-full">
       {/* Header */}
       <div className="bg-white px-5 pt-14 pb-4 sticky top-0 z-10 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-3 mb-3">
+          <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Vitucakes" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
             <p className="text-xs text-gray-400 mt-0.5">{recetas.length} producto{recetas.length !== 1 ? 's' : ''}</p>
