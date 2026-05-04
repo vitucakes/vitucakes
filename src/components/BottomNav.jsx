@@ -1,6 +1,6 @@
 const TABS = [
   { id: 'insumos', label: 'Insumos', icon: '🧂' },
-  { id: 'recetas', label: 'Recetas', icon: '🎂' },
+  { id: 'recetas', label: 'Productos', icon: '🎂' },
 ]
 
 export default function BottomNav({ current, onChange }) {
