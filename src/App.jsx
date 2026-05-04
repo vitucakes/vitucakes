@@ -3,6 +3,7 @@ import { useLocalStorage } from './hooks/useLocalStorage'
 import InsumosPage from './pages/InsumosPage'
 import RecetasPage from './pages/RecetasPage'
 import RecetaDetail from './pages/RecetaDetail'
+import ActualizarPreciosPage from './pages/ActualizarPreciosPage'
 import BottomNav from './components/BottomNav'
 
 export default function App() {
@@ -39,7 +40,10 @@ export default function App() {
     <div className="min-h-screen bg-brand-50 flex flex-col max-w-md mx-auto relative">
       <main className="flex-1 overflow-y-auto pb-20">
         {page === 'insumos' && (
-          <InsumosPage insumos={insumos} setInsumos={setInsumos} />
+          <InsumosPage insumos={insumos} setInsumos={setInsumos} onActualizarPrecios={() => navigate('actualizar-precios')} />
+        )}
+        {page === 'actualizar-precios' && (
+          <ActualizarPreciosPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />
         )}
         {page === 'recetas' && (
           <RecetasPage
@@ -62,7 +66,7 @@ export default function App() {
           />
         )}
       </main>
-      {page !== 'detalle' && (
+      {page !== 'detalle' && page !== 'actualizar-precios' && (
         <BottomNav current={page} onChange={(p) => navigate(p)} />
       )}
     </div>
