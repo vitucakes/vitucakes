@@ -91,7 +91,10 @@ export default function InsumosPage({ insumos, setInsumos }) {
     <div className="flex flex-col min-h-full">
       {/* Header */}
       <div className="bg-white px-5 pt-14 pb-4 sticky top-0 z-10 shadow-sm">
-        <h1 className="text-2xl font-bold text-gray-800 mb-3">Insumos</h1>
+        <div className="flex items-center gap-3 mb-3">
+          <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Vitucakes" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
+          <h1 className="text-2xl font-bold text-gray-800">Insumos</h1>
+        </div>
         <input
           type="text"
           placeholder="Buscar..."
