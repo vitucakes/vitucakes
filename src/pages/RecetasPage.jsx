@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import BottomSheet from '../components/BottomSheet'
-import { calcCostoReceta, formatARS } from '../utils/calc'
+import { calcCostoReceta, formatARS, MARGEN } from '../utils/calc'
 
-const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [], margen: 3 }
+const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [] }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
 
 export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) {
@@ -21,7 +21,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
 
   const openEdit = (r) => {
     setEditId(r.id)
-    setForm({ nombre: r.nombre, rinde: String(r.rinde), unidadRinde: r.unidadRinde, ingredientes: [...r.ingredientes], margen: r.margen })
+    setForm({ nombre: r.nombre, rinde: String(r.rinde), unidadRinde: r.unidadRinde, ingredientes: [...r.ingredientes] })
     setIngForm(EMPTY_ING)
     setOpen(true)
   }
@@ -45,7 +45,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
     const nombre = form.nombre.trim()
     const rinde = parseFloat(form.rinde)
     if (!nombre || isNaN(rinde) || rinde <= 0 || form.ingredientes.length === 0) return
-    const data = { nombre, rinde, unidadRinde: form.unidadRinde, ingredientes: form.ingredientes, margen: form.margen, updatedAt: Date.now() }
+    const data = { nombre, rinde, unidadRinde: form.unidadRinde, ingredientes: form.ingredientes, updatedAt: Date.now() }
     if (editId) {
       setRecetas((prev) => prev.map((r) => r.id === editId ? { ...r, ...data } : r))
     } else {
@@ -94,7 +94,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
         )}
         {filteredRecetas.map((r) => {
           const costo = calcCostoReceta(r, insumos)
-          const precioVenta = r.rinde > 0 ? (costo / r.rinde) * r.margen : 0
+          const precioVenta = r.rinde > 0 ? (costo / r.rinde) * MARGEN : 0
           const tieneProblema = r.ingredientes.some((ing) => {
             const ins = insumos.find((i) => i.id === ing.insumoId)
             return !ins || ins.precioPorUnidad <= 0
@@ -120,7 +120,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
               </div>
               <div className="mt-2 pt-2 border-t border-brand-50 flex justify-between text-xs text-gray-500">
                 <span>Costo total: <span className="font-medium">{formatARS(costo)}</span></span>
-                <span>Margen: <span className="font-medium">{r.margen}x</span></span>
+                <span>Margen: <span className="font-medium">{MARGEN}x</span></span>
               </div>
             </button>
           )
@@ -170,32 +170,6 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
                 className="input"
               />
             </div>
-          </div>
-
-          {/* Margen */}
-          <div>
-            <label className="label">Margen de ganancia</label>
-            <div className="flex gap-2 mb-2">
-              {[2, 2.5, 3, 3.5, 4].map((m) => (
-                <button
-                  key={m}
-                  onClick={() => setForm((f) => ({ ...f, margen: m }))}
-                  className={`flex-1 py-2 rounded-xl text-sm font-bold transition-colors ${
-                    form.margen === m ? 'bg-brand-400 text-white' : 'bg-brand-50 text-brand-600'
-                  }`}
-                >
-                  {m}x
-                </button>
-              ))}
-            </div>
-            <input
-              type="number"
-              value={form.margen}
-              onChange={(e) => setForm((f) => ({ ...f, margen: parseFloat(e.target.value) || 1 }))}
-              placeholder="Ej: 3"
-              className="input"
-            />
-            <p className="text-xs text-gray-400 mt-1">El precio de venta será {form.margen}x el costo</p>
           </div>
 
           {/* Ingredientes */}
