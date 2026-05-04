@@ -11,7 +11,7 @@ const formatDate = (iso) => {
   return `${d}/${m}/${y}`
 }
 
-const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '', fechaActualizacion: todayISO() }
+const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
 
 export default function InsumosPage({ insumos, setInsumos }) {
   const [open, setOpen] = useState(false)
@@ -25,7 +25,7 @@ export default function InsumosPage({ insumos, setInsumos }) {
     .slice()
     .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
 
-  const openAdd = () => { setEditId(null); setForm({ ...EMPTY, fechaActualizacion: todayISO() }); setOpen(true) }
+  const openAdd = () => { setEditId(null); setForm(EMPTY); setOpen(true) }
 
   const openEdit = (ins) => {
     setEditId(ins.id)
@@ -35,7 +35,6 @@ export default function InsumosPage({ insumos, setInsumos }) {
       precioPorUnidad: String(ins.precioPorUnidad),
       totalPagado: '',
       cantidadComprada: '',
-      fechaActualizacion: ins.fechaActualizacion ?? todayISO(),
     })
     setOpen(true)
   }
@@ -53,13 +52,12 @@ export default function InsumosPage({ insumos, setInsumos }) {
     if (editId) {
       setInsumos((prev) => prev.map((i) => {
         if (i.id !== editId) return i
-        const precioCambio = i.precioPorUnidad !== precio
         return {
           ...i,
           nombre,
           unidad: form.unidad,
           precioPorUnidad: precio,
-          fechaActualizacion: precioCambio ? (form.fechaActualizacion || todayISO()) : (i.fechaActualizacion ?? form.fechaActualizacion ?? todayISO()),
+          fechaActualizacion: todayISO(),
           updatedAt: Date.now(),
         }
       }))
@@ -69,7 +67,7 @@ export default function InsumosPage({ insumos, setInsumos }) {
         nombre,
         unidad: form.unidad,
         precioPorUnidad: precio,
-        fechaActualizacion: form.fechaActualizacion || todayISO(),
+        fechaActualizacion: todayISO(),
         updatedAt: Date.now(),
       }])
     }
@@ -176,12 +174,6 @@ export default function InsumosPage({ insumos, setInsumos }) {
           <div>
             <label className="label">Precio por {form.unidad} ($)</label>
             <input type="number" {...field('precioPorUnidad')} placeholder="Ej: 1200" className="input font-semibold text-brand-600" />
-          </div>
-
-          <div>
-            <label className="label">Fecha de actualización</label>
-            <input type="date" {...field('fechaActualizacion')} className="input" />
-            <p className="text-xs text-gray-400 mt-1">Se actualiza automáticamente al cambiar el precio</p>
           </div>
 
           <button

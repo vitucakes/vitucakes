@@ -65,13 +65,13 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
       <div className="bg-white px-5 pt-14 pb-4 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center justify-between mb-3">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">Recetas</h1>
-            <p className="text-xs text-gray-400 mt-0.5">{recetas.length} receta{recetas.length !== 1 ? 's' : ''}</p>
+            <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
+            <p className="text-xs text-gray-400 mt-0.5">{recetas.length} producto{recetas.length !== 1 ? 's' : ''}</p>
           </div>
         </div>
         <input
           type="text"
-          placeholder="Buscar receta..."
+          placeholder="Buscar producto..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full px-4 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
@@ -83,13 +83,13 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
         {recetas.length === 0 && (
           <div className="text-center py-20 text-gray-400">
             <div className="text-5xl mb-3">🎂</div>
-            <p className="font-medium">No hay recetas todavía</p>
-            <p className="text-sm mt-1">Tocá el botón + para crear una</p>
+            <p className="font-medium">No hay productos todavía</p>
+            <p className="text-sm mt-1">Tocá el botón + para crear uno</p>
           </div>
         )}
         {recetas.length > 0 && filteredRecetas.length === 0 && (
           <div className="text-center py-16 text-gray-400">
-            <p className="text-sm">No hay recetas que coincidan con "{search}"</p>
+            <p className="text-sm">No hay productos que coincidan con "{search}"</p>
           </div>
         )}
         {filteredRecetas.map((r) => {
@@ -136,11 +136,11 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
       </button>
 
       {/* Form sheet */}
-      <BottomSheet isOpen={open} onClose={() => setOpen(false)} title={editId ? 'Editar receta' : 'Nueva receta'}>
+      <BottomSheet isOpen={open} onClose={() => setOpen(false)} title={editId ? 'Editar producto' : 'Nuevo producto'}>
         <div className="space-y-4">
           {/* Nombre */}
           <div>
-            <label className="label">Nombre de la receta</label>
+            <label className="label">Nombre del producto</label>
             <input
               value={form.nombre}
               onChange={(e) => setForm((f) => ({ ...f, nombre: e.target.value }))}
@@ -234,7 +234,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
             disabled={!form.nombre.trim() || !form.rinde || form.ingredientes.length === 0}
             className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base disabled:opacity-40 active:scale-95 transition-transform mt-2"
           >
-            {editId ? 'Guardar cambios' : 'Crear receta'}
+            {editId ? 'Guardar cambios' : 'Crear producto'}
           </button>
         </div>
       </BottomSheet>
