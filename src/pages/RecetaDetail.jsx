@@ -133,7 +133,7 @@ export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDele
         <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
           <div className="absolute inset-0 bg-black/40" onClick={() => setConfirmDelete(false)} />
           <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
-            <p className="text-base font-bold text-gray-800 text-center mb-1">¿Eliminar receta?</p>
+            <p className="text-base font-bold text-gray-800 text-center mb-1">¿Eliminar producto?</p>
             <p className="text-sm text-gray-500 text-center mb-5">Esta acción no se puede deshacer.</p>
             <div className="flex gap-3">
               <button onClick={() => setConfirmDelete(false)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">Cancelar</button>
