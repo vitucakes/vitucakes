@@ -29,6 +29,36 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Migración one-shot: restaurar insumos del precarga que el usuario haya
+  // borrado por accidente y que sigan siendo referenciados por alguna receta.
+  // Sin esto, las recetas quedan con ingredientes "fantasma" (warning ⚠️)
+  // y no se puede recuperar el precio.
+  useEffect(() => {
+    const FLAG = 'vitucakes_restore_orphans_v1'
+    if (localStorage.getItem(FLAG)) return
+    if (insumos.length === 0 || recetas.length === 0) return
+    const idsExistentes = new Set(insumos.map((i) => i.id))
+    const idsReferenciados = new Set()
+    for (const r of recetas) for (const ing of r.ingredientes) idsReferenciados.add(ing.insumoId)
+    const idsFaltantes = [...idsReferenciados].filter((id) => !idsExistentes.has(id))
+    if (idsFaltantes.length === 0) {
+      localStorage.setItem(FLAG, '1')
+      return
+    }
+    fetch(`${import.meta.env.BASE_URL}precarga.json`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (!data?.insumos) return
+        const restaurar = data.insumos.filter((i) => idsFaltantes.includes(i.id))
+        if (restaurar.length > 0) {
+          setInsumos((prev) => [...prev, ...restaurar.map((i) => ({ ...i, updatedAt: Date.now() }))])
+        }
+        localStorage.setItem(FLAG, '1')
+      })
+      .catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insumos.length, recetas.length])
+
   const navigate = (to, id = null) => {
     setPage(to)
     setSelectedId(id)
@@ -40,7 +70,7 @@ export default function App() {
     <div className="min-h-screen bg-brand-50 flex flex-col max-w-md mx-auto relative">
       <main className="flex-1 overflow-y-auto pb-20">
         {page === 'insumos' && (
-          <InsumosPage insumos={insumos} setInsumos={setInsumos} onActualizarPrecios={() => navigate('actualizar-precios')} />
+          <InsumosPage insumos={insumos} setInsumos={setInsumos} recetas={recetas} onActualizarPrecios={() => navigate('actualizar-precios')} />
         )}
         {page === 'actualizar-precios' && (
           <ActualizarPreciosPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />

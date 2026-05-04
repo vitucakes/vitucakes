@@ -13,7 +13,7 @@ const formatDate = (iso) => {
 
 const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
 
-export default function InsumosPage({ insumos, setInsumos, onActualizarPrecios }) {
+export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios }) {
   const [open, setOpen] = useState(false)
   const [editId, setEditId] = useState(null)
   const [form, setForm] = useState(EMPTY)
@@ -193,19 +193,45 @@ export default function InsumosPage({ insumos, setInsumos, onActualizarPrecios }
       </BottomSheet>
 
       {/* Delete confirm */}
-      {deleteId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setDeleteId(null)} />
-          <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
-            <p className="text-base font-bold text-gray-800 text-center mb-1">¿Eliminar insumo?</p>
-            <p className="text-sm text-gray-500 text-center mb-5">Se va a borrar de todas las recetas que lo usen.</p>
-            <div className="flex gap-3">
-              <button onClick={() => setDeleteId(null)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">Cancelar</button>
-              <button onClick={handleDelete} className="flex-1 py-3 rounded-2xl bg-red-500 text-white font-semibold">Eliminar</button>
+      {deleteId && (() => {
+        const ins = insumos.find((i) => i.id === deleteId)
+        const recetasQueLoUsan = recetas.filter((r) => r.ingredientes.some((ing) => ing.insumoId === deleteId))
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+            <div className="absolute inset-0 bg-black/40" onClick={() => setDeleteId(null)} />
+            <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+              {recetasQueLoUsan.length > 0 ? (
+                <>
+                  <p className="text-base font-bold text-gray-800 text-center mb-2">No se puede eliminar</p>
+                  <p className="text-sm text-gray-600 text-center mb-3">
+                    <span className="font-semibold">{ins?.nombre}</span> está usado en {recetasQueLoUsan.length} producto{recetasQueLoUsan.length !== 1 ? 's' : ''}:
+                  </p>
+                  <div className="bg-brand-50 rounded-2xl p-3 max-h-48 overflow-y-auto mb-5">
+                    <ul className="space-y-1">
+                      {recetasQueLoUsan.map((r) => (
+                        <li key={r.id} className="text-sm text-gray-700">• {r.nombre}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <p className="text-xs text-gray-400 text-center mb-4">Quitalo de esas recetas primero o editalo en lugar de borrarlo.</p>
+                  <button onClick={() => setDeleteId(null)} className="w-full py-3 rounded-2xl bg-gray-800 text-white font-semibold">Entendido</button>
+                </>
+              ) : (
+                <>
+                  <p className="text-base font-bold text-gray-800 text-center mb-1">¿Eliminar insumo?</p>
+                  <p className="text-sm text-gray-500 text-center mb-5">
+                    <span className="font-semibold">{ins?.nombre}</span> no está siendo usado en ningún producto.
+                  </p>
+                  <div className="flex gap-3">
+                    <button onClick={() => setDeleteId(null)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">Cancelar</button>
+                    <button onClick={handleDelete} className="flex-1 py-3 rounded-2xl bg-red-500 text-white font-semibold">Eliminar</button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
-        </div>
-      )}
+        )
+      })()}
     </div>
   )
 }
