@@ -97,11 +97,12 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
           {onActualizarPrecios && (
             <button
               onClick={onActualizarPrecios}
-              className="w-10 h-10 flex items-center justify-center rounded-full bg-brand-50 text-brand-500 text-lg active:scale-95 transition-transform"
+              className="px-3 py-2 rounded-full bg-brand-400 text-white text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-transform shadow-sm"
               aria-label="Actualizar precios"
               title="Actualizar precios desde El Granate"
             >
-              ⟳
+              <span className="text-sm leading-none">⟳</span>
+              <span>Actualizar precios</span>
             </button>
           )}
         </div>
