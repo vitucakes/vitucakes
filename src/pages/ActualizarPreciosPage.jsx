@@ -98,15 +98,19 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     const ids = selected
     const fecha = todayISO()
     const cantidad = ids.size
+    // Timestamps únicos e incrementales para que cada actualizado quede
+    // arriba del anterior y todos juntos en el tope de la lista.
+    let stamp = Date.now()
     setInsumos((prev) => prev.map((i) => {
       if (!ids.has(i.id)) return i
       const sug = sugerencias.find((s) => s.insumoId === i.id)
       if (!sug) return i
+      stamp += 1
       return {
         ...i,
         precioPorUnidad: sug.precioSugerido,
         fechaActualizacion: fecha,
-        updatedAt: Date.now(),
+        updatedAt: stamp,
       }
     }))
     setAppliedToast(`Se actualizaron ${cantidad} insumo${cantidad !== 1 ? 's' : ''}`)
