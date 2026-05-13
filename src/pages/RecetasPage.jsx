@@ -11,6 +11,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
   const [form, setForm] = useState(EMPTY_RECETA)
   const [ingForm, setIngForm] = useState(EMPTY_ING)
   const [search, setSearch] = useState('')
+  const [deleteId, setDeleteId] = useState(null)
 
   const filteredRecetas = recetas
     .filter((r) => r.nombre.toLowerCase().includes(search.toLowerCase()))
@@ -101,29 +102,49 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
             return !ins || ins.precioPorUnidad <= 0
           })
           return (
-            <button
+            <div
               key={r.id}
-              onClick={() => onSelect(r.id)}
-              className={`w-full bg-white rounded-2xl px-4 py-4 text-left shadow-sm active:scale-[0.98] transition-transform border ${tieneProblema ? 'border-amber-200' : 'border-brand-50'}`}
+              className={`bg-white rounded-2xl shadow-sm border ${tieneProblema ? 'border-amber-200' : 'border-brand-50'}`}
             >
-              <div className="flex items-start justify-between">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <p className="font-bold text-gray-800 text-base truncate">{r.nombre}</p>
-                    {tieneProblema && <span className="text-base flex-shrink-0">⚠️</span>}
+              <button
+                onClick={() => onSelect(r.id)}
+                className="w-full px-4 pt-4 pb-2 text-left active:scale-[0.98] transition-transform"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="font-bold text-gray-800 text-base truncate">{r.nombre}</p>
+                      {tieneProblema && <span className="text-base flex-shrink-0">⚠️</span>}
+                    </div>
+                    <p className="text-xs text-gray-400 mt-0.5">Rinde {r.rinde} {r.unidadRinde} · {r.ingredientes.length} ingrediente{r.ingredientes.length !== 1 ? 's' : ''}</p>
                   </div>
-                  <p className="text-xs text-gray-400 mt-0.5">Rinde {r.rinde} {r.unidadRinde} · {r.ingredientes.length} ingrediente{r.ingredientes.length !== 1 ? 's' : ''}</p>
+                  <div className="ml-3 text-right flex-shrink-0">
+                    <p className="text-xs text-gray-400">Venta / u</p>
+                    <p className="text-lg font-bold text-brand-500">{formatARS(precioVenta)}</p>
+                  </div>
                 </div>
-                <div className="ml-3 text-right flex-shrink-0">
-                  <p className="text-xs text-gray-400">Venta / u</p>
-                  <p className="text-lg font-bold text-brand-500">{formatARS(precioVenta)}</p>
+                <div className="mt-2 pt-2 border-t border-brand-50 flex justify-between text-xs text-gray-500">
+                  <span>Costo total: <span className="font-medium">{formatARS(costo)}</span></span>
+                  <span>Margen: <span className="font-medium">{MARGEN}x</span></span>
                 </div>
+              </button>
+              <div className="px-4 pb-3 pt-1 flex justify-end gap-2">
+                <button
+                  onClick={() => openEdit(r)}
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base"
+                  aria-label="Editar"
+                >
+                  ✏️
+                </button>
+                <button
+                  onClick={() => setDeleteId(r.id)}
+                  className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-base"
+                  aria-label="Eliminar"
+                >
+                  🗑️
+                </button>
               </div>
-              <div className="mt-2 pt-2 border-t border-brand-50 flex justify-between text-xs text-gray-500">
-                <span>Costo total: <span className="font-medium">{formatARS(costo)}</span></span>
-                <span>Margen: <span className="font-medium">{MARGEN}x</span></span>
-              </div>
-            </button>
+            </div>
           )
         })}
       </div>
@@ -239,6 +260,34 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
           </button>
         </div>
       </BottomSheet>
+
+      {/* Delete confirm */}
+      {deleteId && (() => {
+        const r = recetas.find((x) => x.id === deleteId)
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+            <div className="absolute inset-0 bg-black/40" onClick={() => setDeleteId(null)} />
+            <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+              <p className="text-base font-bold text-gray-800 text-center mb-1">¿Eliminar producto?</p>
+              <p className="text-sm text-gray-500 text-center mb-5">
+                <span className="font-semibold">{r?.nombre}</span> se va a borrar. Esta acción no se puede deshacer.
+              </p>
+              <div className="flex gap-3">
+                <button onClick={() => setDeleteId(null)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">Cancelar</button>
+                <button
+                  onClick={() => {
+                    setRecetas((prev) => prev.filter((x) => x.id !== deleteId))
+                    setDeleteId(null)
+                  }}
+                  className="flex-1 py-3 rounded-2xl bg-red-500 text-white font-semibold"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
     </div>
   )
 }
