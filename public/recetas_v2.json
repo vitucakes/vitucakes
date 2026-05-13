@@ -1,0 +1,842 @@
+{
+  "version": 2,
+  "insumosNuevos": [
+    {
+      "id": "v2-sal",
+      "nombre": "Sal",
+      "unidad": "g",
+      "precioPorUnidad": 1,
+      "fechaActualizacion": "2026-05-04"
+    },
+    {
+      "id": "v2-mascarpone",
+      "nombre": "Queso Mascarpone",
+      "unidad": "g",
+      "precioPorUnidad": 15,
+      "fechaActualizacion": "2026-05-04"
+    },
+    {
+      "id": "v2-albumina",
+      "nombre": "Albúmina",
+      "unidad": "g",
+      "precioPorUnidad": 50,
+      "fechaActualizacion": "2026-05-04"
+    },
+    {
+      "id": "v2-canela",
+      "nombre": "Canela",
+      "unidad": "g",
+      "precioPorUnidad": 40,
+      "fechaActualizacion": "2026-05-04"
+    },
+    {
+      "id": "v2-pan-rallado",
+      "nombre": "Pan rallado",
+      "unidad": "g",
+      "precioPorUnidad": 2,
+      "fechaActualizacion": "2026-05-04"
+    }
+  ],
+  "cambiosRecetas": [
+    {
+      "nombre": "Pastafrola",
+      "agregar": [
+        {
+          "insumoId": "dc459a53-28d6-44a6-a449-b0ea4c464f69",
+          "cantidad": 50
+        }
+      ]
+    },
+    {
+      "nombre": "Chipa 1/2 kg",
+      "agregar": [
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 10
+        }
+      ]
+    },
+    {
+      "nombre": "Figacitas de manteca 36 unidades",
+      "agregar": [
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 20
+        }
+      ]
+    },
+    {
+      "nombre": "Pan de Molde de Salvado",
+      "reemplazar": [
+        {
+          "insumoId": "2bb8f08c-d94a-4cb5-9d4b-6d07ade8a248",
+          "cantidad": 250
+        },
+        {
+          "insumoId": "8b101c05-ef41-409f-a48a-5af5d9ed9ada",
+          "cantidad": 50
+        },
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "39f797a6-8910-49ce-b7a6-6f80f8c70e64",
+          "cantidad": 20
+        },
+        {
+          "insumoId": "e2448c9d-a065-402d-8720-b2991f0fab8a",
+          "cantidad": 10
+        },
+        {
+          "insumoId": "11526d8c-9639-4164-958d-ed7892960601",
+          "cantidad": 15
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "0b82389c-cf45-4170-82de-97bb2a51012b",
+          "cantidad": 15
+        },
+        {
+          "insumoId": "1d5ab7ab-47c7-40c8-b256-db5f607848da",
+          "cantidad": 20
+        }
+      ]
+    },
+    {
+      "nombre": "Macarrons x 12 unidades",
+      "reemplazar": [
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 57.5
+        },
+        {
+          "insumoId": "af9a73bb-6bbb-4bbe-bd41-a137a1211346",
+          "cantidad": 31.25
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "beb5332c-b79f-4055-8a8c-99785658dc99",
+          "cantidad": 31.25
+        },
+        {
+          "insumoId": "e545bd3b-7982-415e-90d9-145ee3ab5525",
+          "cantidad": 0.28
+        },
+        {
+          "insumoId": "c514df29-3bf7-4343-be86-545cec87e875",
+          "cantidad": 2.5
+        },
+        {
+          "insumoId": "3fe7fe4b-0202-40d2-acb7-a68aff0d42f0",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "be1f4ea8-9e98-4438-afc2-2db13ea5027a",
+          "cantidad": 15
+        },
+        {
+          "insumoId": "a16027e9-e1c9-43e4-8a1c-11ec8e335a03",
+          "cantidad": 2
+        },
+        {
+          "insumoId": "a78ae66f-b791-49b9-864f-af8b1fe81574",
+          "cantidad": 1
+        }
+      ]
+    }
+  ],
+  "recetasNuevas": [
+    {
+      "id": "v2-masa-sablee",
+      "nombre": "Masa Sablée",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 300
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 180
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 2
+        },
+        {
+          "insumoId": "beb5332c-b79f-4055-8a8c-99785658dc99",
+          "cantidad": 120
+        },
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        }
+      ],
+      "updatedAt": 1778705383993
+    },
+    {
+      "id": "v2-masa-frolla",
+      "nombre": "Masa Frolla",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 150
+        },
+        {
+          "insumoId": "17ecd98c-502d-48a8-ad4a-ca4c796038ae",
+          "cantidad": 50
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 60
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "bfe8da11-27e9-4dfd-a2c5-0e23dc47308f",
+          "cantidad": 0.5
+        },
+        {
+          "insumoId": "05e1a197-c1b5-4dbd-abc1-868f4dd8cf93",
+          "cantidad": 2.5
+        }
+      ],
+      "updatedAt": 1778705383994
+    },
+    {
+      "id": "v2-tiramisu",
+      "nombre": "Tiramisú",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 6
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 340
+        },
+        {
+          "insumoId": "78e7e767-a3bd-4562-b4f8-a27a2ff42f3c",
+          "cantidad": 40
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "8a58225e-36f8-4226-9fdd-d94cc250c56e",
+          "cantidad": 17
+        },
+        {
+          "insumoId": "v2-mascarpone",
+          "cantidad": 250
+        },
+        {
+          "insumoId": "3fe7fe4b-0202-40d2-acb7-a68aff0d42f0",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "d2153b66-4f9e-4035-bc7d-502dba3329f6",
+          "cantidad": 3
+        }
+      ],
+      "updatedAt": 1778705383995
+    },
+    {
+      "id": "v2-scones",
+      "nombre": "Scones",
+      "rinde": 12,
+      "unidadRinde": "unidades",
+      "ingredientes": [
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 400
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "05e1a197-c1b5-4dbd-abc1-868f4dd8cf93",
+          "cantidad": 10
+        },
+        {
+          "insumoId": "3fe7fe4b-0202-40d2-acb7-a68aff0d42f0",
+          "cantidad": 120
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "801bf671-116a-479d-a16b-27c6a0147650",
+          "cantidad": 50
+        },
+        {
+          "insumoId": "bfe8da11-27e9-4dfd-a2c5-0e23dc47308f",
+          "cantidad": 1
+        }
+      ],
+      "updatedAt": 1778705383996
+    },
+    {
+      "id": "v2-apple-streusel",
+      "nombre": "Apple Streusel Pie",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 350
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 220
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "bfe8da11-27e9-4dfd-a2c5-0e23dc47308f",
+          "cantidad": 0.5
+        },
+        {
+          "insumoId": "937da638-2591-40ca-8305-472ec924f244",
+          "cantidad": 600
+        },
+        {
+          "insumoId": "801bf671-116a-479d-a16b-27c6a0147650",
+          "cantidad": 45
+        },
+        {
+          "insumoId": "e1409cbd-6d2f-4598-a7c8-8e7a3af77b76",
+          "cantidad": 30
+        },
+        {
+          "insumoId": "v2-pan-rallado",
+          "cantidad": 30
+        },
+        {
+          "insumoId": "v2-canela",
+          "cantidad": 3
+        }
+      ],
+      "updatedAt": 1778705383997
+    },
+    {
+      "id": "v2-pionono",
+      "nombre": "Pionono",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 4
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "2a89ec34-9551-4ba4-bb16-89e68e3aa733",
+          "cantidad": 15
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        }
+      ],
+      "updatedAt": 1778705383998
+    },
+    {
+      "id": "v2-arrollado-ddl",
+      "nombre": "Arrollado de Dulce de Leche",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 4
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "2a89ec34-9551-4ba4-bb16-89e68e3aa733",
+          "cantidad": 15
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "67407f74-e310-49f5-b2c3-c67868e35c53",
+          "cantidad": 300
+        },
+        {
+          "insumoId": "d21adfdb-f242-4170-a69e-821be0994eea",
+          "cantidad": 10
+        }
+      ],
+      "updatedAt": 1778705383999
+    },
+    {
+      "id": "v2-trufa-chocolate",
+      "nombre": "Trufa de Chocolate",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 3
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 90
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 90
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "67407f74-e310-49f5-b2c3-c67868e35c53",
+          "cantidad": 250
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 25
+        },
+        {
+          "insumoId": "3fe7fe4b-0202-40d2-acb7-a68aff0d42f0",
+          "cantidad": 150
+        },
+        {
+          "insumoId": "be1f4ea8-9e98-4438-afc2-2db13ea5027a",
+          "cantidad": 150
+        },
+        {
+          "insumoId": "dc459a53-28d6-44a6-a449-b0ea4c464f69",
+          "cantidad": 80
+        }
+      ],
+      "updatedAt": 1778705384000
+    },
+    {
+      "id": "v2-pan-viena",
+      "nombre": "Pan de Viena (Pancho/Hamburguesa/Pebete)",
+      "rinde": 25,
+      "unidadRinde": "unidades",
+      "ingredientes": [
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 1000
+        },
+        {
+          "insumoId": "11526d8c-9639-4164-958d-ed7892960601",
+          "cantidad": 50
+        },
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 10
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 150
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "75ad4107-c8c3-40f6-9cc4-837bf4234d06",
+          "cantidad": 250
+        }
+      ],
+      "updatedAt": 1778705384001
+    },
+    {
+      "id": "v2-mini-alfajor-nuez",
+      "nombre": "Mini Alfajores de Nuez",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 75
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 75
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 75
+        },
+        {
+          "insumoId": "e1409cbd-6d2f-4598-a7c8-8e7a3af77b76",
+          "cantidad": 75
+        },
+        {
+          "insumoId": "67407f74-e310-49f5-b2c3-c67868e35c53",
+          "cantidad": 150
+        }
+      ],
+      "updatedAt": 1778705384002
+    },
+    {
+      "id": "v2-cuadraditos-coco",
+      "nombre": "Cuadraditos de Coco",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 120
+        },
+        {
+          "insumoId": "beb5332c-b79f-4055-8a8c-99785658dc99",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "78e7e767-a3bd-4562-b4f8-a27a2ff42f3c",
+          "cantidad": 15
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 2
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "67407f74-e310-49f5-b2c3-c67868e35c53",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "dc459a53-28d6-44a6-a449-b0ea4c464f69",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "2a89ec34-9551-4ba4-bb16-89e68e3aa733",
+          "cantidad": 15
+        }
+      ],
+      "updatedAt": 1778705384003
+    },
+    {
+      "id": "v2-tarteleta-choco-ganache-blanco",
+      "nombre": "Tarteleta de Chocolate y Ganache Blanco",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 120
+        },
+        {
+          "insumoId": "beb5332c-b79f-4055-8a8c-99785658dc99",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 2
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "be1f4ea8-9e98-4438-afc2-2db13ea5027a",
+          "cantidad": 60
+        },
+        {
+          "insumoId": "3fe7fe4b-0202-40d2-acb7-a68aff0d42f0",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "8ae13ded-a7d9-405e-8047-6e34658e796b",
+          "cantidad": 8
+        }
+      ],
+      "updatedAt": 1778705384004
+    },
+    {
+      "id": "v2-budin-marmolado",
+      "nombre": "Budín Marmolado",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 2
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 120
+        },
+        {
+          "insumoId": "05e1a197-c1b5-4dbd-abc1-868f4dd8cf93",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "78e7e767-a3bd-4562-b4f8-a27a2ff42f3c",
+          "cantidad": 10
+        }
+      ],
+      "updatedAt": 1778705384005
+    },
+    {
+      "id": "v2-budin-ingles",
+      "nombre": "Budín Inglés (Cuatro Cuartos)",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 2
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 100
+        },
+        {
+          "insumoId": "05e1a197-c1b5-4dbd-abc1-868f4dd8cf93",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "9b7e9175-6670-4a27-921e-5dabba687d4f",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "eef19c99-036b-422d-af8a-6ab91f5b9e61",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        }
+      ],
+      "updatedAt": 1778705384006
+    },
+    {
+      "id": "v2-galleta-pizpireta",
+      "nombre": "Galleta Pizpireta",
+      "rinde": 25,
+      "unidadRinde": "unidades",
+      "ingredientes": [
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 250
+        },
+        {
+          "insumoId": "beb5332c-b79f-4055-8a8c-99785658dc99",
+          "cantidad": 400
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 10
+        },
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "77193b82-6b88-4ed4-b1eb-42fad4947eb9",
+          "cantidad": 450
+        },
+        {
+          "insumoId": "v2-albumina",
+          "cantidad": 9
+        }
+      ],
+      "updatedAt": 1778705384007
+    },
+    {
+      "id": "v2-cheesecake-frutos-rojos",
+      "nombre": "Cheesecake con Frutos Rojos",
+      "rinde": 1,
+      "unidadRinde": "unidad",
+      "ingredientes": [
+        {
+          "insumoId": "5ffdb609-5c15-4cb1-82cc-dde12e7e5a02",
+          "cantidad": 200
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 80
+        },
+        {
+          "insumoId": "a1491d8f-5907-4340-9636-3dbdea33e16b",
+          "cantidad": 750
+        },
+        {
+          "insumoId": "4bfc863c-4d1e-4246-9ca5-e98cc2926287",
+          "cantidad": 240
+        },
+        {
+          "insumoId": "3fe7fe4b-0202-40d2-acb7-a68aff0d42f0",
+          "cantidad": 180
+        },
+        {
+          "insumoId": "73e27edd-a6ef-4f3d-80cd-e0b489f00648",
+          "cantidad": 3
+        },
+        {
+          "insumoId": "17ecd98c-502d-48a8-ad4a-ca4c796038ae",
+          "cantidad": 30
+        },
+        {
+          "insumoId": "bfe8da11-27e9-4dfd-a2c5-0e23dc47308f",
+          "cantidad": 1
+        },
+        {
+          "insumoId": "0bfefb58-c861-49d3-aa6a-d473a8ee0497",
+          "cantidad": 5
+        },
+        {
+          "insumoId": "4c280d2e-8e9b-4e77-a0aa-91843bb321fb",
+          "cantidad": 200
+        }
+      ],
+      "updatedAt": 1778705384008
+    },
+    {
+      "id": "v2-panes-salvado",
+      "nombre": "Panes de Salvado",
+      "rinde": 10,
+      "unidadRinde": "unidades",
+      "ingredientes": [
+        {
+          "insumoId": "2bb8f08c-d94a-4cb5-9d4b-6d07ade8a248",
+          "cantidad": 500
+        },
+        {
+          "insumoId": "8b101c05-ef41-409f-a48a-5af5d9ed9ada",
+          "cantidad": 50
+        },
+        {
+          "insumoId": "v2-sal",
+          "cantidad": 10
+        },
+        {
+          "insumoId": "39f797a6-8910-49ce-b7a6-6f80f8c70e64",
+          "cantidad": 10
+        },
+        {
+          "insumoId": "11526d8c-9639-4164-958d-ed7892960601",
+          "cantidad": 40
+        },
+        {
+          "insumoId": "3c8b3e1f-6f0d-4743-9a2d-05db96f27e45",
+          "cantidad": 30
+        },
+        {
+          "insumoId": "e2448c9d-a065-402d-8720-b2991f0fab8a",
+          "cantidad": 20
+        }
+      ],
+      "updatedAt": 1778705384009
+    }
+  ]
+}
