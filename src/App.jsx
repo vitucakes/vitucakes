@@ -59,6 +59,57 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [insumos.length, recetas.length])
 
+  // Migración v2: agrega insumos nuevos (Sal, Mascarpone, etc.), aplica cambios
+  // a 5 recetas existentes y agrega 17 recetas nuevas que no estaban en el
+  // precarga. Para recetas existentes solo se aplica el cambio si la receta
+  // sigue teniendo el nombre original; para recetas nuevas, solo si no existe
+  // otra con el mismo nombre.
+  useEffect(() => {
+    const FLAG = 'vitucakes_recetas_v2_done'
+    if (localStorage.getItem(FLAG)) return
+    if (insumos.length === 0 || recetas.length === 0) return
+    fetch(`${import.meta.env.BASE_URL}recetas_v2.json`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (!data) return
+        // 1) Insumos nuevos: agregar si no existen por id
+        const insumosExistentesIds = new Set(insumos.map((i) => i.id))
+        const insumosAAgregar = (data.insumosNuevos || []).filter((i) => !insumosExistentesIds.has(i.id))
+        if (insumosAAgregar.length > 0) {
+          setInsumos((prev) => [...prev, ...insumosAAgregar.map((i) => ({ ...i, updatedAt: Date.now() }))])
+        }
+        // 2) Cambios a recetas existentes: matchean por nombre
+        let stamp = Date.now() + 1000
+        setRecetas((prev) => {
+          let next = prev.map((r) => {
+            const cambio = (data.cambiosRecetas || []).find((c) => c.nombre === r.nombre)
+            if (!cambio) return r
+            stamp += 1
+            if (cambio.reemplazar) {
+              return { ...r, ingredientes: cambio.reemplazar, updatedAt: stamp }
+            }
+            if (cambio.agregar) {
+              const existingIds = new Set(r.ingredientes.map((ing) => ing.insumoId))
+              const toAdd = cambio.agregar.filter((ing) => !existingIds.has(ing.insumoId))
+              if (toAdd.length === 0) return r
+              return { ...r, ingredientes: [...r.ingredientes, ...toAdd], updatedAt: stamp }
+            }
+            return r
+          })
+          // 3) Recetas nuevas: agregar si no existe otra con el mismo nombre
+          const nombresExistentes = new Set(next.map((r) => r.nombre))
+          const nuevasAAgregar = (data.recetasNuevas || []).filter((r) => !nombresExistentes.has(r.nombre))
+          if (nuevasAAgregar.length > 0) {
+            next = [...next, ...nuevasAAgregar]
+          }
+          return next
+        })
+        localStorage.setItem(FLAG, '1')
+      })
+      .catch(() => {})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [insumos.length, recetas.length])
+
   const navigate = (to, id = null) => {
     setPage(to)
     setSelectedId(id)
