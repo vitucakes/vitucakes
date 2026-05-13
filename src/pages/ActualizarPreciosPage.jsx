@@ -175,8 +175,8 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
                       {isSelected && <span className="text-xs leading-none">✓</span>}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-800 truncate">{s.nombre}</p>
-                      <p className="text-[11px] text-gray-400 truncate mb-2">{s.producto}</p>
+                      <p className="font-bold text-gray-800 break-words">{s.nombre}</p>
+                      <p className="text-[11px] text-gray-400 break-words mb-2">{s.producto}</p>
                       <div className="flex items-center gap-2 text-sm">
                         <span className="text-gray-400 line-through">{formatARS(s.precioActual)}/{s.unidadVitu}</span>
                         <span className="text-gray-300">→</span>
@@ -238,7 +238,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
             <div className="bg-brand-50 rounded-2xl p-3 max-h-56 overflow-y-auto mb-5 space-y-1.5">
               {sugerenciasSeleccionadas.map((s) => (
                 <div key={s.insumoId} className="flex items-center justify-between gap-2 text-sm">
-                  <span className="text-gray-700 font-medium truncate">{s.nombre}</span>
+                  <span className="text-gray-700 font-medium break-words flex-1">{s.nombre}</span>
                   <span className="text-brand-600 font-semibold flex-shrink-0">{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
                 </div>
               ))}

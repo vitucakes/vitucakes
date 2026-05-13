@@ -113,7 +113,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
                 <div className="flex items-start justify-between">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className="font-bold text-gray-800 text-base truncate">{r.nombre}</p>
+                      <p className="font-bold text-gray-800 text-base break-words">{r.nombre}</p>
                       {tieneProblema && <span className="text-base flex-shrink-0">⚠️</span>}
                     </div>
                     <p className="text-xs text-gray-400 mt-0.5">Rinde {r.rinde} {r.unidadRinde} · {r.ingredientes.length} ingrediente{r.ingredientes.length !== 1 ? 's' : ''}</p>

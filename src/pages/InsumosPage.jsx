@@ -127,7 +127,7 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
         {filtered.map((ins) => (
           <div key={ins.id} className="bg-white rounded-2xl px-4 py-3.5 flex items-center justify-between shadow-sm border border-brand-50">
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-gray-800 truncate">{ins.nombre}</p>
+              <p className="font-semibold text-gray-800 break-words">{ins.nombre}</p>
               <p className="text-sm text-brand-500 font-medium mt-0.5">
                 ${ins.precioPorUnidad.toLocaleString('es-AR')} / {ins.unidad}
               </p>

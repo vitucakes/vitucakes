@@ -26,7 +26,7 @@ export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDele
           >
             ←
           </button>
-          <h1 className="text-xl font-bold text-gray-800 flex-1 truncate">{receta.nombre}</h1>
+          <h1 className="text-xl font-bold text-gray-800 flex-1 break-words">{receta.nombre}</h1>
           <button
             onClick={() => setConfirmDelete(true)}
             className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50"
