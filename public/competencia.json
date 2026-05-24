@@ -1,0 +1,112 @@
+{
+  "generadoEn": "2026-05-24T04:36:37.547Z",
+  "competidoras": [
+    {
+      "id": "candelitte",
+      "nombre": "Candelitte",
+      "fuente": "https://candelitte.mitiendanube.com",
+      "productos": [
+        {
+          "slug": "tiramisu",
+          "nombre": "Tiramisú",
+          "descripcion": "El clásico Tiramisú que nunca falla, en version grande! Masa sablee de cacao por fuera y en su interior torta de vainillas con café, queso mascarpone y cacao...",
+          "precio": 58900,
+          "url": "https://candelitte.mitiendanube.com/productos/tiramisu/"
+        },
+        {
+          "slug": "frandelitte1",
+          "nombre": "Frandelitte",
+          "descripcion": "Nuestra Frandelitte en version grande! Base de vainilla, rellena de chocolate negro, chocolate blanco, frambuesas y Franui por dentro y por fuera. Tiene 20cm...",
+          "precio": 65900,
+          "url": "https://candelitte.mitiendanube.com/productos/frandelitte1/"
+        },
+        {
+          "slug": "cheesecake-de-frutos-rojos",
+          "nombre": "Cheesecake de frutos rojos",
+          "descripcion": "Nuestro riquisimo cheesecake de frutos rojos en versión grande! Basde de vainilla, crema de queso, mermelada y frutos rojos Tiene 20cm y rinde entre 15/18 po...",
+          "precio": 60900,
+          "url": "https://candelitte.mitiendanube.com/productos/cheesecake-de-frutos-rojos/"
+        },
+        {
+          "slug": "doble-oreo1",
+          "nombre": "Brownie Oreo",
+          "descripcion": "Una de nuestras opciones de brownie favoritas! Base de brownie, dulce de leche, crema oreo, crema chantilly y galletitas oreo Tiene 20cm y rinde entre 15/18 ...",
+          "precio": 65900,
+          "url": "https://candelitte.mitiendanube.com/productos/doble-oreo1/"
+        },
+        {
+          "slug": "red-velvet",
+          "nombre": "Red Velvet",
+          "descripcion": "Red velvet super XXL! Bizcochos de cacao color rojo, rellena y cubierta de frosting de chocolate blanco Tiene 20cm y rinde entre 15/18 porciones! Disponible ...",
+          "precio": 70900,
+          "url": "https://candelitte.mitiendanube.com/productos/red-velvet/"
+        },
+        {
+          "slug": "pavlova",
+          "nombre": "Pavlova",
+          "descripcion": "Nuestra Pavlova version grande y super abundante! Base de merengue seco, rellena de dulce de leche, crema chantilly y frutos del bosque Tiene 20cm y rinde en...",
+          "precio": 60900,
+          "url": "https://candelitte.mitiendanube.com/productos/pavlova/"
+        },
+        {
+          "slug": "brownie-dominica",
+          "nombre": "Brownie Dominica",
+          "descripcion": "Nuestro Brownie dominica version grande y super abundante! Base de brownie, dulce de leche, crema chantilly y frutos del bosque Tiene 20cm y rinde entre 15/1...",
+          "precio": 65900,
+          "url": "https://candelitte.mitiendanube.com/productos/brownie-dominica/"
+        },
+        {
+          "slug": "chocotorta",
+          "nombre": "Chocotorta",
+          "descripcion": "Nuestra clásica chocotorta version grande y super abundante! Tiene 20cm y rinde entre 15/18 porciones! Disponible para retirar en las sucursales de Lanús Oes...",
+          "precio": 60900,
+          "url": "https://candelitte.mitiendanube.com/productos/chocotorta/"
+        },
+        {
+          "slug": "doble-oreo2",
+          "nombre": "Doble Oreo",
+          "descripcion": "Doble oreo versión XXL! Doble base de Oreo, dulce de leche y crema chantilly Tiene 20cm y rinde entre 15/18 porciones! Disponible para retirar en las sucursa...",
+          "precio": 70900,
+          "url": "https://candelitte.mitiendanube.com/productos/doble-oreo2/"
+        },
+        {
+          "slug": "balcarce",
+          "nombre": "Balcarce",
+          "descripcion": "Nuestra Balcarce en version grande! Doble pionono de vainilla, dulce de leche, crema chantilly, duraznos en almíbar y merengue seco, cubierta de coco rallado...",
+          "precio": 65900,
+          "url": "https://candelitte.mitiendanube.com/productos/balcarce/"
+        },
+        {
+          "slug": "matilda",
+          "nombre": "Matilda",
+          "descripcion": "Torta Matilda! Bizcochos húmedos de chocolate, relleno con crema bariloche Tiene 20cm y rinde entre 15/18 porciones! Disponible para retirar en las sucursale...",
+          "precio": 70900,
+          "url": "https://candelitte.mitiendanube.com/productos/matilda/"
+        },
+        {
+          "slug": "brownie-clasico2",
+          "nombre": "Brownie Clásico",
+          "descripcion": "Brownie Clásico con muuucho Dulce de Leche y Merengue! Base de brownie, dulce de leche y merengue italiano Tiene 20cm y rinde entre 15/18 porciones! Disponib...",
+          "precio": 55900,
+          "url": "https://candelitte.mitiendanube.com/productos/brownie-clasico2/"
+        },
+        {
+          "slug": "carrot-cake",
+          "nombre": "Carrot Cake",
+          "descripcion": "Carrot Cake! Bizcochos húmedos de zanahoria con nuez, relleno con frosting de chocolate blanco y naranja Tiene 20cm y rinde entre 15/18 porciones! Disponible...",
+          "precio": 70900,
+          "url": "https://candelitte.mitiendanube.com/productos/carrot-cake/"
+        },
+        {
+          "slug": "alimonada",
+          "nombre": "Alimonada",
+          "descripcion": "Alimonada! Bizcochos húmedos de limón, relleno con frosting de chocolate blanco y limón, y mermelada de arándanos. Tiene 20cm y rinde entre 15/18 porciones! ...",
+          "precio": 70900,
+          "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
+        }
+      ],
+      "errores": [],
+      "updatedAt": "2026-05-24T04:36:38.653Z"
+    }
+  ]
+}
