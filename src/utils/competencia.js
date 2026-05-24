@@ -159,6 +159,28 @@ export function promedioCompetencia(matches) {
   return sum / matches.length
 }
 
+// Devuelve la lista de recetas que tienen algo pendiente de resolver con la
+// competencia: las que NO tienen ningún match confirmado todavía. Cada item
+// incluye la mejor sugerencia automática (si la hay) o null para que el user
+// la resuelva manual.
+//
+// Diseño consciente: si Vitu ya confirmó un match para una receta, no
+// volvemos a molestarla aunque haya más sugerencias posibles. Esto cumple
+// la promesa "ya te lo validé yo, no me lo vuelvas a preguntar".
+export function recetasParaResolver(recetas, competidoras) {
+  if (!recetas?.length || !competidoras?.length) return []
+  return recetas
+    .map((receta) => {
+      const matches = receta.matchesCompetencia ?? []
+      if (matches.length > 0) return null
+      return {
+        receta,
+        sugerencia: proponerSugerencia(receta, competidoras),
+      }
+    })
+    .filter(Boolean)
+}
+
 // Devuelve todos los productos de la competencia que esta receta todavía no
 // matcheó (ni siquiera rechazó). Útil para la pantalla de "match manual"
 // donde el user busca y elige el equivalente cuando los nombres no se parecen

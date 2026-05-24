@@ -4,6 +4,7 @@ import InsumosPage from './pages/InsumosPage'
 import RecetasPage from './pages/RecetasPage'
 import RecetaDetail from './pages/RecetaDetail'
 import ActualizarPreciosPage from './pages/ActualizarPreciosPage'
+import ResolverMatchesPage from './pages/ResolverMatchesPage'
 import BottomNav from './components/BottomNav'
 
 const COMPETENCIA_CACHE_KEY = 'vitucakes_competencia_cache'
@@ -152,10 +153,20 @@ export default function App() {
             recetas={recetas}
             setRecetas={setRecetas}
             insumos={insumos}
+            competidoras={competencia?.competidoras ?? []}
+            onResolverMatches={() => navigate('resolver-matches')}
             onSelect={(id) => {
               setRecetas((prev) => prev.map((r) => r.id === id ? { ...r, updatedAt: Date.now() } : r))
               navigate('detalle', id)
             }}
+          />
+        )}
+        {page === 'resolver-matches' && (
+          <ResolverMatchesPage
+            recetas={recetas}
+            setRecetas={setRecetas}
+            competidoras={competencia?.competidoras ?? []}
+            onBack={() => navigate('recetas')}
           />
         )}
         {page === 'detalle' && selectedReceta && (
@@ -169,7 +180,7 @@ export default function App() {
           />
         )}
       </main>
-      {page !== 'detalle' && page !== 'actualizar-precios' && (
+      {page !== 'detalle' && page !== 'actualizar-precios' && page !== 'resolver-matches' && (
         <BottomNav current={page} onChange={(p) => navigate(p)} />
       )}
     </div>

@@ -1,12 +1,11 @@
-import { useMemo, useState } from 'react'
-import BottomSheet from '../components/BottomSheet'
+import { useState } from 'react'
+import MatchManualSheet from '../components/MatchManualSheet'
 import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
 import { proponerSugerencia, matchesConDetalle, promedioCompetencia, productosDisponibles } from '../utils/competencia'
 
 export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
-  const [matchSearch, setMatchSearch] = useState('')
 
   const costoInsumos = calcCostoInsumos(receta, insumos)
   const indirectos = calcGastosIndirectos(costoInsumos)
@@ -71,13 +70,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
       ),
     })
     setMatchManualOpen(false)
-    setMatchSearch('')
   }
-
-  const productosParaElegir = useMemo(
-    () => productosDisponibles(receta, competidoras, matchSearch),
-    [receta, competidoras, matchSearch],
-  )
 
   const hayCompetidorasCargadas = (competidoras ?? []).some((c) => (c.productos ?? []).length > 0)
 
@@ -339,53 +332,13 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         </div>
       </div>
 
-      {/* Match manual: sheet con buscador + lista de productos */}
-      <BottomSheet
+      <MatchManualSheet
         isOpen={matchManualOpen}
-        onClose={() => { setMatchManualOpen(false); setMatchSearch('') }}
-        title="Elegir match manual"
-      >
-        <div className="space-y-3">
-          <p className="text-xs text-gray-500">
-            Buscá el producto de la competencia que equivale a <span className="font-semibold text-gray-700">{receta.nombre}</span>.
-          </p>
-          <input
-            type="text"
-            placeholder="Buscar por nombre o descripción..."
-            value={matchSearch}
-            onChange={(e) => setMatchSearch(e.target.value)}
-            className="input"
-            autoFocus
-          />
-          {productosParaElegir.length === 0 && (
-            <p className="text-sm text-gray-400 text-center py-6">
-              {matchSearch
-                ? `No hay productos que coincidan con "${matchSearch}"`
-                : 'No hay productos disponibles para matchear.'}
-            </p>
-          )}
-          <div className="space-y-2">
-            {productosParaElegir.map((p) => (
-              <button
-                key={`${p.competidoraId}-${p.productoSlug}`}
-                onClick={() => elegirMatchManual(p)}
-                className="w-full text-left bg-brand-50 rounded-xl p-3 active:scale-[0.98] transition-transform"
-              >
-                <div className="flex items-start justify-between gap-2">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[11px] font-semibold text-brand-500 uppercase tracking-wide">{p.competidoraNombre}</p>
-                    <p className="text-sm font-bold text-gray-800 mt-0.5">{p.productoNombre}</p>
-                    {p.productoDescripcion && (
-                      <p className="text-xs text-gray-500 mt-1 line-clamp-2">{p.productoDescripcion}</p>
-                    )}
-                  </div>
-                  <span className="text-base font-black text-brand-600 flex-shrink-0">{formatARS(p.productoPrecio)}</span>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </BottomSheet>
+        onClose={() => setMatchManualOpen(false)}
+        receta={receta}
+        competidoras={competidoras}
+        onElegir={elegirMatchManual}
+      />
 
       {/* Delete confirm */}
       {confirmDelete && (
