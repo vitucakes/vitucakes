@@ -6,7 +6,7 @@ import { recetasParaResolver } from '../utils/competencia'
 const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [] }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
 
-export default function RecetasPage({ recetas, setRecetas, insumos, competidoras = [], onSelect, onResolverMatches }) {
+export default function RecetasPage({ recetas, setRecetas, insumos, competidoras = [], onSelect, onResolverMatches, onBackup }) {
   const [open, setOpen] = useState(false)
   const [editId, setEditId] = useState(null)
   const [form, setForm] = useState(EMPTY_RECETA)
@@ -85,6 +85,16 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
               title="Competencia"
             >
               <span>🤔{pendientesMatch.length > 0 ? ` ${pendientesMatch.length}` : ''}</span>
+            </button>
+          )}
+          {onBackup && (
+            <button
+              onClick={onBackup}
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base flex-shrink-0"
+              title="Backup de datos"
+              aria-label="Backup de datos"
+            >
+              💾
             </button>
           )}
         </div>
