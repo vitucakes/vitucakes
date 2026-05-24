@@ -180,6 +180,68 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 5. Los insumos quedan actualizados con `fechaActualizacion = hoy` y `updatedAt` incremental (todos juntos arriba en la lista)
 6. Si querés precios al día sin esperar al lunes: botón "Actualizar precios manualmente" → scrape live desde el browser (~30s)
 
+## Sistema de competencia (PR #15 y #16)
+
+Vitucakes muestra precios de referencia de pastelerías competidoras al lado del propio.
+
+### Cron semanal de competencia
+- Workflow: `.github/workflows/update-competencia.yml`
+- Cron: lunes 23:30 ART (30 min después del de precios, para no pisarse)
+- Script: `scripts/update-competencia.mjs` (Node 20, sin deps)
+- Output: `public/competencia.json`
+- Array `COMPETIDORAS` en el script lista las "oficiales" (committeadas al repo). Hoy: solo **Candelitte** (`https://candelitte.mitiendanube.com`).
+
+### Modelo de datos competencia
+```js
+// public/competencia.json
+{
+  generadoEn: ISO,
+  competidoras: [{
+    id, nombre, fuente,
+    productos: [{ slug, nombre, descripcion, precio, url }],
+    errores: [...],
+    updatedAt: ISO,
+  }]
+}
+
+// localStorage: vitucakes_competidoras_user
+// Mismo formato, pero son las que el user agregó desde la app.
+// Se mergean con las oficiales via mergeCompetidoras() en utils/competencia.js.
+// Si hay colisión por id, gana la oficial.
+
+// En cada receta:
+{
+  ...,
+  matchesCompetencia: [{ competidoraId, productoSlug }],
+  rechazadosCompetencia: [{ competidoraId, productoSlug }],
+}
+```
+
+### UX del matching
+1. En **Productos** aparece el pill **🤔** cuando hay competidoras cargadas (con número si hay matches pendientes).
+2. **ResolverMatchesPage** lista las recetas sin match agrupadas en "con sugerencia automática" (Sí / No / Elegir otro) y "sin sugerencia" (Elegir manualmente).
+3. **Match automático** (score Jaccard + Levenshtein, threshold 25%): se calcula en `proponerSugerencia()` (utils/competencia.js).
+4. **Match manual**: `MatchManualSheet` con buscador (filtra por nombre + descripción). Resuelve casos como "Lemon pie" ↔ "Alimonada" donde los nombres no coinciden pero la descripción menciona limón.
+5. **Resolver Page tiene un botón "+ Competidora"** que lleva a `AgregarCompetidoraPage`. El user pega URL de un Tiendanube → `scrapeTiendanube` en vivo (proxy CORS, mismo patrón que `scrapeGranate`) → muestra productos → guarda en `vitucakes_competidoras_user`.
+6. **Sumar competidora user al cron oficial**: la app abre un GitHub Issue prefilled (botón "Pedir sumarla al cron semanal"). El admin lo ve, agrega al array `COMPETIDORAS` de `update-competencia.mjs`, mergea PR, queda automática.
+
+### Promesa: "no preguntar lo que ya validé"
+Una vez confirmado un match, `recetasParaResolver()` excluye esa receta. La próxima corrida del cron actualiza el precio pero NO vuelve a preguntar. Solo se vuelve a preguntar si el slug del producto cambió en la competencia (raro).
+
+### Reglas a no romper en competencia
+- `mergeCompetidoras()` es la única fuente para la lista combinada — no leer `competencia.competidoras` directo en pantallas, pasar la mergeada.
+- Los IDs de competidoras user se generan de `idFromHost(sitemapUrl)` (en `AgregarCompetidoraPage.jsx`) — si dos users agregan la misma URL, el id colisiona y se trata como la misma.
+- El scraper devuelve productos cuyo slug coincide con `/productos/<slug>/` — para soportar Empretienda (Silnari) habría que extender el regex.
+
+## Backup de datos del user
+
+**Crítico**: los datos del user (insumos, recetas, matches, competidoras user) viven en `localStorage` del browser, NO en la carpeta. La pantalla **BackupPage** (botón 💾 en el header de Productos) permite:
+- **Descargar backup**: JSON con todos los keys relevantes + flags de migración.
+- **Restaurar backup**: sube JSON y reemplaza el localStorage actual.
+- **Reset**: borra todo y vuelve a precarga inicial.
+
+Las claves de localStorage que se respaldan están en `BACKUP_KEYS` en `src/pages/BackupPage.jsx`. Si agregás un nuevo dato del user en localStorage, **sumalo a esa lista** y bumpeá `APP_VERSION`.
+
 ## Hecho
 
 - CRUD completo de Productos e Insumos
@@ -191,6 +253,7 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 - Bottom sheet para forms (mobile-friendly)
 - Auto-precarga desde `precarga.json` en primer uso (flag `vitucakes_precarga_done`)
 - Restauración automática de insumos del precarga si las recetas los siguen referenciando (flag `vitucakes_restore_orphans_v1`)
+- Migración v2 con insumos + recetas nuevas (flag `vitucakes_recetas_v2_done`)
 - Sort por última interacción (`updatedAt`)
 - Fecha de actualización auto al guardar insumo
 - Deploy automático a GitHub Pages
@@ -198,15 +261,17 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 - Sistema completo de actualización de precios desde El Granate (cron + manual)
 - Bloqueo de borrado de insumos en uso
 - Modal de confirmación antes de aplicar precios
+- **Sistema de competencia con match interactivo** (sugerencia automática + match manual + comparador) — PR #15
+- **Agregar competidoras desde la app** con scrape en vivo + flujo de sumarlas al cron oficial via Issue — PR #16
+- **Backup de datos** (export/import JSON + reset) — para sobrevivir cambio de celu / wipe de Safari
 
 ## Pendiente / a terminar
 
-1. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo).
-2. La usuaria quería un resumen en chat con costo + precio recomendado de cada receta (queda en el aire).
-3. Posible: botón "Recargar precarga" dentro de la app.
-4. Mejorar matches del scraper para los ~20 insumos que todavía no machean.
-5. Posible: sumar una segunda distribuidora.
-6. Posible: botón en cada sugerencia para abrir la página del producto en El Granate.
+1. **Extender scraper para Empretienda** (Silnari, `https://www.silnari.com/tortas-y-tartas`). El actual solo soporta Tiendanube. Las URLs de Silnari son `/tortas-y-tartas/<slug>` (no `/productos/<slug>/`) y el HTML probablemente tiene los precios en otro formato (no `price_number` JSON inline).
+2. **Sumar Nati's Pastelería al cron** (`https://www.natispasteleria.com.ar`). Es Tiendanube, ~130 productos. Patricio iba a agregarla desde la app y abrir el Issue. Cuando aparezca, sumarla al array `COMPETIDORAS` de `update-competencia.mjs`. Conviene agregar `excludeSlugs` para descartar desayunos/panes/packs.
+3. Resto del cron de El Granate: ~20 insumos siguen sin match (ver lista en `update-prices.mjs`).
+4. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo).
+5. PWA + Vercel: PR #14 quedó **cerrado sin mergear**. Si en el futuro queremos instalable en iOS / URL más linda, retomar de cero (no la rama, está borrada).
 
 ## Conversación previa relevante
 
@@ -222,17 +287,36 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 ## Si tenés que retomar
 
 1. Cloná el repo (o si ya está local, `git pull`), `npm install`, `npm run dev`
-2. Leé este doc completo
+2. Leé este doc completo + el README.md
 3. Mirá `src/App.jsx` para entender el flujo y las migraciones
 4. Para deploy: cualquier push a `main` se publica solo en ~30s vía GitHub Actions
-5. Para tocar el scraper: editar `QUERIES` en **ambos** archivos (script .mjs y utils .js), después `node scripts/update-prices.mjs` para verificar
+5. Para tocar el scraper de El Granate: editar `QUERIES` en **ambos** archivos (script `update-prices.mjs` y utils `scrapeGranate.js`), después `node scripts/update-prices.mjs` para verificar
+6. Para agregar una competidora oficial al cron: agregar entrada al array `COMPETIDORAS` en `scripts/update-competencia.mjs`, correr `node scripts/update-competencia.mjs` localmente para verificar
+7. **Node 20+ obligatorio** (con 18 falla por un tema de `crypto` global en dep transitiva)
 
-## Último estado (2026-05-04)
+## Cómo levantar sin GitHub ni Claude (solo con esta carpeta)
 
-- PRs mergeados durante esta sesión: #2, #3, #4, #5, #6, #7, #8, #9
-- `main` con todo el sistema de precios + UX nueva
-- Cuestiones de seguridad/precaución del workflow agente:
-  - **No mergees PRs antes de pushear todos los commits** (problema repetido durante esta sesión: el user mergeaba y yo seguía pusheando, lo que dejaba commits huérfanos. Ahora siempre `git push && gh pr merge`)
-- Sin tareas en curso
-- Carpeta del proyecto: `/Users/patriciomartinvallerino/Documents/General/Personal/vitucakes`
-- Worktree de esta sesión: `/Users/patriciomartinvallerino/Documents/General/Personal/vitucakes/.claude/worktrees/great-engelbart-8fda00` (branch `claude/great-engelbart-8fda00`)
+Ver sección equivalente en [README.md](./README.md). Resumen:
+- Local: `npm install && npm run dev`
+- Build estático: `npm run build` → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
+- Datos del user: usar **BackupPage** (botón 💾 en Productos) para descargar JSON con todo. Sin eso, los datos viven solo en el `localStorage` del browser y se pierden si Vitu cambia de celu.
+
+## Último estado (2026-05-24)
+
+- PRs mergeados en sesiones recientes: #11, #12, #13, **#15** (competencia con match interactivo), **#16** (agregar competidora desde app)
+- PR #14 (PWA + Vercel) → **cerrado sin mergear** (decisión del user)
+- `main` con todo el sistema de competencia + backup
+- Tareas en curso: **ninguna**
+- TODO próximos:
+  1. Soportar Empretienda en el scraper (para Silnari)
+  2. Sumar Nati's al cron cuando aparezca su Issue
+  3. Filtros de exclusión para Nati's (excluir desayunos/panes/packs)
+- Reglas de workflow agente (lecciones aprendidas):
+  - **No mergees PRs antes de pushear todos los commits** — siempre `git push && gh pr merge`.
+  - **El user trabaja desde una carpeta en Google Drive** (`~/Library/CloudStorage/GoogleDrive-.../Mi unidad/vitucakes`). Hay también una carpeta en `~/Documents/General/Personal/vitucakes` que es legacy. Cuidado con confundir las dos.
+  - **`node_modules` en Drive ralentiza la sincronización**. Recomendar al user excluir esa carpeta de Drive sync.
+
+## Carpetas del proyecto en la máquina de Patricio
+
+- **Drive (oficial, en uso)**: `/Users/patriciomartinvallerino/Library/CloudStorage/GoogleDrive-patriciovallerino@gmail.com/Mi unidad/vitucakes`
+- **Documents (legacy)**: `/Users/patriciomartinvallerino/Documents/General/Personal/vitucakes`

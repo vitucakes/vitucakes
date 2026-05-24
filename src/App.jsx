@@ -6,6 +6,7 @@ import RecetaDetail from './pages/RecetaDetail'
 import ActualizarPreciosPage from './pages/ActualizarPreciosPage'
 import ResolverMatchesPage from './pages/ResolverMatchesPage'
 import AgregarCompetidoraPage from './pages/AgregarCompetidoraPage'
+import BackupPage from './pages/BackupPage'
 import BottomNav from './components/BottomNav'
 import { mergeCompetidoras } from './utils/competencia'
 
@@ -164,6 +165,7 @@ export default function App() {
             insumos={insumos}
             competidoras={competidoras}
             onResolverMatches={() => navigate('resolver-matches')}
+            onBackup={() => navigate('backup')}
             onSelect={(id) => {
               setRecetas((prev) => prev.map((r) => r.id === id ? { ...r, updatedAt: Date.now() } : r))
               navigate('detalle', id)
@@ -186,6 +188,9 @@ export default function App() {
             onBack={() => navigate('resolver-matches')}
           />
         )}
+        {page === 'backup' && (
+          <BackupPage onBack={() => navigate('recetas')} />
+        )}
         {page === 'detalle' && selectedReceta && (
           <RecetaDetail
             receta={selectedReceta}
@@ -197,7 +202,7 @@ export default function App() {
           />
         )}
       </main>
-      {page !== 'detalle' && page !== 'actualizar-precios' && page !== 'resolver-matches' && page !== 'agregar-competidora' && (
+      {page !== 'detalle' && page !== 'actualizar-precios' && page !== 'resolver-matches' && page !== 'agregar-competidora' && page !== 'backup' && (
         <BottomNav current={page} onChange={(p) => navigate(p)} />
       )}
     </div>
