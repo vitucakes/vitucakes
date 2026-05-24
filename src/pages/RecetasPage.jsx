@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import BottomSheet from '../components/BottomSheet'
 import { calcCostoReceta, formatARS, MARGEN } from '../utils/calc'
+import { recetasParaResolver } from '../utils/competencia'
 
 const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [] }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
 
-export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) {
+export default function RecetasPage({ recetas, setRecetas, insumos, competidoras = [], onSelect, onResolverMatches }) {
   const [open, setOpen] = useState(false)
   const [editId, setEditId] = useState(null)
   const [form, setForm] = useState(EMPTY_RECETA)
@@ -17,6 +18,11 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
     .filter((r) => r.nombre.toLowerCase().includes(search.toLowerCase()))
     .slice()
     .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
+
+  const pendientesMatch = useMemo(
+    () => recetasParaResolver(recetas, competidoras),
+    [recetas, competidoras],
+  )
 
   const openAdd = () => { setEditId(null); setForm(EMPTY_RECETA); setIngForm(EMPTY_ING); setOpen(true) }
 
@@ -66,10 +72,19 @@ export default function RecetasPage({ recetas, setRecetas, insumos, onSelect }) 
       <div className="bg-white px-5 pt-14 pb-4 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center gap-3 mb-3">
           <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Vitucakes" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
             <p className="text-xs text-gray-400 mt-0.5">{recetas.length} producto{recetas.length !== 1 ? 's' : ''}</p>
           </div>
+          {pendientesMatch.length > 0 && onResolverMatches && (
+            <button
+              onClick={onResolverMatches}
+              className="px-3 py-2 rounded-full bg-brand-400 text-white text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-transform shadow-sm flex-shrink-0"
+              title="Resolver matches con competencia"
+            >
+              <span>🤔 {pendientesMatch.length}</span>
+            </button>
+          )}
         </div>
         <input
           type="text"

@@ -4,13 +4,35 @@ import InsumosPage from './pages/InsumosPage'
 import RecetasPage from './pages/RecetasPage'
 import RecetaDetail from './pages/RecetaDetail'
 import ActualizarPreciosPage from './pages/ActualizarPreciosPage'
+import ResolverMatchesPage from './pages/ResolverMatchesPage'
 import BottomNav from './components/BottomNav'
+
+const COMPETENCIA_CACHE_KEY = 'vitucakes_competencia_cache'
 
 export default function App() {
   const [page, setPage] = useState('recetas')
   const [selectedId, setSelectedId] = useState(null)
   const [insumos, setInsumos] = useLocalStorage('vitucakes_insumos', [])
   const [recetas, setRecetas] = useLocalStorage('vitucakes_recetas', [])
+  const [competencia, setCompetencia] = useState(null)
+
+  // Carga la competencia (productos de pasteleras competidoras). Primero
+  // mira el cache local (rápido y offline-friendly), después intenta refrescar
+  // desde el JSON committeado por el cron semanal.
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem(COMPETENCIA_CACHE_KEY)
+      if (cached) setCompetencia(JSON.parse(cached))
+    } catch {}
+    fetch(`${import.meta.env.BASE_URL}competencia.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!data) return
+        setCompetencia(data)
+        try { localStorage.setItem(COMPETENCIA_CACHE_KEY, JSON.stringify(data)) } catch {}
+      })
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     if (insumos.length === 0 && recetas.length === 0 && !localStorage.getItem('vitucakes_precarga_done')) {
@@ -131,23 +153,34 @@ export default function App() {
             recetas={recetas}
             setRecetas={setRecetas}
             insumos={insumos}
+            competidoras={competencia?.competidoras ?? []}
+            onResolverMatches={() => navigate('resolver-matches')}
             onSelect={(id) => {
               setRecetas((prev) => prev.map((r) => r.id === id ? { ...r, updatedAt: Date.now() } : r))
               navigate('detalle', id)
             }}
           />
         )}
+        {page === 'resolver-matches' && (
+          <ResolverMatchesPage
+            recetas={recetas}
+            setRecetas={setRecetas}
+            competidoras={competencia?.competidoras ?? []}
+            onBack={() => navigate('recetas')}
+          />
+        )}
         {page === 'detalle' && selectedReceta && (
           <RecetaDetail
             receta={selectedReceta}
             insumos={insumos}
+            competidoras={competencia?.competidoras ?? []}
             onBack={() => navigate('recetas')}
             onUpdate={(updated) => setRecetas((prev) => prev.map((r) => r.id === updated.id ? { ...updated, updatedAt: Date.now() } : r))}
             onDelete={(id) => { setRecetas((prev) => prev.filter((r) => r.id !== id)); navigate('recetas') }}
           />
         )}
       </main>
-      {page !== 'detalle' && page !== 'actualizar-precios' && (
+      {page !== 'detalle' && page !== 'actualizar-precios' && page !== 'resolver-matches' && (
         <BottomNav current={page} onChange={(p) => navigate(p)} />
       )}
     </div>
