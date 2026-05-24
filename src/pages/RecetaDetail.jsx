@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
+import { proponerSugerencia, matchesConDetalle, promedioCompetencia } from '../utils/competencia'
 
-export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDelete }) {
+export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
 
   const costoInsumos = calcCostoInsumos(receta, insumos)
@@ -14,6 +15,43 @@ export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDele
     const ins = insumos.find((i) => i.id === ing.insumoId)
     return !ins || ins.precioPorUnidad <= 0
   })
+
+  // Competencia: sugerencia pendiente + matches confirmados
+  const sugerencia = proponerSugerencia(receta, competidoras)
+  const matches = matchesConDetalle(receta, competidoras)
+  const promedio = promedioCompetencia(matches)
+  const diffPct = promedio > 0 && precioVenta > 0
+    ? ((precioVenta - promedio) / promedio) * 100
+    : null
+
+  const confirmarMatch = (sug) => {
+    onUpdate({
+      ...receta,
+      matchesCompetencia: [
+        ...(receta.matchesCompetencia ?? []),
+        { competidoraId: sug.competidoraId, productoSlug: sug.productoSlug },
+      ],
+    })
+  }
+
+  const rechazarMatch = (sug) => {
+    onUpdate({
+      ...receta,
+      rechazadosCompetencia: [
+        ...(receta.rechazadosCompetencia ?? []),
+        { competidoraId: sug.competidoraId, productoSlug: sug.productoSlug },
+      ],
+    })
+  }
+
+  const quitarMatch = (m) => {
+    onUpdate({
+      ...receta,
+      matchesCompetencia: (receta.matchesCompetencia ?? []).filter(
+        (x) => !(x.competidoraId === m.competidoraId && x.productoSlug === m.productoSlug),
+      ),
+    })
+  }
 
   return (
     <div className="flex flex-col min-h-full bg-brand-50">
@@ -40,6 +78,52 @@ export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDele
       </div>
 
       <div className="flex-1 px-4 py-4 space-y-4">
+        {/* Card de sugerencia de competencia — arriba del hero */}
+        {sugerencia && (
+          <div className="bg-white rounded-2xl p-4 shadow-sm border-2 border-brand-200">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-base">🤔</span>
+              <p className="text-xs font-bold text-brand-600 uppercase tracking-wide">
+                ¿Es lo mismo?
+              </p>
+            </div>
+            <p className="text-sm text-gray-700 mb-1">
+              <span className="font-bold">{sugerencia.competidoraNombre}</span> vende
+              {' '}<span className="font-semibold">"{sugerencia.productoNombre}"</span> a
+              {' '}<span className="font-bold text-brand-600">{formatARS(sugerencia.productoPrecio)}</span>.
+            </p>
+            {sugerencia.productoDescripcion && (
+              <p className="text-xs text-gray-500 mb-3 line-clamp-2">
+                {sugerencia.productoDescripcion}
+              </p>
+            )}
+            <div className="flex gap-2 mt-3">
+              <button
+                onClick={() => rechazarMatch(sugerencia)}
+                className="flex-1 py-2.5 rounded-xl bg-gray-100 text-gray-700 font-semibold text-sm active:scale-95 transition-transform"
+              >
+                No, distinto
+              </button>
+              <button
+                onClick={() => confirmarMatch(sugerencia)}
+                className="flex-1 py-2.5 rounded-xl bg-brand-500 text-white font-semibold text-sm active:scale-95 transition-transform"
+              >
+                Sí, es el mismo
+              </button>
+            </div>
+            {sugerencia.productoUrl && (
+              <a
+                href={sugerencia.productoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mt-2 text-center text-[11px] text-brand-500 underline"
+              >
+                Ver en {sugerencia.competidoraNombre} ↗
+              </a>
+            )}
+          </div>
+        )}
+
         {/* Warning: insumos faltantes */}
         {insumosConProblema.length > 0 && (
           <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3 flex gap-3 items-start">
@@ -69,6 +153,84 @@ export default function RecetaDetail({ receta, insumos, onBack, onUpdate, onDele
             <span className="opacity-70">Margen: <span className="font-bold opacity-100">{MARGEN}x</span></span>
           </div>
         </div>
+
+        {/* Comparador con competencia — debajo del hero si hay matches */}
+        {matches.length > 0 && (
+          <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+                Precio de referencia · competencia
+              </p>
+              {matches.length > 1 && (
+                <span className="text-[11px] text-gray-400">Promedio de {matches.length}</span>
+              )}
+            </div>
+
+            {matches.length > 1 && (
+              <div className="mb-3 pb-3 border-b border-brand-50">
+                <div className="flex items-baseline justify-between">
+                  <span className="text-sm text-gray-600">Promedio</span>
+                  <span className="text-xl font-black text-gray-800">{formatARS(promedio)}</span>
+                </div>
+                {diffPct !== null && (
+                  <p className="text-xs mt-1 text-right">
+                    {diffPct > 0 ? (
+                      <span className="text-amber-700 font-semibold">Estás +{diffPct.toFixed(0)}% que la competencia</span>
+                    ) : diffPct < 0 ? (
+                      <span className="text-emerald-700 font-semibold">Estás {diffPct.toFixed(0)}% que la competencia</span>
+                    ) : (
+                      <span className="text-gray-500 font-semibold">Mismo precio que la competencia</span>
+                    )}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <div className="space-y-2">
+              {matches.map((m) => {
+                const diff = precioVenta > 0
+                  ? ((precioVenta - m.productoPrecio) / m.productoPrecio) * 100
+                  : null
+                return (
+                  <div key={`${m.competidoraId}-${m.productoSlug}`} className="bg-brand-50 rounded-xl p-3">
+                    <div className="flex items-start justify-between gap-2 mb-1.5">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-gray-800">{m.competidoraNombre}</p>
+                        <p className="text-[11px] text-gray-500 truncate">{m.productoNombre}</p>
+                      </div>
+                      <span className="text-base font-black text-brand-600 flex-shrink-0">{formatARS(m.productoPrecio)}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px]">
+                      <div className="flex gap-3">
+                        {m.productoUrl && (
+                          <a
+                            href={m.productoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-brand-500 font-semibold"
+                          >
+                            Ver ↗
+                          </a>
+                        )}
+                        <button
+                          onClick={() => quitarMatch(m)}
+                          className="text-gray-400"
+                        >
+                          Quitar match
+                        </button>
+                      </div>
+                      {diff !== null && matches.length === 1 && (
+                        <span className={diff > 0 ? 'text-amber-700 font-semibold' : diff < 0 ? 'text-emerald-700 font-semibold' : 'text-gray-500'}>
+                          {diff > 0 ? '+' : ''}{diff.toFixed(0)}% vs vos
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Costo total */}
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
