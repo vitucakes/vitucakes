@@ -11,7 +11,7 @@ import { recetasParaResolver } from '../utils/competencia'
 // Una vez que el user confirma un match, esa receta desaparece de la lista.
 // La próxima semana, cuando el cron traiga el JSON actualizado, no se le
 // vuelve a preguntar (la receta ya tiene match guardado).
-export default function ResolverMatchesPage({ recetas, setRecetas, competidoras, onBack }) {
+export default function ResolverMatchesPage({ recetas, setRecetas, competidoras, onBack, onAgregarCompetidora }) {
   const [manualPara, setManualPara] = useState(null) // receta para la que se abre el sheet manual
   const [toast, setToast] = useState(null)
 
@@ -98,6 +98,15 @@ export default function ResolverMatchesPage({ recetas, setRecetas, competidoras,
             ←
           </button>
           <h1 className="text-xl font-bold text-gray-800 flex-1">Resolver matches</h1>
+          {onAgregarCompetidora && (
+            <button
+              onClick={onAgregarCompetidora}
+              className="px-3 py-2 rounded-full bg-brand-400 text-white text-xs font-bold flex items-center gap-1 active:scale-95 transition-transform shadow-sm flex-shrink-0"
+              title="Agregar una competidora nueva"
+            >
+              + Competidora
+            </button>
+          )}
         </div>
         <p className="text-xs text-gray-500">
           {conSugerencia.length} con sugerencia · {sinSugerencia.length} sin sugerencia

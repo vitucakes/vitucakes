@@ -5,7 +5,9 @@ import RecetasPage from './pages/RecetasPage'
 import RecetaDetail from './pages/RecetaDetail'
 import ActualizarPreciosPage from './pages/ActualizarPreciosPage'
 import ResolverMatchesPage from './pages/ResolverMatchesPage'
+import AgregarCompetidoraPage from './pages/AgregarCompetidoraPage'
 import BottomNav from './components/BottomNav'
+import { mergeCompetidoras } from './utils/competencia'
 
 const COMPETENCIA_CACHE_KEY = 'vitucakes_competencia_cache'
 
@@ -15,6 +17,13 @@ export default function App() {
   const [insumos, setInsumos] = useLocalStorage('vitucakes_insumos', [])
   const [recetas, setRecetas] = useLocalStorage('vitucakes_recetas', [])
   const [competencia, setCompetencia] = useState(null)
+  // Competidoras agregadas por el user desde la app. Se guardan local; para
+  // sumarlas al cron oficial hay un botón en AgregarCompetidoraPage que
+  // abre un GitHub Issue prefilled.
+  const [competidorasExtra, setCompetidorasExtra] = useLocalStorage('vitucakes_competidoras_user', [])
+
+  // Combinación: oficiales del JSON + las que el user agregó local
+  const competidoras = mergeCompetidoras(competencia?.competidoras ?? [], competidorasExtra)
 
   // Carga la competencia (productos de pasteleras competidoras). Primero
   // mira el cache local (rápido y offline-friendly), después intenta refrescar
@@ -153,7 +162,7 @@ export default function App() {
             recetas={recetas}
             setRecetas={setRecetas}
             insumos={insumos}
-            competidoras={competencia?.competidoras ?? []}
+            competidoras={competidoras}
             onResolverMatches={() => navigate('resolver-matches')}
             onSelect={(id) => {
               setRecetas((prev) => prev.map((r) => r.id === id ? { ...r, updatedAt: Date.now() } : r))
@@ -165,22 +174,30 @@ export default function App() {
           <ResolverMatchesPage
             recetas={recetas}
             setRecetas={setRecetas}
-            competidoras={competencia?.competidoras ?? []}
+            competidoras={competidoras}
             onBack={() => navigate('recetas')}
+            onAgregarCompetidora={() => navigate('agregar-competidora')}
+          />
+        )}
+        {page === 'agregar-competidora' && (
+          <AgregarCompetidoraPage
+            extras={competidorasExtra}
+            setExtras={setCompetidorasExtra}
+            onBack={() => navigate('resolver-matches')}
           />
         )}
         {page === 'detalle' && selectedReceta && (
           <RecetaDetail
             receta={selectedReceta}
             insumos={insumos}
-            competidoras={competencia?.competidoras ?? []}
+            competidoras={competidoras}
             onBack={() => navigate('recetas')}
             onUpdate={(updated) => setRecetas((prev) => prev.map((r) => r.id === updated.id ? { ...updated, updatedAt: Date.now() } : r))}
             onDelete={(id) => { setRecetas((prev) => prev.filter((r) => r.id !== id)); navigate('recetas') }}
           />
         )}
       </main>
-      {page !== 'detalle' && page !== 'actualizar-precios' && page !== 'resolver-matches' && (
+      {page !== 'detalle' && page !== 'actualizar-precios' && page !== 'resolver-matches' && page !== 'agregar-competidora' && (
         <BottomNav current={page} onChange={(p) => navigate(p)} />
       )}
     </div>

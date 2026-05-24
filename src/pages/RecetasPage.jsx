@@ -76,13 +76,15 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
             <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
             <p className="text-xs text-gray-400 mt-0.5">{recetas.length} producto{recetas.length !== 1 ? 's' : ''}</p>
           </div>
-          {pendientesMatch.length > 0 && onResolverMatches && (
+          {/* Pill de competencia: aparece siempre que hay competidoras cargadas.
+              Con N si hay matches pendientes, sin número si está todo resuelto. */}
+          {competidoras.length > 0 && onResolverMatches && (
             <button
               onClick={onResolverMatches}
               className="px-3 py-2 rounded-full bg-brand-400 text-white text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-transform shadow-sm flex-shrink-0"
-              title="Resolver matches con competencia"
+              title="Competencia"
             >
-              <span>🤔 {pendientesMatch.length}</span>
+              <span>🤔{pendientesMatch.length > 0 ? ` ${pendientesMatch.length}` : ''}</span>
             </button>
           )}
         </div>

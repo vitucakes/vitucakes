@@ -9,6 +9,17 @@
 // trae un producto NUEVO en la competidora, la app vuelve a proponerlo porque
 // ese slug no está en la lista de rechazados.
 
+// Mergea las competidoras "oficiales" (las que vienen del JSON del cron
+// semanal) con las "personales" (las que el user agregó desde la app, que
+// viven en localStorage). Si hay colisión por id, gana la oficial.
+//
+// Devuelve un array nuevo, no muta nada.
+export function mergeCompetidoras(oficiales = [], extras = []) {
+  const oficialesIds = new Set((oficiales ?? []).map((c) => c.id))
+  const extrasFiltradas = (extras ?? []).filter((c) => !oficialesIds.has(c.id))
+  return [...(oficiales ?? []), ...extrasFiltradas]
+}
+
 const STOPWORDS = new Set([
   'de',
   'del',
