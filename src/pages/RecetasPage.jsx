@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import BottomSheet from '../components/BottomSheet'
 import { calcCostoReceta, formatARS, MARGEN } from '../utils/calc'
-import { recetasParaResolver } from '../utils/competencia'
+import { matchesConDetalle, promedioCompetencia, recetasParaResolver } from '../utils/competencia'
 
 const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [] }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
@@ -160,6 +160,13 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
             const ins = insumos.find((i) => i.id === ing.insumoId)
             return !ins || ins.precioPorUnidad <= 0
           })
+          // Competencia: si la receta tiene matches confirmados, calculamos
+          // el promedio para mostrar la referencia y el diff vs el precio propio.
+          const matches = matchesConDetalle(r, competidoras)
+          const compPromedio = promedioCompetencia(matches)
+          const diffPct = compPromedio > 0 && precioVenta > 0
+            ? ((precioVenta - compPromedio) / compPromedio) * 100
+            : null
           return (
             <div
               key={r.id}
@@ -169,22 +176,49 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
                 onClick={() => onSelect(r.id)}
                 className="w-full px-4 pt-4 pb-2 text-left active:scale-[0.98] transition-transform"
               >
-                <div className="flex items-start justify-between">
+                <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <p className="font-bold text-gray-800 text-base break-words">{r.nombre}</p>
                       {tieneProblema && <span className="text-base flex-shrink-0">⚠️</span>}
                     </div>
-                    <p className="text-xs text-gray-400 mt-0.5">Rinde {r.rinde} {r.unidadRinde} · {r.ingredientes.length} ingrediente{r.ingredientes.length !== 1 ? 's' : ''}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">Rinde {r.rinde} {r.unidadRinde}</p>
                   </div>
-                  <div className="ml-3 text-right flex-shrink-0">
-                    <p className="text-xs text-gray-400">Venta / u</p>
-                    <p className="text-lg font-bold text-brand-500">{formatARS(precioVenta)}</p>
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-[10px] uppercase text-gray-400 font-semibold tracking-wide">Mi precio /u</p>
+                    <p className="text-xl font-black text-brand-500 leading-tight">{formatARS(precioVenta)}</p>
+                    <p className="text-[10px] text-gray-400">margen {MARGEN}x</p>
                   </div>
                 </div>
-                <div className="mt-2 pt-2 border-t border-brand-50 flex justify-between text-xs text-gray-500">
-                  <span>Costo total: <span className="font-medium">{formatARS(costo)}</span></span>
-                  <span>Margen: <span className="font-medium">{MARGEN}x</span></span>
+                <div className="mt-3 pt-3 border-t border-brand-50 space-y-1">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="text-gray-500">Costo total</span>
+                    <span className="font-semibold text-gray-700">{formatARS(costo)}</span>
+                  </div>
+                  {compPromedio > 0 && (
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="text-gray-500">
+                        Competencia
+                        {matches.length > 1 ? ` (avg ${matches.length})` : ''}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <span className="font-semibold text-gray-700">{formatARS(compPromedio)}</span>
+                        {diffPct !== null && (
+                          <span
+                            className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                              diffPct > 5
+                                ? 'bg-amber-100 text-amber-700'
+                                : diffPct < -5
+                                  ? 'bg-emerald-100 text-emerald-700'
+                                  : 'bg-gray-100 text-gray-600'
+                            }`}
+                          >
+                            {diffPct > 0 ? '+' : ''}{diffPct.toFixed(0)}%
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </button>
               <div className="px-4 pb-3 pt-1 flex justify-end gap-2">
