@@ -3,7 +3,7 @@ import BottomSheet from '../components/BottomSheet'
 import { calcCostoReceta, formatARS, MARGEN } from '../utils/calc'
 import { matchesConDetalle, promedioCompetencia, recetasParaResolver } from '../utils/competencia'
 
-const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [] }
+const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [], descripcion: '' }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
 
 export default function RecetasPage({ recetas, setRecetas, insumos, competidoras = [], onSelect, onResolverMatches, onBackup }) {
@@ -39,7 +39,13 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
 
   const openEdit = (r) => {
     setEditId(r.id)
-    setForm({ nombre: r.nombre, rinde: String(r.rinde), unidadRinde: r.unidadRinde, ingredientes: [...r.ingredientes] })
+    setForm({
+      nombre: r.nombre,
+      rinde: String(r.rinde),
+      unidadRinde: r.unidadRinde,
+      ingredientes: [...r.ingredientes],
+      descripcion: r.descripcion ?? '',
+    })
     setIngForm(EMPTY_ING)
     setOpen(true)
   }
@@ -63,7 +69,14 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
     const nombre = form.nombre.trim()
     const rinde = parseFloat(form.rinde)
     if (!nombre || isNaN(rinde) || rinde <= 0 || form.ingredientes.length === 0) return
-    const data = { nombre, rinde, unidadRinde: form.unidadRinde, ingredientes: form.ingredientes, updatedAt: Date.now() }
+    const data = {
+      nombre,
+      rinde,
+      unidadRinde: form.unidadRinde,
+      ingredientes: form.ingredientes,
+      descripcion: form.descripcion?.trim() ?? '',
+      updatedAt: Date.now(),
+    }
     if (editId) {
       setRecetas((prev) => prev.map((r) => r.id === editId ? { ...r, ...data } : r))
     } else {
@@ -350,6 +363,22 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Descripción para copy/paste a clientes. El precio se concatena
+              solo al final cuando se ve/copia desde RecetaDetail. */}
+          <div>
+            <label className="label">Descripción (opcional)</label>
+            <textarea
+              value={form.descripcion}
+              onChange={(e) => setForm((f) => ({ ...f, descripcion: e.target.value }))}
+              placeholder="Ej: Cheesecake de frutos rojos, base de vainilla, rinde 8 porciones. Hacelo con 48hs de anticipación."
+              rows={4}
+              className="input resize-none leading-snug"
+            />
+            <p className="text-[11px] text-gray-400 mt-1">
+              Te lo dejamos listo para copiar-pegar. El precio se agrega solo al final, no lo escribas.
+            </p>
           </div>
 
           <button

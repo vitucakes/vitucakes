@@ -7,6 +7,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
   const [confirmConvertir, setConfirmConvertir] = useState(false)
+  const [copiado, setCopiado] = useState(false)
 
   // Scroll-to-top al entrar al detalle (o cambiar de receta). El scroll
   // vive en el <main> de App.jsx con overflow-y-auto, no en window.
@@ -57,6 +58,34 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         { competidoraId: sug.competidoraId, productoSlug: sug.productoSlug },
       ],
     })
+  }
+
+  // Mensaje para clientes: descripción libre + precio actual concatenado al
+  // final. Se recalcula automáticamente cuando cambia el precio (porque
+  // depende de costo × MARGEN), así Vitu no tiene que tocar la descripción
+  // si cambian los insumos.
+  const descripcionLimpia = receta.descripcion?.trim() ?? ''
+  const mensajeCompleto = descripcionLimpia
+    ? `${descripcionLimpia}\n${formatARS(precioVenta)}`
+    : null
+
+  const copiarMensaje = async () => {
+    if (!mensajeCompleto) return
+    try {
+      await navigator.clipboard.writeText(mensajeCompleto)
+    } catch {
+      // Fallback para browsers/contextos sin permission de clipboard
+      const ta = document.createElement('textarea')
+      ta.value = mensajeCompleto
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      try { document.execCommand('copy') } catch {}
+      document.body.removeChild(ta)
+    }
+    setCopiado(true)
+    setTimeout(() => setCopiado(false), 2000)
   }
 
   const convertirA1 = () => {
@@ -304,6 +333,33 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
                 {matches.length > 0 ? '+ Agregar otro match' : 'Elegir manualmente'}
               </button>
             )}
+          </div>
+        )}
+
+        {/* Mensaje para clientes (descripción + precio actual) */}
+        {mensajeCompleto && (
+          <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
+            <div className="flex items-center justify-between mb-2 gap-3">
+              <p className="text-xs font-bold text-gray-500 uppercase tracking-wide">
+                Mensaje para clientes
+              </p>
+              <button
+                onClick={copiarMensaje}
+                className={`text-xs font-bold px-3 py-1.5 rounded-full active:scale-95 transition-transform flex-shrink-0 ${
+                  copiado
+                    ? 'bg-emerald-100 text-emerald-700'
+                    : 'bg-brand-500 text-white'
+                }`}
+              >
+                {copiado ? '✓ Copiado' : 'Copiar 📋'}
+              </button>
+            </div>
+            <div className="bg-brand-50 rounded-xl p-3 whitespace-pre-line text-sm text-gray-700 leading-relaxed">
+              {mensajeCompleto}
+            </div>
+            <p className="text-[11px] text-gray-400 mt-2">
+              El precio se actualiza solo si cambian los insumos.
+            </p>
           </div>
         )}
 
