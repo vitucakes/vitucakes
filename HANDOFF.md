@@ -296,10 +296,12 @@ Las claves de localStorage que se respaldan están en `BACKUP_KEYS` en `src/page
 
 ## Cómo levantar sin GitHub ni Claude (solo con esta carpeta)
 
-Ver sección equivalente en [README.md](./README.md). Resumen:
-- Local: `npm install && npm run dev`
-- Build estático: `npm run build` → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
-- Datos del user: usar **BackupPage** (botón 💾 en Productos) para descargar JSON con todo. Sin eso, los datos viven solo en el `localStorage` del browser y se pierden si Vitu cambia de celu.
+**Guía completa, paso a paso, asumiendo cero conocimiento**: [RECONSTRUIR.md](./RECONSTRUIR.md).
+
+Resumen:
+- Local: `bash arrancar.sh` (o `npm install && npm run dev`)
+- Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
+- Datos del user: usar **BackupPage** (botón 💾 en Productos) para descargar JSON con todo. Sin eso, los datos viven solo en el `localStorage` del browser y se pierden si Vitu cambia de celu. La app muestra un banner amarillo de recordatorio si pasaron más de 14 días sin descargar backup.
 
 ## Último estado (2026-05-24)
 
