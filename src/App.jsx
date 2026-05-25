@@ -15,6 +15,7 @@ const COMPETENCIA_CACHE_KEY = 'vitucakes_competencia_cache'
 export default function App() {
   const [page, setPage] = useState('recetas')
   const [selectedId, setSelectedId] = useState(null)
+  const [insumoInitialEditId, setInsumoInitialEditId] = useState(null)
   const [insumos, setInsumos] = useLocalStorage('vitucakes_insumos', [])
   const [recetas, setRecetas] = useLocalStorage('vitucakes_recetas', [])
   const [competencia, setCompetencia] = useState(null)
@@ -153,7 +154,14 @@ export default function App() {
     <div className="min-h-screen bg-brand-50 flex flex-col max-w-md mx-auto relative">
       <main className="flex-1 overflow-y-auto pb-20">
         {page === 'insumos' && (
-          <InsumosPage insumos={insumos} setInsumos={setInsumos} recetas={recetas} onActualizarPrecios={() => navigate('actualizar-precios')} />
+          <InsumosPage
+            insumos={insumos}
+            setInsumos={setInsumos}
+            recetas={recetas}
+            onActualizarPrecios={() => navigate('actualizar-precios')}
+            initialEditId={insumoInitialEditId}
+            onInitialEditConsumed={() => setInsumoInitialEditId(null)}
+          />
         )}
         {page === 'actualizar-precios' && (
           <ActualizarPreciosPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />
@@ -199,6 +207,10 @@ export default function App() {
             onBack={() => navigate('recetas')}
             onUpdate={(updated) => setRecetas((prev) => prev.map((r) => r.id === updated.id ? { ...updated, updatedAt: Date.now() } : r))}
             onDelete={(id) => { setRecetas((prev) => prev.filter((r) => r.id !== id)); navigate('recetas') }}
+            onEditInsumo={(insumoId) => {
+              setInsumoInitialEditId(insumoId)
+              navigate('insumos')
+            }}
           />
         )}
       </main>

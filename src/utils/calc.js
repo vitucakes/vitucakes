@@ -19,6 +19,14 @@ export const calcGastosIndirectos = (costoInsumos) => costoInsumos * GASTOS_INDI
 
 export const calcCostoTotal = (costoInsumos) => costoInsumos * (1 + GASTOS_INDIRECTOS)
 
-// Backward-compatible alias: returns total cost incl. indirect expenses
+// Costo total de la receta entera (insumos + indirectos). NO se divide por rinde.
+// El precio de venta es el de la receta completa (1 unidad de venta = 1 receta).
 export const calcCostoReceta = (receta, insumos) =>
   calcCostoTotal(calcCostoInsumos(receta, insumos))
+
+// Precio de venta de la receta entera. Es lo que cobra Vitu por esa receta,
+// independientemente de cuántas porciones/unidades produzca internamente.
+// Esto también arregla la comparación con la competencia: ahora se compara
+// receta entera vs producto entero de la competencia.
+export const calcPrecioVenta = (receta, insumos) =>
+  calcCostoReceta(receta, insumos) * MARGEN
