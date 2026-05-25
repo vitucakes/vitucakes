@@ -1,11 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import MatchManualSheet from '../components/MatchManualSheet'
 import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
 import { proponerSugerencia, matchesConDetalle, promedioCompetencia, productosDisponibles } from '../utils/competencia'
 
+const formatDate = (iso) => {
+  if (!iso) return ''
+  const [y, m, d] = iso.split('-')
+  return `${d}/${m}/${y}`
+}
+
 export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
+  const [insumoModal, setInsumoModal] = useState(null) // insumo abierto en el modal de detalle
+
+  // Scroll-to-top al entrar al detalle (o cambiar de receta). El scroll
+  // vive en el <main> de App.jsx con overflow-y-auto, no en window.
+  useEffect(() => {
+    const main = document.querySelector('main')
+    if (main) main.scrollTo({ top: 0 })
+    window.scrollTo({ top: 0 })
+  }, [receta.id])
 
   const costoInsumos = calcCostoInsumos(receta, insumos)
   const indirectos = calcGastosIndirectos(costoInsumos)
@@ -277,6 +292,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         {/* Costo total */}
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Desglose de costos</p>
+          <p className="text-[11px] text-gray-400 mb-2">Tocá un ingrediente para ver su precio actual.</p>
           <div className="space-y-2">
             {receta.ingredientes.map((ing) => {
               const ins = insumos.find((i) => i.id === ing.insumoId)
@@ -284,7 +300,11 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
               const costoIng = ing.cantidad * ins.precioPorUnidad
               const pct = costoInsumos > 0 ? (costoIng / costoInsumos) * 100 : 0
               return (
-                <div key={ing.insumoId}>
+                <button
+                  key={ing.insumoId}
+                  onClick={() => setInsumoModal(ins)}
+                  className="w-full text-left rounded-xl active:bg-brand-50 active:scale-[0.99] transition-all px-1 py-1 -mx-1"
+                >
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-sm text-gray-700 font-medium">{ins.nombre}</span>
                     <span className="text-sm font-semibold text-gray-800">{formatARS(costoIng)}</span>
@@ -295,7 +315,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
                     </div>
                     <span className="text-xs text-gray-400 w-10 text-right">{ing.cantidad} {ins.unidad}</span>
                   </div>
-                </div>
+                </button>
               )
             })}
           </div>
@@ -339,6 +359,54 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         competidoras={competidoras}
         onElegir={elegirMatchManual}
       />
+
+      {/* Modal detalle de insumo */}
+      {insumoModal && (() => {
+        const ing = receta.ingredientes.find((x) => x.insumoId === insumoModal.id)
+        const cantidad = ing?.cantidad ?? 0
+        const costoEnReceta = cantidad * insumoModal.precioPorUnidad
+        return (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+            <div className="absolute inset-0 bg-black/40" onClick={() => setInsumoModal(null)} />
+            <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-brand-500 uppercase tracking-wide">Insumo</p>
+                  <p className="text-lg font-black text-gray-800 mt-0.5 break-words">{insumoModal.nombre}</p>
+                </div>
+                <button
+                  onClick={() => setInsumoModal(null)}
+                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 text-sm font-medium flex-shrink-0"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="bg-brand-50 rounded-2xl p-4 mb-3">
+                <p className="text-xs text-gray-500 mb-1">Precio actual</p>
+                <p className="text-2xl font-black text-brand-600">
+                  {formatARS(insumoModal.precioPorUnidad)}
+                  <span className="text-sm font-semibold text-brand-500"> / {insumoModal.unidad}</span>
+                </p>
+                {insumoModal.fechaActualizacion && (
+                  <p className="text-[11px] text-gray-400 mt-1">
+                    Actualizado el {formatDate(insumoModal.fechaActualizacion)}
+                  </p>
+                )}
+              </div>
+              <div className="space-y-1.5 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">Usado en esta receta</span>
+                  <span className="font-semibold text-gray-700">{cantidad} {insumoModal.unidad}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500">Costo en esta receta</span>
+                  <span className="font-semibold text-gray-700">{formatARS(costoEnReceta)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })()}
 
       {/* Delete confirm */}
       {confirmDelete && (
