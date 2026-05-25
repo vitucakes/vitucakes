@@ -5,15 +5,28 @@ React + Vite + Tailwind. Sin backend. Datos en `localStorage`.
 
 **Live**: https://patriciovallerino.github.io/vitucakes/
 
-## Quick start
+## 🚨 Si llegaste acá sin saber qué es esto
 
-Necesitás **Node 20+** (con 18 falla el build por un tema de `crypto` global en una dep transitiva).
+Leé **[RECONSTRUIR.md](./RECONSTRUIR.md)** — guía paso a paso, sin presupuesto técnico, para levantar la app desde cero con solo esta carpeta y un backup JSON.
+
+## Quick start (rápido, asume Node 20+ instalado)
+
+```bash
+bash arrancar.sh   # script todo-en-uno: verifica, instala, arranca
+```
+
+O manualmente:
 
 ```bash
 npm install
 npm run dev      # http://localhost:5173/vitucakes/
 npm run build    # produce dist/ con la app lista para servir
 ```
+
+## Scripts incluidos
+
+- `arrancar.sh` — verifica Node, instala dependencias si falta, arranca la app en dev.
+- `publicar.sh` — buildea y te da instrucciones para subir `dist/` a Netlify Drop (deploy gratis sin GitHub).
 
 ## Levantar la app sin GitHub y sin Claude
 
@@ -103,9 +116,11 @@ Leé [HANDOFF.md](./HANDOFF.md). Tiene contexto histórico, decisiones de UX, re
 ## Para Claude / otra IA que arranca de cero
 
 Si sos una IA que retoma este proyecto solo con esta carpeta:
-1. Leé este README + el HANDOFF.md.
-2. El stack es simple: React 18 funcional (no clases), Tailwind, sin TypeScript.
-3. No agregues backend ni servicios externos sin avisar.
-4. **Mantené el patrón de migraciones one-shot** en App.jsx para cambios al modelo de datos — vivimos en producción con datos del user, no podés romper backwards compat.
-5. **Internamente "receta" = "producto"** (en UI dice "Producto", en código sigue siendo `receta` por compat).
-6. Idioma: español rioplatense.
+1. Leé `RECONSTRUIR.md` (para entender el escenario "el user solo tiene la carpeta").
+2. Leé este README + el HANDOFF.md (contexto técnico).
+3. El stack es simple: React 18 funcional (no clases), Tailwind, sin TypeScript.
+4. No agregues backend ni servicios externos sin avisar.
+5. **Mantené el patrón de migraciones one-shot** en App.jsx para cambios al modelo de datos — vivimos en producción con datos del user, no podés romper backwards compat.
+6. **Internamente "receta" = "producto"** (en UI dice "Producto", en código sigue siendo `receta` por compat).
+7. Idioma: español rioplatense.
+8. **Si el user dice que perdió GitHub o Claude**: el documento RECONSTRUIR.md es para él, llevalo de la mano por ahí.

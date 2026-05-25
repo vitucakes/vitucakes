@@ -65,6 +65,8 @@ export default function BackupPage({ onBack }) {
     }
     const filename = `vitucakes-backup-${todayISO()}.json`
     downloadJSON(data, filename)
+    // Guardamos la fecha del último backup para el banner de recordatorio
+    localStorage.setItem('vitucakes_last_backup_at', String(Date.now()))
     setMessage({ type: 'ok', text: `Descargado ${filename}` })
   }
 
