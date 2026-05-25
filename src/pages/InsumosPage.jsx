@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BottomSheet from '../components/BottomSheet'
 
 const UNIDADES = ['kg', 'g', 'l', 'ml', 'u', 'cdas', 'cdtas', 'taza', 'atado']
@@ -13,12 +13,32 @@ const formatDate = (iso) => {
 
 const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
 
-export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios }) {
+export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios, initialEditId, onInitialEditConsumed }) {
   const [open, setOpen] = useState(false)
   const [editId, setEditId] = useState(null)
   const [form, setForm] = useState(EMPTY)
   const [search, setSearch] = useState('')
   const [deleteId, setDeleteId] = useState(null)
+
+  // Si entramos con initialEditId (ej. desde RecetaDetail tocando un ingrediente),
+  // abrimos el form de edición de ese insumo automáticamente.
+  useEffect(() => {
+    if (!initialEditId) return
+    const ins = insumos.find((i) => i.id === initialEditId)
+    if (ins) {
+      setEditId(ins.id)
+      setForm({
+        nombre: ins.nombre,
+        unidad: ins.unidad,
+        precioPorUnidad: String(ins.precioPorUnidad),
+        totalPagado: '',
+        cantidadComprada: '',
+      })
+      setOpen(true)
+    }
+    onInitialEditConsumed?.()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialEditId])
 
   const filtered = insumos
     .filter((i) => i.nombre.toLowerCase().includes(search.toLowerCase()))

@@ -3,16 +3,10 @@ import MatchManualSheet from '../components/MatchManualSheet'
 import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
 import { proponerSugerencia, matchesConDetalle, promedioCompetencia, productosDisponibles } from '../utils/competencia'
 
-const formatDate = (iso) => {
-  if (!iso) return ''
-  const [y, m, d] = iso.split('-')
-  return `${d}/${m}/${y}`
-}
-
-export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete }) {
+export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete, onEditInsumo }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
-  const [insumoModal, setInsumoModal] = useState(null) // insumo abierto en el modal de detalle
+  const [confirmConvertir, setConfirmConvertir] = useState(false)
 
   // Scroll-to-top al entrar al detalle (o cambiar de receta). El scroll
   // vive en el <main> de App.jsx con overflow-y-auto, no en window.
@@ -25,8 +19,12 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
   const costoInsumos = calcCostoInsumos(receta, insumos)
   const indirectos = calcGastosIndirectos(costoInsumos)
   const costo = calcCostoTotal(costoInsumos)
-  const costoPorUnidad = receta.rinde > 0 ? costo / receta.rinde : 0
-  const precioVenta = costoPorUnidad * MARGEN
+  // Precio de venta de la receta ENTERA (no por unidad). Si la receta produce
+  // varias unidades pero se vende como lote, este es el precio del lote.
+  // Para vender por unidad, ajustar la receta para que sea 1 unidad (botón
+  // "Convertir a 1 unidad" abajo).
+  const precioVenta = costo * MARGEN
+  const ganancia = precioVenta - costo
 
   const insumosConProblema = receta.ingredientes.filter((ing) => {
     const ins = insumos.find((i) => i.id === ing.insumoId)
@@ -59,6 +57,23 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         { competidoraId: sug.competidoraId, productoSlug: sug.productoSlug },
       ],
     })
+  }
+
+  const convertirA1 = () => {
+    const rindeActual = receta.rinde || 1
+    if (rindeActual <= 1) return
+    const ingredientesAjustados = receta.ingredientes.map((ing) => ({
+      ...ing,
+      // Redondeamos a 2 decimales para no terminar con números raros tipo 0.0833.
+      cantidad: Math.round((ing.cantidad / rindeActual) * 100) / 100,
+    }))
+    onUpdate({
+      ...receta,
+      rinde: 1,
+      unidadRinde: receta.unidadRinde.replace(/s$/, ''),
+      ingredientes: ingredientesAjustados,
+    })
+    setConfirmConvertir(false)
   }
 
   const quitarMatch = (m) => {
@@ -182,10 +197,13 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
 
         {/* Precio de venta — hero card */}
         <div className="bg-brand-400 rounded-3xl p-5 text-white shadow-md">
-          <p className="text-sm font-medium opacity-80 mb-1">Precio de venta por unidad</p>
+          <p className="text-sm font-medium opacity-80 mb-1">Precio de venta</p>
           <p className="text-4xl font-black">{formatARS(precioVenta)}</p>
+          <p className="text-[11px] opacity-70 mt-1">
+            por {receta.rinde === 1 ? `1 ${receta.unidadRinde.replace(/s$/, '')}` : `${receta.rinde} ${receta.unidadRinde}`}
+          </p>
           <div className="mt-3 pt-3 border-t border-white/20 flex justify-between text-sm">
-            <span className="opacity-70">Costo / u: <span className="font-bold opacity-100">{formatARS(costoPorUnidad)}</span></span>
+            <span className="opacity-70">Costo: <span className="font-bold opacity-100">{formatARS(costo)}</span></span>
             <span className="opacity-70">Margen: <span className="font-bold opacity-100">{MARGEN}x</span></span>
           </div>
         </div>
@@ -292,7 +310,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         {/* Costo total */}
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Desglose de costos</p>
-          <p className="text-[11px] text-gray-400 mb-2">Tocá un ingrediente para ver su precio actual.</p>
+          <p className="text-[11px] text-gray-400 mb-2">Tocá un ingrediente para modificar su precio.</p>
           <div className="space-y-2">
             {receta.ingredientes.map((ing) => {
               const ins = insumos.find((i) => i.id === ing.insumoId)
@@ -302,7 +320,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
               return (
                 <button
                   key={ing.insumoId}
-                  onClick={() => setInsumoModal(ins)}
+                  onClick={() => onEditInsumo?.(ins.id)}
                   className="w-full text-left rounded-xl active:bg-brand-50 active:scale-[0.99] transition-all px-1 py-1 -mx-1"
                 >
                   <div className="flex justify-between items-center mb-1">
@@ -342,14 +360,25 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
             <Row label="Costo de insumos" value={formatARS(costoInsumos)} />
             <Row label={`Indirectos (${Math.round(GASTOS_INDIRECTOS * 100)}%)`} value={formatARS(indirectos)} />
             <Row label="Costo total" value={formatARS(costo)} />
-            <Row label={`Costo por ${receta.unidadRinde.replace(/s$/, '')}`} value={formatARS(costoPorUnidad)} />
-            <Row label={`Ganancia por ${receta.unidadRinde.replace(/s$/, '')}`} value={formatARS(precioVenta - costoPorUnidad)} highlight />
+            <Row label="Ganancia" value={formatARS(ganancia)} highlight />
             <div className="pt-2 border-t border-brand-100 flex justify-between items-center">
               <span className="text-sm font-bold text-gray-800">Precio de venta</span>
               <span className="text-xl font-black text-brand-500">{formatARS(precioVenta)}</span>
             </div>
           </div>
         </div>
+
+        {/* Convertir a 1 unidad: útil para recetas que producen varios pero
+            se venden como unidades individuales (ej. Pan Dulce x5 → x1).
+            Divide todas las cantidades por el rinde actual y deja rinde=1. */}
+        {receta.rinde > 1 && onUpdate && (
+          <button
+            onClick={() => setConfirmConvertir(true)}
+            className="w-full py-3 rounded-2xl bg-gray-50 text-gray-600 font-semibold text-sm border border-gray-200 active:scale-95 transition-transform"
+          >
+            Convertir esta receta a 1 {receta.unidadRinde.replace(/s$/, '')}
+          </button>
+        )}
       </div>
 
       <MatchManualSheet
@@ -360,53 +389,25 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         onElegir={elegirMatchManual}
       />
 
-      {/* Modal detalle de insumo */}
-      {insumoModal && (() => {
-        const ing = receta.ingredientes.find((x) => x.insumoId === insumoModal.id)
-        const cantidad = ing?.cantidad ?? 0
-        const costoEnReceta = cantidad * insumoModal.precioPorUnidad
-        return (
-          <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
-            <div className="absolute inset-0 bg-black/40" onClick={() => setInsumoModal(null)} />
-            <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
-              <div className="flex items-start justify-between gap-3 mb-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs font-bold text-brand-500 uppercase tracking-wide">Insumo</p>
-                  <p className="text-lg font-black text-gray-800 mt-0.5 break-words">{insumoModal.nombre}</p>
-                </div>
-                <button
-                  onClick={() => setInsumoModal(null)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 text-sm font-medium flex-shrink-0"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="bg-brand-50 rounded-2xl p-4 mb-3">
-                <p className="text-xs text-gray-500 mb-1">Precio actual</p>
-                <p className="text-2xl font-black text-brand-600">
-                  {formatARS(insumoModal.precioPorUnidad)}
-                  <span className="text-sm font-semibold text-brand-500"> / {insumoModal.unidad}</span>
-                </p>
-                {insumoModal.fechaActualizacion && (
-                  <p className="text-[11px] text-gray-400 mt-1">
-                    Actualizado el {formatDate(insumoModal.fechaActualizacion)}
-                  </p>
-                )}
-              </div>
-              <div className="space-y-1.5 text-sm">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500">Usado en esta receta</span>
-                  <span className="font-semibold text-gray-700">{cantidad} {insumoModal.unidad}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-500">Costo en esta receta</span>
-                  <span className="font-semibold text-gray-700">{formatARS(costoEnReceta)}</span>
-                </div>
-              </div>
+      {/* Confirmar convertir a 1 unidad */}
+      {confirmConvertir && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setConfirmConvertir(false)} />
+          <div className="relative bg-white rounded-3xl p-6 w-full max-w-sm shadow-2xl">
+            <p className="text-base font-bold text-gray-800 text-center mb-2">¿Convertir a 1 unidad?</p>
+            <p className="text-sm text-gray-600 text-center mb-2">
+              Voy a dividir las cantidades de los <span className="font-semibold">{receta.ingredientes.length} ingredientes</span> por <span className="font-semibold">{receta.rinde}</span> y dejar la receta para 1 {receta.unidadRinde.replace(/s$/, '')}.
+            </p>
+            <p className="text-xs text-gray-500 text-center mb-5">
+              Útil si esta receta hoy produce varias pero querés que el precio de venta sea por unidad individual.
+            </p>
+            <div className="flex gap-3">
+              <button onClick={() => setConfirmConvertir(false)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">Cancelar</button>
+              <button onClick={convertirA1} className="flex-1 py-3 rounded-2xl bg-brand-500 text-white font-semibold">Convertir</button>
             </div>
           </div>
-        )
-      })()}
+        </div>
+      )}
 
       {/* Delete confirm */}
       {confirmDelete && (
