@@ -158,7 +158,8 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
         )}
         {filteredRecetas.map((r) => {
           const costo = calcCostoReceta(r, insumos)
-          const precioVenta = r.rinde > 0 ? (costo / r.rinde) * MARGEN : 0
+          // Precio de venta = costo total × margen (receta entera, no por unidad).
+          const precioVenta = costo * MARGEN
           const tieneProblema = r.ingredientes.some((ing) => {
             const ins = insumos.find((i) => i.id === ing.insumoId)
             return !ins || ins.precioPorUnidad <= 0
@@ -185,10 +186,14 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
                       <p className="font-bold text-gray-800 text-base break-words">{r.nombre}</p>
                       {tieneProblema && <span className="text-base flex-shrink-0">⚠️</span>}
                     </div>
-                    <p className="text-xs text-gray-400 mt-0.5">Rinde {r.rinde} {r.unidadRinde}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">
+                      {r.rinde === 1
+                        ? `1 ${r.unidadRinde.replace(/s$/, '')}`
+                        : `${r.rinde} ${r.unidadRinde}`}
+                    </p>
                   </div>
                   <div className="text-right flex-shrink-0">
-                    <p className="text-[10px] uppercase text-gray-400 font-semibold tracking-wide">Mi precio /u</p>
+                    <p className="text-[10px] uppercase text-gray-400 font-semibold tracking-wide">Mi precio</p>
                     <p className="text-xl font-black text-brand-500 leading-tight">{formatARS(precioVenta)}</p>
                     <p className="text-[10px] text-gray-400">margen {MARGEN}x</p>
                   </div>
