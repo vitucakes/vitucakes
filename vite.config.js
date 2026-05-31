@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+// En producción (GitHub Pages) la app vive en /vitucakes/. En dev servimos
+// desde la raíz para simplificar la verificación local.
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: '/vitucakes/',
-})
+  base: command === 'build' ? '/vitucakes/' : '/',
+}))

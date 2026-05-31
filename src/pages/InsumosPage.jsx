@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import BottomSheet from '../components/BottomSheet'
+import { useEditGate, LockToggle } from '../hooks/useEditGate'
 
 const UNIDADES = ['kg', 'g', 'l', 'ml', 'u', 'cdas', 'cdtas', 'taza', 'atado']
 
@@ -19,6 +20,7 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
   const [form, setForm] = useState(EMPTY)
   const [search, setSearch] = useState('')
   const [deleteId, setDeleteId] = useState(null)
+  const { canEdit } = useEditGate()
 
   // Si entramos con initialEditId (ej. desde RecetaDetail tocando un ingrediente),
   // abrimos el form de edición de ese insumo automáticamente.
@@ -114,7 +116,8 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
         <div className="flex items-center gap-3 mb-3">
           <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Vitucakes" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
           <h1 className="text-2xl font-bold text-gray-800 flex-1">Insumos</h1>
-          {onActualizarPrecios && (
+          <LockToggle />
+          {canEdit && onActualizarPrecios && (
             <button
               onClick={onActualizarPrecios}
               className="px-3 py-2 rounded-full bg-brand-400 text-white text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-transform shadow-sm"
@@ -155,21 +158,25 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
                 <p className="text-[11px] text-gray-400 mt-0.5">Actualizado: {formatDate(ins.fechaActualizacion)}</p>
               )}
             </div>
-            <div className="flex gap-2 ml-2">
-              <button onClick={() => openEdit(ins)} className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base">✏️</button>
-              <button onClick={() => confirmDelete(ins.id)} className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-base">🗑️</button>
-            </div>
+            {canEdit && (
+              <div className="flex gap-2 ml-2">
+                <button onClick={() => openEdit(ins)} className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base">✏️</button>
+                <button onClick={() => confirmDelete(ins.id)} className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-base">🗑️</button>
+              </div>
+            )}
           </div>
         ))}
       </div>
 
       {/* FAB */}
-      <button
-        onClick={openAdd}
-        className="fixed bottom-24 right-4 w-14 h-14 bg-brand-400 rounded-full shadow-lg flex items-center justify-center text-white text-3xl active:scale-95 transition-transform z-30"
-      >
-        +
-      </button>
+      {canEdit && (
+        <button
+          onClick={openAdd}
+          className="fixed bottom-24 right-4 w-14 h-14 bg-brand-400 rounded-full shadow-lg flex items-center justify-center text-white text-3xl active:scale-95 transition-transform z-30"
+        >
+          +
+        </button>
+      )}
 
       {/* Form sheet */}
       <BottomSheet isOpen={open} onClose={() => setOpen(false)} title={editId ? 'Editar insumo' : 'Nuevo insumo'}>

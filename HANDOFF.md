@@ -6,8 +6,8 @@ App de costeo y precios de venta para una pastelería casera (uso personal de Vi
 
 - **Repo**: https://github.com/patriciovallerino/vitucakes
 - **Live**: https://patriciovallerino.github.io/vitucakes/
-- **Stack**: React 18 + Vite + Tailwind CSS, sin backend
-- **Storage**: `localStorage` (claves `vitucakes_insumos`, `vitucakes_recetas`)
+- **Stack**: React 18 + Vite + Tailwind CSS + **Firebase (Firestore + Auth anónima)**
+- **Storage**: **Firestore** (colección `vitucakes`, un doc por "tabla": `insumos`, `recetas`, `competidoras_user`, `meta`). Compartido y en vivo entre todos los dispositivos. Ya NO es `localStorage`.
 - **Deploy**: GitHub Actions → GitHub Pages (auto en push a `main`)
 - **Cuenta GitHub conectada**: `patriciovallerino` (la usuaria también tiene `patriciovallerino-maker` pero no se llegó a switchear con `gh`)
 
@@ -30,6 +30,22 @@ Abre en `http://localhost:5173/vitucakes/`.
 - **Idioma**: español rioplatense (vos, "tocá", etc.).
 - **Diseño**: mobile-first, paleta rosa del logo (`brand.50–600` en `tailwind.config.js`).
 - **Logo**: `public/logo.jpg` (1080×1080). Circular 48px a la izquierda del título en headers de Productos e Insumos. Favicon y apple-touch-icon también.
+
+## Datos compartidos (Firebase) — arquitectura nueva (migración 2026-05)
+
+Los datos viven en **Firestore** (proyecto `vitucakes`), no en `localStorage`.
+
+- **`src/firebase.js`**: init de Firebase, Firestore con cache offline (IndexedDB) y login anónimo automático e invisible. El config NO es secreto (la seguridad la dan las reglas de Firestore).
+- **`src/hooks/useSharedState.js`**: hook con la misma interfaz que `useLocalStorage` (`[valor, setValor]`) + 3er valor `loaded`. Real-time listener (`onSnapshot`), escrituras debounceadas (350ms) y guard contra el "eco" de la propia escritura. Un doc por "tabla" bajo la colección `vitucakes` (`insumos`, `recetas`, `competidoras_user`, `meta`), cada uno con un campo `value`.
+- **Candado de edición** (`src/hooks/useEditGate.jsx`): lectura pública, edición detrás de **PIN** (hash SHA-256 en el archivo; lo conocen Vitu y Patricio). `canEdit` se persiste en `localStorage` por dispositivo. `<LockToggle/>` (🔒/🔓) está en los headers; cada control de edición se renderiza solo si `canEdit`. Para candado fuerte se puede migrar a Login con Google + allowlist de mails en las reglas.
+- **`src/pages/InicializarDatos.jsx`**: pantalla de primera carga (cuando `meta.seeded` no existe). Opciones: *subir datos de este dispositivo* (lee el `localStorage` viejo), *importar backup JSON*, o *datos de fábrica*. Requiere PIN. Muestra conteos antes de confirmar.
+- **`src/utils/seedData.js`**: helpers de seed (`readDeviceData`, `readBackupData`, `buildFactoryData`). `buildFactoryData` replica las migraciones viejas (precarga + v2) una sola vez.
+- **Reglas Firestore**: `read: if true; write: if request.auth != null;` para `/vitucakes/{doc}`.
+
+**Reglas a no romper**:
+- `useSharedState` es la única vía de datos compartidos — no volver a `useLocalStorage` para insumos/recetas/competidoras.
+- Las migraciones one-shot viejas (precarga, restore-orphans, v2) ya NO corren en `App.jsx`; su lógica vive una sola vez en `buildFactoryData()`.
+- Tabla compartida nueva = otro doc en la colección `vitucakes` vía `useSharedState('nombre', inicial)`. Acordate de sumarla al export de `BackupPage`.
 
 ## Modelo de datos
 

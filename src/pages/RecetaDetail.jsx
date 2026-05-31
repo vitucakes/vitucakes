@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import MatchManualSheet from '../components/MatchManualSheet'
 import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
 import { proponerSugerencia, matchesConDetalle, promedioCompetencia, productosDisponibles } from '../utils/competencia'
+import { useEditGate, LockToggle } from '../hooks/useEditGate'
 
 export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete, onEditInsumo }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
   const [confirmConvertir, setConfirmConvertir] = useState(false)
   const [copiado, setCopiado] = useState(false)
+  const { canEdit } = useEditGate()
 
   // Scroll-to-top al entrar al detalle (o cambiar de receta). El scroll
   // vive en el <main> de App.jsx con overflow-y-auto, no en window.
@@ -145,12 +147,15 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
             ←
           </button>
           <h1 className="text-xl font-bold text-gray-800 flex-1 break-words">{receta.nombre}</h1>
-          <button
-            onClick={() => setConfirmDelete(true)}
-            className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50"
-          >
-            🗑️
-          </button>
+          <LockToggle />
+          {canEdit && (
+            <button
+              onClick={() => setConfirmDelete(true)}
+              className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50"
+            >
+              🗑️
+            </button>
+          )}
         </div>
         <p className="text-sm text-gray-500">
           Rinde <span className="font-semibold text-gray-700">{receta.rinde} {receta.unidadRinde}</span>
@@ -158,8 +163,9 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
       </div>
 
       <div className="flex-1 px-4 py-4 space-y-4">
-        {/* Card de sugerencia de competencia — arriba del hero */}
-        {sugerencia && (
+        {/* Card de sugerencia de competencia — arriba del hero. Solo para
+            quien puede editar (es un prompt para decidir un match). */}
+        {canEdit && sugerencia && (
           <div className="bg-white rounded-2xl p-4 shadow-sm border-2 border-brand-200">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-base">🤔</span>
@@ -296,12 +302,14 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
                               Ver ↗
                             </a>
                           )}
-                          <button
-                            onClick={() => quitarMatch(m)}
-                            className="text-gray-400"
-                          >
-                            Quitar match
-                          </button>
+                          {canEdit && (
+                            <button
+                              onClick={() => quitarMatch(m)}
+                              className="text-gray-400"
+                            >
+                              Quitar match
+                            </button>
+                          )}
                         </div>
                         {diff !== null && matches.length === 1 && (
                           <span className={diff > 0 ? 'text-amber-700 font-semibold' : diff < 0 ? 'text-emerald-700 font-semibold' : 'text-gray-500'}>
@@ -317,15 +325,17 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
               // Sin matches todavía: mensaje discreto. Si arriba está la card
               // de sugerencia automática, esta queda como complemento.
               <p className="text-sm text-gray-500 text-center py-2">
-                {sugerencia
-                  ? 'Confirmá o rechazá la sugerencia de arriba, o elegí manualmente.'
-                  : 'Todavía no matcheaste este producto con nadie de la competencia.'}
+                {!canEdit
+                  ? 'Sin precio de referencia de la competencia todavía.'
+                  : sugerencia
+                    ? 'Confirmá o rechazá la sugerencia de arriba, o elegí manualmente.'
+                    : 'Todavía no matcheaste este producto con nadie de la competencia.'}
               </p>
             )}
 
             {/* Botón para abrir match manual: siempre disponible si hay productos
                 disponibles para elegir. Texto cambia según haya o no matches. */}
-            {productosDisponibles(receta, competidoras).length > 0 && (
+            {canEdit && productosDisponibles(receta, competidoras).length > 0 && (
               <button
                 onClick={() => setMatchManualOpen(true)}
                 className="w-full mt-3 py-2.5 rounded-xl bg-brand-50 text-brand-600 font-semibold text-sm active:scale-95 transition-transform"
@@ -366,7 +376,9 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         {/* Costo total */}
         <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
           <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Desglose de costos</p>
-          <p className="text-[11px] text-gray-400 mb-2">Tocá un ingrediente para modificar su precio.</p>
+          {canEdit && (
+            <p className="text-[11px] text-gray-400 mb-2">Tocá un ingrediente para modificar su precio.</p>
+          )}
           <div className="space-y-2">
             {receta.ingredientes.map((ing) => {
               const ins = insumos.find((i) => i.id === ing.insumoId)
@@ -376,8 +388,8 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
               return (
                 <button
                   key={ing.insumoId}
-                  onClick={() => onEditInsumo?.(ins.id)}
-                  className="w-full text-left rounded-xl active:bg-brand-50 active:scale-[0.99] transition-all px-1 py-1 -mx-1"
+                  onClick={canEdit ? () => onEditInsumo?.(ins.id) : undefined}
+                  className={`w-full text-left rounded-xl px-1 py-1 -mx-1 ${canEdit ? 'active:bg-brand-50 active:scale-[0.99] transition-all' : ''}`}
                 >
                   <div className="flex justify-between items-center mb-1">
                     <span className="text-sm text-gray-700 font-medium">{ins.nombre}</span>
@@ -427,7 +439,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         {/* Convertir a 1 unidad: útil para recetas que producen varios pero
             se venden como unidades individuales (ej. Pan Dulce x5 → x1).
             Divide todas las cantidades por el rinde actual y deja rinde=1. */}
-        {receta.rinde > 1 && onUpdate && (
+        {canEdit && receta.rinde > 1 && onUpdate && (
           <button
             onClick={() => setConfirmConvertir(true)}
             className="w-full py-3 rounded-2xl bg-gray-50 text-gray-600 font-semibold text-sm border border-gray-200 active:scale-95 transition-transform"

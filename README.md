@@ -1,9 +1,29 @@
 # Vitucakes
 
 App de costeo y precios de venta para una pastelería casera (uso personal).
-React + Vite + Tailwind. Sin backend. Datos en `localStorage`.
+React + Vite + Tailwind. **Datos compartidos en la nube vía Firebase (Firestore)** — todos los dispositivos ven y editan lo mismo, en vivo.
 
 **Live**: https://patriciovallerino.github.io/vitucakes/
+
+## Datos compartidos (Firebase) — leer esto primero
+
+- Los datos (insumos, recetas, competidoras propias) viven en **Firestore** (proyecto `vitucakes`), no en `localStorage`. Se sincronizan en vivo entre todos los dispositivos.
+- **Lectura pública / escritura con candado**: cualquiera que abra el link ve los datos. Para editar hay que **desbloquear con un PIN** (botón 🔒 en el header). El PIN está hasheado en `src/hooks/useEditGate.jsx`.
+- **Config**: `src/firebase.js` (no es secreto; la seguridad la dan las reglas de Firestore). Capa de datos: `src/hooks/useSharedState.js` (misma interfaz que el viejo `useLocalStorage`, pero contra Firestore).
+- **Primer arranque**: si la base está vacía, la app muestra `InicializarDatos` (subir datos de este dispositivo / importar backup / datos de fábrica). Requiere PIN.
+- **Reglas de Firestore** (Firestore → Reglas):
+
+  ```
+  rules_version = '2';
+  service cloud.firestore {
+    match /databases/{database}/documents {
+      match /vitucakes/{doc} {
+        allow read: if true;
+        allow write: if request.auth != null;
+      }
+    }
+  }
+  ```
 
 ## 🚨 Si llegaste acá sin saber qué es esto
 
@@ -58,14 +78,12 @@ Importante: si vas a servir desde una ruta distinta a `/vitucakes/`, editá `vit
 
 ### Los datos del user (insumos, recetas, matches, etc.)
 
-**No están en esta carpeta**. Viven en el `localStorage` del browser de quien usa la app. Si Vitu pierde el celu o limpia datos del sitio, **se pierden**.
+Viven en **Firestore** (nube), compartidos entre todos los dispositivos. Ya **no** se pierden al cambiar de celu. La pantalla **Backup de datos** (botón 💾 en el header de Productos) sigue existiendo como copia extra:
+- **Descargar copia**: baja un JSON con los datos actuales.
+- **Restaurar**: sube un JSON y reemplaza la base compartida (requiere PIN).
+- **Datos de fábrica**: reemplaza la base con la precarga inicial (requiere PIN).
 
-Por eso la app tiene una pantalla **Backup de datos** (botón 💾 en el header de Productos) con:
-- **Descargar backup**: baja un JSON con todos los datos del user.
-- **Restaurar backup**: sube un JSON y reemplaza lo actual.
-- **Reset**: borra todo y vuelve a la precarga inicial (167 insumos + 139 recetas).
-
-Recomendado: que Vitu baje un backup cada tanto y lo guarde en Drive / mail.
+Para correr la app **sin Firebase** (offline total / fork sin nube) habría que volver a `useLocalStorage` — ver historial de git antes de la migración a Firebase.
 
 ## Estructura
 

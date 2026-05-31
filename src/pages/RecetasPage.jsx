@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import BottomSheet from '../components/BottomSheet'
 import { calcCostoReceta, formatARS, MARGEN } from '../utils/calc'
 import { matchesConDetalle, promedioCompetencia, recetasParaResolver } from '../utils/competencia'
+import { useEditGate, LockToggle } from '../hooks/useEditGate'
 
 const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [], descripcion: '' }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
@@ -13,6 +14,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
   const [ingForm, setIngForm] = useState(EMPTY_ING)
   const [search, setSearch] = useState('')
   const [deleteId, setDeleteId] = useState(null)
+  const { canEdit } = useEditGate()
 
   const filteredRecetas = recetas
     .filter((r) => r.nombre.toLowerCase().includes(search.toLowerCase()))
@@ -100,9 +102,10 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
             <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
             <p className="text-xs text-gray-400 mt-0.5">{recetas.length} producto{recetas.length !== 1 ? 's' : ''}</p>
           </div>
+          <LockToggle />
           {/* Pill de competencia: aparece siempre que hay competidoras cargadas.
               Con N si hay matches pendientes, sin número si está todo resuelto. */}
-          {competidoras.length > 0 && onResolverMatches && (
+          {canEdit && competidoras.length > 0 && onResolverMatches && (
             <button
               onClick={onResolverMatches}
               className="px-3 py-2 rounded-full bg-brand-400 text-white text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-transform shadow-sm flex-shrink-0"
@@ -114,7 +117,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
           {/* Cassette 💾: aparece solo cuando hace falta bajar un backup
               (≥14 días sin uno o nunca). Si tenés un backup reciente, no
               hay ruido visual — el banner amarillo abajo también desaparece. */}
-          {onBackup && mostrarRecordatorioBackup && (
+          {onBackup && (mostrarRecordatorioBackup || canEdit) && (
             <button
               onClick={onBackup}
               className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base flex-shrink-0"
@@ -146,8 +149,8 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
               <p className="text-sm font-bold text-amber-900">Bajá un backup</p>
               <p className="text-xs text-amber-800">
                 {diasSinBackup === Infinity
-                  ? 'Nunca bajaste un respaldo. Tus datos solo viven en este celu.'
-                  : `Hace ${diasSinBackup} días que no respaldás. Tocá para descargar uno.`}
+                  ? 'Bajá una copia de respaldo por las dudas.'
+                  : `Hace ${diasSinBackup} días que no bajás una copia. Tocá para descargar una.`}
               </p>
             </div>
             <span className="text-amber-700 font-bold text-lg flex-shrink-0">›</span>
@@ -242,34 +245,38 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
                   )}
                 </div>
               </button>
-              <div className="px-4 pb-3 pt-1 flex justify-end gap-2">
-                <button
-                  onClick={() => openEdit(r)}
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base"
-                  aria-label="Editar"
-                >
-                  ✏️
-                </button>
-                <button
-                  onClick={() => setDeleteId(r.id)}
-                  className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-base"
-                  aria-label="Eliminar"
-                >
-                  🗑️
-                </button>
-              </div>
+              {canEdit && (
+                <div className="px-4 pb-3 pt-1 flex justify-end gap-2">
+                  <button
+                    onClick={() => openEdit(r)}
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-base"
+                    aria-label="Editar"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    onClick={() => setDeleteId(r.id)}
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-red-50 text-base"
+                    aria-label="Eliminar"
+                  >
+                    🗑️
+                  </button>
+                </div>
+              )}
             </div>
           )
         })}
       </div>
 
       {/* FAB */}
-      <button
-        onClick={openAdd}
-        className="fixed bottom-24 right-4 w-14 h-14 bg-brand-400 rounded-full shadow-lg flex items-center justify-center text-white text-3xl active:scale-95 transition-transform z-30"
-      >
-        +
-      </button>
+      {canEdit && (
+        <button
+          onClick={openAdd}
+          className="fixed bottom-24 right-4 w-14 h-14 bg-brand-400 rounded-full shadow-lg flex items-center justify-center text-white text-3xl active:scale-95 transition-transform z-30"
+        >
+          +
+        </button>
+      )}
 
       {/* Form sheet */}
       <BottomSheet isOpen={open} onClose={() => setOpen(false)} title={editId ? 'Editar producto' : 'Nuevo producto'}>
