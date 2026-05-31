@@ -8,12 +8,16 @@ Si seguís estos pasos, en menos de 30 minutos tenés la app andando con todos l
 
 ## 🎯 Resumen ultra corto
 
-Necesitás 2 cosas:
+Necesitás:
 
 1. **La carpeta `vitucakes/`** (tiene todo el código).
-2. **El archivo `vitucakes-backup-AAAA-MM-DD.json`** (tiene los datos de Vitu).
+2. **Una de estas dos** para los datos:
+   - Acceso al proyecto **Firebase `vitucakes`** (cuenta Google de Patricio) → los datos ya están en la nube, no hace falta nada más.
+   - O un **`vitucakes-backup-AAAA-MM-DD.json`** → lo importás y la app lo sube a la nube.
 
-Con esas dos cosas en cualquier computadora moderna, tenés la app de vuelta.
+Con eso, en cualquier computadora moderna, tenés la app de vuelta.
+
+> ⚠️ **Cambió con Firebase (2026-05):** los datos de Vitu ya **no** viven en el navegador (localStorage), sino en la **nube (Firebase/Firestore)** — por eso todos los dispositivos ven lo mismo. El código de conexión está en `src/firebase.js` (no es secreto). Para **editar** hace falta un **PIN** (botón 🔒). Si reconstruís contra un Firebase vacío, la app muestra una pantalla "Inicializar datos" para sembrar desde un backup.
 
 ---
 
@@ -81,19 +85,20 @@ npm run dev
 
 ---
 
-## Parte 3 — Restaurar los datos de Vitu (2 min)
+## Parte 3 — Que aparezcan los datos de Vitu (2 min)
 
-Cuando abras la app por primera vez, va a tener los **datos de fábrica** (167 insumos y 139 recetas del Excel original). Necesitás reemplazarlos por los datos de Vitu (que están en el backup):
+Depende de a qué Firebase apunte la app (la config está en `src/firebase.js`):
 
-1. En la app, andá a **Productos** (abajo a la derecha).
-2. Arriba a la derecha tocá el botón **💾**.
-3. En "Restaurar desde backup", tocá **Elegir archivo**.
-4. Buscá el archivo `vitucakes-backup-AAAA-MM-DD.json` y abrilo.
-5. Te aparece un modal con preview de cuántos insumos / recetas tiene.
-6. Tocá **Restaurar**.
-7. **Recargá la página** (F5 o Cmd+R).
+**Caso A — apunta al Firebase `vitucakes` real (lo normal):** los datos de Vitu **ya están en la nube**. Apenas abrís la app, los ves. No tenés que hacer nada. (Para editar, tocá **🔒** y poné el PIN.)
 
-Listo. Tenés todos los datos de vuelta.
+**Caso B — apunta a un Firebase vacío (reconstrucción desde cero):** la app te muestra la pantalla **"Inicializar datos"**:
+
+1. Tocá **"Desbloquear con PIN"** y poné el PIN.
+2. Tocá **"Importar desde un backup"** → elegí el archivo `vitucakes-backup-AAAA-MM-DD.json`.
+3. Revisá los números (insumos / recetas) y confirmá.
+4. Listo: esos datos quedan en la nube y los ve cualquier dispositivo.
+
+> Si ya pasaste la pantalla inicial y querés restaurar un backup igual: botón **💾** en Productos → "Restaurar desde copia" (requiere PIN).
 
 ---
 
@@ -137,7 +142,7 @@ La URL de Netlify probablemente no tenga el `/vitucakes/` final. Para que funcio
 
 ### Datos en la versión nueva
 
-La app de Netlify nueva **arranca con datos de fábrica**. Vitu tiene que volver a importar el backup (botón 💾 → Restaurar) **en el browser que use** para acceder a esa URL. Una vez importado, queda guardado en ese browser.
+Como los datos viven en **Firebase** (no en el browser), la app de Netlify usa el **mismo** `src/firebase.js` → muestra **los mismos datos** que la versión de siempre, sin reimportar nada. (A diferencia de antes, ya no hay que volver a cargar el backup en cada browser.)
 
 ---
 
@@ -147,7 +152,7 @@ Sin Claude, las modificaciones requieren saber **React + Vite + Tailwind**. Si n
 
 1. **Contratar un dev React por hora** (sitios como Workana, freelance.com). Mostrale este RECONSTRUIR.md + el HANDOFF.md + el README.md, debería entender el proyecto en 30 minutos.
 2. **Usar otra IA** (ChatGPT, Gemini, Claude desde otra cuenta) y pedirle que lea los .md del proyecto. La carpeta entera ocupa ~150 KB sin `node_modules`, se la podés subir como contexto.
-3. **Aprender lo básico**: la app es bastante simple. React + Tailwind + localStorage. Hay miles de tutoriales gratis.
+3. **Aprender lo básico**: la app es bastante simple. React + Tailwind + Firebase (Firestore). Hay miles de tutoriales gratis.
 
 Lo que el dev/IA necesita leer en orden:
 1. `README.md` — quick start
@@ -175,9 +180,9 @@ Estas cosas necesitan GitHub para correr **automáticamente**. La app igual func
 
 ### Stack técnico
 - React 18 + Vite + Tailwind CSS
-- Sin backend, sin base de datos
-- Datos del user en `localStorage` del browser
-- Datos de fábrica en `public/precarga.json`, `public/recetas_v2.json`
+- **Firebase/Firestore** como base de datos compartida en la nube (config pública en `src/firebase.js`)
+- Capa de datos: `src/hooks/useSharedState.js`. Edición detrás de PIN: `src/hooks/useEditGate.jsx`
+- Datos de fábrica (semilla) en `public/precarga.json`, `public/recetas_v2.json`
 
 ### Migrar a otra Mac
 1. Copiá la carpeta `vitucakes` entera (con USB, AirDrop, Drive, ZIP).
@@ -216,7 +221,9 @@ Guardá los backups en:
 - **`npm run dev`**: arranca la app en modo desarrollo (localhost). Mientras corre, podés editar código y se refresca solo.
 - **`npm run build`**: prepara la versión "para producción". Genera la carpeta `dist/` con HTML/JS/CSS minificados.
 - **`dist/`**: la carpeta resultado de `npm run build`. Es lo que subís a un servidor.
-- **localStorage**: donde el browser guarda los datos del user. Cada browser y cada URL tienen su propio localStorage independiente.
+- **Firebase / Firestore**: la base de datos en la nube donde viven los datos de Vitu (insumos, recetas, competidoras). Reemplazó a localStorage para que todos los dispositivos vean lo mismo. Config (pública) en `src/firebase.js`.
+- **PIN de edición**: clave que desbloquea la edición (botón 🔒). Sin PIN, la app es solo-lectura. La saben Vitu y Patricio.
+- **localStorage**: antes guardaba los datos del user; ahora solo guarda cosas locales del dispositivo (el flag de "edición desbloqueada" y algunos caches). Los datos reales están en Firebase.
 - **CORS / proxy CORS**: técnica para que la app del browser pueda leer datos de otros sitios (ej. catálogos de competencia). Usamos `corsproxy.io` (servicio externo gratis).
 - **GitHub Pages**: el hosting gratis donde estaba publicada la app (cuando había acceso a GitHub).
 - **Netlify Drop**: alternativa a GitHub Pages, sin cuenta. Arrastrás una carpeta, te da una URL.
@@ -250,8 +257,8 @@ Importá tu backup más reciente. Si no tenés backup → te quedaste con la pre
 ## En resumen
 
 1. **Carpeta `vitucakes/` + Node 20 + 30 min** → tenés la app andando.
-2. **Backup JSON** → tenés los datos.
-3. **Netlify Drop** (opcional) → tenés URL pública nueva.
+2. **Datos**: viven en **Firebase** (nube). Con acceso al proyecto `vitucakes` aparecen solos; si no, un **backup JSON** + la pantalla "Inicializar datos" los repone.
+3. **Netlify Drop** (opcional) → URL pública nueva (apuntando al mismo Firebase).
 4. **Cualquier IA o dev React** → podés modificar el código si querés.
 
-**Todo lo que necesitás está en esta carpeta.** Nada vive solo en GitHub o en mi cabeza. Nada se pierde si seguís estos pasos.
+**El código está todo en esta carpeta.** Los **datos** viven en Firebase (nube) — guardá backups igual, por las dudas. Con la carpeta + acceso a Firebase (o un backup), nada se pierde.

@@ -39,7 +39,7 @@ O manualmente:
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173/vitucakes/
+npm run dev      # http://localhost:5173/  (en dev la base es '/'; en prod '/vitucakes/')
 npm run build    # produce dist/ con la app lista para servir
 ```
 
@@ -60,7 +60,7 @@ npm install
 npm run dev
 ```
 
-Listo. La app es 100% client-side y funciona contra `localStorage`. No necesita servidor propio.
+La app es client-side, pero los datos viven en **Firebase/Firestore** (nube). Para que muestre los datos reales necesitás el mismo proyecto Firebase (config en `src/firebase.js`); si lo corrés contra un proyecto vacío, arranca con la pantalla de inicializar y te deja sembrar (subir de este dispositivo / backup / fábrica).
 
 ### Publicarla en otro hosting (sin GitHub)
 
@@ -90,14 +90,18 @@ Para correr la app **sin Firebase** (offline total / fork sin nube) habría que 
 ```
 vitucakes/
 ├── src/
-│   ├── App.jsx                    # Routing por estado, precarga, migraciones one-shot
-│   ├── main.jsx
+│   ├── App.jsx                    # Routing por estado, carga, gate de inicialización, seed
+│   ├── main.jsx                   # Envuelve App en <EditGateProvider>
 │   ├── index.css                  # Tailwind + clases .input .label
+│   ├── firebase.js                # Init Firebase: Firestore (cache offline) + auth anónima
 │   ├── hooks/
-│   │   └── useLocalStorage.js
+│   │   ├── useSharedState.js      # [valor,setValor,loaded] contra Firestore (real-time)
+│   │   ├── useLocalStorage.js     # legacy (ya no se usa para datos compartidos)
+│   │   └── useEditGate.jsx        # Candado por PIN: provider, hook, <LockToggle/>, PinPrompt
 │   ├── utils/
 │   │   ├── calc.js                # Cálculos y constantes (MARGEN, GASTOS_INDIRECTOS)
 │   │   ├── competencia.js         # Match recetas ↔ productos de competencia
+│   │   ├── seedData.js            # Siembra inicial (this device / backup / fábrica)
 │   │   ├── scrapeGranate.js       # Scrape de El Granate (insumos) en vivo
 │   │   └── scrapeTiendanube.js    # Scrape genérico de cualquier Tiendanube
 │   ├── components/
@@ -105,22 +109,24 @@ vitucakes/
 │   │   ├── BottomSheet.jsx
 │   │   └── MatchManualSheet.jsx   # Sheet con buscador para elegir match manual
 │   └── pages/
-│       ├── InsumosPage.jsx
-│       ├── RecetasPage.jsx        # Lista de productos (legacy: "recetas" en código)
-│       ├── RecetaDetail.jsx
+│       ├── InsumosPage.jsx        # CRUD insumos. Orden por más usados (usos)
+│       ├── RecetasPage.jsx        # Lista de productos (legacy: "recetas"). Orden por usos
+│       ├── RecetaDetail.jsx       # Detalle; edición detrás del candado (canEdit)
 │       ├── ActualizarPreciosPage.jsx
 │       ├── ResolverMatchesPage.jsx   # Bulk review de matches con competencia
 │       ├── AgregarCompetidoraPage.jsx
-│       └── BackupPage.jsx
+│       ├── BackupPage.jsx         # Export/restore/reset de la base COMPARTIDA
+│       └── InicializarDatos.jsx   # Primera carga cuando la base está vacía
 ├── public/
-│   ├── precarga.json              # 167 insumos + 139 recetas (datos iniciales)
+│   ├── precarga.json              # 167 insumos + 139 recetas (datos de fábrica)
 │   ├── recetas_v2.json            # Migración v2 (insumos y recetas nuevas)
 │   ├── precios_sugeridos.json     # Generado por el cron (El Granate)
 │   ├── competencia.json           # Generado por el cron (competidoras Tiendanube)
 │   └── logo.jpg
 ├── scripts/
 │   ├── update-prices.mjs          # Cron: scrape de El Granate
-│   └── update-competencia.mjs     # Cron: scrape de competidoras
+│   ├── update-competencia.mjs     # Cron: scrape de competidoras
+│   └── build-recetas-v2.mjs       # Generó recetas_v2.json (one-shot)
 └── .github/workflows/
     ├── deploy.yml                 # Deploy automático a GH Pages en push a main
     ├── update-prices.yml          # Cron lunes 23 ART
@@ -137,8 +143,9 @@ Si sos una IA que retoma este proyecto solo con esta carpeta:
 1. Leé `RECONSTRUIR.md` (para entender el escenario "el user solo tiene la carpeta").
 2. Leé este README + el HANDOFF.md (contexto técnico).
 3. El stack es simple: React 18 funcional (no clases), Tailwind, sin TypeScript.
-4. No agregues backend ni servicios externos sin avisar.
-5. **Mantené el patrón de migraciones one-shot** en App.jsx para cambios al modelo de datos — vivimos en producción con datos del user, no podés romper backwards compat.
+4. Ya hay un "backend" liviano: **Firebase/Firestore** (datos compartidos — ver `src/firebase.js` + `src/hooks/useSharedState.js`). No agregues MÁS servicios externos sin avisar.
+5. **Vivimos en producción con datos reales del user (en Firestore): no rompas backwards-compat.** La capa de datos compartida es `useSharedState`; la siembra y los "datos de fábrica" viven en `utils/seedData.js` (ya NO hay migraciones one-shot en `App.jsx`).
 6. **Internamente "receta" = "producto"** (en UI dice "Producto", en código sigue siendo `receta` por compat).
-7. Idioma: español rioplatense.
-8. **Si el user dice que perdió GitHub o Claude**: el documento RECONSTRUIR.md es para él, llevalo de la mano por ahí.
+7. **Orden de listas por más usados** (`usos`), no por recencia. **Edición detrás de PIN** (`useEditGate`); los controles se muestran solo si `canEdit`.
+8. Idioma: español rioplatense.
+9. **Si el user dice que perdió GitHub o Claude**: el documento RECONSTRUIR.md es para él, llevalo de la mano por ahí.

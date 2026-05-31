@@ -20,7 +20,11 @@ npm install
 npm run dev
 ```
 
-Abre en `http://localhost:5173/vitucakes/`.
+Abre en `http://localhost:5173/` (en dev la `base` es `/`; en prod es `/vitucakes/`).
+
+- **Node 20+ obligatorio** (con 18 puede fallar; en este repo hay `~/.nvm` con `v20`).
+- ⚠️ **`npm run dev` pega contra la base de Firestore REAL** (los datos compartidos de Vitu). Si desbloqueás con el PIN en local y editás, le tocás los datos de producción. Para probar sin riesgo: no desbloquees, o usá un proyecto Firebase aparte cambiando `src/firebase.js`.
+- El config de Firebase está committeado en `src/firebase.js` (no es secreto). Reglas de Firestore: ver sección de abajo.
 
 ## Decisiones de UI / naming (importante)
 
@@ -57,29 +61,36 @@ Los datos viven en **Firestore** (proyecto `vitucakes`), no en `localStorage`.
   unidad: 'kg' | 'g' | 'l' | 'ml' | 'u' | 'cdas' | 'cdtas' | 'taza' | 'atado',
   precioPorUnidad: number,       // ARS por unidad
   fechaActualizacion: string,    // ISO 'YYYY-MM-DD' — se setea automáticamente a hoy al guardar
-  updatedAt: number,             // timestamp ms — para sort por reciente
+  updatedAt: number,             // timestamp ms de última edición (ya NO es la clave de orden)
+  usos: number,                  // veces que se abrió/tocó — ES la clave de orden (desc). Opcional; ausente = 0
 }
 
 // Receta (mostrada como "Producto" en UI)
 {
   id: string,
   nombre: string,
-  rinde: number,                 // cuántas unidades produce
+  rinde: number,                 // cuántas unidades produce (informativo; NO divide el precio)
   unidadRinde: string,           // 'unidades', 'porciones', etc.
   ingredientes: [{ insumoId: string, cantidad: number }],
-  updatedAt: number,
+  descripcion: string,           // texto para "Mensaje para clientes" (se le concatena el precio)
+  matchesCompetencia: [{ competidoraId, productoSlug }],     // matches confirmados
+  rechazadosCompetencia: [{ competidoraId, productoSlug }],  // matches rechazados
+  updatedAt: number,             // última edición (ya NO ordena)
+  usos: number,                  // veces que se abrió el detalle — clave de orden (desc). Ausente = 0
   // Nota: el campo `margen` quedó en recetas viejas pero ya no se usa.
 }
 ```
 
 ## Cálculo (utils/calc.js)
 
+El precio de venta es el de la **receta ENTERA** (no por porción). `rinde` es informativo
+y NO divide el precio — así se compara receta entera vs producto entero de la competencia.
+
 ```
 costoInsumos = sum(cantidad × precioPorUnidad)
 gastosIndirectos = costoInsumos × 0.10        // GASTOS_INDIRECTOS = 0.10
-costoTotal = costoInsumos × 1.10
-costoPorUnidad = costoTotal / rinde
-precioVenta = costoPorUnidad × MARGEN         // MARGEN = 3 (fijo)
+costoReceta (costo total) = costoInsumos × 1.10
+precioVenta = costoReceta × MARGEN            // MARGEN = 3 (fijo). Receta entera.
 ```
 
 ## Reglas de UX importantes (NO romper)
@@ -90,42 +101,57 @@ precioVenta = costoPorUnidad × MARGEN         // MARGEN = 3 (fijo)
 - **Actualizar precios: el OK final es manual**. Default: ningún ítem seleccionado. Después de tildar, el botón "Revisar y aplicar" abre un modal de confirmación con la lista de cambios. El user confirma explícitamente.
 - **Regla "no bajar precio"**: si el precio scrapeado es menor o igual al actual del user, no se muestra como sugerencia. La regla está en el cliente, no en el script (`item.precio <= ins.precioPorUnidad → null`).
 - **Equivalencia g↔ml**: para "Crema de leche" y "Miel", el scraper acepta indistintamente el peso en g o el volumen en ml, según `allowMlToG` / `allowGToMl` en las queries.
-- **Aplicar masivo arriba**: al aplicar precios masivamente, cada insumo recibe un `updatedAt` único e incremental (`stamp + 1`, `stamp + 2`, ...). Esto garantiza que todos los actualizados queden juntos arriba en la lista. NO usar `Date.now()` plano dentro del map porque todos terminan iguales y el sort estable conserva el orden previo.
-- **Sort de listas**: por `updatedAt` descendente. Se setea al crear, editar, **abrir** un detalle (Productos), y al aplicar precios (Insumos).
-- **Migración de insumos huérfanos**: si una receta referencia un `insumoId` que no existe en `insumos` pero sí en `public/precarga.json`, la app restaura ese insumo con el id original al abrir. Flag: `vitucakes_restore_orphans_v1`. Esto recupera insumos borrados por accidente sin romper recetas.
+- **Sort de listas (Insumos y Productos): por MÁS usados** (PR #24). Campo `usos` descendente, empate alfabético (`a.nombre.localeCompare(b.nombre)`). `usos` sube +1 cada vez que se **abre** un producto (su detalle, en `App.jsx onSelect`) o un insumo (su edición, en `InsumosPage openEdit` y el efecto de `initialEditId`), y **solo si `canEdit`** — un viewer/cliente no reordena la lista de todos. Ya NO se ordena por `updatedAt`/recencia (el user lo pidió explícito). Arranca alfabético (todo en 0) y se acomoda con el uso real.
+- **Migración de insumos huérfanos / precarga / v2**: esas migraciones one-shot que antes corrían en `App.jsx` sobre `localStorage` ya NO existen como tales. Su lógica de armado de datos de fábrica vive una sola vez en `buildFactoryData()` (`utils/seedData.js`), que se usa solo en la siembra inicial (`InicializarDatos`) o en "datos de fábrica" del Backup.
 
 ## Estructura
 
 ```
 vitucakes/
 ├── src/
-│   ├── App.jsx                  # Routing por estado, precarga, migración huérfanos
-│   ├── main.jsx
+│   ├── App.jsx                  # Routing por estado, carga, gate de inicialización, seed
+│   ├── main.jsx                 # Envuelve App en <EditGateProvider>
 │   ├── index.css                # Tailwind + clases .input .label
+│   ├── firebase.js              # Init Firebase: Firestore (cache offline) + auth anónima
 │   ├── hooks/
-│   │   └── useLocalStorage.js
+│   │   ├── useSharedState.js    # [valor,setValor,loaded] contra Firestore (real-time). Reemplaza useLocalStorage
+│   │   ├── useLocalStorage.js   # legacy — ya no se usa para datos compartidos
+│   │   └── useEditGate.jsx      # Candado por PIN: EditGateProvider, useEditGate, <LockToggle/>, PinPrompt
 │   ├── utils/
-│   │   ├── calc.js              # Cálculos y constantes
-│   │   └── scrapeGranate.js     # Scrape client-side vía proxy CORS
+│   │   ├── calc.js              # Cálculos y constantes (MARGEN, GASTOS_INDIRECTOS). Precio = receta entera
+│   │   ├── competencia.js       # Match recetas ↔ competencia (Jaccard + Levenshtein)
+│   │   ├── seedData.js          # Siembra inicial: readDeviceData / readBackupData / buildFactoryData
+│   │   ├── scrapeGranate.js     # Scrape El Granate (insumos) vía proxy CORS
+│   │   └── scrapeTiendanube.js  # Scrape genérico de cualquier Tiendanube
 │   ├── components/
 │   │   ├── BottomNav.jsx        # Tab "Productos" (id sigue siendo 'recetas')
-│   │   └── BottomSheet.jsx
+│   │   ├── BottomSheet.jsx
+│   │   └── MatchManualSheet.jsx # Sheet con buscador para elegir match manual
 │   └── pages/
-│       ├── InsumosPage.jsx      # CRUD insumos + botón "Actualizar precios"
-│       ├── RecetasPage.jsx      # CRUD productos (file name legacy)
-│       ├── RecetaDetail.jsx     # Detalle de producto (file name legacy)
-│       └── ActualizarPreciosPage.jsx  # Pantalla de sugerencias de precios
+│       ├── InsumosPage.jsx      # CRUD insumos + "Actualizar precios". Sort por usos. Incrementa usos al abrir edición
+│       ├── RecetasPage.jsx      # CRUD productos (file name legacy). Sort por usos. LockToggle en header
+│       ├── RecetaDetail.jsx     # Detalle de producto. Controles de edición detrás de canEdit
+│       ├── ActualizarPreciosPage.jsx  # Sugerencias de precios (El Granate)
+│       ├── ResolverMatchesPage.jsx    # Bulk review de matches con competencia
+│       ├── AgregarCompetidoraPage.jsx # Agregar competidora con scrape en vivo
+│       ├── BackupPage.jsx       # Export/restore/reset de la base COMPARTIDA (no localStorage)
+│       └── InicializarDatos.jsx # Primera carga (base vacía): subir de este dispositivo / backup / fábrica
 ├── public/
-│   ├── precarga.json            # 167 insumos + 139 recetas migrados del Excel
-│   ├── precios_sugeridos.json   # Generado por el cron / script
+│   ├── precarga.json            # 167 insumos + 139 recetas (datos de fábrica)
+│   ├── recetas_v2.json          # Migración v2 (insumos y recetas nuevas)
+│   ├── precios_sugeridos.json   # Generado por el cron (El Granate)
+│   ├── competencia.json         # Generado por el cron (competidoras Tiendanube)
 │   └── logo.jpg
 ├── scripts/
-│   └── update-prices.mjs        # Scraper para GitHub Actions (Node)
+│   ├── update-prices.mjs        # Cron: scrape de El Granate
+│   ├── update-competencia.mjs   # Cron: scrape de competidoras
+│   └── build-recetas-v2.mjs     # Generó recetas_v2.json (one-shot)
 ├── .github/workflows/
 │   ├── deploy.yml               # Deploy a GH Pages en push a main
-│   └── update-prices.yml        # Cron lunes 23h ART
+│   ├── update-prices.yml        # Cron lunes 23h ART
+│   └── update-competencia.yml   # Cron lunes 23:30 ART
 ├── 0. Costeo y Ventas VITUCA CAKES.xlsx   # Excel original
-└── vite.config.js               # base: '/vitucakes/'
+└── vite.config.js               # base '/vitucakes/' en build, '/' en dev
 ```
 
 ## Sistema de actualización de precios desde El Granate
@@ -220,7 +246,7 @@ Vitucakes muestra precios de referencia de pastelerías competidoras al lado del
   }]
 }
 
-// localStorage: vitucakes_competidoras_user
+// Firestore: vitucakes/competidoras_user (antes era localStorage; ahora compartido)
 // Mismo formato, pero son las que el user agregó desde la app.
 // Se mergean con las oficiales via mergeCompetidoras() en utils/competencia.js.
 // Si hay colisión por id, gana la oficial.
@@ -251,12 +277,12 @@ Una vez confirmado un match, `recetasParaResolver()` excluye esa receta. La pró
 
 ## Backup de datos del user
 
-**Crítico**: los datos del user (insumos, recetas, matches, competidoras user) viven en `localStorage` del browser, NO en la carpeta. La pantalla **BackupPage** (botón 💾 en el header de Productos) permite:
-- **Descargar backup**: JSON con todos los keys relevantes + flags de migración.
-- **Restaurar backup**: sube JSON y reemplaza el localStorage actual.
-- **Reset**: borra todo y vuelve a precarga inicial.
+Los datos viven en **Firestore** (compartidos, en la nube) — ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (botón 💾 en el header de Productos; visible siempre que `canEdit`, o cuando hace ≥14 días que no se baja una copia) permite:
+- **Descargar copia**: JSON con `insumos`, `recetas`, `competidoras_user`. Formato `{ app, version, exportadoEn, datos: { vitucakes_* } }`, compatible con backups viejos. Abierto para todos (export no requiere PIN).
+- **Restaurar**: sube un JSON y reemplaza la base compartida (detrás de PIN).
+- **Datos de fábrica**: reemplaza la base con la precarga inicial vía `buildFactoryData()` (detrás de PIN).
 
-Las claves de localStorage que se respaldan están en `BACKUP_KEYS` en `src/pages/BackupPage.jsx`. Si agregás un nuevo dato del user en localStorage, **sumalo a esa lista** y bumpeá `APP_VERSION`.
+`BackupPage` recibe de `App.jsx` los datos compartidos (`data`) + un `onApply(data)` que escribe a Firestore con los setters de `useSharedState`. Si agregás una "tabla" compartida nueva, sumala al export y al `onApply`.
 
 ## Hecho
 
@@ -270,7 +296,7 @@ Las claves de localStorage que se respaldan están en `BACKUP_KEYS` en `src/page
 - Auto-precarga desde `precarga.json` en primer uso (flag `vitucakes_precarga_done`)
 - Restauración automática de insumos del precarga si las recetas los siguen referenciando (flag `vitucakes_restore_orphans_v1`)
 - Migración v2 con insumos + recetas nuevas (flag `vitucakes_recetas_v2_done`)
-- Sort por última interacción (`updatedAt`)
+- Orden de listas por **más usados** (`usos` desc, tiebreak alfabético) — PR #24
 - Fecha de actualización auto al guardar insumo
 - Deploy automático a GitHub Pages
 - Logo, favicon, apple-touch-icon
@@ -279,7 +305,11 @@ Las claves de localStorage que se respaldan están en `BACKUP_KEYS` en `src/page
 - Modal de confirmación antes de aplicar precios
 - **Sistema de competencia con match interactivo** (sugerencia automática + match manual + comparador) — PR #15
 - **Agregar competidoras desde la app** con scrape en vivo + flujo de sumarlas al cron oficial via Issue — PR #16
-- **Backup de datos** (export/import JSON + reset) — para sobrevivir cambio de celu / wipe de Safari
+- **Backup de datos** (export/import JSON + reset) — ahora opera sobre la base compartida
+- **Datos compartidos en la nube (Firebase/Firestore)** — todos los dispositivos ven y editan lo mismo, en vivo. Migración de `localStorage` → Firestore (PR #23)
+- **Candado de edición por PIN** — lectura pública para todos, edición detrás de PIN (Vitu y Patricio). PR #23
+- **Pantalla de primera carga** (`InicializarDatos`) — siembra inicial sin pisar los datos reales del user. PR #23
+- **Orden por los más usados** (`usos`) en Insumos y Productos, en vez de por recencia. PR #24
 
 ## Pendiente / a terminar
 
@@ -317,22 +347,29 @@ Las claves de localStorage que se respaldan están en `BACKUP_KEYS` en `src/page
 Resumen:
 - Local: `bash arrancar.sh` (o `npm install && npm run dev`)
 - Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
-- Datos del user: usar **BackupPage** (botón 💾 en Productos) para descargar JSON con todo. Sin eso, los datos viven solo en el `localStorage` del browser y se pierden si Vitu cambia de celu. La app muestra un banner amarillo de recordatorio si pasaron más de 14 días sin descargar backup.
+- Datos del user: viven en **Firestore** (nube), ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (💾 en Productos) baja una copia JSON extra. **Ojo**: si reconstruís la app en otro hosting sin el mismo proyecto Firebase (config en `src/firebase.js`), no vas a tener los datos — necesitás ese proyecto o sembrar de cero desde un backup. Para correr 100% offline/sin nube habría que volver a `useLocalStorage` (ver git antes de la migración a Firebase).
 
-## Último estado (2026-05-24)
+## Último estado (2026-05-31)
 
-- PRs mergeados en sesiones recientes: #11, #12, #13, **#15** (competencia con match interactivo), **#16** (agregar competidora desde app)
-- PR #14 (PWA + Vercel) → **cerrado sin mergear** (decisión del user)
-- `main` con todo el sistema de competencia + backup
-- Tareas en curso: **ninguna**
-- TODO próximos:
+- **Migración a Firebase/Firestore** (datos compartidos en la nube) — **PR #23 mergeado y deployado**. Vitu sembró sus datos reales desde su celu: la base tiene `meta.seeded: true`, **176 insumos / 154 recetas**. La app quedó **unificada**: cualquiera que abra el link, desde cualquier dispositivo, ve exactamente lo mismo.
+- **Orden por los más usados** (`usos`) en Insumos y Productos, en vez de por recencia — **PR #24 mergeado y deployado**.
+- Antes: #15 (competencia), #16 (agregar competidora), #20/#21/#22. #14 (PWA+Vercel) quedó cerrado sin mergear.
+- Tareas en curso: **ninguna**.
+- **Firebase** (proyecto `vitucakes`, cuenta Google de Patricio):
+  - Auth anónima habilitada. Reglas: `/vitucakes/{doc}` → `read: if true; write: if request.auth != null`.
+  - PIN de edición: lo conocen Vitu y Patricio (hash SHA-256 en `src/hooks/useEditGate.jsx`).
+  - Candado fuerte futuro (si se quiere): Login con Google + allowlist de mails (Vitu y Patricio) en las reglas.
+- TODO próximos (sin empezar):
   1. Soportar Empretienda en el scraper (para Silnari)
   2. Sumar Nati's al cron cuando aparezca su Issue
-  3. Filtros de exclusión para Nati's (excluir desayunos/panes/packs)
+  3. ~20 insumos sin match en El Granate
 - Reglas de workflow agente (lecciones aprendidas):
-  - **No mergees PRs antes de pushear todos los commits** — siempre `git push && gh pr merge`.
-  - **El user trabaja desde una carpeta en Google Drive** (`~/Library/CloudStorage/GoogleDrive-.../Mi unidad/vitucakes`). Hay también una carpeta en `~/Documents/General/Personal/vitucakes` que es legacy. Cuidado con confundir las dos.
-  - **`node_modules` en Drive ralentiza la sincronización**. Recomendar al user excluir esa carpeta de Drive sync.
+  - **El user autorizó mergear PRs sin preguntar** (en Vitucakes). Flujo: crear PR → `gh pr merge --squash` → deploya solo. Excepción: algo de alto riesgo o que pueda perder datos → avisar primero.
+  - **Después de un squash-merge**, para el siguiente PR ramá desde `origin/main` (no desde tu rama vieja); si no, el diff arrastra lo ya mergeado.
+  - **No mergees antes de pushear todos los commits** — siempre `git push && gh pr merge`.
+  - **Verificación de cambios**: hay un dev server vía preview (`launch.json`, puerto 5174) que pega a la base real. Para probar siembra/seed sin ensuciar, sembrá y después limpiá con un script `firebase/firestore` temporal (auth anónima + del docs), y NO te olvides de resetear.
+  - **El user trabaja desde una carpeta en Google Drive** (`~/Library/CloudStorage/GoogleDrive-.../Mi unidad/vitucakes`). Hay también una en `~/Documents/General/Personal/vitucakes` que es legacy. Cuidado con confundir las dos.
+  - **`node_modules` en Drive ralentiza la sincronización**. Recomendar excluir esa carpeta de Drive sync.
 
 ## Carpetas del proyecto en la máquina de Patricio
 
