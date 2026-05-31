@@ -37,15 +37,19 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
         cantidadComprada: '',
       })
       setOpen(true)
+      // Cuenta una "apertura" del insumo (abierto desde un ingrediente de receta).
+      setInsumos((prev) => prev.map((i) => (i.id === ins.id ? { ...i, usos: (i.usos ?? 0) + 1 } : i)))
     }
     onInitialEditConsumed?.()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialEditId])
 
+  // Orden: por los MÁS usados/tocados (contador `usos`), no por el último.
+  // Empate (ej. todos en 0 al principio) → alfabético, para un orden neutro.
   const filtered = insumos
     .filter((i) => i.nombre.toLowerCase().includes(search.toLowerCase()))
     .slice()
-    .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
+    .sort((a, b) => (b.usos ?? 0) - (a.usos ?? 0) || a.nombre.localeCompare(b.nombre))
 
   const openAdd = () => { setEditId(null); setForm(EMPTY); setOpen(true) }
 
@@ -59,6 +63,8 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
       cantidadComprada: '',
     })
     setOpen(true)
+    // Cuenta una "apertura" del insumo para el orden por más usados.
+    setInsumos((prev) => prev.map((i) => (i.id === ins.id ? { ...i, usos: (i.usos ?? 0) + 1 } : i)))
   }
 
   const computedPrecio = (() => {

@@ -16,10 +16,12 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
   const [deleteId, setDeleteId] = useState(null)
   const { canEdit } = useEditGate()
 
+  // Orden: por los MÁS usados/abiertos (contador `usos`), no por el último.
+  // Empate (ej. todos en 0 al principio) → alfabético, para un orden neutro.
   const filteredRecetas = recetas
     .filter((r) => r.nombre.toLowerCase().includes(search.toLowerCase()))
     .slice()
-    .sort((a, b) => (b.updatedAt ?? 0) - (a.updatedAt ?? 0))
+    .sort((a, b) => (b.usos ?? 0) - (a.usos ?? 0) || a.nombre.localeCompare(b.nombre))
 
   const pendientesMatch = useMemo(
     () => recetasParaResolver(recetas, competidoras),

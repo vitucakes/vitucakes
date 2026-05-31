@@ -110,10 +110,10 @@ export default function App() {
             onResolverMatches={() => navigate('resolver-matches')}
             onBackup={() => navigate('backup')}
             onSelect={(id) => {
-              // Solo reordenamos por recencia si quien navega puede editar:
-              // un viewer no debe reordenar la lista compartida de todos.
+              // Contamos una "apertura" para el orden por más usados. Solo si
+              // puede editar: un viewer (cliente) no debe reordenar la lista de todos.
               if (canEdit) {
-                setRecetas((prev) => prev.map((r) => (r.id === id ? { ...r, updatedAt: Date.now() } : r)))
+                setRecetas((prev) => prev.map((r) => (r.id === id ? { ...r, usos: (r.usos ?? 0) + 1 } : r)))
               }
               navigate('detalle', id)
             }}
