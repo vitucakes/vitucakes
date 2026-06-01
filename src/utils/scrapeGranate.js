@@ -1,6 +1,10 @@
 // Scraping de Distribuidora El Granate desde el browser, vía proxy CORS público.
 // Usado por el botón "Actualizar precios manualmente". Si el proxy falla,
 // la app cae al precios_sugeridos.json generado por el cron semanal.
+//
+// El Granate migró de Tiendanube a **Odoo eCommerce** (~2026-05). URLs ahora son
+// /shop/<ref>-<slug>-<idOdoo> y el precio (con IVA) vive en
+// <span itemprop="price">11000.0</span>. Mantener en sync con scripts/update-prices.mjs.
 
 const PROXY = 'https://corsproxy.io/?'
 const SITEMAP_URL = 'https://www.distribuidoraelgranate.com.ar/sitemap.xml'
@@ -10,22 +14,22 @@ const QUERIES = [
   { nombre: 'Harina 0000', unidad: 'g', keywords: ['harina-0000'], exclude: ['leudante','reposteria','integral'] },
   { nombre: 'Harina de almendras', unidad: 'g', keywords: ['harina-de-almendra'], exclude: [] },
   { nombre: 'Harina leudante', unidad: 'g', keywords: ['harina-leudante'], exclude: [] },
-  { nombre: 'Azúcar', unidad: 'g', keywords: ['azucar-ledesma','azucar-comun-tipo'], exclude: ['impalpable','negra','granulada','rubia','mascabo','organica','glasse'] },
+  { nombre: 'Azúcar', unidad: 'g', keywords: ['azucar-ledesma','azucar-comun-tipo','azucar-refinada'], exclude: ['impalpable','negra','granulada','granella','rubio','rubia','mascabo','organica','glasse','antihumedad'] },
   { nombre: 'Azúcar impalpable', unidad: 'g', keywords: ['azucar-impalpable'], exclude: [] },
   { nombre: 'Azucar Negra', unidad: 'g', keywords: ['azucar-negra','azucar-mascabo'], exclude: [] },
-  { nombre: 'Cacao', unidad: 'g', keywords: ['cacao-amargo','cacao-en-polvo','cacao-puro'], exclude: ['alcalino','alcalinizado','chocolate'] },
+  { nombre: 'Cacao', unidad: 'g', keywords: ['cacao-fenix-56n','cacao-especial','cacao-amargo','cacao-en-polvo'], exclude: ['alcalino','alcalinizado','chocolate','manteca','nesquik'] },
   { nombre: 'Fecula de Mandioca', unidad: 'g', keywords: ['fecula-de-mandioca'], exclude: [] },
-  { nombre: 'Manteca', unidad: 'g', keywords: ['manteca-'], exclude: ['cacao'] },
-  { nombre: 'Margarina', unidad: 'g', keywords: ['margarina'], exclude: [] },
-  { nombre: 'Chips de chocolate', unidad: 'g', keywords: ['chips-de-chocolate','chip-de-chocolate'], exclude: [] },
+  { nombre: 'Manteca', unidad: 'g', keywords: ['manteca-'], exclude: ['cacao','aroma','kolaroma','esencia'] },
+  { nombre: 'Margarina', unidad: 'g', keywords: ['margarina','oleomargarina'], exclude: [] },
+  { nombre: 'Chips de chocolate', unidad: 'g', keywords: ['chips-'], exclude: ['blanco'] },
   { nombre: 'Chocolate', unidad: 'g', keywords: ['chocolate-alpino-pins-con-leche'], exclude: [] },
   { nombre: 'Coco rayado', unidad: 'g', keywords: ['coco-rallado'], exclude: [] },
-  { nombre: 'Almedras', unidad: 'g', keywords: ['almendra-'], exclude: ['harina','leche','esencia','aceite'] },
-  { nombre: 'Nuez', unidad: 'g', keywords: ['nuez-','nueces-'], exclude: ['moscada','pecan'] },
+  { nombre: 'Almedras', unidad: 'g', keywords: ['almendras-'], exclude: ['harina','leche','esencia','aceite','chocolate','garrapinada','pasta'] },
+  { nombre: 'Nuez', unidad: 'g', keywords: ['nuez-','nueces-'], exclude: ['moscada','pecan','cascara'] },
   { nombre: 'Caju', unidad: 'g', keywords: ['castana-de-caju','castanas-de-caju','caju-'], exclude: [] },
   { nombre: 'Levadura', unidad: 'g', keywords: ['levadura'], exclude: ['nutricional','quimica'] },
-  { nombre: 'Polvo de hornear', unidad: 'g', keywords: ['polvo-de-hornear','polvo-leudante'], exclude: [] },
-  { nombre: 'Bicarbonato de sodio', unidad: 'g', keywords: ['bicarbonato'], exclude: [] },
+  { nombre: 'Polvo de hornear', unidad: 'g', keywords: ['polvo-para-hornear','polvo-de-hornear','polvo-leudante'], exclude: [] },
+  { nombre: 'Bicarbonato de sodio', unidad: 'g', keywords: ['bicarbonato'], exclude: ['amonio'] },
   { nombre: 'Gelatina Sin Sabor', unidad: 'g', keywords: ['gelatina-sin-sabor'], exclude: [] },
   { nombre: 'Esencia de vainilla', unidad: 'ml', keywords: ['esencia-de-vainilla'], exclude: [] },
   { nombre: 'Dulce de leche', unidad: 'g', keywords: ['dulce-de-leche-vacalin','dulce-de-leche-el-mundo','dulce-de-leche-milkey'], exclude: ['vegano','alfajorero'] },
@@ -35,9 +39,9 @@ const QUERIES = [
   { nombre: 'Nutella', unidad: 'g', keywords: ['nutella'], exclude: [] },
   { nombre: 'Mermelada Frambuesa', unidad: 'g', keywords: ['mermelada-de-frambuesa','mermelada-frambuesa'], exclude: [] },
   { nombre: 'Miel', unidad: 'ml', keywords: ['miel-'], exclude: [], allowGToMl: true },
-  { nombre: 'Salvado de trigo', unidad: 'g', keywords: ['salvado-de-trigo'], exclude: [] },
+  { nombre: 'Salvado de trigo', unidad: 'g', keywords: ['salvado-de-trigo','salvado-chacabuco','salvado'], exclude: ['avena'] },
   { nombre: 'Extracto de malta', unidad: 'g', keywords: ['extracto-de-malta'], exclude: [] },
-  { nombre: 'Pasta ballina', unidad: 'g', keywords: ['pasta-ballina'], exclude: ['goma','color','chocolate'] },
+  { nombre: 'Pasta ballina', unidad: 'g', keywords: ['pasta-ballina'], exclude: ['goma','color','chocolate','cacao'] },
   { nombre: 'Pasta de goma', unidad: 'g', keywords: ['pasta-de-goma'], exclude: [] },
   { nombre: 'Mix frutos secos', unidad: 'g', keywords: ['mix-de-frutos','mix-frutos'], exclude: [] },
 ]
@@ -47,40 +51,62 @@ const fetchProxied = (url) => fetch(PROXY + encodeURIComponent(url)).then((r) =>
   return r.text()
 })
 
+// El slug de Odoo es todo lo que va después de /shop/ (incluye ref numérica al
+// inicio y el id de Odoo al final; el peso va en el medio, ej. "por-1-kg").
+const slugOf = (url) => url.split('/shop/')[1] || ''
+
 const parseWeight = (slug) => {
-  let m = slug.match(/por-(\d+)-kilos?/)
+  // kilos / litros decimales: "por-2-5-kg" = 2,5 kg
+  let m = slug.match(/(?:por-|x-)?(\d+)-(\d+)-(?:kilos?|kg)\b/)
+  if (m) return { qty: parseFloat(`${m[1]}.${m[2]}`) * 1000, unit: 'g' }
+  m = slug.match(/(?:por-|x-)?(\d+)-(\d+)-litros?\b/)
+  if (m) return { qty: parseFloat(`${m[1]}.${m[2]}`) * 1000, unit: 'ml' }
+  // kilos / kg con número
+  m = slug.match(/(?:por-|x-)?(\d+)-?(?:kilos?|kg)\b/)
   if (m) return { qty: parseInt(m[1]) * 1000, unit: 'g' }
-  m = slug.match(/x-(\d+)-?kg/)
-  if (m) return { qty: parseInt(m[1]) * 1000, unit: 'g' }
-  m = slug.match(/por-(\d+)-?(?:gramos|grs|g\b)/)
+  // gramos / grs / g con número
+  m = slug.match(/(?:por-|x-)?(\d+)-?(?:gramos|grs|g)\b/)
   if (m) return { qty: parseInt(m[1]), unit: 'g' }
-  m = slug.match(/x-(\d+)-?(?:gramos|grs|g\b)/)
-  if (m) return { qty: parseInt(m[1]), unit: 'g' }
-  m = slug.match(/por-(\d+)-litros?/)
+  // litros con número
+  m = slug.match(/(?:por-|x-)?(\d+)-?litros?\b/)
   if (m) return { qty: parseInt(m[1]) * 1000, unit: 'ml' }
-  m = slug.match(/por-(\d+)-?ml/)
+  // cc / ml con número
+  m = slug.match(/(?:por-|x-)?(\d+)-?(?:cc|ml)\b/)
   if (m) return { qty: parseInt(m[1]), unit: 'ml' }
+  // "por kilo" / "por kg" SIN número = 1 kg
+  if (/por-kilos?\b/.test(slug) || /por-kg\b/.test(slug)) return { qty: 1000, unit: 'g' }
+  // "por litro" SIN número = 1 litro
+  if (/por-litros?\b/.test(slug)) return { qty: 1000, unit: 'ml' }
   return null
 }
 
+// Preferimos tamaños retail (1 kg / 500 g / 1 l) sobre bultos mayoristas.
 const scoreUrl = (url) => {
-  const slug = url.split('/productos/')[1] || ''
-  if (slug.includes('por-1-kilo')) return 100
-  if (slug.includes('x-1-kilo')) return 95
-  if (slug.includes('por-500-')) return 90
-  if (slug.includes('por-250-')) return 80
-  if (slug.includes('por-2-')) return 70
-  if (slug.includes('por-5-')) return 60
-  if (slug.includes('por-10-kilo')) return 50
-  if (slug.includes('por-25-kilo')) return 40
-  return 30
+  const slug = slugOf(url)
+  if (/(?:por-)?1-(?:kilo|kg)\b/.test(slug) || /por-kilos?\b/.test(slug) || /por-kg\b/.test(slug)) return 100
+  if (/por-1-litro\b/.test(slug) || /por-litros?\b/.test(slug)) return 98
+  if (/500-?(?:grs|gramos|g|cc)\b/.test(slug)) return 90
+  if (/250-?(?:grs|gramos|g|cc)\b/.test(slug)) return 80
+  if (/(?:por-|x-)?2-(?:kg|kilo|litros?)\b/.test(slug)) return 70
+  if (/(?:por-|x-)?3-(?:kg|kilo|litros?)\b/.test(slug)) return 65
+  if (/(?:por-|x-)?5-(?:kg|kilo|litros?)\b/.test(slug)) return 60
+  return 30 // bultos 10/15/20/50 kg
+}
+
+const parsePrice = (raw) => {
+  raw = String(raw).trim()
+  if (raw.includes(',')) raw = raw.replace(/\./g, '').replace(',', '.')
+  const n = parseFloat(raw)
+  return Number.isFinite(n) ? n : null
 }
 
 const extractPrice = (html) => {
-  const m = html.match(/"price_number":(\d+)/)
-  if (m) return parseInt(m[1])
-  const m2 = html.match(/tiendanube:price"\s+content="(\d+)"/)
-  if (m2) return parseInt(m2[1])
+  // Odoo: span oculto con el precio limpio (con IVA), ej. <span itemprop="price">11000.0</span>
+  let m = html.match(/itemprop="price"[^>]*>\s*([\d.,]+)\s*</)
+  if (m) return parsePrice(m[1])
+  // Fallback: primer oe_currency_value (precio mostrado, con IVA, formato AR)
+  m = html.match(/oe_currency_value">\s*([\d.,]+)/)
+  if (m) return parsePrice(m[1])
   return null
 }
 
@@ -108,35 +134,53 @@ const pool = async (jobs, concurrency, onItemDone) => {
   return results
 }
 
+// Cuántos candidatos probar por insumo antes de rendirse (agotados con precio 0,
+// otra unidad, etc.). Se prueban en orden de score (retail primero).
+const MAX_TRY = 6
+
 export async function scrapeGranate(onProgress) {
   onProgress?.({ stage: 'sitemap', done: 0, total: QUERIES.length })
 
   const sitemap = await fetchProxied(SITEMAP_URL)
   const urls = (sitemap.match(/<loc>[^<]+<\/loc>/g) || [])
     .map((s) => s.replace(/<\/?loc>/g, '').trim())
-    .filter((u) => u.includes('/productos/'))
-
-  // Resolve best URL per query (no fetch yet)
-  const targets = QUERIES.map((q) => {
-    const cands = urls.filter((u) => {
-      const slug = u.split('/productos/')[1] || ''
-      if (q.exclude.some((ex) => slug.includes(ex))) return false
-      return q.keywords.some((kw) => slug.includes(kw))
-    })
-    if (cands.length === 0) return { q, error: 'sin candidatos' }
-    const best = cands.sort((a, b) => scoreUrl(b) - scoreUrl(a))[0]
-    const slug = best.split('/productos/')[1] || ''
-    const w = parseWeight(slug)
-    if (!w) return { q, url: best, error: 'sin peso en slug' }
-    return { q, url: best, weight: w }
-  })
+    .filter((u) => u.includes('/shop/') && !u.includes('/shop/category/'))
 
   let done = 0
-  const total = targets.length
-  const fetched = await pool(targets.map((t) => async () => {
-    if (t.error) return t
-    const html = await fetchProxied(t.url)
-    return { ...t, html }
+  const total = QUERIES.length
+
+  // Un job por insumo: filtra candidatos, los ordena por score y prueba en
+  // orden hasta dar con uno que tenga peso parseable, unidad compatible y precio.
+  const resolved = await pool(QUERIES.map((q) => async () => {
+    const cands = urls
+      .filter((u) => {
+        const slug = slugOf(u)
+        if (q.exclude.some((ex) => slug.includes(ex))) return false
+        return q.keywords.some((kw) => slug.includes(kw))
+      })
+      .sort((a, b) => scoreUrl(b) - scoreUrl(a))
+    if (cands.length === 0) return { q, error: 'sin candidatos' }
+
+    let lastErr = null
+    for (const url of cands.slice(0, MAX_TRY)) {
+      const w = parseWeight(slugOf(url))
+      if (!w) { lastErr = { error: 'sin peso en slug', url }; continue }
+      const unitOk = w.unit === q.unidad
+        || (q.allowMlToG && w.unit === 'ml' && q.unidad === 'g')
+        || (q.allowGToMl && w.unit === 'g' && q.unidad === 'ml')
+      if (!unitOk) { lastErr = { error: 'unidad no coincide', url }; continue }
+      let html
+      try {
+        html = await fetchProxied(url)
+      } catch (e) {
+        lastErr = { error: e.message, url }
+        continue
+      }
+      const price = extractPrice(html)
+      if (!price) { lastErr = { error: 'sin precio en página (¿agotado?)', url }; continue }
+      return { q, url, weight: w, price, name: extractName(html) }
+    }
+    return { q, ...lastErr }
   }), 5, () => {
     done++
     onProgress?.({ stage: 'pages', done, total })
@@ -144,25 +188,18 @@ export async function scrapeGranate(onProgress) {
 
   const items = []
   const errores = []
-  for (const t of fetched) {
-    const q = t.q
-    if (t.error) { errores.push({ nombre: q.nombre, error: t.error, url: t.url }); continue }
-    const price = extractPrice(t.html)
-    const name = extractName(t.html)
-    if (!price) { errores.push({ nombre: q.nombre, error: 'sin precio en página', url: t.url }); continue }
-    const unitOk = t.weight.unit === q.unidad
-      || (q.allowMlToG && t.weight.unit === 'ml' && q.unidad === 'g')
-      || (q.allowGToMl && t.weight.unit === 'g' && q.unidad === 'ml')
-    if (!unitOk) { errores.push({ nombre: q.nombre, error: `unidad no coincide`, url: t.url }); continue }
+  for (const r of resolved) {
+    const q = r.q
+    if (!r || r.error) { errores.push({ nombre: q?.nombre, error: r?.error || 'desconocido', url: r?.url }); continue }
     items.push({
       nombre: q.nombre,
-      precio: +(price / t.weight.qty).toFixed(4),
+      precio: +(r.price / r.weight.qty).toFixed(4),
       unidad: q.unidad,
-      producto: name.replace(/ - Distribuidora.*$/, '').trim(),
-      granateQty: t.weight.qty,
-      granateUnit: t.weight.unit,
-      granatePrecioTotal: price,
-      sourceUrl: t.url,
+      producto: r.name.replace(/ [|\-] Distribuidora.*$/, '').trim(),
+      granateQty: r.weight.qty,
+      granateUnit: r.weight.unit,
+      granatePrecioTotal: r.price,
+      sourceUrl: r.url,
     })
   }
 

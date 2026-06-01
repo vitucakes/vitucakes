@@ -160,9 +160,9 @@ vitucakes/
 
 ## Sistema de actualización de precios desde El Granate
 
-> ⚠️ **EL GRANATE ESTÁ ROTO (desde ~2026-05-26): migró de plataforma.** Las URLs de producto pasaron de Tiendanube (`/productos/<slug>/`) a un sitio nuevo (`/shop/<id>-<slug>`, ej. `/shop/1279-aceite-natura-por-3-litros-4309`). El scraper actual filtra `/productos/` → devuelve 0. `precios_sugeridos.json` quedó en 0 items. **Pendiente: reescribir `update-prices.mjs` + `scrapeGranate.js` para el nuevo `/shop/`** (la slug sigue teniendo el peso "por-1-kilo"/"por-500cc"; hay que ver el nuevo formato de precio en la página). Mientras tanto, **Día cubre todos los insumos** (es fallback, así que con El Granate vacío muestra todo).
+> ✅ **El Granate migró de Tiendanube a Odoo eCommerce (~2026-05). Scraper reescrito y funcionando (2026-06-01).** Lo que cambió vs Tiendanube: el sitemap sigue en `/sitemap.xml` (plano, ~665 productos) pero las URLs de producto son `/shop/<ref>-<slug>-<idOdoo>` (ej. `/shop/1575-chocolate-alpino-pins-con-leche-por-1-kg-4592`); el precio (con IVA) vive en `<span itemprop="price">11000.0</span>` (antes `"price_number"`); y el peso del slug tiene formatos nuevos. Última corrida: **34 insumos cubiertos, 0 errores.**
 
-Distribuidora El Granate (https://www.distribuidoraelgranate.com.ar/) era una tienda Tiendanube de Lanús Oeste con catálogo público de insumos de pastelería. La app tiene un sistema de match entre los insumos de Vitucakes y los productos de El Granate.
+Distribuidora El Granate (https://www.distribuidoraelgranate.com.ar/) es una tienda Odoo de Lanús Oeste con catálogo público de insumos de pastelería. La app tiene un sistema de match entre los insumos de Vitucakes y los productos de El Granate.
 
 ### Cron semanal
 - Workflow: `.github/workflows/update-prices.yml`
@@ -191,29 +191,27 @@ El array `QUERIES` (duplicado en `scripts/update-prices.mjs` y `src/utils/scrape
 }
 ```
 
-El matching:
-1. Fetch del sitemap de El Granate
-2. Filtra URLs de `/productos/`
+El matching (Odoo):
+1. Fetch del sitemap de El Granate (`/sitemap.xml`, plano)
+2. Filtra URLs de `/shop/` (descarta `/shop/category/`)
 3. Por cada query, busca URLs que matcheen al menos un keyword y no contengan exclude
-4. Elige la URL con mejor `scoreUrl` (prefiere "por 1 kilo")
-5. Extrae el peso del slug (`por-1-kilo`, `por-500-grs`, `por-2-litros`, etc.) — regex en `parseWeight`
-6. Fetcha la página y extrae el precio (`"price_number":N` del JSON inline de Tiendanube)
-7. Calcula precio por unidad
+4. Ordena candidatos por `scoreUrl` (prefiere retail: 1 kg / 500 g / 1 l por sobre bultos mayoristas)
+5. Prueba los candidatos **en orden hasta `MAX_TRY=6`**: parsea el peso del slug (`parseWeight`), chequea unidad y fetcha la página. **Se queda con el primero que tenga peso parseable, unidad compatible y precio > 0** — así saltea productos agotados (Odoo les pone precio `0.0`) o en otra unidad, en vez de rendirse con el primer candidato.
+6. El precio sale de `<span itemprop="price">N</span>` (con IVA; fallback: primer `oe_currency_value`, formato AR `11.000,00`)
+7. `parseWeight` entiende `por-1-kg`, `por-1-kilo`, `1-kg`/`10-kg` (sin "por"), `por-500-grs`, `por-90grs`, `x-100grs`, `por-30cc`/`por-500cc`, `por-3-litros`, `por-2-5-kg` (=2,5 kg) y `por-kg`/`por-kilo` sin número (=1 kg)
+8. Calcula precio por unidad
 
-### Insumos cubiertos (~22)
+### Insumos cubiertos (34 — corrida 2026-06-01)
 
-Harina 000, Harina 0000, Harina de almendras, Harina leudante, Azúcar, Azúcar impalpable, Chocolate, Nuez, Caju, Levadura, Bicarbonato de sodio, Esencia de vainilla, Crema de leche (g≡ml), Leche condensada, Avena, Nutella, Mermelada Frambuesa, Miel (ml≡g), Extracto de malta, Pasta ballina, Pasta de goma, Mix frutos secos.
+Harina 000, Harina 0000, Harina de almendras, Harina leudante, Azúcar, Azúcar impalpable, Azucar Negra, Cacao, Fecula de Mandioca, Manteca, Margarina, Chips de chocolate, Chocolate, Coco rayado, Almedras, Nuez, Caju, Levadura, Polvo de hornear, Bicarbonato de sodio, Gelatina Sin Sabor, Esencia de vainilla, Dulce de leche, Crema de leche (g≡ml), Leche condensada, Avena, Nutella, Mermelada Frambuesa, Miel (ml≡g), Salvado de trigo, Extracto de malta, Pasta ballina, Pasta de goma, Mix frutos secos.
+
+(La migración a Odoo + el barrido de candidatos sumó varios que antes no matcheaban: Azucar Negra, Cacao, Fecula de Mandioca, Manteca, Margarina, Chips de chocolate, Coco rayado, Almedras, Polvo de hornear, Gelatina Sin Sabor, Dulce de leche, Salvado de trigo.)
 
 ### Insumos sin match (todavía)
 
-Azucar Negra, Cacao, Cacao alcalino, Fecula de Mandioca, Manteca, Margarina, Chips de chocolate, Coco rayado, Almedras, Polvo de hornear, Gelatina Sin Sabor, Dulce de leche, Cerezas, Frutas abrillantadas, Salvado de trigo, Saborizante, Colorante, Granas de color, Semillas de amapola, Pasas de uva.
+Cacao alcalino, Cerezas, Frutas abrillantadas, Saborizante, Colorante, Granas de color, Semillas de amapola, Pasas de uva. No están en `QUERIES` (algunos no están en El Granate o tienen nombre raro). Los cubre Día si están ahí.
 
-Razones:
-- Los slugs de algunas URLs no tienen peso parseable (ej. `/azucar-negra/`).
-- Algunas páginas devuelven precio 0 o estructura distinta.
-- Algunos productos no están en El Granate o tienen otro nombre.
-
-Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .js), correr `node scripts/update-prices.mjs` localmente para verificar, commit y push.
+Para agregar uno: editar `QUERIES` en **ambos** archivos (script `.mjs` y utils `.js` — mantenerlos sincronizados), correr `node scripts/update-prices.mjs` localmente para verificar, commit y push.
 
 ### Flujo del user
 
@@ -341,10 +339,10 @@ Los datos viven en **Firestore** (compartidos, en la nube) — ya NO se pierden 
 1. ~~Extender scraper para Empretienda~~ ✅ **HECHO (PR #27)**: el cron soporta Tiendanube + Empretienda + WooCommerce. Memo La Pastelería, Silnari y Delicias del Corazón ya están en el comparador. (El scrape EN VIVO de `AgregarCompetidoraPage` sigue solo Tiendanube — pendiente si se quiere.)
 2. **Sumar Nati's Pastelería al cron** (`https://www.natispasteleria.com.ar`). Es Tiendanube, ~130 productos. Sumarla al array `COMPETIDORAS` de `update-competencia.mjs` con `type: 'tiendanube'`. Conviene agregar `excludeSlugs` para descartar desayunos/panes/packs.
    - ~~Acotar Delicias del Corazón~~ ✅ hecho: usa la Store API filtrada por categorías (campo `categorias`).
-3. **Reescribir el scraper de El Granate** para su plataforma nueva `/shop/<id>-<slug>` (ver aviso ⚠️ arriba). Está roto desde ~2026-05-26.
-3. Resto del cron de El Granate: ~20 insumos siguen sin match (ver lista en `update-prices.mjs`).
-4. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo).
-5. PWA + Vercel: PR #14 quedó **cerrado sin mergear**. Si en el futuro queremos instalable en iOS / URL más linda, retomar de cero (no la rama, está borrada).
+3. ~~Reescribir el scraper de El Granate~~ ✅ **HECHO (2026-06-01)**: portado de Tiendanube a Odoo (`/shop/` + `itemprop=price` + barrido de candidatos hasta precio válido). 34 insumos, 0 errores. Ambos archivos (`update-prices.mjs` y `scrapeGranate.js`) en sync.
+4. Resto del cron de El Granate: ~8 insumos niche siguen sin match (Cacao alcalino, Cerezas, Frutas abrillantadas, Saborizante, Colorante, Granas de color, Semillas de amapola, Pasas de uva). Los cubre Día si están.
+5. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo).
+6. PWA + Vercel: PR #14 quedó **cerrado sin mergear**. Si en el futuro queremos instalable en iOS / URL más linda, retomar de cero (no la rama, está borrada).
 
 ## Conversación previa relevante
 
@@ -376,7 +374,10 @@ Resumen:
 - Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
 - Datos del user: viven en **Firestore** (nube), ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (💾 en Productos) baja una copia JSON extra. **Ojo**: si reconstruís la app en otro hosting sin el mismo proyecto Firebase (config en `src/firebase.js`), no vas a tener los datos — necesitás ese proyecto o sembrar de cero desde un backup. Para correr 100% offline/sin nube habría que volver a `useLocalStorage` (ver git antes de la migración a Firebase).
 
-## Último estado (2026-05-31)
+## Último estado (2026-06-01)
+
+- **Scraper de El Granate reescrito para Odoo** (estaba roto desde la migración de plataforma): `update-prices.mjs` + `scrapeGranate.js` portados a `/shop/` + `itemprop=price`, con barrido de candidatos hasta precio válido. **34 insumos, 0 errores.** `precios_sugeridos.json` regenerado. Es la fuente PRINCIPAL de precios de insumos otra vez (Día vuelve a su rol de fallback). PR aparte.
+- Antes (2026-05-31):
 
 - **Migración a Firebase/Firestore** (datos compartidos en la nube) — **PR #23 mergeado y deployado**. Vitu sembró sus datos reales desde su celu: la base tiene `meta.seeded: true`, **176 insumos / 154 recetas**. La app quedó **unificada**: cualquiera que abra el link, desde cualquier dispositivo, ve exactamente lo mismo.
 - **Orden por los más usados** (`usos`) en Insumos y Productos, en vez de por recencia — **PR #24 mergeado y deployado**.
@@ -389,7 +390,7 @@ Resumen:
 - TODO próximos (sin empezar):
   1. ~~Soportar Empretienda~~ ✅ hecho (PR #27)
   2. ~~Día como 2da fuente de insumos~~ ✅ hecho (PR #28); ~~Día = fallback de El Granate~~ ✅; ~~acotar Delicias~~ ✅
-  3. ⚠️ **El Granate roto** (migró a `/shop/<id>-<slug>`) — reescribir `update-prices.mjs` + `scrapeGranate.js`. Mientras tanto Día cubre todo.
+  3. ~~El Granate roto~~ ✅ **arreglado (2026-06-01)**: scraper portado a Odoo, 34 insumos / 0 errores.
   4. Sumar Nati's al cron cuando aparezca su Issue
   5. (opcional) extender el scrape EN VIVO de `AgregarCompetidoraPage` a Empretienda/WooCommerce
 - Reglas de workflow agente (lecciones aprendidas):
