@@ -63,6 +63,7 @@ Los datos viven en **Firestore** (proyecto `vitucakes`), no en `localStorage`.
   fechaActualizacion: string,    // ISO 'YYYY-MM-DD' — se setea automáticamente a hoy al guardar
   updatedAt: number,             // timestamp ms de última edición (ya NO es la clave de orden)
   usos: number,                  // veces que se abrió/tocó — ES la clave de orden (desc). Opcional; ausente = 0
+  fuentePrecio: string,          // de dónde salió el precio: 'El Granate' | 'Día' | 'A mano'. Opcional; ausente = sin badge. Se setea al aplicar una sugerencia (con su fuente) o al editar a mano (si cambió el precio). Se muestra como badge en la lista de Insumos.
 }
 
 // Receta (mostrada como "Producto" en UI)

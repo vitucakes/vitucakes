@@ -39,14 +39,18 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
   const handleSubmit = (data) => {
     if (editing) {
       setInsumos((prev) =>
-        prev.map((i) =>
-          i.id === editing.id ? { ...i, ...data, fechaActualizacion: todayISO(), updatedAt: Date.now() } : i,
-        ),
+        prev.map((i) => {
+          if (i.id !== editing.id) return i
+          // Si tocó el precio a mano, la fuente pasa a "A mano"; si no, se conserva
+          // (ej. cambió solo el nombre/unidad y el precio venía de Día/El Granate).
+          const fuentePrecio = data.precioPorUnidad !== editing.precioPorUnidad ? 'A mano' : i.fuentePrecio
+          return { ...i, ...data, fechaActualizacion: todayISO(), updatedAt: Date.now(), fuentePrecio }
+        }),
       )
     } else {
       setInsumos((prev) => [
         ...prev,
-        { id: crypto.randomUUID(), ...data, fechaActualizacion: todayISO(), updatedAt: Date.now() },
+        { id: crypto.randomUUID(), ...data, fechaActualizacion: todayISO(), updatedAt: Date.now(), fuentePrecio: 'A mano' },
       ])
     }
     setOpen(false)
@@ -101,9 +105,24 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
           <div key={ins.id} className="bg-white rounded-2xl px-4 py-3.5 flex items-center justify-between shadow-sm border border-brand-50">
             <div className="flex-1 min-w-0">
               <p className="font-semibold text-gray-800 break-words">{ins.nombre}</p>
-              <p className="text-sm text-brand-500 font-medium mt-0.5">
-                ${ins.precioPorUnidad.toLocaleString('es-AR')} / {ins.unidad}
-              </p>
+              <div className="flex items-center gap-2 flex-wrap mt-0.5">
+                <p className="text-sm text-brand-500 font-medium">
+                  ${ins.precioPorUnidad.toLocaleString('es-AR')} / {ins.unidad}
+                </p>
+                {ins.fuentePrecio && (
+                  <span
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      ins.fuentePrecio === 'Día'
+                        ? 'bg-rose-100 text-rose-600'
+                        : ins.fuentePrecio === 'El Granate'
+                          ? 'bg-emerald-100 text-emerald-700'
+                          : 'bg-gray-100 text-gray-500'
+                    }`}
+                  >
+                    {ins.fuentePrecio}
+                  </span>
+                )}
+              </div>
               {ins.fechaActualizacion && (
                 <p className="text-[11px] text-gray-400 mt-0.5">Actualizado: {formatDate(ins.fechaActualizacion)}</p>
               )}

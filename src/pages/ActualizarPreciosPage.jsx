@@ -9,6 +9,10 @@ const formatDate = (iso) => {
   return `${d}/${m}/${y}`
 }
 
+// Nombre corto de la fuente para guardar/mostrar: "El Granate" o "Día"
+// (saca el prefijo "Distribuidora " y el sufijo " (manual)" del scrape en vivo).
+const nombreFuente = (f) => (f || '').replace('Distribuidora ', '').replace(' (manual)', '').trim()
+
 const CACHE_KEY = 'vitucakes_precios_sugeridos_cache'
 
 export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
@@ -124,7 +128,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     // fuentes para el mismo insumo, gana la última en la lista.
     const byInsumo = new Map()
     sugerencias.forEach((s) => {
-      if (selected.has(s.key)) byInsumo.set(s.insumoId, s.precioSugerido)
+      if (selected.has(s.key)) byInsumo.set(s.insumoId, { precio: s.precioSugerido, fuente: nombreFuente(s.fuente) })
     })
     const cantidad = byInsumo.size
     // Timestamps únicos e incrementales para que los actualizados queden juntos arriba.
@@ -132,7 +136,9 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     setInsumos((prev) => prev.map((i) => {
       if (!byInsumo.has(i.id)) return i
       stamp += 1
-      return { ...i, precioPorUnidad: byInsumo.get(i.id), fechaActualizacion: fecha, updatedAt: stamp }
+      const { precio, fuente } = byInsumo.get(i.id)
+      // Guardamos de dónde salió el precio (El Granate / Día) para mostrarlo en la lista.
+      return { ...i, precioPorUnidad: precio, fechaActualizacion: fecha, updatedAt: stamp, fuentePrecio: fuente }
     }))
     setAppliedToast(`Se actualizaron ${cantidad} insumo${cantidad !== 1 ? 's' : ''}`)
     setSelected(new Set())
@@ -185,7 +191,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
             {sugerencias.map((s) => {
               const pct = ((s.precioSugerido - s.precioActual) / s.precioActual) * 100
               const isSelected = selected.has(s.key)
-              const fuenteCorta = s.fuente.replace('Distribuidora ', '')
+              const fuenteCorta = nombreFuente(s.fuente)
               return (
                 <button
                   key={s.key}
@@ -264,7 +270,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
               {sugerenciasSeleccionadas.map((s) => (
                 <div key={s.key} className="flex items-center justify-between gap-2 text-sm">
                   <span className="text-gray-700 font-medium break-words flex-1">
-                    {s.nombre} <span className="text-gray-400 text-xs">· {s.fuente.replace('Distribuidora ', '')}</span>
+                    {s.nombre} <span className="text-gray-400 text-xs">· {nombreFuente(s.fuente)}</span>
                   </span>
                   <span className="text-brand-600 font-semibold flex-shrink-0">{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
                 </div>
