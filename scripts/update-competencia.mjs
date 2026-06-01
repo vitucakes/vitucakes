@@ -41,6 +41,13 @@ const COMPETIDORAS = [
     nombre: 'Delicias del Corazón',
     type: 'woocommerce',
     sitemapUrl: 'https://deliciasdelcorazon.com.ar/sitemap.xml',
+    // Delicias vende también insumos/herramientas (tablas, discos) y cosas que
+    // Vitu no hace (cajas, candy bar, desayunos). Con la Store API de WooCommerce
+    // traemos SOLO las categorías de pastelería comparables a lo que vende Vitu.
+    storeApi: 'https://deliciasdelcorazon.com.ar/wp-json/wc/store/v1',
+    // Solo pastelería comparable a lo que hace Vitu (NO "tortas de diseño"
+    // custom tipo Pop Art / personajes, que Vitu no vende). Editar si hace falta.
+    categorias: ['pasteleria', 'tartas', 'macarons', 'postres', 'alfajores', 'drip-cakes'],
     excludeSlugs: [],
   },
 ];
@@ -173,7 +180,64 @@ async function getProductUrls(comp) {
   return [];
 }
 
+const stripHtml = (s) =>
+  decodeEntities((s || '').replace(/<[^>]+>/g, ' '));
+
+// WooCommerce Store API: trae productos SOLO de las categorías permitidas
+// (pastelería comparable a lo que vende Vitu). Mucho más limpio y liviano que
+// scrapear todo el catálogo (que incluye insumos, cajas, candy bar, etc.).
+async function scrapeWooStoreApi(comp) {
+  const cats = JSON.parse(await get(`${comp.storeApi}/products/categories?per_page=100`));
+  const wanted = new Set(comp.categorias.map((s) => s.toLowerCase()));
+  const ids = cats.filter((c) => wanted.has((c.slug || '').toLowerCase())).map((c) => c.id);
+  const seen = new Set();
+  const productos = [];
+  for (const id of ids) {
+    for (let page = 1; page <= 10; page++) {
+      let arr;
+      try {
+        arr = JSON.parse(await get(`${comp.storeApi}/products?category=${id}&per_page=100&page=${page}`));
+      } catch {
+        break;
+      }
+      if (!Array.isArray(arr) || arr.length === 0) break;
+      for (const p of arr) {
+        if (seen.has(p.id)) continue;
+        seen.add(p.id);
+        const minor = p.prices?.currency_minor_unit ?? 2;
+        const precio = p.prices?.price ? Math.round(Number(p.prices.price) / 10 ** minor) : null;
+        if (!precio) continue;
+        productos.push({
+          slug: p.slug,
+          nombre: decodeEntities(p.name || ''),
+          descripcion: stripHtml(p.short_description).slice(0, 200),
+          precio,
+          url: p.permalink,
+        });
+      }
+      if (arr.length < 100) break;
+    }
+  }
+  return productos;
+}
+
 async function scrapeCompetidora(comp) {
+  // WooCommerce con Store API + categorías → traemos solo pastelería comparable.
+  if (comp.storeApi && comp.categorias) {
+    console.log(`\n[${comp.nombre}] (woocommerce store-api) Fetching categorías...`);
+    const productos = await scrapeWooStoreApi(comp);
+    console.log(`[${comp.nombre}] ${productos.length} productos`);
+    productos.forEach((p) => console.log(`  ✓ ${p.nombre}: $${p.precio.toLocaleString('es-AR')}`));
+    return {
+      id: comp.id,
+      nombre: comp.nombre,
+      fuente: comp.sitemapUrl.replace(/\/sitemap\.xml$/, ''),
+      productos,
+      errores: [],
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
   console.log(`\n[${comp.nombre}] (${comp.type}) Fetching sitemap...`);
   let urls = await getProductUrls(comp);
   urls = urls.filter((u) => !(comp.excludeSlugs || []).some((ex) => u.includes(ex)));
