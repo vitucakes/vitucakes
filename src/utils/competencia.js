@@ -52,6 +52,12 @@ const STOPWORDS = new Set([
   'chica',
   'torta',
   'tortas',
+  // Palabras genéricas de postre: no distinguen un producto de otro, así que
+  // no deben generar match por sí solas (ej. "Carrot Cake" vs "Drip Cake").
+  'cake',
+  'tarta',
+  'tartas',
+  'pie',
 ])
 
 // Normaliza un nombre para matching: lowercase, sin tildes, sin puntuación,
@@ -63,7 +69,9 @@ function tokens(s) {
     .replace(/[̀-ͯ]/g, '')
     .replace(/[^a-z0-9\s]/g, ' ')
     .split(/\s+/)
-    .filter((t) => t && !STOPWORDS.has(t))
+    // Descarta stopwords y tokens de tamaño/número (22cm, 20, 2kg, x12…) que no
+    // distinguen un producto de otro.
+    .filter((t) => t && !STOPWORDS.has(t) && !/^\d/.test(t))
 }
 
 // Distancia de Levenshtein normalizada (0 = idénticas, 1 = sin nada en común).
@@ -105,7 +113,7 @@ export function scoreNombres(a, b) {
 
 // Threshold mínimo para mostrar una sugerencia. Si el mejor score está por
 // debajo, no se propone nada (mejor "sin equivalente" que un match malo).
-export const MATCH_THRESHOLD = 0.25
+export const MATCH_THRESHOLD = 0.3
 
 // Para una receta, devuelve la mejor sugerencia pendiente entre todos los
 // productos de todas las competidoras que NO fueron confirmados ni rechazados

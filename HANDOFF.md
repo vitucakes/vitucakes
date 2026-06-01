@@ -232,7 +232,7 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 
 **Día es FALLBACK de El Granate**: en `ActualizarPreciosPage` solo se muestran sugerencias de Día para los insumos que **El Granate NO trae** (no encontró precio). El Granate es la fuente principal. Precios de Día vía su API pública VTEX.
 
-> 🥇 **REGLA DE ORO — NUNCA bajar un precio de insumo.** Ambas fuentes solo sugieren si el precio nuevo es MAYOR al actual (`item.precio <= ins.precioPorUnidad → se descarta`). Nunca se sugiere ni aplica un precio menor o igual. No tocar esta regla.
+> 🥇 **REGLA DE ORO — NUNCA bajar un precio de insumo.** Aplica a **TODO costo importado/scrapeado, de cualquier fuente** (El Granate, Día, y cualquiera que se agregue): solo se sugiere/actualiza si el precio nuevo es MAYOR al actual (`item.precio <= ins.precioPorUnidad → se descarta`). El filtro está centralizado en `sugerencias` de `ActualizarPreciosPage`, por donde pasan todas las fuentes. (Las ediciones MANUALES del user sí pueden bajar — son a propósito; la regla es solo para imports.) No tocar.
 
 - Workflow: `.github/workflows/update-precios-dia.yml` — cron lunes 23:15 ART (15 min después de El Granate).
 - Script: `scripts/update-precios-dia.mjs` (Node 20, sin deps). Pega a `…/api/catalog_system/pub/products/search?ft=<term>`. El array `QUERIES` tiene `nombre` (= insumo EXACTO), `ft` (búsqueda), `head` (el nombre del producto debe EMPEZAR con esto — filtro anti-falsos-positivos, ej. descarta "Figacitas de manteca"), `include`/`exclude`, y `allowMlToG`/`allowGToMl`. `parseSize()` saca el tamaño del paquete del nombre → precio por unidad.
@@ -281,7 +281,7 @@ Vitucakes muestra precios de referencia de pastelerías competidoras al lado del
 ### UX del matching
 1. En **Productos** aparece el pill **🤔** cuando hay competidoras cargadas (con número si hay matches pendientes).
 2. **ResolverMatchesPage** lista las recetas sin match agrupadas en "con sugerencia automática" (Sí / No / Elegir otro) y "sin sugerencia" (Elegir manualmente).
-3. **Match automático** (score Jaccard + Levenshtein, threshold 25%): se calcula en `proponerSugerencia()` (utils/competencia.js).
+3. **Match automático** (score Jaccard + Levenshtein, `MATCH_THRESHOLD = 0.3`): se calcula en `proponerSugerencia()` (utils/competencia.js). El tokenizador descarta **stopwords genéricas de postre** (`torta/tortas/cake/tarta/tartas/pie`) y **tokens de tamaño/número** (`22cm`, `2kg`, etc.) para que no generen matches espurios. Antes, con 240 productos y umbral 0.25, "Carrot Cake" matcheaba con cualquier "Drip Cake" (compartían "cake") y al rechazar uno aparecía otro idéntico — eso se arregló (PR #31).
 4. **Match manual**: `MatchManualSheet` con buscador (filtra por nombre + descripción). Resuelve casos como "Lemon pie" ↔ "Alimonada" donde los nombres no coinciden pero la descripción menciona limón.
 5. **Resolver Page tiene un botón "+ Competidora"** que lleva a `AgregarCompetidoraPage`. El user pega URL de un Tiendanube → `scrapeTiendanube` en vivo (proxy CORS, mismo patrón que `scrapeGranate`) → muestra productos → guarda en `vitucakes_competidoras_user`.
 6. **Sumar competidora user al cron oficial**: la app abre un GitHub Issue prefilled (botón "Pedir sumarla al cron semanal"). El admin lo ve, agrega al array `COMPETIDORAS` de `update-competencia.mjs`, mergea PR, queda automática.
