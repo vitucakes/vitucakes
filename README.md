@@ -121,16 +121,19 @@ vitucakes/
 │   ├── precarga.json              # 167 insumos + 139 recetas (datos de fábrica)
 │   ├── recetas_v2.json            # Migración v2 (insumos y recetas nuevas)
 │   ├── precios_sugeridos.json     # Generado por el cron (El Granate)
-│   ├── competencia.json           # Generado por el cron (competidoras Tiendanube)
+│   ├── precios_dia.json           # Generado por el cron (Día / supermercado)
+│   ├── competencia.json           # Generado por el cron (competidoras: Tiendanube/Empretienda/Woo)
 │   └── logo.jpg
 ├── scripts/
-│   ├── update-prices.mjs          # Cron: scrape de El Granate
-│   ├── update-competencia.mjs     # Cron: scrape de competidoras
+│   ├── update-prices.mjs          # Cron: scrape de El Granate (insumos)
+│   ├── update-precios-dia.mjs     # Cron: precios de insumos en Día (VTEX)
+│   ├── update-competencia.mjs     # Cron: scrape de competidoras (3 plataformas)
 │   └── build-recetas-v2.mjs       # Generó recetas_v2.json (one-shot)
 └── .github/workflows/
     ├── deploy.yml                 # Deploy automático a GH Pages en push a main
-    ├── update-prices.yml          # Cron lunes 23 ART
-    └── update-competencia.yml     # Cron lunes 23:30 ART
+    ├── update-prices.yml          # Cron lunes 23 ART (El Granate)
+    ├── update-precios-dia.yml     # Cron lunes 23:15 ART (Día)
+    └── update-competencia.yml     # Cron lunes 23:30 ART (competencia)
 ```
 
 ## Para entender el proyecto en detalle

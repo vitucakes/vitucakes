@@ -126,12 +126,13 @@ vitucakes/
 │   ├── components/
 │   │   ├── BottomNav.jsx        # Tab "Productos" (id sigue siendo 'recetas')
 │   │   ├── BottomSheet.jsx
-│   │   └── MatchManualSheet.jsx # Sheet con buscador para elegir match manual
+│   │   ├── MatchManualSheet.jsx # Sheet con buscador para elegir match manual
+│   │   └── InsumoEditSheet.jsx  # Form de insumo reutilizable (InsumosPage + RecetaDetail inline)
 │   └── pages/
 │       ├── InsumosPage.jsx      # CRUD insumos + "Actualizar precios". Sort por usos. Incrementa usos al abrir edición
 │       ├── RecetasPage.jsx      # CRUD productos (file name legacy). Sort por usos. LockToggle en header
 │       ├── RecetaDetail.jsx     # Detalle de producto. Controles de edición detrás de canEdit
-│       ├── ActualizarPreciosPage.jsx  # Sugerencias de precios (El Granate)
+│       ├── ActualizarPreciosPage.jsx  # Sugerencias de precios (El Granate + Día)
 │       ├── ResolverMatchesPage.jsx    # Bulk review de matches con competencia
 │       ├── AgregarCompetidoraPage.jsx # Agregar competidora con scrape en vivo
 │       ├── BackupPage.jsx       # Export/restore/reset de la base COMPARTIDA (no localStorage)
@@ -140,16 +141,19 @@ vitucakes/
 │   ├── precarga.json            # 167 insumos + 139 recetas (datos de fábrica)
 │   ├── recetas_v2.json          # Migración v2 (insumos y recetas nuevas)
 │   ├── precios_sugeridos.json   # Generado por el cron (El Granate)
-│   ├── competencia.json         # Generado por el cron (competidoras Tiendanube)
+│   ├── precios_dia.json         # Generado por el cron (Día / supermercado)
+│   ├── competencia.json         # Generado por el cron (competidoras: Tiendanube/Empretienda/Woo)
 │   └── logo.jpg
 ├── scripts/
-│   ├── update-prices.mjs        # Cron: scrape de El Granate
-│   ├── update-competencia.mjs   # Cron: scrape de competidoras
+│   ├── update-prices.mjs        # Cron: scrape de El Granate (insumos)
+│   ├── update-precios-dia.mjs   # Cron: precios de insumos en Día (VTEX)
+│   ├── update-competencia.mjs   # Cron: scrape de competidoras (3 plataformas)
 │   └── build-recetas-v2.mjs     # Generó recetas_v2.json (one-shot)
 ├── .github/workflows/
 │   ├── deploy.yml               # Deploy a GH Pages en push a main
-│   ├── update-prices.yml        # Cron lunes 23h ART
-│   └── update-competencia.yml   # Cron lunes 23:30 ART
+│   ├── update-prices.yml        # Cron lunes 23h ART (El Granate)
+│   ├── update-precios-dia.yml   # Cron lunes 23:15 ART (Día)
+│   └── update-competencia.yml   # Cron lunes 23:30 ART (competencia)
 ├── 0. Costeo y Ventas VITUCA CAKES.xlsx   # Excel original
 └── vite.config.js               # base '/vitucakes/' en build, '/' en dev
 ```
@@ -222,6 +226,16 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 5. Los insumos quedan actualizados con `fechaActualizacion = hoy` y `updatedAt` incremental (todos juntos arriba en la lista)
 6. Si querés precios al día sin esperar al lunes: botón "Actualizar precios manualmente" → scrape live desde el browser (~30s)
 
+## Segunda fuente de precios de insumos: Día (supermercado) — PR #28
+
+Además de El Granate, hay precios de insumos desde **Día** vía su API pública VTEX.
+
+- Workflow: `.github/workflows/update-precios-dia.yml` — cron lunes 23:15 ART (15 min después de El Granate).
+- Script: `scripts/update-precios-dia.mjs` (Node 20, sin deps). Pega a `…/api/catalog_system/pub/products/search?ft=<term>`. El array `QUERIES` tiene `nombre` (= insumo EXACTO), `ft` (búsqueda), `head` (el nombre del producto debe EMPEZAR con esto — filtro anti-falsos-positivos, ej. descarta "Figacitas de manteca"), `include`/`exclude`, y `allowMlToG`/`allowGToMl`. `parseSize()` saca el tamaño del paquete del nombre → precio por unidad.
+- Output: `public/precios_dia.json` (mismo formato que `precios_sugeridos.json`). 26 insumos staples cubiertos.
+- **Coto se descartó**: SPA detrás de un WAF de Fortinet, no scrapeable por cron con fetch.
+- En `ActualizarPreciosPage` se cargan y **mergean AMBAS fuentes**; cada sugerencia lleva `fuente` (El Granate / Día) con badge. La key de selección es `insumoId|fuente`. La regla "no bajar precio" aplica a las dos. Para sumar un insumo a Día, agregarlo a `QUERIES` y correr `node scripts/update-precios-dia.mjs`.
+
 ## Sistema de competencia (PR #15 y #16)
 
 Vitucakes muestra precios de referencia de pastelerías competidoras al lado del propio.
@@ -231,7 +245,7 @@ Vitucakes muestra precios de referencia de pastelerías competidoras al lado del
 - Cron: lunes 23:30 ART (30 min después del de precios, para no pisarse)
 - Script: `scripts/update-competencia.mjs` (Node 20, sin deps)
 - Output: `public/competencia.json`
-- Array `COMPETIDORAS` en el script lista las "oficiales" (committeadas al repo). Hoy: solo **Candelitte** (`https://candelitte.mitiendanube.com`).
+- Array `COMPETIDORAS` en el script lista las "oficiales" (committeadas al repo). Cada una tiene un `type`: **tiendanube** (Candelitte), **empretienda** (Memo La Pastelería, Silnari) o **woocommerce** (Delicias del Corazón). El scraper detecta el sitemap y el formato de precio según el `type` (PR #27).
 
 ### Modelo de datos competencia
 ```js
@@ -273,7 +287,8 @@ Una vez confirmado un match, `recetasParaResolver()` excluye esa receta. La pró
 ### Reglas a no romper en competencia
 - `mergeCompetidoras()` es la única fuente para la lista combinada — no leer `competencia.competidoras` directo en pantallas, pasar la mergeada.
 - Los IDs de competidoras user se generan de `idFromHost(sitemapUrl)` (en `AgregarCompetidoraPage.jsx`) — si dos users agregan la misma URL, el id colisiona y se trata como la misma.
-- El scraper devuelve productos cuyo slug coincide con `/productos/<slug>/` — para soportar Empretienda (Silnari) habría que extender el regex.
+- El scraper de `update-competencia.mjs` soporta 3 plataformas vía `type`: **tiendanube** (`/productos/<slug>/`, precio `price_number`), **empretienda** (`/<categoria>/<slug>`, precio `meta product:price:amount`) y **woocommerce** (sitemap índice → `product-sitemap` → `/producto/<slug>/`, precio JSON-LD). Para sumar otra plataforma, agregar un `type` y su lógica de sitemap/precio.
+- El scrape EN VIVO de competidoras agregadas por el user (`AgregarCompetidoraPage` / `scrapeTiendanube.js`) sigue siendo solo Tiendanube — el multi-plataforma está solo en el cron.
 
 ## Backup de datos del user
 
@@ -310,11 +325,15 @@ Los datos viven en **Firestore** (compartidos, en la nube) — ya NO se pierden 
 - **Candado de edición por PIN** — lectura pública para todos, edición detrás de PIN (Vitu y Patricio). PR #23
 - **Pantalla de primera carga** (`InicializarDatos`) — siembra inicial sin pisar los datos reales del user. PR #23
 - **Orden por los más usados** (`usos`) en Insumos y Productos, en vez de por recencia. PR #24
+- **Editar insumo desde la receta** sin salir del producto (sheet inline). PR #26
+- **Competencia multi-plataforma** (Tiendanube + Empretienda + WooCommerce) + Memo, Silnari, Delicias. PR #27
+- **Precios de insumos desde Día** (supermercado, VTEX) como 2da fuente en "Actualizar precios". PR #28
 
 ## Pendiente / a terminar
 
-1. **Extender scraper para Empretienda** (Silnari, `https://www.silnari.com/tortas-y-tartas`). El actual solo soporta Tiendanube. Las URLs de Silnari son `/tortas-y-tartas/<slug>` (no `/productos/<slug>/`) y el HTML probablemente tiene los precios en otro formato (no `price_number` JSON inline).
-2. **Sumar Nati's Pastelería al cron** (`https://www.natispasteleria.com.ar`). Es Tiendanube, ~130 productos. Patricio iba a agregarla desde la app y abrir el Issue. Cuando aparezca, sumarla al array `COMPETIDORAS` de `update-competencia.mjs`. Conviene agregar `excludeSlugs` para descartar desayunos/panes/packs.
+1. ~~Extender scraper para Empretienda~~ ✅ **HECHO (PR #27)**: el cron soporta Tiendanube + Empretienda + WooCommerce. Memo La Pastelería, Silnari y Delicias del Corazón ya están en el comparador. (El scrape EN VIVO de `AgregarCompetidoraPage` sigue solo Tiendanube — pendiente si se quiere.)
+2. **Sumar Nati's Pastelería al cron** (`https://www.natispasteleria.com.ar`). Es Tiendanube, ~130 productos. Sumarla al array `COMPETIDORAS` de `update-competencia.mjs` con `type: 'tiendanube'`. Conviene agregar `excludeSlugs` para descartar desayunos/panes/packs.
+   - Posible: **acotar Delicias del Corazón** (448 productos, muchos custom) a categorías comparables vía la WooCommerce Store API (`/wp-json/wc/store/v1/products`).
 3. Resto del cron de El Granate: ~20 insumos siguen sin match (ver lista en `update-prices.mjs`).
 4. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo).
 5. PWA + Vercel: PR #14 quedó **cerrado sin mergear**. Si en el futuro queremos instalable en iOS / URL más linda, retomar de cero (no la rama, está borrada).
@@ -360,9 +379,10 @@ Resumen:
   - PIN de edición: lo conocen Vitu y Patricio (hash SHA-256 en `src/hooks/useEditGate.jsx`).
   - Candado fuerte futuro (si se quiere): Login con Google + allowlist de mails (Vitu y Patricio) en las reglas.
 - TODO próximos (sin empezar):
-  1. Soportar Empretienda en el scraper (para Silnari)
+  1. ~~Soportar Empretienda~~ ✅ hecho (PR #27)
   2. Sumar Nati's al cron cuando aparezca su Issue
   3. ~20 insumos sin match en El Granate
+  4. (opcional) acotar Delicias del Corazón a categorías comparables; extender scrape EN VIVO a Empretienda/Woo
 - Reglas de workflow agente (lecciones aprendidas):
   - **El user autorizó mergear PRs sin preguntar** (en Vitucakes). Flujo: crear PR → `gh pr merge --squash` → deploya solo. Excepción: algo de alto riesgo o que pueda perder datos → avisar primero.
   - **Después de un squash-merge**, para el siguiente PR ramá desde `origin/main` (no desde tu rama vieja); si no, el diff arrastra lo ya mergeado.
