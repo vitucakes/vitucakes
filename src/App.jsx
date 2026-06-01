@@ -18,7 +18,6 @@ export default function App() {
   const { canEdit } = useEditGate()
   const [page, setPage] = useState('recetas')
   const [selectedId, setSelectedId] = useState(null)
-  const [insumoInitialEditId, setInsumoInitialEditId] = useState(null)
 
   // Datos COMPARTIDOS (viven en Firestore, sincronizan en vivo entre todos los
   // dispositivos). Misma interfaz que antes: [valor, setValor], + flag loaded.
@@ -94,8 +93,6 @@ export default function App() {
             setInsumos={setInsumos}
             recetas={recetas}
             onActualizarPrecios={() => navigate('actualizar-precios')}
-            initialEditId={insumoInitialEditId}
-            onInitialEditConsumed={() => setInsumoInitialEditId(null)}
           />
         )}
         {page === 'actualizar-precios' && (
@@ -150,6 +147,7 @@ export default function App() {
           <RecetaDetail
             receta={selectedReceta}
             insumos={insumos}
+            setInsumos={setInsumos}
             competidoras={competidoras}
             onBack={() => navigate('recetas')}
             onUpdate={(updated) =>
@@ -158,10 +156,6 @@ export default function App() {
             onDelete={(id) => {
               setRecetas((prev) => prev.filter((r) => r.id !== id))
               navigate('recetas')
-            }}
-            onEditInsumo={(insumoId) => {
-              setInsumoInitialEditId(insumoId)
-              navigate('insumos')
             }}
           />
         )}

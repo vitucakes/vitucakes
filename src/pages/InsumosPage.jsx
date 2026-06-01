@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
-import BottomSheet from '../components/BottomSheet'
+import { useState } from 'react'
+import InsumoEditSheet from '../components/InsumoEditSheet'
 import { useEditGate, LockToggle } from '../hooks/useEditGate'
-
-const UNIDADES = ['kg', 'g', 'l', 'ml', 'u', 'cdas', 'cdtas', 'taza', 'atado']
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -12,37 +10,12 @@ const formatDate = (iso) => {
   return `${d}/${m}/${y}`
 }
 
-const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
-
-export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios, initialEditId, onInitialEditConsumed }) {
+export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios }) {
   const [open, setOpen] = useState(false)
-  const [editId, setEditId] = useState(null)
-  const [form, setForm] = useState(EMPTY)
+  const [editing, setEditing] = useState(null) // insumo a editar, o null = nuevo
   const [search, setSearch] = useState('')
   const [deleteId, setDeleteId] = useState(null)
   const { canEdit } = useEditGate()
-
-  // Si entramos con initialEditId (ej. desde RecetaDetail tocando un ingrediente),
-  // abrimos el form de edición de ese insumo automáticamente.
-  useEffect(() => {
-    if (!initialEditId) return
-    const ins = insumos.find((i) => i.id === initialEditId)
-    if (ins) {
-      setEditId(ins.id)
-      setForm({
-        nombre: ins.nombre,
-        unidad: ins.unidad,
-        precioPorUnidad: String(ins.precioPorUnidad),
-        totalPagado: '',
-        cantidadComprada: '',
-      })
-      setOpen(true)
-      // Cuenta una "apertura" del insumo (abierto desde un ingrediente de receta).
-      setInsumos((prev) => prev.map((i) => (i.id === ins.id ? { ...i, usos: (i.usos ?? 0) + 1 } : i)))
-    }
-    onInitialEditConsumed?.()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialEditId])
 
   // Orden: por los MÁS usados/tocados (contador `usos`), no por el último.
   // Empate (ej. todos en 0 al principio) → alfabético, para un orden neutro.
@@ -51,54 +24,30 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
     .slice()
     .sort((a, b) => (b.usos ?? 0) - (a.usos ?? 0) || a.nombre.localeCompare(b.nombre))
 
-  const openAdd = () => { setEditId(null); setForm(EMPTY); setOpen(true) }
+  const openAdd = () => {
+    setEditing(null)
+    setOpen(true)
+  }
 
   const openEdit = (ins) => {
-    setEditId(ins.id)
-    setForm({
-      nombre: ins.nombre,
-      unidad: ins.unidad,
-      precioPorUnidad: String(ins.precioPorUnidad),
-      totalPagado: '',
-      cantidadComprada: '',
-    })
+    setEditing(ins)
     setOpen(true)
     // Cuenta una "apertura" del insumo para el orden por más usados.
     setInsumos((prev) => prev.map((i) => (i.id === ins.id ? { ...i, usos: (i.usos ?? 0) + 1 } : i)))
   }
 
-  const computedPrecio = (() => {
-    const t = parseFloat(form.totalPagado)
-    const c = parseFloat(form.cantidadComprada)
-    if (t > 0 && c > 0) return t / c
-    return parseFloat(form.precioPorUnidad) || 0
-  })()
-
-  const handleSave = () => {
-    const nombre = form.nombre.trim()
-    const precio = computedPrecio
-    if (!nombre || precio <= 0) return
-    if (editId) {
-      setInsumos((prev) => prev.map((i) => {
-        if (i.id !== editId) return i
-        return {
-          ...i,
-          nombre,
-          unidad: form.unidad,
-          precioPorUnidad: precio,
-          fechaActualizacion: todayISO(),
-          updatedAt: Date.now(),
-        }
-      }))
+  const handleSubmit = (data) => {
+    if (editing) {
+      setInsumos((prev) =>
+        prev.map((i) =>
+          i.id === editing.id ? { ...i, ...data, fechaActualizacion: todayISO(), updatedAt: Date.now() } : i,
+        ),
+      )
     } else {
-      setInsumos((prev) => [...prev, {
-        id: crypto.randomUUID(),
-        nombre,
-        unidad: form.unidad,
-        precioPorUnidad: precio,
-        fechaActualizacion: todayISO(),
-        updatedAt: Date.now(),
-      }])
+      setInsumos((prev) => [
+        ...prev,
+        { id: crypto.randomUUID(), ...data, fechaActualizacion: todayISO(), updatedAt: Date.now() },
+      ])
     }
     setOpen(false)
   }
@@ -109,11 +58,6 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
     setInsumos((prev) => prev.filter((i) => i.id !== deleteId))
     setDeleteId(null)
   }
-
-  const field = (k) => ({
-    value: form[k],
-    onChange: (e) => setForm((f) => ({ ...f, [k]: e.target.value })),
-  })
 
   return (
     <div className="flex flex-col min-h-full">
@@ -184,47 +128,8 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
         </button>
       )}
 
-      {/* Form sheet */}
-      <BottomSheet isOpen={open} onClose={() => setOpen(false)} title={editId ? 'Editar insumo' : 'Nuevo insumo'}>
-        <div className="space-y-4">
-          <div>
-            <label className="label">Nombre</label>
-            <input {...field('nombre')} placeholder="Ej: Harina 000" className="input" />
-          </div>
-          <div>
-            <label className="label">Unidad</label>
-            <select {...field('unidad')} className="input bg-white">
-              {UNIDADES.map((u) => <option key={u}>{u}</option>)}
-            </select>
-          </div>
-
-          <div className="flex gap-2">
-            <div className="flex-1">
-              <label className="label">Total pagado ($)</label>
-              <input type="number" {...field('totalPagado')} placeholder="Ej: 6000" className="input" />
-            </div>
-            <div className="flex-1">
-              <label className="label">Cantidad ({form.unidad})</label>
-              <input type="number" {...field('cantidadComprada')} placeholder="Ej: 5" className="input" />
-            </div>
-          </div>
-
-          <div>
-            <label className="label">Precio por {form.unidad} ($)</label>
-            <div className="input font-semibold text-brand-600 bg-gray-50">
-              {computedPrecio > 0 ? computedPrecio.toLocaleString('es-AR', { maximumFractionDigits: 2 }) : '—'}
-            </div>
-          </div>
-
-          <button
-            onClick={handleSave}
-            disabled={!form.nombre.trim() || computedPrecio <= 0}
-            className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base disabled:opacity-40 active:scale-95 transition-transform mt-2"
-          >
-            {editId ? 'Guardar cambios' : 'Agregar insumo'}
-          </button>
-        </div>
-      </BottomSheet>
+      {/* Form sheet (crear / editar) */}
+      <InsumoEditSheet isOpen={open} insumo={editing} onClose={() => setOpen(false)} onSubmit={handleSubmit} />
 
       {/* Delete confirm */}
       {deleteId && (() => {

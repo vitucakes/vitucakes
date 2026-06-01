@@ -3,13 +3,34 @@ import MatchManualSheet from '../components/MatchManualSheet'
 import { calcCostoInsumos, calcGastosIndirectos, calcCostoTotal, formatARS, GASTOS_INDIRECTOS, MARGEN } from '../utils/calc'
 import { proponerSugerencia, matchesConDetalle, promedioCompetencia, productosDisponibles } from '../utils/competencia'
 import { useEditGate, LockToggle } from '../hooks/useEditGate'
+import InsumoEditSheet from '../components/InsumoEditSheet'
 
-export default function RecetaDetail({ receta, insumos, competidoras = [], onBack, onUpdate, onDelete, onEditInsumo }) {
+const todayISO = () => new Date().toISOString().slice(0, 10)
+
+export default function RecetaDetail({ receta, insumos, setInsumos, competidoras = [], onBack, onUpdate, onDelete }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
   const [confirmConvertir, setConfirmConvertir] = useState(false)
   const [copiado, setCopiado] = useState(false)
+  const [editingInsumo, setEditingInsumo] = useState(null)
   const { canEdit } = useEditGate()
+
+  // Editar un ingrediente SIN salir de la receta: abre el editor acá mismo.
+  // Cuenta una "apertura" del insumo para el orden por más usados.
+  const abrirEdicionInsumo = (ins) => {
+    setEditingInsumo(ins)
+    setInsumos?.((prev) => prev.map((i) => (i.id === ins.id ? { ...i, usos: (i.usos ?? 0) + 1 } : i)))
+  }
+
+  const guardarInsumo = (data) => {
+    if (!editingInsumo) return
+    setInsumos?.((prev) =>
+      prev.map((i) =>
+        i.id === editingInsumo.id ? { ...i, ...data, fechaActualizacion: todayISO(), updatedAt: Date.now() } : i,
+      ),
+    )
+    setEditingInsumo(null)
+  }
 
   // Scroll-to-top al entrar al detalle (o cambiar de receta). El scroll
   // vive en el <main> de App.jsx con overflow-y-auto, no en window.
@@ -388,7 +409,7 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
               return (
                 <button
                   key={ing.insumoId}
-                  onClick={canEdit ? () => onEditInsumo?.(ins.id) : undefined}
+                  onClick={canEdit ? () => abrirEdicionInsumo(ins) : undefined}
                   className={`w-full text-left rounded-xl px-1 py-1 -mx-1 ${canEdit ? 'active:bg-brand-50 active:scale-[0.99] transition-all' : ''}`}
                 >
                   <div className="flex justify-between items-center mb-1">
@@ -455,6 +476,15 @@ export default function RecetaDetail({ receta, insumos, competidoras = [], onBac
         receta={receta}
         competidoras={competidoras}
         onElegir={elegirMatchManual}
+      />
+
+      {/* Editor de insumo inline: al tocar un ingrediente, se edita acá sin
+          salir de la receta. Al guardar/cerrar te quedás en el producto. */}
+      <InsumoEditSheet
+        isOpen={!!editingInsumo}
+        insumo={editingInsumo}
+        onClose={() => setEditingInsumo(null)}
+        onSubmit={guardarInsumo}
       />
 
       {/* Confirmar convertir a 1 unidad */}
