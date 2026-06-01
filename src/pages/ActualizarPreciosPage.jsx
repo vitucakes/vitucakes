@@ -12,7 +12,8 @@ const formatDate = (iso) => {
 const CACHE_KEY = 'vitucakes_precios_sugeridos_cache'
 
 export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null) // El Granate
+  const [dataDia, setDataDia] = useState(null) // Día (supermercado)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [selected, setSelected] = useState(() => new Set())
@@ -40,6 +41,14 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
       .finally(() => setLoading(false))
   }, [])
 
+  // Precios de Día (supermercado): solo del cron semanal (sin scrape manual).
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}precios_dia.json`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => d && setDataDia(d))
+      .catch(() => {})
+  }, [])
+
   const actualizarManualmente = async () => {
     setScraping(true)
     setError(null)
@@ -57,13 +66,19 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
   }
 
   const sugerencias = useMemo(() => {
-    if (!data?.items) return []
-    return data.items
-      .map((item) => {
+    const fuentes = [
+      { items: data?.items, fuente: data?.fuente || 'El Granate' },
+      { items: dataDia?.items, fuente: dataDia?.fuente || 'Día' },
+    ]
+    const out = []
+    for (const { items, fuente } of fuentes) {
+      for (const item of items || []) {
         const ins = insumos.find((i) => i.nombre === item.nombre)
-        if (!ins) return null
-        if (item.precio <= ins.precioPorUnidad) return null
-        return {
+        if (!ins) continue
+        // Regla "no bajar precio": solo sugerimos si es mayor al actual.
+        if (item.precio <= ins.precioPorUnidad) continue
+        out.push({
+          key: `${ins.id}|${fuente}`,
           insumoId: ins.id,
           nombre: ins.nombre,
           unidadVitu: ins.unidad,
@@ -73,11 +88,12 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
           fechaActual: ins.fechaActualizacion,
           producto: item.producto,
           sourceUrl: item.sourceUrl,
-        }
-      })
-      .filter(Boolean)
-      .sort((a, b) => (b.precioSugerido / b.precioActual) - (a.precioSugerido / a.precioActual))
-  }, [data, insumos])
+          fuente,
+        })
+      }
+    }
+    return out.sort((a, b) => b.precioSugerido / b.precioActual - a.precioSugerido / a.precioActual)
+  }, [data, dataDia, insumos])
 
   // Default: nada seleccionado. El user tilda lo que quiere aplicar.
 
@@ -91,27 +107,24 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
 
   const toggleAll = () => {
     if (selected.size === sugerencias.length) setSelected(new Set())
-    else setSelected(new Set(sugerencias.map((s) => s.insumoId)))
+    else setSelected(new Set(sugerencias.map((s) => s.key)))
   }
 
   const aplicar = () => {
-    const ids = selected
     const fecha = todayISO()
-    const cantidad = ids.size
-    // Timestamps únicos e incrementales para que cada actualizado quede
-    // arriba del anterior y todos juntos en el tope de la lista.
+    // De las sugerencias seleccionadas armamos insumoId → precio. Si hay dos
+    // fuentes para el mismo insumo, gana la última en la lista.
+    const byInsumo = new Map()
+    sugerencias.forEach((s) => {
+      if (selected.has(s.key)) byInsumo.set(s.insumoId, s.precioSugerido)
+    })
+    const cantidad = byInsumo.size
+    // Timestamps únicos e incrementales para que los actualizados queden juntos arriba.
     let stamp = Date.now()
     setInsumos((prev) => prev.map((i) => {
-      if (!ids.has(i.id)) return i
-      const sug = sugerencias.find((s) => s.insumoId === i.id)
-      if (!sug) return i
+      if (!byInsumo.has(i.id)) return i
       stamp += 1
-      return {
-        ...i,
-        precioPorUnidad: sug.precioSugerido,
-        fechaActualizacion: fecha,
-        updatedAt: stamp,
-      }
+      return { ...i, precioPorUnidad: byInsumo.get(i.id), fechaActualizacion: fecha, updatedAt: stamp }
     }))
     setAppliedToast(`Se actualizaron ${cantidad} insumo${cantidad !== 1 ? 's' : ''}`)
     setSelected(new Set())
@@ -119,7 +132,7 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     setTimeout(() => setAppliedToast(null), 2500)
   }
 
-  const sugerenciasSeleccionadas = sugerencias.filter((s) => selected.has(s.insumoId))
+  const sugerenciasSeleccionadas = sugerencias.filter((s) => selected.has(s.key))
 
   return (
     <div className="flex flex-col min-h-full bg-brand-50">
@@ -129,9 +142,9 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
           <button onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full bg-brand-50 text-brand-500 text-lg font-bold">←</button>
           <h1 className="text-xl font-bold text-gray-800 flex-1">Actualizar precios</h1>
         </div>
-        {data?.generadoEn && (
+        {(data?.generadoEn || dataDia?.generadoEn) && (
           <p className="text-xs text-gray-400">
-            Última consulta: {new Date(data.generadoEn).toLocaleString('es-AR', { dateStyle: 'short', timeStyle: 'short' })} · {data.fuente}
+            Fuentes: {[data && 'El Granate', dataDia && 'Día'].filter(Boolean).join(' · ')}
           </p>
         )}
       </div>
@@ -163,11 +176,12 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
 
             {sugerencias.map((s) => {
               const pct = ((s.precioSugerido - s.precioActual) / s.precioActual) * 100
-              const isSelected = selected.has(s.insumoId)
+              const isSelected = selected.has(s.key)
+              const fuenteCorta = s.fuente.replace('Distribuidora ', '')
               return (
                 <button
-                  key={s.insumoId}
-                  onClick={() => toggle(s.insumoId)}
+                  key={s.key}
+                  onClick={() => toggle(s.key)}
                   className={`w-full bg-white rounded-2xl p-4 text-left shadow-sm border transition-colors ${isSelected ? 'border-brand-300' : 'border-brand-50'}`}
                 >
                   <div className="flex items-start gap-3">
@@ -175,7 +189,10 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
                       {isSelected && <span className="text-xs leading-none">✓</span>}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-gray-800 break-words">{s.nombre}</p>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className="font-bold text-gray-800 break-words">{s.nombre}</p>
+                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${s.fuente === 'Día' ? 'bg-rose-100 text-rose-600' : 'bg-emerald-100 text-emerald-700'}`}>{fuenteCorta}</span>
+                      </div>
                       <p className="text-[11px] text-gray-400 break-words mb-2">{s.producto}</p>
                       <div className="flex items-center gap-2 text-sm">
                         <span className="text-gray-400 line-through">{formatARS(s.precioActual)}/{s.unidadVitu}</span>
@@ -237,8 +254,10 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
             <p className="text-xs text-gray-500 text-center mb-4">Se va a actualizar el precio y la fecha de:</p>
             <div className="bg-brand-50 rounded-2xl p-3 max-h-56 overflow-y-auto mb-5 space-y-1.5">
               {sugerenciasSeleccionadas.map((s) => (
-                <div key={s.insumoId} className="flex items-center justify-between gap-2 text-sm">
-                  <span className="text-gray-700 font-medium break-words flex-1">{s.nombre}</span>
+                <div key={s.key} className="flex items-center justify-between gap-2 text-sm">
+                  <span className="text-gray-700 font-medium break-words flex-1">
+                    {s.nombre} <span className="text-gray-400 text-xs">· {s.fuente.replace('Distribuidora ', '')}</span>
+                  </span>
                   <span className="text-brand-600 font-semibold flex-shrink-0">{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
                 </div>
               ))}
