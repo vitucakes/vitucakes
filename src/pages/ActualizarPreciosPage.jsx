@@ -67,8 +67,12 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
 
   const sugerencias = useMemo(() => {
     // El Granate es la fuente PRINCIPAL. Día es FALLBACK: solo aporta insumos
-    // que El Granate no trae (no encontró precio para ese insumo).
-    const cubiertosPorGranate = new Set((data?.items || []).map((it) => it.nombre))
+    // que El Granate no trae — o sea, los que no encontró o trajo en 0/sin
+    // precio. Un insumo cuenta como "cubierto" SOLO si El Granate le dio un
+    // precio > 0; si no, lo busca Día.
+    const cubiertosPorGranate = new Set(
+      (data?.items || []).filter((it) => it.precio > 0).map((it) => it.nombre),
+    )
     const fuentes = [
       { items: data?.items, fuente: data?.fuente || 'El Granate' },
       { items: (dataDia?.items || []).filter((it) => !cubiertosPorGranate.has(it.nombre)), fuente: dataDia?.fuente || 'Día' },
