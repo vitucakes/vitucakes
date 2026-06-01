@@ -160,7 +160,9 @@ vitucakes/
 
 ## Sistema de actualización de precios desde El Granate
 
-Distribuidora El Granate (https://www.distribuidoraelgranate.com.ar/) es una tienda Tiendanube de Lanús Oeste con catálogo público de insumos de pastelería. La app tiene un sistema de match entre los insumos de Vitucakes y los productos de El Granate.
+> ⚠️ **EL GRANATE ESTÁ ROTO (desde ~2026-05-26): migró de plataforma.** Las URLs de producto pasaron de Tiendanube (`/productos/<slug>/`) a un sitio nuevo (`/shop/<id>-<slug>`, ej. `/shop/1279-aceite-natura-por-3-litros-4309`). El scraper actual filtra `/productos/` → devuelve 0. `precios_sugeridos.json` quedó en 0 items. **Pendiente: reescribir `update-prices.mjs` + `scrapeGranate.js` para el nuevo `/shop/`** (la slug sigue teniendo el peso "por-1-kilo"/"por-500cc"; hay que ver el nuevo formato de precio en la página). Mientras tanto, **Día cubre todos los insumos** (es fallback, así que con El Granate vacío muestra todo).
+
+Distribuidora El Granate (https://www.distribuidoraelgranate.com.ar/) era una tienda Tiendanube de Lanús Oeste con catálogo público de insumos de pastelería. La app tiene un sistema de match entre los insumos de Vitucakes y los productos de El Granate.
 
 ### Cron semanal
 - Workflow: `.github/workflows/update-prices.yml`
@@ -228,13 +230,15 @@ Para agregar uno: editar `QUERIES` en **ambos** archivos (script .mjs y utils .j
 
 ## Segunda fuente de precios de insumos: Día (supermercado) — PR #28
 
-Además de El Granate, hay precios de insumos desde **Día** vía su API pública VTEX.
+**Día es FALLBACK de El Granate**: en `ActualizarPreciosPage` solo se muestran sugerencias de Día para los insumos que **El Granate NO trae** (no encontró precio). El Granate es la fuente principal. Precios de Día vía su API pública VTEX.
+
+> 🥇 **REGLA DE ORO — NUNCA bajar un precio de insumo.** Ambas fuentes solo sugieren si el precio nuevo es MAYOR al actual (`item.precio <= ins.precioPorUnidad → se descarta`). Nunca se sugiere ni aplica un precio menor o igual. No tocar esta regla.
 
 - Workflow: `.github/workflows/update-precios-dia.yml` — cron lunes 23:15 ART (15 min después de El Granate).
 - Script: `scripts/update-precios-dia.mjs` (Node 20, sin deps). Pega a `…/api/catalog_system/pub/products/search?ft=<term>`. El array `QUERIES` tiene `nombre` (= insumo EXACTO), `ft` (búsqueda), `head` (el nombre del producto debe EMPEZAR con esto — filtro anti-falsos-positivos, ej. descarta "Figacitas de manteca"), `include`/`exclude`, y `allowMlToG`/`allowGToMl`. `parseSize()` saca el tamaño del paquete del nombre → precio por unidad.
 - Output: `public/precios_dia.json` (mismo formato que `precios_sugeridos.json`). 26 insumos staples cubiertos.
 - **Coto se descartó**: SPA detrás de un WAF de Fortinet, no scrapeable por cron con fetch.
-- En `ActualizarPreciosPage` se cargan y **mergean AMBAS fuentes**; cada sugerencia lleva `fuente` (El Granate / Día) con badge. La key de selección es `insumoId|fuente`. La regla "no bajar precio" aplica a las dos. Para sumar un insumo a Día, agregarlo a `QUERIES` y correr `node scripts/update-precios-dia.mjs`.
+- En `ActualizarPreciosPage` se cargan ambas fuentes y se mergean: las sugerencias de Día se **filtran a las que El Granate NO cubre** (`cubiertosPorGranate` = nombres con item en `precios_sugeridos.json`). Cada sugerencia lleva `fuente` (El Granate / Día) con badge; la key de selección es `insumoId|fuente`. Para sumar un insumo a Día, agregarlo a `QUERIES` y correr `node scripts/update-precios-dia.mjs`.
 
 ## Sistema de competencia (PR #15 y #16)
 
@@ -246,6 +250,7 @@ Vitucakes muestra precios de referencia de pastelerías competidoras al lado del
 - Script: `scripts/update-competencia.mjs` (Node 20, sin deps)
 - Output: `public/competencia.json`
 - Array `COMPETIDORAS` en el script lista las "oficiales" (committeadas al repo). Cada una tiene un `type`: **tiendanube** (Candelitte), **empretienda** (Memo La Pastelería, Silnari) o **woocommerce** (Delicias del Corazón). El scraper detecta el sitemap y el formato de precio según el `type` (PR #27).
+- **Delicias del Corazón** además vende insumos/herramientas y tortas de diseño custom que Vitu no hace. Por eso usa la **WooCommerce Store API** filtrada por un allowlist de categorías de pastelería (campo `categorias`: pasteleria, tartas, macarons, postres, alfajores, drip-cakes) → trae solo lo comparable a lo que vende Vitu (~173 productos, no 448). Editar `categorias` en el script para ajustar.
 
 ### Modelo de datos competencia
 ```js
@@ -333,7 +338,8 @@ Los datos viven en **Firestore** (compartidos, en la nube) — ya NO se pierden 
 
 1. ~~Extender scraper para Empretienda~~ ✅ **HECHO (PR #27)**: el cron soporta Tiendanube + Empretienda + WooCommerce. Memo La Pastelería, Silnari y Delicias del Corazón ya están en el comparador. (El scrape EN VIVO de `AgregarCompetidoraPage` sigue solo Tiendanube — pendiente si se quiere.)
 2. **Sumar Nati's Pastelería al cron** (`https://www.natispasteleria.com.ar`). Es Tiendanube, ~130 productos. Sumarla al array `COMPETIDORAS` de `update-competencia.mjs` con `type: 'tiendanube'`. Conviene agregar `excludeSlugs` para descartar desayunos/panes/packs.
-   - Posible: **acotar Delicias del Corazón** (448 productos, muchos custom) a categorías comparables vía la WooCommerce Store API (`/wp-json/wc/store/v1/products`).
+   - ~~Acotar Delicias del Corazón~~ ✅ hecho: usa la Store API filtrada por categorías (campo `categorias`).
+3. **Reescribir el scraper de El Granate** para su plataforma nueva `/shop/<id>-<slug>` (ver aviso ⚠️ arriba). Está roto desde ~2026-05-26.
 3. Resto del cron de El Granate: ~20 insumos siguen sin match (ver lista en `update-prices.mjs`).
 4. La usuaria iba a mandar un PDF con recetas para revalidar la precarga (no llegó a mandarlo).
 5. PWA + Vercel: PR #14 quedó **cerrado sin mergear**. Si en el futuro queremos instalable en iOS / URL más linda, retomar de cero (no la rama, está borrada).
@@ -380,9 +386,10 @@ Resumen:
   - Candado fuerte futuro (si se quiere): Login con Google + allowlist de mails (Vitu y Patricio) en las reglas.
 - TODO próximos (sin empezar):
   1. ~~Soportar Empretienda~~ ✅ hecho (PR #27)
-  2. Sumar Nati's al cron cuando aparezca su Issue
-  3. ~20 insumos sin match en El Granate
-  4. (opcional) acotar Delicias del Corazón a categorías comparables; extender scrape EN VIVO a Empretienda/Woo
+  2. ~~Día como 2da fuente de insumos~~ ✅ hecho (PR #28); ~~Día = fallback de El Granate~~ ✅; ~~acotar Delicias~~ ✅
+  3. ⚠️ **El Granate roto** (migró a `/shop/<id>-<slug>`) — reescribir `update-prices.mjs` + `scrapeGranate.js`. Mientras tanto Día cubre todo.
+  4. Sumar Nati's al cron cuando aparezca su Issue
+  5. (opcional) extender el scrape EN VIVO de `AgregarCompetidoraPage` a Empretienda/WooCommerce
 - Reglas de workflow agente (lecciones aprendidas):
   - **El user autorizó mergear PRs sin preguntar** (en Vitucakes). Flujo: crear PR → `gh pr merge --squash` → deploya solo. Excepción: algo de alto riesgo o que pueda perder datos → avisar primero.
   - **Después de un squash-merge**, para el siguiente PR ramá desde `origin/main` (no desde tu rama vieja); si no, el diff arrastra lo ya mergeado.

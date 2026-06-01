@@ -66,16 +66,20 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
   }
 
   const sugerencias = useMemo(() => {
+    // El Granate es la fuente PRINCIPAL. Día es FALLBACK: solo aporta insumos
+    // que El Granate no trae (no encontró precio para ese insumo).
+    const cubiertosPorGranate = new Set((data?.items || []).map((it) => it.nombre))
     const fuentes = [
       { items: data?.items, fuente: data?.fuente || 'El Granate' },
-      { items: dataDia?.items, fuente: dataDia?.fuente || 'Día' },
+      { items: (dataDia?.items || []).filter((it) => !cubiertosPorGranate.has(it.nombre)), fuente: dataDia?.fuente || 'Día' },
     ]
     const out = []
     for (const { items, fuente } of fuentes) {
       for (const item of items || []) {
         const ins = insumos.find((i) => i.nombre === item.nombre)
         if (!ins) continue
-        // Regla "no bajar precio": solo sugerimos si es mayor al actual.
+        // REGLA DE ORO — NUNCA bajar un precio de insumo: solo sugerimos si el
+        // precio nuevo es MAYOR al actual. Un precio menor o igual se descarta.
         if (item.precio <= ins.precioPorUnidad) continue
         out.push({
           key: `${ins.id}|${fuente}`,
