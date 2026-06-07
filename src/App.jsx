@@ -9,6 +9,8 @@ import ResolverMatchesPage from './pages/ResolverMatchesPage'
 import AgregarCompetidoraPage from './pages/AgregarCompetidoraPage'
 import BackupPage from './pages/BackupPage'
 import InicializarDatos from './pages/InicializarDatos'
+import ComprasPage from './pages/ComprasPage'
+import VentasPage from './pages/VentasPage'
 import BottomNav from './components/BottomNav'
 import { mergeCompetidoras } from './utils/competencia'
 
@@ -26,6 +28,10 @@ export default function App() {
   const [competidorasExtra, setCompetidorasExtra, compLoaded] = useSharedState('competidoras_user', [])
   // Metadatos: { seeded: bool } — marca si ya se cargaron los datos iniciales.
   const [meta, setMeta, metaLoaded] = useSharedState('meta', {})
+  // Stock: compras (suman) y ventas (restan, según receta). Datos internos del
+  // negocio (solo visibles en modo edición).
+  const [compras, setCompras, comprasLoaded] = useSharedState('compras', [])
+  const [ventas, setVentas, ventasLoaded] = useSharedState('ventas', [])
 
   const [competencia, setCompetencia] = useState(null)
 
@@ -56,6 +62,12 @@ export default function App() {
     setSelectedId(id)
   }
 
+  // Si se bloquea la edición estando en una pantalla interna (Compras/Ventas),
+  // volvemos a Productos: esas pantallas son solo para editores.
+  useEffect(() => {
+    if (!canEdit && (page === 'compras' || page === 'ventas')) setPage('recetas')
+  }, [canEdit, page])
+
   // Siembra inicial de la base compartida (una sola vez). La dispara el user
   // desde la pantalla InicializarDatos eligiendo el origen de los datos.
   const seed = async (data) => {
@@ -65,7 +77,7 @@ export default function App() {
     setMeta((prev) => ({ ...prev, seeded: true, seededAt: new Date().toISOString() }))
   }
 
-  const loaded = insumosLoaded && recetasLoaded && compLoaded && metaLoaded
+  const loaded = insumosLoaded && recetasLoaded && compLoaded && metaLoaded && comprasLoaded && ventasLoaded
 
   // 1) Mientras no sepamos el estado real de la nube: pantalla de carga.
   if (!loaded) {
@@ -134,13 +146,27 @@ export default function App() {
         )}
         {page === 'backup' && (
           <BackupPage
-            data={{ insumos, recetas, competidoras: competidorasExtra }}
+            data={{ insumos, recetas, competidoras: competidorasExtra, compras, ventas }}
             onApply={(d) => {
               setInsumos(d.insumos || [])
               setRecetas(d.recetas || [])
               setCompetidorasExtra(d.competidoras || [])
+              setCompras(d.compras || [])
+              setVentas(d.ventas || [])
             }}
             onBack={() => navigate('recetas')}
+          />
+        )}
+        {page === 'compras' && canEdit && (
+          <ComprasPage compras={compras} setCompras={setCompras} insumos={insumos} setInsumos={setInsumos} />
+        )}
+        {page === 'ventas' && canEdit && (
+          <VentasPage
+            ventas={ventas}
+            setVentas={setVentas}
+            insumos={insumos}
+            setInsumos={setInsumos}
+            recetas={recetas}
           />
         )}
         {page === 'detalle' && selectedReceta && (
@@ -164,7 +190,7 @@ export default function App() {
         page !== 'actualizar-precios' &&
         page !== 'resolver-matches' &&
         page !== 'agregar-competidora' &&
-        page !== 'backup' && <BottomNav current={page} onChange={(p) => navigate(p)} />}
+        page !== 'backup' && <BottomNav current={page} onChange={(p) => navigate(p)} canEdit={canEdit} />}
     </div>
   )
 }

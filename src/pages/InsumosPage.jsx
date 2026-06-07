@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import InsumoEditSheet from '../components/InsumoEditSheet'
 import { useEditGate, LockToggle } from '../hooks/useEditGate'
+import { stockDe, fmtCant } from '../utils/stock'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -122,6 +123,18 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
                     {ins.fuentePrecio}
                   </span>
                 )}
+                {ins.stock != null && (() => {
+                  const st = stockDe(ins)
+                  return (
+                    <span
+                      className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        st < 0 ? 'bg-red-100 text-red-600' : st > 0 ? 'bg-blue-50 text-blue-600' : 'bg-gray-100 text-gray-500'
+                      }`}
+                    >
+                      📦 {st !== 0 ? `${fmtCant(st)} ${ins.unidad}` : 'Sin stock'}
+                    </span>
+                  )
+                })()}
               </div>
               {ins.fechaActualizacion && (
                 <p className="text-[11px] text-gray-400 mt-0.5">Actualizado: {formatDate(ins.fechaActualizacion)}</p>

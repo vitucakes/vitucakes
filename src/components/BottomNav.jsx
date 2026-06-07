@@ -1,12 +1,19 @@
-const TABS = [
+const BASE_TABS = [
   { id: 'insumos', label: 'Insumos', icon: '🧂' },
   { id: 'recetas', label: 'Productos', icon: '🎂' },
 ]
+// Compras y Ventas son datos internos del negocio: solo se muestran en modo
+// edición (detrás del PIN), no para un cliente que abre el link público.
+const EDIT_TABS = [
+  { id: 'compras', label: 'Compras', icon: '🛒' },
+  { id: 'ventas', label: 'Ventas', icon: '💵' },
+]
 
-export default function BottomNav({ current, onChange }) {
+export default function BottomNav({ current, onChange, canEdit }) {
+  const tabs = canEdit ? [...BASE_TABS, ...EDIT_TABS] : BASE_TABS
   return (
     <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-brand-100 flex z-40">
-      {TABS.map((tab) => (
+      {tabs.map((tab) => (
         <button
           key={tab.id}
           onClick={() => onChange(tab.id)}

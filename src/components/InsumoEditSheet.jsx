@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import BottomSheet from './BottomSheet'
 
 const UNIDADES = ['kg', 'g', 'l', 'ml', 'u', 'cdas', 'cdtas', 'taza', 'atado']
-const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '' }
+const EMPTY = { nombre: '', unidad: 'kg', precioPorUnidad: '', totalPagado: '', cantidadComprada: '', stock: '' }
 
 // Sheet para crear/editar un insumo. Reutilizable:
 //  - InsumosPage lo usa para crear y editar desde la lista.
@@ -25,6 +25,7 @@ export default function InsumoEditSheet({ isOpen, insumo, onClose, onSubmit }) {
             precioPorUnidad: String(insumo.precioPorUnidad),
             totalPagado: '',
             cantidadComprada: '',
+            stock: insumo.stock != null ? String(insumo.stock) : '',
           }
         : EMPTY,
     )
@@ -48,7 +49,11 @@ export default function InsumoEditSheet({ isOpen, insumo, onClose, onSubmit }) {
   const submit = () => {
     const nombre = form.nombre.trim()
     if (!nombre || computedPrecio <= 0) return
-    onSubmit({ nombre, unidad: form.unidad, precioPorUnidad: computedPrecio })
+    const data = { nombre, unidad: form.unidad, precioPorUnidad: computedPrecio }
+    // Solo tocamos el stock si escribiste algo. Si lo dejás vacío se conserva el
+    // stock actual (que se mueve solo con Compras/Ventas).
+    if (form.stock !== '') data.stock = parseFloat(form.stock) || 0
+    onSubmit(data)
   }
 
   return (
@@ -83,6 +88,12 @@ export default function InsumoEditSheet({ isOpen, insumo, onClose, onSubmit }) {
           <div className="input font-semibold text-brand-600 bg-gray-50">
             {computedPrecio > 0 ? computedPrecio.toLocaleString('es-AR', { maximumFractionDigits: 2 }) : '—'}
           </div>
+        </div>
+
+        <div>
+          <label className="label">Stock actual ({form.unidad})</label>
+          <input type="number" inputMode="decimal" {...field('stock')} placeholder="0" className="input" />
+          <p className="text-[11px] text-gray-400 mt-1">Opcional. Cuánto tenés hoy; después se actualiza solo con Compras y Ventas.</p>
         </div>
 
         <button

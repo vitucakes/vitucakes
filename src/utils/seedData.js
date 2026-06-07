@@ -19,6 +19,8 @@ export function readDeviceData() {
     insumos: parse('vitucakes_insumos') || [],
     recetas: parse('vitucakes_recetas') || [],
     competidoras: parse('vitucakes_competidoras_user') || [],
+    compras: parse('vitucakes_compras') || [],
+    ventas: parse('vitucakes_ventas') || [],
   }
 }
 
@@ -32,6 +34,8 @@ export function readBackupData(json) {
     insumos: d.vitucakes_insumos || [],
     recetas: d.vitucakes_recetas || [],
     competidoras: d.vitucakes_competidoras_user || [],
+    compras: d.vitucakes_compras || [],
+    ventas: d.vitucakes_ventas || [],
   }
 }
 
@@ -74,5 +78,5 @@ export async function buildFactoryData() {
     // Si falla recetas_v2, usamos solo la precarga base.
   }
 
-  return { insumos, recetas, competidoras: [] }
+  return { insumos, recetas, competidoras: [], compras: [], ventas: [] }
 }

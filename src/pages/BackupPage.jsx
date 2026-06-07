@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { useEditGate } from '../hooks/useEditGate'
 import { readBackupData, buildFactoryData } from '../utils/seedData'
 
-const APP_VERSION = '2.0' // 2.0 = datos en la nube (Firestore)
+const APP_VERSION = '2.1' // 2.0 = datos en la nube (Firestore); 2.1 = + compras/ventas (stock)
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
@@ -34,6 +34,8 @@ export default function BackupPage({ data, onApply, onReset, onBack }) {
   const insumos = data?.insumos ?? []
   const recetas = data?.recetas ?? []
   const competidoras = data?.competidoras ?? []
+  const compras = data?.compras ?? []
+  const ventas = data?.ventas ?? []
 
   const exportar = () => {
     const payload = {
@@ -44,6 +46,8 @@ export default function BackupPage({ data, onApply, onReset, onBack }) {
         vitucakes_insumos: insumos,
         vitucakes_recetas: recetas,
         vitucakes_competidoras_user: competidoras,
+        vitucakes_compras: compras,
+        vitucakes_ventas: ventas,
       },
     }
     const filename = `vitucakes-backup-${todayISO()}.json`
@@ -69,6 +73,8 @@ export default function BackupPage({ data, onApply, onReset, onBack }) {
           insumos: parsed.insumos.length,
           recetas: parsed.recetas.length,
           competidoras: parsed.competidoras.length,
+          compras: parsed.compras.length,
+          ventas: parsed.ventas.length,
         },
       })
       setMessage(null)
@@ -227,6 +233,8 @@ export default function BackupPage({ data, onApply, onReset, onBack }) {
               <Row label="Insumos" value={pendingRestore.summary.insumos} />
               <Row label="Recetas" value={pendingRestore.summary.recetas} />
               <Row label="Competidoras propias" value={pendingRestore.summary.competidoras} />
+              <Row label="Compras" value={pendingRestore.summary.compras} />
+              <Row label="Ventas" value={pendingRestore.summary.ventas} />
             </div>
             <p className="text-xs text-gray-500 text-center mb-4">
               Reemplaza lo que ven todos. No se puede deshacer.

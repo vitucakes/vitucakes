@@ -341,7 +341,7 @@ Los datos viven en **Firestore** (compartidos, en la nube) — ya NO se pierden 
 ## Pendiente / a terminar
 
 1. ~~Extender scraper para Empretienda~~ ✅ **HECHO (PR #27)**: el cron soporta Tiendanube + Empretienda + WooCommerce. Memo La Pastelería, Silnari y Delicias del Corazón ya están en el comparador. (El scrape EN VIVO de `AgregarCompetidoraPage` sigue solo Tiendanube — pendiente si se quiere.)
-2. **Sumar Nati's Pastelería al cron** (`https://www.natispasteleria.com.ar`). Es Tiendanube, ~130 productos. Sumarla al array `COMPETIDORAS` de `update-competencia.mjs` con `type: 'tiendanube'`. Conviene agregar `excludeSlugs` para descartar desayunos/panes/packs.
+2. ~~Sumar Nati's Pastelería al cron~~ ✅ **HECHO (2026-06-07, PR #37)**: agregada a `COMPETIDORAS` (`type: 'tiendanube'`) con `excludeSlugs` para descartar cursos/recetarios, objetos (taza/cuenco/clavel/tag), mesas dulces, tortas a medida, boxes/cajas surtidos y borradores `-copia`. 69 productos, 0 errores.
    - ~~Acotar Delicias del Corazón~~ ✅ hecho: usa la Store API filtrada por categorías (campo `categorias`).
 3. ~~Reescribir el scraper de El Granate~~ ✅ **HECHO (2026-06-01)**: portado de Tiendanube a Odoo (`/shop/` + `itemprop=price` + barrido de candidatos hasta precio válido). 34 insumos, 0 errores. Ambos archivos (`update-prices.mjs` y `scrapeGranate.js`) en sync.
 4. Resto del cron de El Granate: ~8 insumos niche siguen sin match (Cacao alcalino, Cerezas, Frutas abrillantadas, Saborizante, Colorante, Granas de color, Semillas de amapola, Pasas de uva). Los cubre Día si están.
@@ -378,7 +378,16 @@ Resumen:
 - Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
 - Datos del user: viven en **Firestore** (nube), ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (💾 en Productos) baja una copia JSON extra. **Ojo**: si reconstruís la app en otro hosting sin el mismo proyecto Firebase (config en `src/firebase.js`), no vas a tener los datos — necesitás ese proyecto o sembrar de cero desde un backup. Para correr 100% offline/sin nube habría que volver a `useLocalStorage` (ver git antes de la migración a Firebase).
 
-## Último estado (2026-06-01)
+## Último estado (2026-06-07)
+
+- **Módulo de Stock: Compras y Ventas** — NUEVO. Cada insumo tiene `stock` (en su unidad), editable a mano en su form (campo "Stock actual", opcional) y visible como chip en la lista de Insumos. Dos pantallas nuevas, **solo en modo edición** (las tabs se ocultan para clientes/viewers):
+  - **Compras** (`pages/ComprasPage.jsx` + `components/CompraEditSheet.jsx`): una compra con varias líneas (insumo + cantidad + total opcional). Suma el stock y, si cargás el total y el precio por unidad pagado es MAYOR al actual, actualiza el precio del insumo (`fuentePrecio: 'Compra'`) — **NUNCA lo baja** (regla de oro intacta).
+  - **Ventas** (`pages/VentasPage.jsx` + `components/VentaEditSheet.jsx`): elegís productos + cantidad. Descuenta del stock los insumos de cada receta (**1 venta = producto entero × cantidad**), guarda el `precioUnitario` (snapshot del precio de venta) y muestra **facturación** (este mes + histórico). Si el stock quedaría negativo, **avisa pero permite**.
+  - Lógica pura en `utils/stock.js` (`consumoDeItems`, `aplicarDeltasStock`, `aplicarCompraAInsumos`, `deltasDeCompra`), con tests. Borrar una compra/venta **revierte** su efecto en el stock (el precio no se revierte). Las ventas guardan su `consumo` exacto para poder revertir aunque la receta cambie después.
+  - Firestore: docs nuevos `vitucakes/compras` y `vitucakes/ventas` (vía `useSharedState`). Incluidos en el backup (`seedData.js` + `BackupPage.jsx`, `APP_VERSION` 2.1). ⚠️ Lectura pública en Firestore como todo el resto: la facturación se oculta en la UI sin PIN, pero el doc es legible con el link (candado fuerte = Login con Google, a futuro).
+- **Nati's Pastelería sumada al cron de competencia** (PR #37). Ahora hay 5 competidoras.
+
+### Antes (2026-06-01)
 
 - **Scraper de El Granate reescrito para Odoo** (estaba roto desde la migración de plataforma): `update-prices.mjs` + `scrapeGranate.js` portados a `/shop/` + `itemprop=price`, con barrido de candidatos hasta precio válido. **34 insumos, 0 errores.** `precios_sugeridos.json` regenerado. Es la fuente PRINCIPAL de precios de insumos otra vez (Día vuelve a su rol de fallback). PR #33 (mergeado).
 - **Día ahora busca TODOS los insumos** (antes 26 curados): `update-precios-dia.mjs` lee los 176 insumos de Firestore (REST) y busca cada uno — OVERRIDES finos para staples + match genérico ("empieza con la palabra principal") para el resto, con retry anti-ECONNRESET. **70 items** (57 curados + 13 auto). El packaging (cajas/bolsas/bandejas/etc.) no lo vende el súper → queda manual. PR aparte.
