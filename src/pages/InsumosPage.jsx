@@ -11,7 +11,7 @@ const formatDate = (iso) => {
   return `${d}/${m}/${y}`
 }
 
-export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios }) {
+export default function InsumosPage({ insumos, setInsumos, recetas = [], onActualizarPrecios, onCargarStock }) {
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState(null) // insumo a editar, o null = nuevo
   const [search, setSearch] = useState('')
@@ -95,6 +95,26 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
 
       {/* List */}
       <div className="flex-1 px-4 py-4 space-y-3">
+        {canEdit && onCargarStock && !search && (() => {
+          const sinStock = insumos.filter((i) => i.stock == null).length
+          return (
+            <button
+              onClick={onCargarStock}
+              className="w-full bg-blue-50 border border-blue-200 rounded-2xl p-4 flex items-center gap-3 text-left active:scale-[0.99] transition-transform"
+            >
+              <span className="text-2xl flex-shrink-0">📦</span>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-blue-900">{sinStock > 0 ? 'Cargá tu stock inicial' : 'Ajustar stock'}</p>
+                <p className="text-xs text-blue-700">
+                  {sinStock > 0
+                    ? `Tenés ${sinStock} insumo${sinStock !== 1 ? 's' : ''} sin stock. Cargalo una vez y después se mueve solo con Compras y Ventas.`
+                    : 'Revisá o ajustá el stock de tus insumos.'}
+                </p>
+              </div>
+              <span className="text-blue-400 text-lg flex-shrink-0">›</span>
+            </button>
+          )
+        })()}
         {filtered.length === 0 && (
           <div className="text-center py-20 text-gray-400">
             <div className="text-5xl mb-3">🧂</div>

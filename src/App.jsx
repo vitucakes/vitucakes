@@ -11,6 +11,7 @@ import BackupPage from './pages/BackupPage'
 import InicializarDatos from './pages/InicializarDatos'
 import ComprasPage from './pages/ComprasPage'
 import VentasPage from './pages/VentasPage'
+import StockInicialPage from './pages/StockInicialPage'
 import BottomNav from './components/BottomNav'
 import { mergeCompetidoras } from './utils/competencia'
 
@@ -62,10 +63,12 @@ export default function App() {
     setSelectedId(id)
   }
 
-  // Si se bloquea la edición estando en una pantalla interna (Compras/Ventas),
-  // volvemos a Productos: esas pantallas son solo para editores.
+  // Si se bloquea la edición estando en una pantalla interna (Compras/Ventas/
+  // stock), salimos: esas pantallas son solo para editores.
   useEffect(() => {
-    if (!canEdit && (page === 'compras' || page === 'ventas')) setPage('recetas')
+    if (canEdit) return
+    if (page === 'compras' || page === 'ventas') setPage('recetas')
+    else if (page === 'cargar-stock') setPage('insumos')
   }, [canEdit, page])
 
   // Siembra inicial de la base compartida (una sola vez). La dispara el user
@@ -105,7 +108,11 @@ export default function App() {
             setInsumos={setInsumos}
             recetas={recetas}
             onActualizarPrecios={() => navigate('actualizar-precios')}
+            onCargarStock={() => navigate('cargar-stock')}
           />
+        )}
+        {page === 'cargar-stock' && canEdit && (
+          <StockInicialPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />
         )}
         {page === 'actualizar-precios' && (
           <ActualizarPreciosPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />
@@ -190,6 +197,7 @@ export default function App() {
         page !== 'actualizar-precios' &&
         page !== 'resolver-matches' &&
         page !== 'agregar-competidora' &&
+        page !== 'cargar-stock' &&
         page !== 'backup' && <BottomNav current={page} onChange={(p) => navigate(p)} canEdit={canEdit} />}
     </div>
   )
