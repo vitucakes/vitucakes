@@ -50,6 +50,21 @@ const COMPETIDORAS = [
     categorias: ['pasteleria', 'tartas', 'macarons', 'postres', 'alfajores', 'drip-cakes'],
     excludeSlugs: [],
   },
+  {
+    id: 'natis-pasteleria',
+    nombre: "Nati's Pastelería",
+    type: 'tiendanube',
+    sitemapUrl: 'https://www.natispasteleria.com.ar/sitemap.xml',
+    // Nati's también vende cursos/recetarios (digital), objetos (taza, cuenco,
+    // clavel de papel, tag), mesas dulces y tortas a medida (precio no
+    // comparable), boxes/cajas surtidos y borradores "-copia". Dejamos solo
+    // pastelería de unidad comparable a lo que hace Vitu.
+    excludeSlugs: [
+      'gift-card', 'box-', 'caja-', 'combo-', 'mesas-dulces', 'tortas-a-medida',
+      'recetario', 'recetas', 'teoria', 'curso', 'clase-', 'programa',
+      'cuenco', 'taza-', 'clavel', 'tag-feliz', 'bono', '-copia',
+    ],
+  },
 ];
 
 function get(url) {
