@@ -43,6 +43,17 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
   const costoInsumos = calcCostoInsumos(receta, insumos)
   const indirectos = calcGastosIndirectos(costoInsumos)
   const costo = calcCostoTotal(costoInsumos)
+
+  // Ingredientes ordenados por cuánto inciden en el costo, de MAYOR a menor.
+  // El que más pesa va primero. Un insumo borrado o sin precio cuenta como 0
+  // (queda al fondo). No mutamos receta.ingredientes (copia con slice).
+  const costoDeIngrediente = (ing) => {
+    const ins = insumos.find((i) => i.id === ing.insumoId)
+    return ins ? ing.cantidad * ins.precioPorUnidad : 0
+  }
+  const ingredientesPorCosto = [...receta.ingredientes].sort(
+    (a, b) => costoDeIngrediente(b) - costoDeIngrediente(a),
+  )
   // Precio de venta de la receta ENTERA (no por unidad). Si la receta produce
   // varias unidades pero se vende como lote, este es el precio del lote.
   // Para vender por unidad, ajustar la receta para que sea 1 unidad (botón
@@ -401,7 +412,7 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
             <p className="text-[11px] text-gray-400 mb-2">Tocá un ingrediente para modificar su precio.</p>
           )}
           <div className="space-y-2">
-            {receta.ingredientes.map((ing) => {
+            {ingredientesPorCosto.map((ing) => {
               const ins = insumos.find((i) => i.id === ing.insumoId)
               if (!ins) return null
               const costoIng = ing.cantidad * ins.precioPorUnidad
