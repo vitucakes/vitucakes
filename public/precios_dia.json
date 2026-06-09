@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-06-02T06:59:42.163Z",
+  "generadoEn": "2026-06-09T06:29:13.408Z",
   "fuente": "Día",
   "items": [
     {
@@ -486,7 +486,7 @@
       "nombre": "Oreos",
       "precio": 17.5424,
       "unidad": "g",
-      "producto": "Galletitas Oreo Rellenas Con Crema Sabor Original 354 Gr.",
+      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
       "diaPrecioTotal": 6210,
@@ -534,12 +534,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 10.6042,
+      "precio": 10.3536,
       "unidad": "g",
-      "producto": "Queso Crema Clásico Dia 480 Gr.",
-      "diaQty": 480,
+      "producto": "Queso Crema Clasico Ricrem 280 Gr.",
+      "diaQty": 280,
       "diaUnit": "g",
-      "diaPrecioTotal": 5090,
+      "diaPrecioTotal": 2899,
       "match": "curado"
     },
     {
@@ -584,22 +584,22 @@
     },
     {
       "nombre": "Tomate",
-      "precio": 4.89,
+      "precio": 4.99,
       "unidad": "g",
       "producto": "Tomate Redondo x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 4890,
+      "diaPrecioTotal": 4990,
       "match": "curado"
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 6.59,
+      "precio": 8.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6590,
+      "diaPrecioTotal": 8990,
       "match": "curado"
     },
     {
@@ -694,12 +694,12 @@
     },
     {
       "nombre": "Film",
-      "precio": 1001,
+      "precio": 4300,
       "unidad": "u",
-      "producto": "Film Transparente De Pvp 20 Mt.",
+      "producto": "Film Transparente Dia 30 Mt.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1001,
+      "diaPrecioTotal": 4300,
       "match": "auto"
     }
   ],
