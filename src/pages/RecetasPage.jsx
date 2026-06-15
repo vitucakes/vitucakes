@@ -88,6 +88,12 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
     setOpen(false)
   }
 
+  // Confirmar que un producto NO lleva packaging a propósito: lo saca del aviso
+  // sin tener que cargarle una caja/bandeja.
+  const marcarNoLlevaPackaging = (id) => {
+    setRecetas((prev) => prev.map((r) => (r.id === id ? { ...r, noLlevaPackaging: true, updatedAt: Date.now() } : r)))
+  }
+
   const insumoName = (id) => insumos.find((i) => i.id === id)?.nombre ?? '?'
   const insumoUnit = (id) => insumos.find((i) => i.id === id)?.unidad ?? ''
 
@@ -438,18 +444,34 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
       <BottomSheet isOpen={verSinPackaging} onClose={() => setVerSinPackaging(false)} title="Productos sin packaging">
         <div className="space-y-2">
           <p className="text-xs text-gray-500 mb-2">
-            Estos productos no tienen ningún insumo de papelería en su receta. Tocá uno para agregarle la caja/bandeja.
+            Estos productos no tienen ningún insumo de papelería en su receta. Agregales la caja/bandeja,
+            o confirmá que no llevan packaging para sacarlos del aviso.
           </p>
-          {sinPackaging.map((r) => (
-            <button
-              key={r.id}
-              onClick={() => { setVerSinPackaging(false); openEdit(r) }}
-              className="w-full flex items-center justify-between bg-brand-50 rounded-xl px-3 py-2.5 text-left active:scale-[0.99] transition-transform"
-            >
-              <span className="text-sm font-medium text-gray-800 break-words">{r.nombre}</span>
-              <span className="text-brand-400 flex-shrink-0">›</span>
-            </button>
-          ))}
+          {sinPackaging.length === 0 ? (
+            <p className="text-sm text-emerald-700 bg-emerald-50 rounded-xl px-3 py-3 text-center">
+              ✓ Listo, no quedan productos sin packaging.
+            </p>
+          ) : (
+            sinPackaging.map((r) => (
+              <div key={r.id} className="bg-brand-50 rounded-xl px-3 py-2.5">
+                <p className="text-sm font-medium text-gray-800 break-words mb-2">{r.nombre}</p>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => { setVerSinPackaging(false); openEdit(r) }}
+                    className="flex-1 py-2 rounded-lg bg-brand-400 text-white font-semibold text-xs active:scale-95 transition-transform"
+                  >
+                    Agregar packaging
+                  </button>
+                  <button
+                    onClick={() => marcarNoLlevaPackaging(r.id)}
+                    className="flex-1 py-2 rounded-lg bg-white border border-gray-200 text-gray-600 font-semibold text-xs active:scale-95 transition-transform"
+                  >
+                    No lleva ✓
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
           <button
             onClick={() => { setVerSinPackaging(false); onMarcarPapeleria() }}
             className="w-full mt-3 py-2.5 rounded-xl bg-gray-100 text-gray-600 font-semibold text-sm"

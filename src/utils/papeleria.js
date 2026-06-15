@@ -36,8 +36,11 @@ export const idsPapeleria = (insumos) =>
 export const hayPapeleriaMarcada = (insumos) => insumos.some((i) => i.esPapeleria === true)
 
 // Productos (recetas) cuya receta NO incluye ningún insumo de papelería.
+// Excluye los que el user confirmó que no llevan packaging (`noLlevaPackaging`).
 export const productosSinPackaging = (recetas, insumos) => {
   const ids = idsPapeleria(insumos)
   if (ids.size === 0) return []
-  return recetas.filter((r) => !(r.ingredientes || []).some((ing) => ids.has(ing.insumoId)))
+  return recetas.filter(
+    (r) => r.noLlevaPackaging !== true && !(r.ingredientes || []).some((ing) => ids.has(ing.insumoId)),
+  )
 }
