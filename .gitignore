@@ -1,3 +1,7 @@
 node_modules
 dist
 .DS_Store
+
+# Backups locales de la base (datos reales de Vitu). NO se suben: el repo es
+# público. Los genera scripts/backup-firestore.mjs (agendado semanal).
+backups/
