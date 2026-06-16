@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-06-09T06:29:59.357Z",
+  "generadoEn": "2026-06-16T08:23:51.698Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -113,13 +113,20 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-06-09T06:30:00.380Z"
+      "updatedAt": "2026-06-16T08:23:53.031Z"
     },
     {
       "id": "memo-la-pasteleria",
       "nombre": "Memo La Pastelería",
       "fuente": "https://memolapasteleria.empretienda.com.ar",
       "productos": [
+        {
+          "slug": "desayuno-para-papa",
+          "nombre": "Desayuno para PAPÁ",
+          "descripcion": "DÍA DEL PADRE • Sabores para regalarPorque algunos regalos se disfrutan mejor compartiendo 🤍Este año armamos una caja especial con una selección de sabores que se van a con",
+          "precio": 42000,
+          "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/desayuno-para-papa"
+        },
         {
           "slug": "cirila",
           "nombre": "CIRILA",
@@ -248,7 +255,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-06-09T06:30:04.373Z"
+      "updatedAt": "2026-06-16T08:23:55.224Z"
     },
     {
       "id": "silnari",
@@ -514,7 +521,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-06-09T06:30:07.446Z"
+      "updatedAt": "2026-06-16T08:24:00.178Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1734,7 +1741,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-06-09T06:30:32.500Z"
+      "updatedAt": "2026-06-16T08:24:21.204Z"
     },
     {
       "id": "natis-pasteleria",
@@ -1887,13 +1894,6 @@
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada. Base de chocolate con almendras, cremoso de chocolate semiamargo y praline de frutas secas (almendra...",
           "precio": 14500,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-bombona/"
-        },
-        {
-          "slug": "porcion-francesca",
-          "nombre": "Porcion Francesca",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada. No apto celiacos Base de masa sablée sin gluten, gelée de frambuesa y cremoso de chocolate semiamarg...",
-          "precio": 15400,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-francesca/"
         },
         {
           "slug": "porcion-banana-split",
@@ -2223,10 +2223,33 @@
           "descripcion": "Vegana, sin trigo y sin azucar Base sablee de cacao endulzada con eritritol, caramelo salado de datil con mani tostado y ganache de chocolate semiamargo sin ...",
           "precio": 85000,
           "url": "https://www.natispasteleria.com.ar/productos/tarta-snicker-54r3y/"
+        },
+        {
+          "slug": "tableta-key-lime-pie-wgodv",
+          "nombre": "Tableta Key lime pie",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de cremoso de lima con crunchy de coco Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Con...",
+          "precio": 38500,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-key-lime-pie-wgodv/"
+        },
+        {
+          "slug": "tableta-frambuesa-y-pistacho-1e5y7",
+          "nombre": "Tableta Frambuesa y Pistacho",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de pulpa concentrada de frambuesa y pistachos tostados. Sin lácteos, huevo, harina ni azúcar Pe...",
+          "precio": 47500,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/"
         }
       ],
-      "errores": [],
-      "updatedAt": "2026-06-09T06:30:34.187Z"
+      "errores": [
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/",
+          "error": "sin precio"
+        }
+      ],
+      "updatedAt": "2026-06-16T08:24:26.468Z"
     }
   ]
 }
