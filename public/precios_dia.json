@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-06-09T06:29:13.408Z",
+  "generadoEn": "2026-06-16T07:45:42.167Z",
   "fuente": "Día",
   "items": [
     {
@@ -14,22 +14,22 @@
     },
     {
       "nombre": "atun",
-      "precio": 1390,
+      "precio": 1490,
       "unidad": "u",
       "producto": "Atún Desmenuzado Al Natural Dia 170 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1390,
+      "diaPrecioTotal": 1490,
       "match": "curado"
     },
     {
       "nombre": "Azúcar",
-      "precio": 1.18,
+      "precio": 0.995,
       "unidad": "g",
-      "producto": "Azúcar Azucel Común tipo \"A\" 500 Gr.",
-      "diaQty": 500,
+      "producto": "Azúcar Ledesma Clásica 1 Kg.",
+      "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 590,
+      "diaPrecioTotal": 995,
       "match": "curado"
     },
     {
@@ -84,22 +84,22 @@
     },
     {
       "nombre": "Cacao",
-      "precio": 5.3056,
+      "precio": 12.6889,
       "unidad": "g",
-      "producto": "Cacao En Polvo Arcoa 360 Gr.",
+      "producto": "Cacao En Polvo Chocolino Plus sin tacc 360 Gr.",
       "diaQty": 360,
       "diaUnit": "g",
-      "diaPrecioTotal": 1910,
+      "diaPrecioTotal": 4568,
       "match": "curado"
     },
     {
       "nombre": "Café Instantaneo",
-      "precio": 45.8824,
+      "precio": 34.4118,
       "unidad": "g",
-      "producto": "Cafe Instantaneo Moren 170 Gr.",
+      "producto": "Café Instantáneo La Virginia Clásico 170 Gr.",
       "diaQty": 170,
       "diaUnit": "g",
-      "diaPrecioTotal": 7800,
+      "diaPrecioTotal": 5850,
       "match": "curado"
     },
     {
@@ -144,12 +144,12 @@
     },
     {
       "nombre": "Chocolate",
-      "precio": 33.625,
+      "precio": 20.9474,
       "unidad": "g",
-      "producto": "Chocolate con leche DIA 80 Gr.",
-      "diaQty": 80,
+      "producto": "Chocolate Arcor Leche y Maní 95 Gr.",
+      "diaQty": 95,
       "diaUnit": "g",
-      "diaPrecioTotal": 2690,
+      "diaPrecioTotal": 1990,
       "match": "auto"
     },
     {
@@ -174,12 +174,12 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 10.005,
+      "precio": 7.28,
       "unidad": "g",
-      "producto": "Crema de Leche DIA Larga Vida 200 Ml.",
-      "diaQty": 200,
+      "producto": "Crema de Leche Para Batir Las Tres Niñas 500 Ml.",
+      "diaQty": 500,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2001,
+      "diaPrecioTotal": 3640,
       "match": "curado"
     },
     {
@@ -214,22 +214,22 @@
     },
     {
       "nombre": "frutos rojos congelados",
-      "precio": 21.4,
+      "precio": 22.8286,
       "unidad": "g",
       "producto": "Frutos Rojos Congelados Dia 350 Gr",
       "diaQty": 350,
       "diaUnit": "g",
-      "diaPrecioTotal": 7490,
+      "diaPrecioTotal": 7990,
       "match": "curado"
     },
     {
       "nombre": "Galletitas lincoln",
-      "precio": 10.4357,
+      "precio": 11.329,
       "unidad": "g",
       "producto": "Galletitas Dulces Lincoln Clásicas Terrabusi Tripack 459 Gr.",
       "diaQty": 459,
       "diaUnit": "g",
-      "diaPrecioTotal": 4790,
+      "diaPrecioTotal": 5200,
       "match": "curado"
     },
     {
@@ -264,12 +264,12 @@
     },
     {
       "nombre": "Harina 0000",
-      "precio": 1.1,
+      "precio": 0.4,
       "unidad": "g",
-      "producto": "Harina de Trigo 0000 DIA 1 Kg.",
+      "producto": "Harina De Trigo 0000 Cañuelas 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1100,
+      "diaPrecioTotal": 400,
       "match": "curado"
     },
     {
@@ -304,12 +304,12 @@
     },
     {
       "nombre": "Jugo de limón",
-      "precio": 548,
+      "precio": 2145,
       "unidad": "u",
-      "producto": "Jugo En Polvo Limon Rinde Dos 13 Gr.",
+      "producto": "Jugo de Limón Minerva 250 Ml.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 548,
+      "diaPrecioTotal": 2145,
       "match": "auto"
     },
     {
@@ -484,12 +484,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 17.5424,
+      "precio": 18.3051,
       "unidad": "g",
-      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
-      "diaQty": 354,
+      "producto": "Galletitas dulces Oreo sabor Menta Edición Limitada 118 Gr.",
+      "diaQty": 118,
       "diaUnit": "g",
-      "diaPrecioTotal": 6210,
+      "diaPrecioTotal": 2160,
       "match": "curado"
     },
     {
@@ -534,12 +534,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 10.3536,
+      "precio": 10.1931,
       "unidad": "g",
-      "producto": "Queso Crema Clasico Ricrem 280 Gr.",
-      "diaQty": 280,
+      "producto": "Queso Doble Crema DIA Clásico 290 Gr.",
+      "diaQty": 290,
       "diaUnit": "g",
-      "diaPrecioTotal": 2899,
+      "diaPrecioTotal": 2956,
       "match": "curado"
     },
     {
@@ -614,12 +614,12 @@
     },
     {
       "nombre": "Zanahoria",
-      "precio": 1.49,
+      "precio": 1.99,
       "unidad": "g",
       "producto": "Zanahoria x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1490,
+      "diaPrecioTotal": 1990,
       "match": "curado"
     },
     {
