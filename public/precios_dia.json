@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-06-23T06:29:32.548Z",
+  "generadoEn": "2026-06-30T06:34:32.155Z",
   "fuente": "Día",
   "items": [
     {
@@ -114,22 +114,22 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 1.29,
+      "precio": 1.39,
       "unidad": "g",
       "producto": "Cebolla Comercial en bolsa malla x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1290,
+      "diaPrecioTotal": 1390,
       "match": "curado"
     },
     {
       "nombre": "Cebolla deshidratada",
-      "precio": 31.72,
+      "precio": 33.3,
       "unidad": "g",
       "producto": "Cebolla Deshidratada Knorr 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 3172,
+      "diaPrecioTotal": 3330,
       "match": "auto"
     },
     {
@@ -184,12 +184,12 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 9.1,
+      "precio": 10.005,
       "unidad": "g",
-      "producto": "Crema De Leche Para Cocinar Las Tres Niñas 500 Ml.",
-      "diaQty": 500,
+      "producto": "Crema de Leche DIA Larga Vida 200 Ml.",
+      "diaQty": 200,
       "diaUnit": "ml",
-      "diaPrecioTotal": 4550,
+      "diaPrecioTotal": 2001,
       "match": "curado"
     },
     {
@@ -200,16 +200,6 @@
       "diaQty": 400,
       "diaUnit": "g",
       "diaPrecioTotal": 2200,
-      "match": "curado"
-    },
-    {
-      "nombre": "Esencia de vainilla",
-      "precio": 11.1,
-      "unidad": "ml",
-      "producto": "Esencia de Vainilla Dia 110 Ml.",
-      "diaQty": 110,
-      "diaUnit": "ml",
-      "diaPrecioTotal": 1221,
       "match": "curado"
     },
     {
@@ -304,12 +294,12 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 30.4333,
+      "precio": 29.95,
       "unidad": "g",
-      "producto": "Jamón Cocido Lario Feteado 150 Gr.",
-      "diaQty": 150,
+      "producto": "Jamón Cocido Paladini Feteado Fino 200 Gr.",
+      "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 4565,
+      "diaPrecioTotal": 5990,
       "match": "curado"
     },
     {
@@ -334,12 +324,12 @@
     },
     {
       "nombre": "Leche",
-      "precio": 1.925,
+      "precio": 2.05,
       "unidad": "ml",
-      "producto": "Leche fresca La Serenisima Reducida en Lactosa 1 Lt.",
+      "producto": "Leche Entera DIA Larga Vida 1 Lt.",
       "diaQty": 1000,
       "diaUnit": "ml",
-      "diaPrecioTotal": 1925,
+      "diaPrecioTotal": 2050,
       "match": "curado"
     },
     {
@@ -354,12 +344,12 @@
     },
     {
       "nombre": "Lechuga",
-      "precio": 4.99,
+      "precio": 5.49,
       "unidad": "g",
       "producto": "Lechuga Mantecosa x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 4990,
+      "diaPrecioTotal": 5490,
       "match": "auto"
     },
     {
@@ -384,12 +374,12 @@
     },
     {
       "nombre": "Manteca",
-      "precio": 16.79,
+      "precio": 18.2,
       "unidad": "g",
-      "producto": "Manteca Tonadita Extra calidad 200 Gr.",
+      "producto": "Manteca DIA Calidad Extra 200 Gr.",
       "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 3358,
+      "diaPrecioTotal": 3640,
       "match": "curado"
     },
     {
@@ -494,12 +484,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 18.3051,
+      "precio": 17.5424,
       "unidad": "g",
-      "producto": "Galletitas dulces Oreo sabor Menta Edición Limitada 118 Gr.",
-      "diaQty": 118,
+      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
+      "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 2160,
+      "diaPrecioTotal": 6210,
       "match": "curado"
     },
     {
@@ -594,22 +584,22 @@
     },
     {
       "nombre": "Tomate",
-      "precio": 5.39,
+      "precio": 5.29,
       "unidad": "g",
       "producto": "Tomate Redondo x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5390,
+      "diaPrecioTotal": 5290,
       "match": "curado"
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 7.19,
+      "precio": 5.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 7190,
+      "diaPrecioTotal": 5990,
       "match": "curado"
     },
     {
@@ -713,5 +703,11 @@
       "match": "auto"
     }
   ],
-  "errores": []
+  "errores": [
+    {
+      "nombre": "Esencia de vainilla",
+      "error": "sin candidato válido",
+      "encontrados": 0
+    }
+  ]
 }
