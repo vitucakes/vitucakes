@@ -5,18 +5,28 @@ import PickerBuscador from './PickerBuscador'
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '' })
 
-// Sheet para registrar una COMPRA. Una compra puede tener varias líneas (lo que
-// trajiste en una misma ida). Cada línea suma stock al insumo; si cargás el
-// total pagado, además puede actualizar el precio (nunca lo baja).
-export default function CompraEditSheet({ isOpen, insumos, onClose, onSubmit }) {
+// Sheet para registrar o EDITAR una COMPRA. Una compra puede tener varias
+// líneas (lo que trajiste en una misma ida). Cada línea suma stock al insumo;
+// si cargás el total pagado, además puede actualizar el precio (nunca lo baja).
+// `compra` null = nueva; objeto = edición (el padre revierte el efecto viejo
+// en el stock y aplica el nuevo).
+export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSubmit }) {
   const [fecha, setFecha] = useState(todayISO())
   const [lineas, setLineas] = useState([emptyLinea()])
 
   useEffect(() => {
     if (!isOpen) return
-    setFecha(todayISO())
-    setLineas([emptyLinea()])
-  }, [isOpen])
+    setFecha(compra?.fecha ?? todayISO())
+    setLineas(
+      compra?.items?.length
+        ? compra.items.map((it) => ({
+            insumoId: it.insumoId,
+            cantidad: String(it.cantidad),
+            total: it.total > 0 ? String(it.total) : '',
+          }))
+        : [emptyLinea()],
+    )
+  }, [isOpen, compra])
 
   const insumosOrden = [...insumos].sort((a, b) => a.nombre.localeCompare(b.nombre))
 
@@ -44,7 +54,7 @@ export default function CompraEditSheet({ isOpen, insumos, onClose, onSubmit }) 
   }
 
   return (
-    <BottomSheet isOpen={isOpen} onClose={onClose} title="Nueva compra">
+    <BottomSheet isOpen={isOpen} onClose={onClose} title={compra ? 'Editar compra' : 'Nueva compra'}>
       <div className="space-y-4">
         <div>
           <label className="label">Fecha</label>
@@ -128,10 +138,12 @@ export default function CompraEditSheet({ isOpen, insumos, onClose, onSubmit }) 
           disabled={!puedeGuardar}
           className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base disabled:opacity-40 active:scale-95 transition-transform mt-1"
         >
-          Registrar compra
+          {compra ? 'Guardar cambios' : 'Registrar compra'}
         </button>
         <p className="text-[11px] text-gray-400 text-center">
-          Suma el stock de cada insumo. Si cargás el total y el precio por unidad subió, también actualiza el precio (nunca lo baja).
+          {compra
+            ? 'Al guardar se recalcula el stock: se deshace lo que había sumado esta compra y se aplica lo nuevo. El precio de los insumos solo puede subir (nunca baja).'
+            : 'Suma el stock de cada insumo. Si cargás el total y el precio por unidad subió, también actualiza el precio (nunca lo baja).'}
         </p>
       </div>
     </BottomSheet>

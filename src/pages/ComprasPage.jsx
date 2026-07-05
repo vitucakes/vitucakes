@@ -14,6 +14,7 @@ const formatDate = (iso) => {
 // Si cargás el total pagado, también puede actualizar el precio (nunca lo baja).
 export default function ComprasPage({ compras, setCompras, insumos, setInsumos }) {
   const [open, setOpen] = useState(false)
+  const [editing, setEditing] = useState(null) // compra a editar, o null = nueva
   const [deleteId, setDeleteId] = useState(null)
   const [search, setSearch] = useState('')
   const [fechaFiltro, setFechaFiltro] = useState('')
@@ -34,10 +35,20 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
     .sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
 
   const handleSubmit = (compra) => {
-    const record = { id: crypto.randomUUID(), createdAt: Date.now(), ...compra }
-    setCompras((prev) => [record, ...prev])
-    setInsumos((prev) => aplicarCompraAInsumos(prev, record))
+    if (editing) {
+      // Edición: se deshace el efecto de la compra vieja en el stock y se
+      // aplica la nueva. El precio no se revierte (igual que al borrar), pero
+      // la versión nueva puede volver a subirlo (nunca bajarlo).
+      const record = { ...editing, ...compra }
+      setInsumos((prev) => aplicarCompraAInsumos(aplicarDeltasStock(prev, deltasDeCompra(editing), -1), record))
+      setCompras((prev) => prev.map((c) => (c.id === editing.id ? record : c)))
+    } else {
+      const record = { id: crypto.randomUUID(), createdAt: Date.now(), ...compra }
+      setCompras((prev) => [record, ...prev])
+      setInsumos((prev) => aplicarCompraAInsumos(prev, record))
+    }
     setOpen(false)
+    setEditing(null)
   }
 
   const handleDelete = () => {
@@ -112,7 +123,15 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
               <div className="flex items-center gap-2">
                 {c.total > 0 && <span className="text-sm font-black text-brand-600">{formatARS(c.total)}</span>}
                 {canEdit && (
-                  <button onClick={() => setDeleteId(c.id)} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-sm">🗑️</button>
+                  <>
+                    <button
+                      onClick={() => { setEditing(c); setOpen(true) }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-brand-50 text-sm"
+                    >
+                      ✏️
+                    </button>
+                    <button onClick={() => setDeleteId(c.id)} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-sm">🗑️</button>
+                  </>
                 )}
               </div>
             </div>
@@ -133,14 +152,20 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
       {/* FAB */}
       {canEdit && (
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => { setEditing(null); setOpen(true) }}
           className="fixed bottom-24 right-4 w-14 h-14 bg-brand-400 rounded-full shadow-lg flex items-center justify-center text-white text-3xl active:scale-95 transition-transform z-30"
         >
           +
         </button>
       )}
 
-      <CompraEditSheet isOpen={open} insumos={insumos} onClose={() => setOpen(false)} onSubmit={handleSubmit} />
+      <CompraEditSheet
+        isOpen={open}
+        compra={editing}
+        insumos={insumos}
+        onClose={() => { setOpen(false); setEditing(null) }}
+        onSubmit={handleSubmit}
+      />
 
       {/* Confirmar borrado */}
       {deleteId && (

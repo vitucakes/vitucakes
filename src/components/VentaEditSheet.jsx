@@ -7,20 +7,35 @@ import { consumoDeItems, stockDe, fmtCant } from '../utils/stock'
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const emptyLinea = () => ({ recetaId: '', cantidad: '1' })
 
-// Sheet para registrar una VENTA. Elegís uno o más productos y la cantidad.
-// El precio se toma del precio de venta del producto en este momento (snapshot)
-// y se descuentan los insumos de su receta del stock.
-export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSubmit }) {
+// Sheet para registrar o EDITAR una VENTA. Elegís uno o más productos y la
+// cantidad. El precio se toma del precio de venta del producto en este momento
+// (snapshot) y se descuentan los insumos de su receta del stock.
+// `venta` null = nueva; objeto = edición. Al editar, los productos que ya
+// estaban conservan su precio snapshot original (no se reprecian a hoy);
+// solo los productos agregados toman el precio actual.
+export default function VentaEditSheet({ isOpen, venta, recetas, insumos, onClose, onSubmit }) {
   const [fecha, setFecha] = useState(todayISO())
   const [lineas, setLineas] = useState([emptyLinea()])
 
   useEffect(() => {
     if (!isOpen) return
-    setFecha(todayISO())
-    setLineas([emptyLinea()])
-  }, [isOpen])
+    setFecha(venta?.fecha ?? todayISO())
+    setLineas(
+      venta?.items?.length
+        ? venta.items.map((it) => ({ recetaId: it.recetaId, cantidad: String(it.cantidad) }))
+        : [emptyLinea()],
+    )
+  }, [isOpen, venta])
 
   const recetasOrden = [...recetas].sort((a, b) => a.nombre.localeCompare(b.nombre))
+
+  const itemOriginal = (recetaId) => venta?.items?.find((it) => it.recetaId === recetaId)
+  const precioDe = (recetaId) => {
+    const orig = itemOriginal(recetaId)
+    if (orig) return orig.precioUnitario
+    const receta = recetas.find((r) => r.id === recetaId)
+    return receta ? calcPrecioVenta(receta, insumos) : 0
+  }
 
   const setLinea = (i, patch) => setLineas((ls) => ls.map((l, idx) => (idx === i ? { ...l, ...patch } : l)))
   const addLinea = () => setLineas((ls) => [...ls, emptyLinea()])
@@ -30,17 +45,25 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
 
   const items = lineasValidas.map((l) => {
     const receta = recetas.find((r) => r.id === l.recetaId)
-    const precioUnitario = receta ? calcPrecioVenta(receta, insumos) : 0
-    return { recetaId: l.recetaId, nombre: receta?.nombre ?? '', cantidad: parseFloat(l.cantidad) || 0, precioUnitario }
+    const orig = itemOriginal(l.recetaId)
+    return {
+      recetaId: l.recetaId,
+      nombre: receta?.nombre ?? orig?.nombre ?? '',
+      cantidad: parseFloat(l.cantidad) || 0,
+      precioUnitario: precioDe(l.recetaId),
+    }
   })
   const total = items.reduce((s, it) => s + it.precioUnitario * it.cantidad, 0)
 
   // Preview de stock que quedaría negativo (avisar, pero permitir igual).
+  // En edición, el stock actual todavía tiene descontada la venta vieja, así
+  // que primero se "devuelve" su consumo y recién ahí se compara con el nuevo.
   const consumo = consumoDeItems(items, recetas)
+  const devuelto = new Map((venta?.consumo || []).map((d) => [d.insumoId, Number(d.cantidad) || 0]))
   const faltantes = consumo
     .map((d) => {
       const ins = insumos.find((i) => i.id === d.insumoId)
-      const resultante = stockDe(ins) - d.cantidad
+      const resultante = stockDe(ins) + (devuelto.get(d.insumoId) || 0) - d.cantidad
       return ins && resultante < 0 ? { nombre: ins.nombre, unidad: ins.unidad, resultante } : null
     })
     .filter(Boolean)
@@ -53,7 +76,7 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
   }
 
   return (
-    <BottomSheet isOpen={isOpen} onClose={onClose} title="Nueva venta">
+    <BottomSheet isOpen={isOpen} onClose={onClose} title={venta ? 'Editar venta' : 'Nueva venta'}>
       <div className="space-y-4">
         <div>
           <label className="label">Fecha</label>
@@ -62,8 +85,7 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
 
         <div className="space-y-3">
           {lineas.map((l, i) => {
-            const receta = recetas.find((r) => r.id === l.recetaId)
-            const precio = receta ? calcPrecioVenta(receta, insumos) : 0
+            const precio = l.recetaId ? precioDe(l.recetaId) : 0
             const cant = parseFloat(l.cantidad) || 0
             return (
               <div key={i} className="bg-brand-50 rounded-2xl p-3 space-y-2 relative">
@@ -80,7 +102,7 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
                 <PickerBuscador
                   items={recetasOrden
                     .filter((x) => x.id === l.recetaId || !lineas.some((ol, j) => j !== i && ol.recetaId === x.id))
-                    .map((x) => ({ id: x.id, nombre: x.nombre, detalle: formatARS(calcPrecioVenta(x, insumos)) }))}
+                    .map((x) => ({ id: x.id, nombre: x.nombre, detalle: formatARS(precioDe(x.id)) }))}
                   value={l.recetaId}
                   onChange={(id) => setLinea(i, { recetaId: id })}
                   placeholder="🔍 Buscar producto..."
@@ -96,7 +118,7 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
                       className="input"
                     />
                   </div>
-                  {receta && (
+                  {l.recetaId && (
                     <div className="flex-1 text-right">
                       <p className="text-[11px] text-gray-400">{formatARS(precio)} c/u</p>
                       <p className="text-sm font-bold text-gray-800">{formatARS(precio * cant)}</p>
@@ -139,7 +161,7 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
           disabled={!puedeGuardar}
           className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base disabled:opacity-40 active:scale-95 transition-transform"
         >
-          Registrar venta
+          {venta ? 'Guardar cambios' : 'Registrar venta'}
         </button>
       </div>
     </BottomSheet>

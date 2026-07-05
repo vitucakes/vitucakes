@@ -15,6 +15,7 @@ const mesActual = () => new Date().toISOString().slice(0, 7)
 // stock los insumos de cada receta y suma la facturación.
 export default function VentasPage({ ventas, setVentas, insumos, setInsumos, recetas }) {
   const [open, setOpen] = useState(false)
+  const [editing, setEditing] = useState(null) // venta a editar, o null = nueva
   const [deleteId, setDeleteId] = useState(null)
   const [search, setSearch] = useState('')
   const [fechaFiltro, setFechaFiltro] = useState('')
@@ -39,10 +40,20 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
     .reduce((s, v) => s + (v.total || 0), 0)
 
   const handleSubmit = (venta) => {
-    const record = { id: crypto.randomUUID(), createdAt: Date.now(), ...venta }
-    setVentas((prev) => [record, ...prev])
-    setInsumos((prev) => aplicarDeltasStock(prev, venta.consumo || [], -1))
+    if (editing) {
+      // Edición: se devuelve al stock el consumo de la venta vieja y se
+      // descuenta el de la nueva (guardado en el record para poder revertir
+      // después aunque la receta cambie).
+      const record = { ...editing, ...venta }
+      setInsumos((prev) => aplicarDeltasStock(aplicarDeltasStock(prev, editing.consumo || [], +1), venta.consumo || [], -1))
+      setVentas((prev) => prev.map((v) => (v.id === editing.id ? record : v)))
+    } else {
+      const record = { id: crypto.randomUUID(), createdAt: Date.now(), ...venta }
+      setVentas((prev) => [record, ...prev])
+      setInsumos((prev) => aplicarDeltasStock(prev, venta.consumo || [], -1))
+    }
     setOpen(false)
+    setEditing(null)
   }
 
   const handleDelete = () => {
@@ -130,7 +141,15 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
               <div className="flex items-center gap-2">
                 <span className="text-sm font-black text-brand-600">{formatARS(v.total)}</span>
                 {canEdit && (
-                  <button onClick={() => setDeleteId(v.id)} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-sm">🗑️</button>
+                  <>
+                    <button
+                      onClick={() => { setEditing(v); setOpen(true) }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-brand-50 text-sm"
+                    >
+                      ✏️
+                    </button>
+                    <button onClick={() => setDeleteId(v.id)} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-sm">🗑️</button>
+                  </>
                 )}
               </div>
             </div>
@@ -149,14 +168,21 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
       {/* FAB */}
       {canEdit && (
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => { setEditing(null); setOpen(true) }}
           className="fixed bottom-24 right-4 w-14 h-14 bg-brand-400 rounded-full shadow-lg flex items-center justify-center text-white text-3xl active:scale-95 transition-transform z-30"
         >
           +
         </button>
       )}
 
-      <VentaEditSheet isOpen={open} recetas={recetas} insumos={insumos} onClose={() => setOpen(false)} onSubmit={handleSubmit} />
+      <VentaEditSheet
+        isOpen={open}
+        venta={editing}
+        recetas={recetas}
+        insumos={insumos}
+        onClose={() => { setOpen(false); setEditing(null) }}
+        onSubmit={handleSubmit}
+      />
 
       {/* Confirmar borrado */}
       {deleteId && (
