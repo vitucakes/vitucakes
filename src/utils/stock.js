@@ -52,6 +52,9 @@ export const deltasDeCompra = (compra) =>
 // Aplica una compra a los insumos: suma stock de cada item y, si la línea vino
 // con `total` y el precio pagado por unidad es MAYOR al actual, actualiza el
 // precio del insumo (NUNCA lo baja). Marca fuentePrecio = 'Compra'.
+// Excepción: item con `actualizaPrecio: false` (el user dijo que NO al guardar,
+// ej. compra de emergencia pagada más cara que el costo real) → suma stock
+// pero no toca el precio. Ausente o true = comportamiento de siempre.
 export function aplicarCompraAInsumos(insumos, compra) {
   const map = new Map((compra?.items || []).map((it) => [it.insumoId, it]))
   const hoy = hoyISO()
@@ -61,7 +64,7 @@ export function aplicarCompraAInsumos(insumos, compra) {
     const cant = Number(it.cantidad) || 0
     const next = { ...ins, stock: round3(stockDe(ins) + cant) }
     const total = Number(it.total) || 0
-    if (total > 0 && cant > 0) {
+    if (total > 0 && cant > 0 && it.actualizaPrecio !== false) {
       const precioUnit = total / cant
       if (precioUnit > (Number(ins.precioPorUnidad) || 0)) {
         next.precioPorUnidad = round2(precioUnit)

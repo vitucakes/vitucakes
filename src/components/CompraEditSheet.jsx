@@ -13,9 +13,13 @@ const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '' })
 export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSubmit }) {
   const [fecha, setFecha] = useState(todayISO())
   const [lineas, setLineas] = useState([emptyLinea()])
+  // Confirmación antes de guardar: líneas que subirían el costo del insumo.
+  // null = sin modal; array = [{ insumoId, nombre, unidad, actual, nuevo, aplicar }]
+  const [confirmPrecios, setConfirmPrecios] = useState(null)
 
   useEffect(() => {
     if (!isOpen) return
+    setConfirmPrecios(null)
     setFecha(compra?.fecha ?? todayISO())
     setLineas(
       compra?.items?.length
@@ -37,9 +41,8 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
   const lineasValidas = lineas.filter((l) => l.insumoId && parseFloat(l.cantidad) > 0)
   const puedeGuardar = lineasValidas.length > 0
 
-  const submit = () => {
-    if (!puedeGuardar) return
-    const items = lineasValidas.map((l) => {
+  const buildItems = () =>
+    lineasValidas.map((l) => {
       const ins = insumos.find((i) => i.id === l.insumoId)
       return {
         insumoId: l.insumoId,
@@ -49,8 +52,49 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
         total: parseFloat(l.total) || 0,
       }
     })
+
+  const guardar = (items) => {
     const total = items.reduce((s, it) => s + (it.total || 0), 0)
     onSubmit({ fecha, items, total })
+  }
+
+  const submit = () => {
+    if (!puedeGuardar) return
+    const items = buildItems()
+    // Líneas donde el precio pagado por unidad supera el costo actual: antes
+    // de aplicar se pregunta cuáles actualizar (una compra de emergencia puede
+    // no representar el costo real). Si no hay ninguna, se guarda directo.
+    const suben = items
+      .map((it) => {
+        const ins = insumos.find((i) => i.id === it.insumoId)
+        if (!ins || !(it.total > 0) || !(it.cantidad > 0)) return null
+        const nuevo = it.total / it.cantidad
+        if (nuevo <= (Number(ins.precioPorUnidad) || 0)) return null
+        // Al editar, si esa línea ya tenía el "no actualizar" elegido, se
+        // respeta como default (destildada).
+        const original = compra?.items?.find((x) => x.insumoId === it.insumoId)
+        return {
+          insumoId: it.insumoId,
+          nombre: ins.nombre,
+          unidad: ins.unidad,
+          actual: Number(ins.precioPorUnidad) || 0,
+          nuevo,
+          aplicar: original ? original.actualizaPrecio !== false : true,
+        }
+      })
+      .filter(Boolean)
+    if (suben.length === 0) {
+      guardar(items)
+      return
+    }
+    setConfirmPrecios(suben)
+  }
+
+  const confirmarGuardado = () => {
+    const noAplicar = new Set(confirmPrecios.filter((c) => !c.aplicar).map((c) => c.insumoId))
+    const items = buildItems().map((it) => (noAplicar.has(it.insumoId) ? { ...it, actualizaPrecio: false } : it))
+    setConfirmPrecios(null)
+    guardar(items)
   }
 
   return (
@@ -117,7 +161,7 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
                   <p className={`text-[11px] ${subePrecio ? 'text-emerald-700 font-semibold' : 'text-gray-400'}`}>
                     {precioUnit.toLocaleString('es-AR', { maximumFractionDigits: 2 })} $/{ins.unidad}
                     {subePrecio
-                      ? ` · actualiza el precio (antes $${Number(ins.precioPorUnidad).toLocaleString('es-AR')})`
+                      ? ` · más caro que el costo actual ($${Number(ins.precioPorUnidad).toLocaleString('es-AR')}): al guardar te pregunta si actualizarlo`
                       : ` · no cambia el precio (actual $${Number(ins.precioPorUnidad).toLocaleString('es-AR')})`}
                   </p>
                 )}
@@ -142,10 +186,57 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
         </button>
         <p className="text-[11px] text-gray-400 text-center">
           {compra
-            ? 'Al guardar se recalcula el stock: se deshace lo que había sumado esta compra y se aplica lo nuevo. El precio de los insumos solo puede subir (nunca baja).'
-            : 'Suma el stock de cada insumo. Si cargás el total y el precio por unidad subió, también actualiza el precio (nunca lo baja).'}
+            ? 'Al guardar se recalcula el stock: se deshace lo que había sumado esta compra y se aplica lo nuevo. Si pagaste más caro, te pregunta si actualizar el costo (nunca lo baja).'
+            : 'Suma el stock de cada insumo. Si cargás el total y pagaste más caro que el costo actual, te pregunta si actualizarlo (nunca lo baja).'}
         </p>
       </div>
+
+      {/* Confirmación: qué costos actualizar (encima del sheet, z-60 > z-50) */}
+      {confirmPrecios && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setConfirmPrecios(null)} />
+          <div className="relative bg-white rounded-3xl p-5 w-full max-w-sm shadow-2xl">
+            <p className="text-base font-bold text-gray-800 text-center mb-1">¿Actualizar el costo de estos insumos?</p>
+            <p className="text-xs text-gray-500 text-center mb-4">
+              Pagaste más caro que el costo actual. Destildá lo que fue una compra de emergencia y no representa el costo real (el stock se suma igual).
+            </p>
+            <div className="space-y-2 max-h-56 overflow-y-auto mb-4">
+              {confirmPrecios.map((c) => (
+                <label key={c.insumoId} className="flex items-center gap-3 bg-brand-50 rounded-xl px-3 py-2.5 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={c.aplicar}
+                    onChange={(e) =>
+                      setConfirmPrecios((prev) =>
+                        prev.map((p) => (p.insumoId === c.insumoId ? { ...p, aplicar: e.target.checked } : p)),
+                      )
+                    }
+                    className="w-5 h-5 accent-brand-500 flex-shrink-0"
+                  />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-gray-800 break-words">{c.nombre}</p>
+                    <p className="text-[11px] text-gray-500">
+                      ${c.actual.toLocaleString('es-AR', { maximumFractionDigits: 2 })} →{' '}
+                      <span className="font-semibold text-emerald-700">
+                        ${c.nuevo.toLocaleString('es-AR', { maximumFractionDigits: 2 })}
+                      </span>{' '}
+                      el {c.unidad}
+                    </p>
+                  </div>
+                </label>
+              ))}
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => setConfirmPrecios(null)} className="flex-1 py-3 rounded-2xl bg-gray-100 text-gray-700 font-semibold">
+                Volver
+              </button>
+              <button onClick={confirmarGuardado} className="flex-1 py-3 rounded-2xl bg-brand-500 text-white font-semibold">
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </BottomSheet>
   )
 }
