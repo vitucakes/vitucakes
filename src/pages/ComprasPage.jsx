@@ -16,11 +16,14 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
   const [open, setOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
   const [search, setSearch] = useState('')
+  const [fechaFiltro, setFechaFiltro] = useState('')
   const { canEdit } = useEditGate()
 
-  // Busca en el historial por insumo comprado o por fecha (dd/mm/aaaa).
+  // Busca en el historial por insumo comprado (texto) y/o por día exacto
+  // (calendario). Los dos filtros se combinan.
   const q = search.trim().toLowerCase()
   const ordenadas = [...compras]
+    .filter((c) => !fechaFiltro || c.fecha === fechaFiltro)
     .filter(
       (c) =>
         !q ||
@@ -57,13 +60,32 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
         </div>
         <p className="text-xs text-gray-400 mt-1">Cargá lo que comprás y suma el stock de tus insumos.</p>
         {compras.length > 0 && (
-          <input
-            type="text"
-            placeholder="Buscar por insumo o fecha..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 mt-3"
-          />
+          <div className="flex gap-2 mt-3">
+            <input
+              type="text"
+              placeholder="Buscar insumo..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="flex-1 min-w-0 px-4 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300"
+            />
+            <input
+              type="date"
+              value={fechaFiltro}
+              onChange={(e) => setFechaFiltro(e.target.value)}
+              aria-label="Filtrar por día"
+              title="Filtrar por día"
+              className="px-3 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-300"
+            />
+            {fechaFiltro && (
+              <button
+                onClick={() => setFechaFiltro('')}
+                aria-label="Quitar filtro de fecha"
+                className="w-9 flex-shrink-0 flex items-center justify-center rounded-xl bg-gray-100 text-gray-500 text-sm active:scale-95 transition-transform"
+              >
+                ✕
+              </button>
+            )}
+          </div>
         )}
       </div>
 
@@ -77,7 +99,11 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
           </div>
         )}
         {compras.length > 0 && ordenadas.length === 0 && (
-          <p className="text-center text-gray-400 py-16 text-sm">Sin resultados para “{search.trim()}”</p>
+          <p className="text-center text-gray-400 py-16 text-sm">
+            Sin resultados
+            {search.trim() ? <> para “{search.trim()}”</> : ''}
+            {fechaFiltro ? <> el {formatDate(fechaFiltro)}</> : ''}
+          </p>
         )}
         {ordenadas.map((c) => (
           <div key={c.id} className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-brand-50">

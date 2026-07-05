@@ -111,7 +111,6 @@ export default function App() {
             setInsumos={setInsumos}
             recetas={recetas}
             onActualizarPrecios={() => navigate('actualizar-precios')}
-            onMarcarPapeleria={() => navigate('marcar-papeleria')}
           />
         )}
         {page === 'marcar-papeleria' && canEdit && (
