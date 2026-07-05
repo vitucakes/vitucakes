@@ -381,6 +381,9 @@ Resumen:
 
 ## Último estado (2026-07-05)
 
+- **Buscadores en Compras y Ventas** — NUEVO. Dos niveles:
+  - **Historial**: input de búsqueda en el header de `ComprasPage` y `VentasPage` que filtra las compras/ventas por nombre de insumo/producto de sus líneas o por fecha (`dd/mm/aaaa` o ISO). Solo aparece si hay registros; sin resultados muestra "Sin resultados para …". El resumen de facturación de Ventas NO se filtra (siempre muestra el total real).
+  - **Al cargar una compra/venta**: los `<select>` planos (178 insumos / 158 productos) se reemplazaron por **`components/PickerBuscador.jsx`** (nuevo, reutilizable): buscás por nombre, tocás el ítem y colapsa a una fila con botón "Cambiar". Muestra un `detalle` a la derecha (la unidad en insumos, el precio de venta en productos). ⚠️ El picker **excluye lo ya elegido en otra línea** de la misma compra/venta: repetir el mismo insumo en dos líneas rompía la reversión de stock al borrar la compra (`aplicarCompraAInsumos` dedupe por `insumoId` y aplicaba solo la última línea, pero `deltasDeCompra` revertía todas) — ahora no se puede crear ese caso. Nota de layout: el nombre lleva `flex-1` + `min-w-0` para que no colapse letra por letra en pantallas angostas (el lado derecho es `flex-shrink-0`).
 - **Stock siempre visible en cada insumo + adiós a "Cargar stock inicial"**. Vitu ya hizo la carga inicial de inventario, así que: (1) el chip 📦 de stock en la lista de Insumos ahora se muestra **siempre** en cada insumo (antes solo si `stock != null`; sin carga o en 0 muestra "Sin stock" en gris); (2) se eliminó el banner azul "📦 Cargá tu stock inicial / Ajustar stock" y la pantalla `StockInicialPage.jsx` con su ruta `cargar-stock` (archivo borrado — está en el historial de git si hiciera falta revivirla). El stock se sigue editando a mano en el form de cada insumo (campo "Stock actual") y se mueve solo con Compras y Ventas.
 
 ### Antes (2026-06-15)

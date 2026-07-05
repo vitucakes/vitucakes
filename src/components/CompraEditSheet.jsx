@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import BottomSheet from './BottomSheet'
+import PickerBuscador from './PickerBuscador'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '' })
@@ -67,16 +68,17 @@ export default function CompraEditSheet({ isOpen, insumos, onClose, onSubmit }) 
                     ✕
                   </button>
                 )}
-                <select
+                {/* Se excluyen los insumos ya elegidos en otra línea: repetir el
+                    mismo insumo en dos líneas rompe la reversión del stock al
+                    borrar la compra (se aplica una vez pero se revierte dos). */}
+                <PickerBuscador
+                  items={insumosOrden
+                    .filter((x) => x.id === l.insumoId || !lineas.some((ol, j) => j !== i && ol.insumoId === x.id))
+                    .map((x) => ({ id: x.id, nombre: x.nombre, detalle: x.unidad }))}
                   value={l.insumoId}
-                  onChange={(e) => setLinea(i, { insumoId: e.target.value })}
-                  className="input bg-white"
-                >
-                  <option value="">Elegí un insumo…</option>
-                  {insumosOrden.map((x) => (
-                    <option key={x.id} value={x.id}>{x.nombre}</option>
-                  ))}
-                </select>
+                  onChange={(id) => setLinea(i, { insumoId: id })}
+                  placeholder="🔍 Buscar insumo..."
+                />
                 <div className="flex gap-2">
                   <div className="flex-1">
                     <label className="label">Cantidad {ins ? `(${ins.unidad})` : ''}</label>

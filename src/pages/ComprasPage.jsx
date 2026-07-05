@@ -15,9 +15,20 @@ const formatDate = (iso) => {
 export default function ComprasPage({ compras, setCompras, insumos, setInsumos }) {
   const [open, setOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
+  const [search, setSearch] = useState('')
   const { canEdit } = useEditGate()
 
-  const ordenadas = [...compras].sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
+  // Busca en el historial por insumo comprado o por fecha (dd/mm/aaaa).
+  const q = search.trim().toLowerCase()
+  const ordenadas = [...compras]
+    .filter(
+      (c) =>
+        !q ||
+        (c.items || []).some((it) => (it.nombre || '').toLowerCase().includes(q)) ||
+        formatDate(c.fecha).includes(q) ||
+        (c.fecha || '').includes(q),
+    )
+    .sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
 
   const handleSubmit = (compra) => {
     const record = { id: crypto.randomUUID(), createdAt: Date.now(), ...compra }
@@ -45,16 +56,28 @@ export default function ComprasPage({ compras, setCompras, insumos, setInsumos }
           <LockToggle />
         </div>
         <p className="text-xs text-gray-400 mt-1">Cargá lo que comprás y suma el stock de tus insumos.</p>
+        {compras.length > 0 && (
+          <input
+            type="text"
+            placeholder="Buscar por insumo o fecha..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full px-4 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 mt-3"
+          />
+        )}
       </div>
 
       {/* List */}
       <div className="flex-1 px-4 py-4 space-y-3">
-        {ordenadas.length === 0 && (
+        {compras.length === 0 && (
           <div className="text-center py-20 text-gray-400">
             <div className="text-5xl mb-3">🛒</div>
             <p className="font-medium">No hay compras todavía</p>
             <p className="text-sm mt-1">Tocá + para registrar una compra</p>
           </div>
+        )}
+        {compras.length > 0 && ordenadas.length === 0 && (
+          <p className="text-center text-gray-400 py-16 text-sm">Sin resultados para “{search.trim()}”</p>
         )}
         {ordenadas.map((c) => (
           <div key={c.id} className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-brand-50">

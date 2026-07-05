@@ -16,9 +16,20 @@ const mesActual = () => new Date().toISOString().slice(0, 7)
 export default function VentasPage({ ventas, setVentas, insumos, setInsumos, recetas }) {
   const [open, setOpen] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
+  const [search, setSearch] = useState('')
   const { canEdit } = useEditGate()
 
-  const ordenadas = [...ventas].sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
+  // Busca en el historial por producto vendido o por fecha (dd/mm/aaaa).
+  const q = search.trim().toLowerCase()
+  const ordenadas = [...ventas]
+    .filter(
+      (v) =>
+        !q ||
+        (v.items || []).some((it) => (it.nombre || '').toLowerCase().includes(q)) ||
+        formatDate(v.fecha).includes(q) ||
+        (v.fecha || '').includes(q),
+    )
+    .sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
   const totalGeneral = ventas.reduce((s, v) => s + (v.total || 0), 0)
   const totalMes = ventas
     .filter((v) => (v.fecha || '').startsWith(mesActual()))
@@ -49,6 +60,15 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
           <h1 className="text-2xl font-bold text-gray-800 flex-1">Ventas</h1>
           <LockToggle />
         </div>
+        {ventas.length > 0 && (
+          <input
+            type="text"
+            placeholder="Buscar por producto o fecha..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full px-4 py-2.5 rounded-xl bg-brand-50 border border-brand-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-300 mt-3"
+          />
+        )}
       </div>
 
       {/* Resumen de facturación */}
@@ -67,12 +87,15 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
 
       {/* List */}
       <div className="flex-1 px-4 py-4 space-y-3">
-        {ordenadas.length === 0 && (
+        {ventas.length === 0 && (
           <div className="text-center py-16 text-gray-400">
             <div className="text-5xl mb-3">💵</div>
             <p className="font-medium">No hay ventas todavía</p>
             <p className="text-sm mt-1">Tocá + para registrar una venta</p>
           </div>
+        )}
+        {ventas.length > 0 && ordenadas.length === 0 && (
+          <p className="text-center text-gray-400 py-16 text-sm">Sin resultados para “{search.trim()}”</p>
         )}
         {ordenadas.map((v) => (
           <div key={v.id} className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-brand-50">

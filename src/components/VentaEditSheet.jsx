@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import BottomSheet from './BottomSheet'
+import PickerBuscador from './PickerBuscador'
 import { formatARS, calcPrecioVenta } from '../utils/calc'
 import { consumoDeItems, stockDe, fmtCant } from '../utils/stock'
 
@@ -74,16 +75,16 @@ export default function VentaEditSheet({ isOpen, recetas, insumos, onClose, onSu
                     ✕
                   </button>
                 )}
-                <select
+                {/* Sin repetir el mismo producto en dos líneas (para vender más
+                    de uno está el campo Cantidad). */}
+                <PickerBuscador
+                  items={recetasOrden
+                    .filter((x) => x.id === l.recetaId || !lineas.some((ol, j) => j !== i && ol.recetaId === x.id))
+                    .map((x) => ({ id: x.id, nombre: x.nombre, detalle: formatARS(calcPrecioVenta(x, insumos)) }))}
                   value={l.recetaId}
-                  onChange={(e) => setLinea(i, { recetaId: e.target.value })}
-                  className="input bg-white"
-                >
-                  <option value="">Elegí un producto…</option>
-                  {recetasOrden.map((r) => (
-                    <option key={r.id} value={r.id}>{r.nombre}</option>
-                  ))}
-                </select>
+                  onChange={(id) => setLinea(i, { recetaId: id })}
+                  placeholder="🔍 Buscar producto..."
+                />
                 <div className="flex items-end gap-2">
                   <div className="w-24">
                     <label className="label">Cantidad</label>
