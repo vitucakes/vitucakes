@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import VentaEditSheet from '../components/VentaEditSheet'
+import BottomSheet from '../components/BottomSheet'
 import { useEditGate, LockToggle } from '../hooks/useEditGate'
-import { aplicarDeltasStock } from '../utils/stock'
+import { aplicarDeltasStock, fmtCant } from '../utils/stock'
 import { formatARS } from '../utils/calc'
 
 const formatDate = (iso) => {
@@ -17,6 +18,7 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState(null) // venta a editar, o null = nueva
   const [deleteId, setDeleteId] = useState(null)
+  const [detalleId, setDetalleId] = useState(null) // venta cuyo detalle se está viendo
   const [search, setSearch] = useState('')
   const [fechaFiltro, setFechaFiltro] = useState('')
   const { canEdit } = useEditGate()
@@ -135,7 +137,11 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
           </p>
         )}
         {ordenadas.map((v) => (
-          <div key={v.id} className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-brand-50">
+          <div
+            key={v.id}
+            onClick={() => setDetalleId(v.id)}
+            className="bg-white rounded-2xl px-4 py-3.5 shadow-sm border border-brand-50 cursor-pointer active:scale-[0.99] transition-transform"
+          >
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-gray-800">{formatDate(v.fecha)}</span>
               <div className="flex items-center gap-2">
@@ -143,12 +149,17 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
                 {canEdit && (
                   <>
                     <button
-                      onClick={() => { setEditing(v); setOpen(true) }}
+                      onClick={(e) => { e.stopPropagation(); setEditing(v); setOpen(true) }}
                       className="w-8 h-8 flex items-center justify-center rounded-full bg-brand-50 text-sm"
                     >
                       ✏️
                     </button>
-                    <button onClick={() => setDeleteId(v.id)} className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-sm">🗑️</button>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setDeleteId(v.id) }}
+                      className="w-8 h-8 flex items-center justify-center rounded-full bg-red-50 text-sm"
+                    >
+                      🗑️
+                    </button>
                   </>
                 )}
               </div>
@@ -161,6 +172,7 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
                 </li>
               ))}
             </ul>
+            <p className="text-[11px] text-gray-300 mt-1.5">Tocá para ver el detalle ›</p>
           </div>
         ))}
       </div>
@@ -183,6 +195,72 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
         onClose={() => { setOpen(false); setEditing(null) }}
         onSubmit={handleSubmit}
       />
+
+      {/* Detalle de una venta: items con precio unitario, total y el stock
+          que descontó (el consumo guardado en el record). */}
+      {(() => {
+        const v = detalleId ? ventas.find((x) => x.id === detalleId) : null
+        return (
+          <BottomSheet isOpen={!!v} onClose={() => setDetalleId(null)} title={v ? `Venta · ${formatDate(v.fecha)}` : ''}>
+            {v && (
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  {(v.items || []).map((it, idx) => (
+                    <div key={idx} className="bg-brand-50 rounded-xl px-3 py-2.5 flex items-center justify-between gap-2">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-gray-800 break-words">{it.cantidad}× {it.nombre}</p>
+                        <p className="text-[11px] text-gray-400">{formatARS(it.precioUnitario)} c/u</p>
+                      </div>
+                      <span className="text-sm font-bold text-gray-800 whitespace-nowrap">
+                        {formatARS(it.precioUnitario * it.cantidad)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex items-center justify-between px-1">
+                  <span className="text-sm font-semibold text-gray-600">Total de la venta</span>
+                  <span className="text-xl font-black text-brand-600">{formatARS(v.total)}</span>
+                </div>
+
+                {(v.consumo || []).length > 0 && (
+                  <div>
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">Stock descontado</p>
+                    <div className="bg-gray-50 rounded-2xl p-3 space-y-1.5">
+                      {v.consumo.map((d) => {
+                        const ins = insumos.find((i) => i.id === d.insumoId)
+                        return (
+                          <div key={d.insumoId} className="flex justify-between text-xs text-gray-600 gap-2">
+                            <span className="break-words">{ins?.nombre ?? 'Insumo borrado'}</span>
+                            <span className="text-gray-400 whitespace-nowrap">
+                              −{fmtCant(d.cantidad)} {ins?.unidad ?? ''}
+                            </span>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => { setDetalleId(null); setEditing(v); setOpen(true) }}
+                    className="flex-1 py-3 rounded-2xl bg-brand-500 text-white font-semibold active:scale-95 transition-transform"
+                  >
+                    ✏️ Editar
+                  </button>
+                  <button
+                    onClick={() => { setDetalleId(null); setDeleteId(v.id) }}
+                    className="flex-1 py-3 rounded-2xl bg-red-50 text-red-500 font-semibold active:scale-95 transition-transform"
+                  >
+                    🗑️ Borrar
+                  </button>
+                </div>
+              </div>
+            )}
+          </BottomSheet>
+        )
+      })()}
 
       {/* Confirmar borrado */}
       {deleteId && (
