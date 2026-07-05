@@ -7,6 +7,7 @@ const BASE_TABS = [
 const EDIT_TABS = [
   { id: 'compras', label: 'Compras', icon: '🛒' },
   { id: 'ventas', label: 'Ventas', icon: '💵' },
+  { id: 'gestion', label: 'Gestión', icon: '📊' },
 ]
 
 export default function BottomNav({ current, onChange, canEdit }) {

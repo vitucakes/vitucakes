@@ -11,6 +11,7 @@ import BackupPage from './pages/BackupPage'
 import InicializarDatos from './pages/InicializarDatos'
 import ComprasPage from './pages/ComprasPage'
 import VentasPage from './pages/VentasPage'
+import GestionPage from './pages/GestionPage'
 import MarcarPapeleriaPage from './pages/MarcarPapeleriaPage'
 import BottomNav from './components/BottomNav'
 import { mergeCompetidoras } from './utils/competencia'
@@ -70,7 +71,7 @@ export default function App() {
   // stock), salimos: esas pantallas son solo para editores.
   useEffect(() => {
     if (canEdit) return
-    if (page === 'compras' || page === 'ventas') setPage('recetas')
+    if (page === 'compras' || page === 'ventas' || page === 'gestion') setPage('recetas')
     else if (page === 'marcar-papeleria') setPage('insumos')
   }, [canEdit, page])
 
@@ -181,6 +182,7 @@ export default function App() {
             recetas={recetas}
           />
         )}
+        {page === 'gestion' && canEdit && <GestionPage ventas={ventas} compras={compras} />}
         {page === 'detalle' && selectedReceta && (
           <RecetaDetail
             receta={selectedReceta}
