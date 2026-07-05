@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BottomSheet from './BottomSheet'
 import PickerBuscador from './PickerBuscador'
+import { parsearTicket } from '../utils/ticket'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '' })
@@ -16,10 +17,15 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
   // Confirmación antes de guardar: líneas que subirían el costo del insumo.
   // null = sin modal; array = [{ insumoId, nombre, unidad, actual, nuevo, aplicar }]
   const [confirmPrecios, setConfirmPrecios] = useState(null)
+  // Lectura de foto del ticket (OCR en el dispositivo, Tesseract.js):
+  // null | { fase: 'leyendo', progreso } | { fase: 'listo', n, sinMatch } | { fase: 'error', msg }
+  const [ocr, setOcr] = useState(null)
+  const fileRef = useRef(null)
 
   useEffect(() => {
     if (!isOpen) return
     setConfirmPrecios(null)
+    setOcr(null)
     setFecha(compra?.fecha ?? todayISO())
     setLineas(
       compra?.items?.length
@@ -40,6 +46,33 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
 
   const lineasValidas = lineas.filter((l) => l.insumoId && parseFloat(l.cantidad) > 0)
   const puedeGuardar = lineasValidas.length > 0
+
+  // OCR de la foto del ticket, 100% en el dispositivo (no sube la imagen a
+  // ningún lado). Tesseract se importa dinámico para no engordar el bundle;
+  // la primera vez baja el modelo de español (~unos MB, después queda cacheado).
+  const leerFoto = async (file) => {
+    if (!file) return
+    setOcr({ fase: 'leyendo', progreso: 0 })
+    try {
+      const { createWorker } = await import('tesseract.js')
+      const worker = await createWorker('spa', 1, {
+        logger: (m) => {
+          if (m.status === 'recognizing text') setOcr({ fase: 'leyendo', progreso: m.progress })
+        },
+      })
+      const { data } = await worker.recognize(file)
+      await worker.terminate()
+      const { lineas: sugeridas, noReconocidos } = parsearTicket(data.text, insumos)
+      if (!sugeridas.length) {
+        setOcr({ fase: 'error', msg: 'No reconocí ningún insumo tuyo en la foto. Probá con una más nítida o cargá la compra a mano.' })
+        return
+      }
+      setLineas(sugeridas)
+      setOcr({ fase: 'listo', n: sugeridas.length, sinMatch: noReconocidos.length })
+    } catch {
+      setOcr({ fase: 'error', msg: 'No pude leer la foto. Probá de nuevo o cargá la compra a mano.' })
+    }
+  }
 
   const buildItems = () =>
     lineasValidas.map((l) => {
@@ -104,6 +137,39 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
           <label className="label">Fecha</label>
           <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} className="input bg-white" />
         </div>
+
+        {/* Pre-carga desde una foto del ticket (solo en compra nueva) */}
+        {!compra && (
+          <div>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={(e) => {
+                leerFoto(e.target.files?.[0])
+                e.target.value = ''
+              }}
+            />
+            <button
+              onClick={() => fileRef.current?.click()}
+              disabled={ocr?.fase === 'leyendo'}
+              className="w-full py-3 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 font-semibold text-sm active:scale-[0.99] transition-transform disabled:opacity-60"
+            >
+              {ocr?.fase === 'leyendo'
+                ? `📷 Leyendo la foto… ${Math.round((ocr.progreso || 0) * 100)}%`
+                : '📷 Cargar desde una foto del ticket'}
+            </button>
+            {ocr?.fase === 'listo' && (
+              <p className="text-[11px] text-emerald-700 mt-1.5 px-1">
+                ✓ Encontré {ocr.n} insumo{ocr.n !== 1 ? 's' : ''} en el ticket
+                {ocr.sinMatch > 0 ? ` (${ocr.sinMatch} renglón${ocr.sinMatch !== 1 ? 'es' : ''} sin reconocer)` : ''}. Revisá
+                cantidades y totales antes de guardar.
+              </p>
+            )}
+            {ocr?.fase === 'error' && <p className="text-[11px] text-red-500 mt-1.5 px-1">{ocr.msg}</p>}
+          </div>
+        )}
 
         <div className="space-y-3">
           {lineas.map((l, i) => {
