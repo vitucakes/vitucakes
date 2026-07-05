@@ -4,7 +4,13 @@ import PickerBuscador from './PickerBuscador'
 import { parsearTicket } from '../utils/ticket'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
-const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '' })
+const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '', paquetes: '', porPaquete: '' })
+
+// Compra por paquetes: si cargás "3 paquetes de 500 g", la cuenta la hace la
+// app (cantidad = paquetes × contenido). Si no, la cantidad se escribe directo.
+const usaPaquetes = (l) => parseFloat(l.paquetes) > 0 && parseFloat(l.porPaquete) > 0
+const cantidadFinal = (l) =>
+  usaPaquetes(l) ? String(Math.round(parseFloat(l.paquetes) * parseFloat(l.porPaquete) * 1000) / 1000) : l.cantidad
 
 // Sheet para registrar o EDITAR una COMPRA. Una compra puede tener varias
 // líneas (lo que trajiste en una misma ida). Cada línea suma stock al insumo;
@@ -33,6 +39,8 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
             insumoId: it.insumoId,
             cantidad: String(it.cantidad),
             total: it.total > 0 ? String(it.total) : '',
+            paquetes: '',
+            porPaquete: '',
           }))
         : [emptyLinea()],
     )
@@ -44,33 +52,66 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
   const addLinea = () => setLineas((ls) => [...ls, emptyLinea()])
   const removeLinea = (i) => setLineas((ls) => (ls.length === 1 ? ls : ls.filter((_, idx) => idx !== i)))
 
-  const lineasValidas = lineas.filter((l) => l.insumoId && parseFloat(l.cantidad) > 0)
+  const lineasValidas = lineas.filter((l) => l.insumoId && parseFloat(cantidadFinal(l)) > 0)
   const puedeGuardar = lineasValidas.length > 0
 
-  // OCR de la foto del ticket, 100% en el dispositivo (no sube la imagen a
-  // ningún lado). Tesseract se importa dinámico para no engordar el bundle;
+  // OCR de las fotos del ticket, 100% en el dispositivo (no sube las imágenes
+  // a ningún lado). Tesseract se importa dinámico para no engordar el bundle;
   // la primera vez baja el modelo de español (~unos MB, después queda cacheado).
-  const leerFoto = async (file) => {
-    if (!file) return
-    setOcr({ fase: 'leyendo', progreso: 0 })
+  // Acepta varias fotos (ticket largo en partes, o varios tickets de la misma
+  // compra) y lo encontrado se SUMA a las líneas ya cargadas.
+  const leerFotos = async (files) => {
+    const fotos = [...(files || [])].filter(Boolean)
+    if (!fotos.length) return
+    let fotoActual = 0
+    setOcr({ fase: 'leyendo', progreso: 0, foto: 1, fotos: fotos.length })
     try {
       const { createWorker } = await import('tesseract.js')
       const worker = await createWorker('spa', 1, {
         logger: (m) => {
-          if (m.status === 'recognizing text') setOcr({ fase: 'leyendo', progreso: m.progress })
+          if (m.status === 'recognizing text')
+            setOcr({ fase: 'leyendo', progreso: m.progress, foto: fotoActual + 1, fotos: fotos.length })
         },
       })
-      const { data } = await worker.recognize(file)
+      let texto = ''
+      for (fotoActual = 0; fotoActual < fotos.length; fotoActual++) {
+        const { data } = await worker.recognize(fotos[fotoActual])
+        texto += '\n' + data.text
+      }
       await worker.terminate()
-      const { lineas: sugeridas, noReconocidos } = parsearTicket(data.text, insumos)
+      const { lineas: sugeridas, noReconocidos } = parsearTicket(texto, insumos)
       if (!sugeridas.length) {
-        setOcr({ fase: 'error', msg: 'No reconocí ningún insumo tuyo en la foto. Probá con una más nítida o cargá la compra a mano.' })
+        setOcr({ fase: 'error', msg: 'No reconocí ningún insumo tuyo en las fotos. Probá con una más nítida o cargá la compra a mano.' })
         return
       }
-      setLineas(sugeridas)
-      setOcr({ fase: 'listo', n: sugeridas.length, sinMatch: noReconocidos.length })
+      // Merge con lo ya cargado: mismo insumo → suma cantidades y totales.
+      setLineas((prev) => {
+        const resultado = prev.filter((l) => l.insumoId || l.cantidad || l.total).map((l) => ({ ...l }))
+        const suma = (a, b) => {
+          const x = parseFloat(a) || 0
+          const y = parseFloat(b) || 0
+          return x + y > 0 ? String(Math.round((x + y) * 1000) / 1000) : ''
+        }
+        for (const s of sugeridas) {
+          const ex = resultado.find((l) => l.insumoId === s.insumoId)
+          if (!ex) {
+            resultado.push({ ...s, paquetes: '', porPaquete: '' })
+            continue
+          }
+          // Si la línea existente venía por paquetes, se aplana antes de sumar.
+          if (usaPaquetes(ex)) {
+            ex.cantidad = cantidadFinal(ex)
+            ex.paquetes = ''
+            ex.porPaquete = ''
+          }
+          ex.cantidad = suma(ex.cantidad, s.cantidad)
+          ex.total = suma(ex.total, s.total)
+        }
+        return resultado.length ? resultado : [emptyLinea()]
+      })
+      setOcr({ fase: 'listo', n: sugeridas.length, sinMatch: noReconocidos.length, fotos: fotos.length })
     } catch {
-      setOcr({ fase: 'error', msg: 'No pude leer la foto. Probá de nuevo o cargá la compra a mano.' })
+      setOcr({ fase: 'error', msg: 'No pude leer las fotos. Probá de nuevo o cargá la compra a mano.' })
     }
   }
 
@@ -81,7 +122,7 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
         insumoId: l.insumoId,
         nombre: ins?.nombre ?? '',
         unidad: ins?.unidad ?? '',
-        cantidad: parseFloat(l.cantidad) || 0,
+        cantidad: parseFloat(cantidadFinal(l)) || 0,
         total: parseFloat(l.total) || 0,
       }
     })
@@ -145,9 +186,10 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
               ref={fileRef}
               type="file"
               accept="image/*"
+              multiple
               className="hidden"
               onChange={(e) => {
-                leerFoto(e.target.files?.[0])
+                leerFotos(e.target.files)
                 e.target.value = ''
               }}
             />
@@ -157,14 +199,14 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
               className="w-full py-3 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 font-semibold text-sm active:scale-[0.99] transition-transform disabled:opacity-60"
             >
               {ocr?.fase === 'leyendo'
-                ? `📷 Leyendo la foto… ${Math.round((ocr.progreso || 0) * 100)}%`
-                : '📷 Cargar desde una foto del ticket'}
+                ? `📷 Leyendo foto ${ocr.foto}/${ocr.fotos}… ${Math.round((ocr.progreso || 0) * 100)}%`
+                : '📷 Cargar desde fotos del ticket'}
             </button>
             {ocr?.fase === 'listo' && (
               <p className="text-[11px] text-emerald-700 mt-1.5 px-1">
-                ✓ Encontré {ocr.n} insumo{ocr.n !== 1 ? 's' : ''} en el ticket
+                ✓ Encontré {ocr.n} insumo{ocr.n !== 1 ? 's' : ''} en {ocr.fotos > 1 ? `las ${ocr.fotos} fotos` : 'el ticket'}
                 {ocr.sinMatch > 0 ? ` (${ocr.sinMatch} renglón${ocr.sinMatch !== 1 ? 'es' : ''} sin reconocer)` : ''}. Revisá
-                cantidades y totales antes de guardar.
+                cantidades y totales antes de guardar. Podés sumar más fotos con el mismo botón.
               </p>
             )}
             {ocr?.fase === 'error' && <p className="text-[11px] text-red-500 mt-1.5 px-1">{ocr.msg}</p>}
@@ -174,7 +216,7 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
         <div className="space-y-3">
           {lineas.map((l, i) => {
             const ins = insumos.find((x) => x.id === l.insumoId)
-            const cant = parseFloat(l.cantidad) || 0
+            const cant = parseFloat(cantidadFinal(l)) || 0
             const total = parseFloat(l.total) || 0
             const precioUnit = cant > 0 && total > 0 ? total / cant : null
             const subePrecio = ins && precioUnit != null && precioUnit > (Number(ins.precioPorUnidad) || 0)
@@ -199,17 +241,46 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
                   onChange={(id) => setLinea(i, { insumoId: id })}
                   placeholder="🔍 Buscar insumo..."
                 />
+                {/* Compra por paquetes (opcional): la cuenta la hace la app */}
                 <div className="flex gap-2">
                   <div className="flex-1">
-                    <label className="label">Cantidad {ins ? `(${ins.unidad})` : ''}</label>
+                    <label className="label">Paquetes</label>
                     <input
                       type="number"
                       inputMode="decimal"
-                      value={l.cantidad}
-                      onChange={(e) => setLinea(i, { cantidad: e.target.value })}
-                      placeholder="Ej: 5"
+                      value={l.paquetes}
+                      onChange={(e) => setLinea(i, { paquetes: e.target.value })}
+                      placeholder="opcional"
                       className="input"
                     />
+                  </div>
+                  <div className="flex-1">
+                    <label className="label">{ins ? `${ins.unidad} por paquete` : 'Por paquete'}</label>
+                    <input
+                      type="number"
+                      inputMode="decimal"
+                      value={l.porPaquete}
+                      onChange={(e) => setLinea(i, { porPaquete: e.target.value })}
+                      placeholder="Ej: 500"
+                      className="input"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="flex-1">
+                    <label className="label">Cantidad {ins ? `(${ins.unidad})` : ''}</label>
+                    {usaPaquetes(l) ? (
+                      <div className="input bg-gray-50 font-semibold text-brand-600">{cantidadFinal(l)}</div>
+                    ) : (
+                      <input
+                        type="number"
+                        inputMode="decimal"
+                        value={l.cantidad}
+                        onChange={(e) => setLinea(i, { cantidad: e.target.value })}
+                        placeholder="Ej: 5"
+                        className="input"
+                      />
+                    )}
                   </div>
                   <div className="flex-1">
                     <label className="label">Total pagado ($)</label>
@@ -223,6 +294,12 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
                     />
                   </div>
                 </div>
+                {usaPaquetes(l) && (
+                  <p className="text-[11px] text-gray-400">
+                    {l.paquetes} paquete{parseFloat(l.paquetes) !== 1 ? 's' : ''} × {l.porPaquete} {ins?.unidad ?? ''} ={' '}
+                    {cantidadFinal(l)} {ins?.unidad ?? ''}
+                  </p>
+                )}
                 {precioUnit != null && ins && (
                   <p className={`text-[11px] ${subePrecio ? 'text-emerald-700 font-semibold' : 'text-gray-400'}`}>
                     {precioUnit.toLocaleString('es-AR', { maximumFractionDigits: 2 })} $/{ins.unidad}
