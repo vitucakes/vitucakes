@@ -138,6 +138,7 @@ vitucakes/
 │       ├── AgregarCompetidoraPage.jsx # Agregar competidora con scrape en vivo
 │       ├── BackupPage.jsx       # Export/restore/reset de la base COMPARTIDA (no localStorage)
 │       └── InicializarDatos.jsx # Primera carga (base vacía): subir de este dispositivo / backup / fábrica
+│       # (StockInicialPage.jsx se eliminó el 2026-07-05: la carga inicial ya se hizo)
 ├── public/
 │   ├── precarga.json            # 167 insumos + 139 recetas (datos de fábrica)
 │   ├── recetas_v2.json          # Migración v2 (insumos y recetas nuevas)
@@ -378,7 +379,11 @@ Resumen:
 - Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
 - Datos del user: viven en **Firestore** (nube), ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (💾 en Productos) baja una copia JSON extra. **Ojo**: si reconstruís la app en otro hosting sin el mismo proyecto Firebase (config en `src/firebase.js`), no vas a tener los datos — necesitás ese proyecto o sembrar de cero desde un backup. Para correr 100% offline/sin nube habría que volver a `useLocalStorage` (ver git antes de la migración a Firebase).
 
-## Último estado (2026-06-15)
+## Último estado (2026-07-05)
+
+- **Stock siempre visible en cada insumo + adiós a "Cargar stock inicial"**. Vitu ya hizo la carga inicial de inventario, así que: (1) el chip 📦 de stock en la lista de Insumos ahora se muestra **siempre** en cada insumo (antes solo si `stock != null`; sin carga o en 0 muestra "Sin stock" en gris); (2) se eliminó el banner azul "📦 Cargá tu stock inicial / Ajustar stock" y la pantalla `StockInicialPage.jsx` con su ruta `cargar-stock` (archivo borrado — está en el historial de git si hiciera falta revivirla). El stock se sigue editando a mano en el form de cada insumo (campo "Stock actual") y se mueve solo con Compras y Ventas.
+
+### Antes (2026-06-15)
 
 - **Buscador en el selector de insumos** (form de producto): en vez del `<select>` plano con 176 insumos, un input que filtra por nombre + lista clicable con la unidad. El insumo elegido alimenta el placeholder de cantidad.
 - **Editar el producto desde el detalle** — NUEVO. El form de alta/edición se extrajo a `components/RecetaEditSheet.jsx` (reutilizable). En `RecetaDetail` hay un **✏️ en el header** que abre ese editor inline (nombre, rinde, ingredientes con buscador, descripción) **sin salir del producto**; al guardar te quedás en el detalle. La lista (`RecetasPage`) usa el mismo componente (quedó más liviana, sin el form inline).
@@ -394,7 +399,7 @@ Resumen:
   - **Ventas** (`pages/VentasPage.jsx` + `components/VentaEditSheet.jsx`): elegís productos + cantidad. Descuenta del stock los insumos de cada receta (**1 venta = producto entero × cantidad**), guarda el `precioUnitario` (snapshot del precio de venta) y muestra **facturación** (este mes + histórico). Si el stock quedaría negativo, **avisa pero permite**.
   - Lógica pura en `utils/stock.js` (`consumoDeItems`, `aplicarDeltasStock`, `aplicarCompraAInsumos`, `deltasDeCompra`), con tests. Borrar una compra/venta **revierte** su efecto en el stock (el precio no se revierte). Las ventas guardan su `consumo` exacto para poder revertir aunque la receta cambie después.
   - Firestore: docs nuevos `vitucakes/compras` y `vitucakes/ventas` (vía `useSharedState`). Incluidos en el backup (`seedData.js` + `BackupPage.jsx`, `APP_VERSION` 2.1). ⚠️ Lectura pública en Firestore como todo el resto: la facturación se oculta en la UI sin PIN, pero el doc es legible con el link (candado fuerte = Login con Google, a futuro).
-  - **Carga de stock inicial** (`pages/StockInicialPage.jsx`, ruta `cargar-stock`): pantalla de carga masiva con un input por insumo, buscador y filtro "solo los que faltan", y botón "Guardar (N)". Setea el `stock` directo (es un conteo de inventario, NO un movimiento). Punto de entrada: banner "📦 Cargá tu stock inicial" arriba de la lista de Insumos (solo modo edición). Dejar un campo vacío = no toca ese insumo; para poner 0 hay que escribir "0".
+  - **Carga de stock inicial** (`pages/StockInicialPage.jsx`, ruta `cargar-stock`): pantalla de carga masiva con un input por insumo, buscador y filtro "solo los que faltan", y botón "Guardar (N)". Setea el `stock` directo (es un conteo de inventario, NO un movimiento). Punto de entrada: banner "📦 Cargá tu stock inicial" arriba de la lista de Insumos (solo modo edición). Dejar un campo vacío = no toca ese insumo; para poner 0 hay que escribir "0". ⚠️ **Eliminada el 2026-07-05** (la carga inicial ya se hizo; ver "Último estado").
 - **Nati's Pastelería sumada al cron de competencia** (PR #37). Ahora hay 5 competidoras.
 
 ### Antes (2026-06-01)
