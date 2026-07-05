@@ -3,7 +3,7 @@
 App de costeo y precios de venta para una pastelería casera (uso personal).
 React + Vite + Tailwind. **Datos compartidos en la nube vía Firebase (Firestore)** — todos los dispositivos ven y editan lo mismo, en vivo.
 
-**Live**: https://patriciovallerino.github.io/vitucakes/
+**Live**: https://vitucakes.github.io/vitucakes/
 
 ## Datos compartidos (Firebase) — leer esto primero
 

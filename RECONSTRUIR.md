@@ -230,7 +230,7 @@ Estas cosas necesitan GitHub para correr **automáticamente**. La app igual func
 | Cron semanal actualiza precios de El Granate los lunes a las 23h | Hay que tocar "Actualizar precios manualmente" en la app cuando quieras refresh |
 | Cron semanal actualiza precios de competencia (Candelitte) | Idem — los precios quedan congelados al último que se subió a la carpeta |
 | Deploy automático en cada push | Hay que hacer `npm run build` y subir `dist/` a Netlify manualmente |
-| URL pública estable `patriciovallerino.github.io/vitucakes/` | URL nueva de Netlify |
+| URL pública estable `vitucakes.github.io/vitucakes/` | URL nueva de Netlify |
 
 **Todo lo demás funciona igual**: agregar/editar insumos, recetas, matches con competencia, cálculos, backup/restore, etc.
 

@@ -20,15 +20,16 @@ React 18 + Vite + Tailwind, datos en **Firebase/Firestore**, deploy a GitHub Pag
 - "Recetas" se muestra como **"Productos"** en la UI, pero el código sigue usando `receta`/`recetas` (no romper datos). Margen fijo **3x**, gastos indirectos **10%**. Idioma: **español rioplatense** (vos, "tocá").
 
 ## Git / merge — repo PÚBLICO (importante)
-- Commiteá **SIEMPRE** con `patriciovallerino@gmail.com`. **NUNCA** `patricio.vallerino@lemon.me` (es el mail de trabajo y el repo es público).
+- El repo vive en la cuenta **`vitucakes`** (mail `pvallerino@gmail.com`) desde 2026-07-05; antes estaba en `patriciovallerino`. El `gh` local puede seguir autenticado como `patriciovallerino` (colaborador del repo).
+- Commiteá **SIEMPRE** con `pvallerino@gmail.com`. **NUNCA** `patricio.vallerino@lemon.me` (es el mail de trabajo y el repo es público).
 - **Mergeá sin preguntar** (el user lo autorizó). Excepción: algo de alto riesgo o que pueda perder datos → avisá primero.
-- ⚠️ **NO uses `gh pr merge --squash`**: el squash estampa el commit en `main` con el mail **primario de la cuenta de GitHub** (el de Lemon) y pisa tu `user.email` local; "Keep my email private" NO lo evita. **Forma correcta de mergear: push directo a `main` con el commit firmado en gmail** →
+- ⚠️ **NO uses `gh pr merge --squash`**: el squash estampa el commit en `main` con el mail **primario de la cuenta de GitHub autenticada en `gh`** (si es `patriciovallerino`, ese primario es el de Lemon) y pisa tu `user.email` local; "Keep my email private" NO lo evita. **Forma correcta de mergear: push directo a `main` con el commit firmado en gmail** →
   ```bash
   git checkout -b claude/<tarea>      # rama de trabajo
-  git commit ...                      # user.email = patriciovallerino@gmail.com
+  git commit ...                      # user.email = pvallerino@gmail.com
   git rebase origin/main              # si main avanzó
   git push origin HEAD:main           # ← merge real, sin squash, sin filtrar mail
   git fetch origin && git reset --hard origin/main
   ```
   Podés abrir un PR igual (para registro); GitHub lo marca "merged" al detectar el commit en `main`.
-- Cualquier push a `main` **deploya solo** a GitHub Pages (~30s, workflow `deploy.yml`).
+- Cualquier push a `main` **deploya solo** a GitHub Pages (~30s, workflow `deploy.yml`). Live: `https://vitucakes.github.io/vitucakes/`.

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { formatARS } from '../utils/calc'
 import { detectarSitemap, scrapeTiendanube } from '../utils/scrapeTiendanube'
 
-const REPO_ISSUE_URL = 'https://github.com/patriciovallerino/vitucakes/issues/new'
+const REPO_ISSUE_URL = 'https://github.com/vitucakes/vitucakes/issues/new'
 
 // Genera un id legible para guardar la competidora en localStorage. Si dos
 // users agregan la misma, los ids van a coincidir y se trata como la misma.
