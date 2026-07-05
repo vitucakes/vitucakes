@@ -121,21 +121,33 @@ vitucakes/
 │   ├── utils/
 │   │   ├── calc.js              # Cálculos y constantes (MARGEN, GASTOS_INDIRECTOS). Precio = receta entera
 │   │   ├── competencia.js       # Match recetas ↔ competencia (Jaccard + Levenshtein)
+│   │   ├── stock.js             # Lógica pura de stock: compras suman, ventas restan según receta
+│   │   ├── gestion.js           # Agregación por mes (facturado/comprado/ganancia) para Gestión
+│   │   ├── ticket.js            # Parser del OCR de tickets → líneas de compra pre-cargadas
+│   │   ├── papeleria.js         # Detección de insumos de packaging + productos sin packaging
 │   │   ├── seedData.js          # Siembra inicial: readDeviceData / readBackupData / buildFactoryData
 │   │   ├── scrapeGranate.js     # Scrape El Granate (insumos) vía proxy CORS
 │   │   └── scrapeTiendanube.js  # Scrape genérico de cualquier Tiendanube
 │   ├── components/
-│   │   ├── BottomNav.jsx        # Tab "Productos" (id sigue siendo 'recetas')
+│   │   ├── BottomNav.jsx        # Tabs: Insumos, Productos (id 'recetas') + Compras/Ventas/Gestión solo con PIN
 │   │   ├── BottomSheet.jsx
+│   │   ├── PickerBuscador.jsx   # Selector con buscador para listas largas (insumos/productos)
 │   │   ├── MatchManualSheet.jsx # Sheet con buscador para elegir match manual
-│   │   └── InsumoEditSheet.jsx  # Form de insumo reutilizable (InsumosPage + RecetaDetail inline)
+│   │   ├── InsumoEditSheet.jsx  # Form de insumo reutilizable (InsumosPage + RecetaDetail inline)
+│   │   ├── RecetaEditSheet.jsx  # Form de producto reutilizable (lista + detalle inline)
+│   │   ├── CompraEditSheet.jsx  # Alta/edición de compra: OCR de fotos, paquetes, pregunta de costos
+│   │   └── VentaEditSheet.jsx   # Alta/edición de venta: precios snapshot, aviso de stock
 │   └── pages/
-│       ├── InsumosPage.jsx      # CRUD insumos + "Actualizar precios". Sort por usos. Incrementa usos al abrir edición
+│       ├── InsumosPage.jsx      # CRUD insumos + "Actualizar precios". Sort por usos. Chip 📦 de stock siempre visible
 │       ├── RecetasPage.jsx      # CRUD productos (file name legacy). Sort por usos. LockToggle en header
 │       ├── RecetaDetail.jsx     # Detalle de producto. Controles de edición detrás de canEdit
 │       ├── ActualizarPreciosPage.jsx  # Sugerencias de precios (El Granate + Día)
 │       ├── ResolverMatchesPage.jsx    # Bulk review de matches con competencia
 │       ├── AgregarCompetidoraPage.jsx # Agregar competidora con scrape en vivo
+│       ├── ComprasPage.jsx      # Historial de compras: buscador + filtro fecha, editar/borrar
+│       ├── VentasPage.jsx       # Historial de ventas: facturación, buscador + fecha, detalle al tocar
+│       ├── GestionPage.jsx      # Control de gestión: ganancia por mes, promedio 3 meses, % s/ ventas
+│       ├── MarcarPapeleriaPage.jsx    # Marcar insumos de packaging (se entra desde el aviso de Productos)
 │       ├── BackupPage.jsx       # Export/restore/reset de la base COMPARTIDA (no localStorage)
 │       └── InicializarDatos.jsx # Primera carga (base vacía): subir de este dispositivo / backup / fábrica
 │       # (StockInicialPage.jsx se eliminó el 2026-07-05: la carga inicial ya se hizo)
@@ -150,6 +162,7 @@ vitucakes/
 │   ├── update-prices.mjs        # Cron: scrape de El Granate (insumos)
 │   ├── update-precios-dia.mjs   # Cron: precios de insumos en Día (VTEX)
 │   ├── update-competencia.mjs   # Cron: scrape de competidoras (3 plataformas)
+│   ├── backup-firestore.mjs     # Backup semanal de Firestore a backups/ (launchd, domingos 12:00)
 │   └── build-recetas-v2.mjs     # Generó recetas_v2.json (one-shot)
 ├── .github/workflows/
 │   ├── deploy.yml               # Deploy a GH Pages en push a main
