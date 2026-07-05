@@ -31,6 +31,17 @@ export default function GestionPage({ ventas, compras }) {
     anteriores.push(resumenMes(ventas, compras, k))
   }
 
+  // Promedio mensual de los 3 meses anteriores (÷3): normaliza el timing de
+  // compra/venta cuando se compra un mes y se vende otro.
+  const promedio = {
+    facturado: anteriores.reduce((s, m) => s + m.facturado, 0) / 3,
+    gastado: anteriores.reduce((s, m) => s + m.gastado, 0) / 3,
+  }
+  promedio.ganancia = promedio.facturado - promedio.gastado
+
+  // % de ganancia sobre lo facturado (margen). null si no hubo ventas.
+  const pctGanancia = (r) => (r.facturado > 0 ? Math.round((r.ganancia / r.facturado) * 100) : null)
+
   const r = detalle ? resumenMes(ventas, compras, detalle.key) : null
   const tituloDetalle = detalle
     ? `${{ ventas: 'Ventas', compras: 'Compras', ganancia: 'Ganancia' }[detalle.tipo]} · ${nombreMes(detalle.key)}`
@@ -165,6 +176,34 @@ export default function GestionPage({ ventas, compras }) {
               {formatARS(actual.ganancia)} <span className="text-gray-300 font-normal text-base">›</span>
             </span>
           </button>
+          {pctGanancia(actual) != null && (
+            <p className="text-right text-[11px] text-gray-400">
+              = <span className={`font-bold ${colorGanancia(actual.ganancia)}`}>{pctGanancia(actual)}%</span> de lo facturado
+            </p>
+          )}
+        </div>
+
+        {/* Promedio mensual de los 3 meses anteriores */}
+        <div className="bg-white rounded-2xl p-3 shadow-sm border border-brand-50">
+          <p className="text-xs font-bold text-gray-500 mb-0.5">Promedio mensual</p>
+          <p className="text-[10px] text-gray-400 mb-2">Últimos 3 meses ÷ 3 — empareja compras y ventas de meses distintos.</p>
+          <div className="grid grid-cols-3 gap-2">
+            <div className="bg-brand-50 rounded-xl px-2 py-2">
+              <p className="text-[10px] text-gray-400 font-semibold">Facturado</p>
+              <p className="text-xs font-bold text-gray-800 break-words">{fmtCorto(promedio.facturado)}</p>
+            </div>
+            <div className="bg-brand-50 rounded-xl px-2 py-2">
+              <p className="text-[10px] text-gray-400 font-semibold">Compras</p>
+              <p className="text-xs font-bold text-gray-800 break-words">−{fmtCorto(promedio.gastado)}</p>
+            </div>
+            <div className="bg-brand-50 rounded-xl px-2 py-2">
+              <p className="text-[10px] text-gray-400 font-semibold">Ganancia</p>
+              <p className={`text-xs font-bold break-words ${colorGanancia(promedio.ganancia)}`}>{fmtCorto(promedio.ganancia)}</p>
+              {pctGanancia(promedio) != null && (
+                <p className={`text-[10px] font-semibold ${colorGanancia(promedio.ganancia)}`}>{pctGanancia(promedio)}% s/ ventas</p>
+              )}
+            </div>
+          </div>
         </div>
 
         {/* Referencia: los 3 meses anteriores */}
