@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-06-30T06:19:17.095Z",
+  "generadoEn": "2026-07-07T06:14:55.046Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -234,12 +234,12 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 10.8,
+      "precio": 11,
       "unidad": "g",
       "producto": "Crema de Leche Milkaut por 5 Litros",
       "granateQty": 5000,
       "granateUnit": "ml",
-      "granatePrecioTotal": 54000,
+      "granatePrecioTotal": 55000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1136-crema-de-leche-milkaut-por-5-litros-4170"
     },
     {
