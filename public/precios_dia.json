@@ -1,15 +1,15 @@
 {
-  "generadoEn": "2026-06-30T06:34:32.155Z",
+  "generadoEn": "2026-07-07T06:19:39.225Z",
   "fuente": "Día",
   "items": [
     {
       "nombre": "Aceite",
-      "precio": 3.5933,
+      "precio": 3.83,
       "unidad": "ml",
       "producto": "Aceite de Girasol Dia 1,5 Lt.",
       "diaQty": 1500,
       "diaUnit": "ml",
-      "diaPrecioTotal": 5390,
+      "diaPrecioTotal": 5745,
       "match": "curado"
     },
     {
@@ -33,16 +33,6 @@
       "match": "curado"
     },
     {
-      "nombre": "Azúcar impalpable",
-      "precio": 6.91,
-      "unidad": "g",
-      "producto": "Azúcar Impalpable Dia 100 Gr.",
-      "diaQty": 100,
-      "diaUnit": "g",
-      "diaPrecioTotal": 691,
-      "match": "curado"
-    },
-    {
       "nombre": "Baggio",
       "precio": 999,
       "unidad": "u",
@@ -54,12 +44,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 1.99,
+      "precio": 1.89,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1990,
+      "diaPrecioTotal": 1890,
       "match": "curado"
     },
     {
@@ -134,20 +124,20 @@
     },
     {
       "nombre": "Chocolatada 200ml",
-      "precio": 10.225,
+      "precio": 7.15,
       "unidad": "u",
       "producto": "Nesquik Extra Cacao Chocolatada Listo Para Tomar X 200 Ml.",
       "diaQty": 200,
       "diaUnit": "u",
-      "diaPrecioTotal": 2045,
+      "diaPrecioTotal": 1430,
       "match": "curado"
     },
     {
       "nombre": "Chocolate",
-      "precio": 33.625,
+      "precio": 26.9,
       "unidad": "g",
-      "producto": "Chocolate con leche DIA 80 Gr.",
-      "diaQty": 80,
+      "producto": "Chocolate para Taza DIA 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
       "diaPrecioTotal": 2690,
       "match": "auto"
@@ -194,12 +184,22 @@
     },
     {
       "nombre": "Dulce de leche",
-      "precio": 5.5,
+      "precio": 6.5,
       "unidad": "g",
-      "producto": "Dulce de Leche Light DIA 400 Gr.",
-      "diaQty": 400,
+      "producto": "Dulce de Leche DIA 1 Kg.",
+      "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 2200,
+      "diaPrecioTotal": 6500,
+      "match": "curado"
+    },
+    {
+      "nombre": "Esencia de vainilla",
+      "precio": 21.55,
+      "unidad": "ml",
+      "producto": "Esencia Artificial Alicante Vainilla 100 Ml.",
+      "diaQty": 100,
+      "diaUnit": "ml",
+      "diaPrecioTotal": 2155,
       "match": "curado"
     },
     {
@@ -324,22 +324,22 @@
     },
     {
       "nombre": "Leche",
-      "precio": 2.05,
+      "precio": 1.975,
       "unidad": "ml",
-      "producto": "Leche Entera DIA Larga Vida 1 Lt.",
+      "producto": "Leche fresca La Serenisima Reducida en Lactosa 1 Lt.",
       "diaQty": 1000,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2050,
+      "diaPrecioTotal": 1975,
       "match": "curado"
     },
     {
       "nombre": "LECHE CONDENSADA",
-      "precio": 8.8608,
+      "precio": 11.1392,
       "unidad": "g",
       "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3500,
+      "diaPrecioTotal": 4400,
       "match": "auto"
     },
     {
@@ -364,12 +364,12 @@
     },
     {
       "nombre": "Maicena",
-      "precio": 7.998,
+      "precio": 7.36,
       "unidad": "g",
       "producto": "Almidón De Maíz Maizena Clásica Sin Tacc 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 3999,
+      "diaPrecioTotal": 3680,
       "match": "curado"
     },
     {
@@ -424,12 +424,12 @@
     },
     {
       "nombre": "Mermelada Frambuesa",
-      "precio": 7.1586,
+      "precio": 6.1674,
       "unidad": "g",
       "producto": "Mermelada Dia Frambuesa 454 Gr.",
       "diaQty": 454,
       "diaUnit": "g",
-      "diaPrecioTotal": 3250,
+      "diaPrecioTotal": 2800,
       "match": "auto"
     },
     {
@@ -544,12 +544,12 @@
     },
     {
       "nombre": "Queso semiduro",
-      "precio": 9.4828,
+      "precio": 9.9621,
       "unidad": "g",
       "producto": "Queso Cremoso Clásico Dia 290 Gr.",
       "diaQty": 290,
       "diaUnit": "g",
-      "diaPrecioTotal": 2750,
+      "diaPrecioTotal": 2889,
       "match": "curado"
     },
     {
@@ -564,12 +564,12 @@
     },
     {
       "nombre": "Salsa de tomate",
-      "precio": 3.95,
+      "precio": 3.9676,
       "unidad": "g",
       "producto": "Salsa Knorr Pizza 340 Gr.",
       "diaQty": 340,
       "diaUnit": "g",
-      "diaPrecioTotal": 1343,
+      "diaPrecioTotal": 1349,
       "match": "curado"
     },
     {
@@ -584,22 +584,22 @@
     },
     {
       "nombre": "Tomate",
-      "precio": 5.29,
+      "precio": 1.99,
       "unidad": "g",
-      "producto": "Tomate Redondo x Kg.",
+      "producto": "Tomate Comercial en bolsa malla x 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5290,
+      "diaPrecioTotal": 1990,
       "match": "curado"
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 5.99,
+      "precio": 4.2,
       "unidad": "g",
-      "producto": "Tomate Cherry x Kg.",
+      "producto": "Tomates Cherry en Racimo x 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5990,
+      "diaPrecioTotal": 4200,
       "match": "curado"
     },
     {
@@ -624,22 +624,22 @@
     },
     {
       "nombre": "Avena",
-      "precio": 3.7,
+      "precio": 3.925,
       "unidad": "g",
       "producto": "Avena Instantanea Exlusivo 400 Gr.",
       "diaQty": 400,
       "diaUnit": "g",
-      "diaPrecioTotal": 1480,
+      "diaPrecioTotal": 1570,
       "match": "curado"
     },
     {
       "nombre": "Leche condensada",
-      "precio": 8.8608,
+      "precio": 11.1392,
       "unidad": "g",
       "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3500,
+      "diaPrecioTotal": 4400,
       "match": "curado"
     },
     {
@@ -684,12 +684,12 @@
     },
     {
       "nombre": "Pan rallado",
-      "precio": 2.09,
+      "precio": 2.35,
       "unidad": "g",
-      "producto": "Pan Rallado Morixe 1 Kg.",
-      "diaQty": 1000,
+      "producto": "Pan Rallado Exclusivo 400 Gr.",
+      "diaQty": 400,
       "diaUnit": "g",
-      "diaPrecioTotal": 2090,
+      "diaPrecioTotal": 940,
       "match": "curado"
     },
     {
@@ -705,7 +705,7 @@
   ],
   "errores": [
     {
-      "nombre": "Esencia de vainilla",
+      "nombre": "Azúcar impalpable",
       "error": "sin candidato válido",
       "encontrados": 0
     }
