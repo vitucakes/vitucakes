@@ -58,13 +58,19 @@ export default function GestionPage({ ventas, compras }) {
           <div key={v.id} className="bg-brand-50 rounded-xl px-3 py-2.5">
             <div className="flex justify-between items-center mb-1">
               <span className="text-xs font-bold text-gray-700">{formatDate(v.fecha)}</span>
-              <span className="text-sm font-black text-brand-600">{formatARS(v.total)}</span>
+              {v.gratis ? (
+                <span className="text-sm font-black text-emerald-600">🎁 Gratis</span>
+              ) : (
+                <span className="text-sm font-black text-brand-600">{formatARS(v.total)}</span>
+              )}
             </div>
             <ul className="space-y-0.5">
               {(v.items || []).map((it, idx) => (
                 <li key={idx} className="flex justify-between text-xs text-gray-600 gap-2">
                   <span className="break-words">{it.cantidad}× {it.nombre}</span>
-                  <span className="text-gray-400 whitespace-nowrap">{formatARS(it.precioUnitario * it.cantidad)}</span>
+                  <span className={`whitespace-nowrap ${v.gratis ? 'text-gray-300 line-through' : 'text-gray-400'}`}>
+                    {formatARS(it.precioUnitario * it.cantidad)}
+                  </span>
                 </li>
               ))}
             </ul>

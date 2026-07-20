@@ -145,7 +145,11 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-gray-800">{formatDate(v.fecha)}</span>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-black text-brand-600">{formatARS(v.total)}</span>
+                {v.gratis ? (
+                  <span className="text-sm font-black text-emerald-600">🎁 Gratis</span>
+                ) : (
+                  <span className="text-sm font-black text-brand-600">{formatARS(v.total)}</span>
+                )}
                 {canEdit && (
                   <>
                     <button
@@ -168,7 +172,9 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
               {(v.items || []).map((it, idx) => (
                 <li key={idx} className="flex justify-between text-sm text-gray-600 gap-2">
                   <span className="break-words">{it.cantidad}× {it.nombre}</span>
-                  <span className="text-gray-400 whitespace-nowrap">{formatARS(it.precioUnitario * it.cantidad)}</span>
+                  <span className={`whitespace-nowrap ${v.gratis ? 'text-gray-300 line-through' : 'text-gray-400'}`}>
+                    {formatARS(it.precioUnitario * it.cantidad)}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -211,7 +217,7 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
                         <p className="text-sm font-semibold text-gray-800 break-words">{it.cantidad}× {it.nombre}</p>
                         <p className="text-[11px] text-gray-400">{formatARS(it.precioUnitario)} c/u</p>
                       </div>
-                      <span className="text-sm font-bold text-gray-800 whitespace-nowrap">
+                      <span className={`text-sm font-bold whitespace-nowrap ${v.gratis ? 'text-gray-300 line-through' : 'text-gray-800'}`}>
                         {formatARS(it.precioUnitario * it.cantidad)}
                       </span>
                     </div>
@@ -220,7 +226,16 @@ export default function VentasPage({ ventas, setVentas, insumos, setInsumos, rec
 
                 <div className="flex items-center justify-between px-1">
                   <span className="text-sm font-semibold text-gray-600">Total de la venta</span>
-                  <span className="text-xl font-black text-brand-600">{formatARS(v.total)}</span>
+                  {v.gratis ? (
+                    <span className="text-right">
+                      <span className="text-xl font-black text-emerald-600">🎁 Gratis</span>
+                      <p className="text-[11px] text-gray-400 line-through">
+                        {formatARS((v.items || []).reduce((s, it) => s + it.precioUnitario * it.cantidad, 0))}
+                      </p>
+                    </span>
+                  ) : (
+                    <span className="text-xl font-black text-brand-600">{formatARS(v.total)}</span>
+                  )}
                 </div>
 
                 {(v.consumo || []).length > 0 && (

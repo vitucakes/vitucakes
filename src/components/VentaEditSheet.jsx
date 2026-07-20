@@ -16,10 +16,14 @@ const emptyLinea = () => ({ recetaId: '', cantidad: '1' })
 export default function VentaEditSheet({ isOpen, venta, recetas, insumos, onClose, onSubmit }) {
   const [fecha, setFecha] = useState(todayISO())
   const [lineas, setLineas] = useState([emptyLinea()])
+  // Venta gratis (regalo a la familia, canje, etc.): descuenta el stock igual,
+  // pero factura $0. Los items conservan su precio snapshot como referencia.
+  const [gratis, setGratis] = useState(false)
 
   useEffect(() => {
     if (!isOpen) return
     setFecha(venta?.fecha ?? todayISO())
+    setGratis(!!venta?.gratis)
     setLineas(
       venta?.items?.length
         ? venta.items.map((it) => ({ recetaId: it.recetaId, cantidad: String(it.cantidad) }))
@@ -53,7 +57,9 @@ export default function VentaEditSheet({ isOpen, venta, recetas, insumos, onClos
       precioUnitario: precioDe(l.recetaId),
     }
   })
-  const total = items.reduce((s, it) => s + it.precioUnitario * it.cantidad, 0)
+  // Valor de referencia (lo que valdría cobrada); si es gratis, factura $0.
+  const totalReferencia = items.reduce((s, it) => s + it.precioUnitario * it.cantidad, 0)
+  const total = gratis ? 0 : totalReferencia
 
   // Preview de stock que quedaría negativo (avisar, pero permitir igual).
   // En edición, el stock actual todavía tiene descontada la venta vieja, así
@@ -72,7 +78,7 @@ export default function VentaEditSheet({ isOpen, venta, recetas, insumos, onClos
 
   const submit = () => {
     if (!puedeGuardar) return
-    onSubmit({ fecha, items, total, consumo })
+    onSubmit({ fecha, items, total, consumo, gratis })
   }
 
   return (
@@ -137,9 +143,32 @@ export default function VentaEditSheet({ isOpen, venta, recetas, insumos, onClos
           + Agregar otro producto
         </button>
 
+        {/* Venta gratis: regalo/canje — stock y costo iguales, facturación $0 */}
+        <label className="flex items-center justify-between gap-3 bg-brand-50 rounded-xl px-3 py-2.5 cursor-pointer">
+          <div className="min-w-0">
+            <span className="text-sm font-semibold text-gray-700">🎁 Venta gratis (regalo)</span>
+            <p className="text-[11px] text-gray-400">Tortas para la familia, canjes… Descuenta el stock igual, pero factura $0.</p>
+          </div>
+          <input
+            type="checkbox"
+            checked={gratis}
+            onChange={(e) => setGratis(e.target.checked)}
+            className="w-5 h-5 accent-brand-500 flex-shrink-0"
+          />
+        </label>
+
         <div className="flex items-center justify-between px-1">
           <span className="text-sm font-semibold text-gray-600">Total de la venta</span>
-          <span className="text-xl font-black text-brand-600">{formatARS(total)}</span>
+          {gratis ? (
+            <span className="text-right">
+              <span className="text-xl font-black text-emerald-600">🎁 $ 0</span>
+              {totalReferencia > 0 && (
+                <p className="text-[11px] text-gray-400 line-through">{formatARS(totalReferencia)}</p>
+              )}
+            </span>
+          ) : (
+            <span className="text-xl font-black text-brand-600">{formatARS(total)}</span>
+          )}
         </div>
 
         {faltantes.length > 0 && (
