@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-07-14T09:23:41.382Z",
+  "generadoEn": "2026-07-21T10:34:47.067Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -134,13 +134,13 @@
     },
     {
       "nombre": "Coco rayado",
-      "precio": 10.5,
+      "precio": 12,
       "unidad": "g",
-      "producto": "Coco Rallado por Kg",
+      "producto": "Coco Rallado Por 1 Kilo Cumaná",
       "granateQty": 1000,
       "granateUnit": "g",
-      "granatePrecioTotal": 10500,
-      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1508-coco-rallado-por-kg-4530"
+      "granatePrecioTotal": 12000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1710-coco-rallado-por-1-kilo-cumana-4889"
     },
     {
       "nombre": "Almedras",
@@ -254,13 +254,13 @@
     },
     {
       "nombre": "Avena",
-      "precio": 3.5,
+      "precio": 5.5,
       "unidad": "g",
-      "producto": "Harina de Avena por 1 Kg",
-      "granateQty": 1000,
+      "producto": "Avena Instantánea por 400 Grs",
+      "granateQty": 400,
       "granateUnit": "g",
-      "granatePrecioTotal": 3500,
-      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1053-harina-de-avena-por-1-kg-4087"
+      "granatePrecioTotal": 2200,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1054-avena-instantanea-por-400-grs-4088"
     },
     {
       "nombre": "Nutella",
