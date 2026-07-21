@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-07-07T06:19:39.225Z",
+  "generadoEn": "2026-07-21T10:36:48.859Z",
   "fuente": "Día",
   "items": [
     {
@@ -54,12 +54,12 @@
     },
     {
       "nombre": "Bicarbonato de sodio",
-      "precio": 9.8,
+      "precio": 7.13,
       "unidad": "g",
-      "producto": "Bicarbonato I Love Bicarbonato 500 Gr.",
-      "diaQty": 500,
+      "producto": "Bicarbonato I Love Bicarbonato 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 4900,
+      "diaPrecioTotal": 713,
       "match": "curado"
     },
     {
@@ -134,12 +134,12 @@
     },
     {
       "nombre": "Chocolate",
-      "precio": 26.9,
+      "precio": 33.4688,
       "unidad": "g",
-      "producto": "Chocolate para Taza DIA 100 Gr.",
-      "diaQty": 100,
+      "producto": "Chocolate Con Leche Baton 16 Gr.",
+      "diaQty": 16,
       "diaUnit": "g",
-      "diaPrecioTotal": 2690,
+      "diaPrecioTotal": 535.5,
       "match": "auto"
     },
     {
@@ -154,12 +154,12 @@
     },
     {
       "nombre": "Cinta",
-      "precio": 2165,
+      "precio": 2240,
       "unidad": "u",
       "producto": "Cinta Embalar Transparente Candela 1 Ud.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2165,
+      "diaPrecioTotal": 2240,
       "match": "auto"
     },
     {
@@ -204,12 +204,12 @@
     },
     {
       "nombre": "Frutilla",
-      "precio": 2990,
+      "precio": 4990,
       "unidad": "u",
       "producto": "Frutilla en Cubeta 250 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2990,
+      "diaPrecioTotal": 4990,
       "match": "auto"
     },
     {
@@ -254,12 +254,12 @@
     },
     {
       "nombre": "Harina 000",
-      "precio": 0.89,
+      "precio": 0.915,
       "unidad": "g",
       "producto": "Harina de Trigo 000 DIA 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 890,
+      "diaPrecioTotal": 915,
       "match": "curado"
     },
     {
@@ -294,22 +294,22 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 29.95,
+      "precio": 32.45,
       "unidad": "g",
-      "producto": "Jamón Cocido Paladini Feteado Fino 200 Gr.",
+      "producto": "Jamón Cocido Cagnoli 200 Gr.",
       "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 5990,
+      "diaPrecioTotal": 6490,
       "match": "curado"
     },
     {
       "nombre": "Jugo de limón",
-      "precio": 2145,
+      "precio": 2100,
       "unidad": "u",
-      "producto": "Jugo de Limón Minerva 250 Ml.",
+      "producto": "Jugo De Limón Dia 500 Ml.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2145,
+      "diaPrecioTotal": 2100,
       "match": "auto"
     },
     {
@@ -414,12 +414,12 @@
     },
     {
       "nombre": "Membrillo",
-      "precio": 5.56,
+      "precio": 5.82,
       "unidad": "g",
       "producto": "Dulce De Membrillo Dia 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 2780,
+      "diaPrecioTotal": 2910,
       "match": "curado"
     },
     {
@@ -484,12 +484,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 17.5424,
+      "precio": 18.8136,
       "unidad": "g",
       "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 6210,
+      "diaPrecioTotal": 6660,
       "match": "curado"
     },
     {
@@ -510,16 +510,6 @@
       "diaQty": 1000,
       "diaUnit": "g",
       "diaPrecioTotal": 13490,
-      "match": "curado"
-    },
-    {
-      "nombre": "Polvo de hornear",
-      "precio": 21.02,
-      "unidad": "g",
-      "producto": "Polvo para Hornear DIA 50 Gr.",
-      "diaQty": 50,
-      "diaUnit": "g",
-      "diaPrecioTotal": 1051,
       "match": "curado"
     },
     {
@@ -594,12 +584,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 4.2,
+      "precio": 6.99,
       "unidad": "g",
-      "producto": "Tomates Cherry en Racimo x 1 Kg.",
+      "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 4200,
+      "diaPrecioTotal": 6990,
       "match": "curado"
     },
     {
@@ -708,6 +698,11 @@
       "nombre": "Azúcar impalpable",
       "error": "sin candidato válido",
       "encontrados": 0
+    },
+    {
+      "nombre": "Polvo de hornear",
+      "error": "sin candidato válido",
+      "encontrados": 25
     }
   ]
 }
