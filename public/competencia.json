@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-07-14T09:27:50.239Z",
+  "generadoEn": "2026-07-21T10:37:56.982Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -103,17 +103,10 @@
           "descripcion": "Alimonada! Bizcochos húmedos de limón, relleno con frosting de chocolate blanco y limón, y mermelada de arándanos. Tiene 20cm y rinde entre 15/18 porciones! ...",
           "precio": 70900,
           "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
-        },
-        {
-          "slug": "box-argentina-1avtx",
-          "nombre": "Box Argentina",
-          "descripcion": "BOX ARGENTINA Un mix de nuestras mejores opciones dulces y saladas, pensado para compartir y disfrutarlo alentando a la selección. Los sa...",
-          "precio": 37500,
-          "url": "https://candelitte.mitiendanube.com/productos/box-argentina-1avtx/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-07-14T09:27:51.277Z"
+      "updatedAt": "2026-07-21T10:37:58.077Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -248,7 +241,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-07-14T09:27:53.444Z"
+      "updatedAt": "2026-07-21T10:37:59.523Z"
     },
     {
       "id": "silnari",
@@ -514,7 +507,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-07-14T09:27:58.010Z"
+      "updatedAt": "2026-07-21T10:38:03.107Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1734,7 +1727,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-07-14T09:28:19.178Z"
+      "updatedAt": "2026-07-21T10:38:22.381Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2043,20 +2036,6 @@
           "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani/"
         },
         {
-          "slug": "cheesecake",
-          "nombre": "Cheesecake",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base crocante de almendras, cremoso a base de tofu orgánico, gelée de frutos rojos, y frutos rojos enteros....",
-          "precio": 72000,
-          "url": "https://www.natispasteleria.com.ar/productos/cheesecake/"
-        },
-        {
-          "slug": "porcion-cheesecake",
-          "nombre": "Porcion Cheesecake",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base crocante de almendras, cremoso a base de tofu orgánico, gelée de frutos rojos, y frutos rojos enteros....",
-          "precio": 7200,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake/"
-        },
-        {
           "slug": "garrapinadas-de-avellanas",
           "nombre": "Garrapiñadas de avellanas",
           "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
@@ -2125,23 +2104,17 @@
           "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, cubierto con frosting de tofu y caju sa...",
           "precio": 65000,
           "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/"
-        },
-        {
-          "slug": "garrapinadas-de-pistacho-aoz0n",
-          "nombre": "Garrapiñadas de pistacho",
-          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo...",
-          "precio": 15500,
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/"
-        },
-        {
-          "slug": "franatis-tpbk8",
-          "nombre": "Franatis",
-          "descripcion": "Veganas y sin harinas (no apto celiacos) Frambuesas bañadas en chocolate blanco vegano y con chocolate semiamargo Presentacion en bolsita de 100g FOTO ILUSTR...",
-          "precio": 16100,
-          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/"
         }
       ],
       "errores": [
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/",
+          "error": "sin precio"
+        },
         {
           "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/",
           "error": "sin precio"
@@ -2207,7 +2180,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-07-14T09:28:24.044Z"
+      "updatedAt": "2026-07-21T10:38:26.374Z"
     }
   ]
 }
