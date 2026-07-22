@@ -12,6 +12,7 @@ import InicializarDatos from './pages/InicializarDatos'
 import ComprasPage from './pages/ComprasPage'
 import VentasPage from './pages/VentasPage'
 import GestionPage from './pages/GestionPage'
+import RevisarStockPage from './pages/RevisarStockPage'
 import MarcarPapeleriaPage from './pages/MarcarPapeleriaPage'
 import BottomNav from './components/BottomNav'
 import { mergeCompetidoras } from './utils/competencia'
@@ -72,7 +73,7 @@ export default function App() {
   useEffect(() => {
     if (canEdit) return
     if (page === 'compras' || page === 'ventas' || page === 'gestion') setPage('recetas')
-    else if (page === 'marcar-papeleria') setPage('insumos')
+    else if (page === 'marcar-papeleria' || page === 'revisar-stock') setPage('insumos')
   }, [canEdit, page])
 
   // Siembra inicial de la base compartida (una sola vez). La dispara el user
@@ -112,7 +113,11 @@ export default function App() {
             setInsumos={setInsumos}
             recetas={recetas}
             onActualizarPrecios={() => navigate('actualizar-precios')}
+            onRevisarStock={() => navigate('revisar-stock')}
           />
+        )}
+        {page === 'revisar-stock' && canEdit && (
+          <RevisarStockPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />
         )}
         {page === 'marcar-papeleria' && canEdit && (
           <MarcarPapeleriaPage insumos={insumos} setInsumos={setInsumos} onBack={() => navigate('insumos')} />

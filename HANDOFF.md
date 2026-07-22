@@ -148,9 +148,9 @@ vitucakes/
 │       ├── VentasPage.jsx       # Historial de ventas: facturación, buscador + fecha, detalle al tocar
 │       ├── GestionPage.jsx      # Control de gestión: ganancia por mes, promedio 3 meses, % s/ ventas
 │       ├── MarcarPapeleriaPage.jsx    # Marcar insumos de packaging (se entra desde el aviso de Productos)
+│       ├── RevisarStockPage.jsx       # Reconteo masivo de stock de todos los insumos (botón en Insumos)
 │       ├── BackupPage.jsx       # Export/restore/reset de la base COMPARTIDA (no localStorage)
 │       └── InicializarDatos.jsx # Primera carga (base vacía): subir de este dispositivo / backup / fábrica
-│       # (StockInicialPage.jsx se eliminó el 2026-07-05: la carga inicial ya se hizo)
 ├── public/
 │   ├── precarga.json            # 167 insumos + 139 recetas (datos de fábrica)
 │   ├── recetas_v2.json          # Migración v2 (insumos y recetas nuevas)
@@ -392,7 +392,11 @@ Resumen:
 - Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
 - Datos del user: viven en **Firestore** (nube), ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (💾 en Productos) baja una copia JSON extra. **Ojo**: si reconstruís la app en otro hosting sin el mismo proyecto Firebase (config en `src/firebase.js`), no vas a tener los datos — necesitás ese proyecto o sembrar de cero desde un backup. Para correr 100% offline/sin nube habría que volver a `useLocalStorage` (ver git antes de la migración a Firebase).
 
-## Último estado (2026-07-20)
+## Último estado (2026-07-22)
+
+- **Botón "Revisar stock" en Insumos** (`pages/RevisarStockPage.jsx`, ruta `revisar-stock`, solo modo edición) — banner azul 📦 arriba de todo en la lista de Insumos. Abre la vista de reconteo masivo: TODOS los insumos con su stock actual pre-cargado y editable de una; lo que escribís **pisa** el stock (conteo de inventario, no un movimiento), campo vacío = no toca, "0" pone cero. Buscador + filtro "solo los que faltan" + barra "Guardar cambios (N)" que solo cuenta los distintos al actual. Es la vieja `StockInicialPage` (borrada el 2026-07-05) recuperada del historial de git y rebautizada — ahora para reconteos recurrentes, no solo la carga inicial.
+
+## Antes (2026-07-20)
 
 - **Venta GRATIS (regalo)** — tilde "🎁 Venta gratis (regalo)" en el form de venta (`VentaEditSheet`, campo `venta.gratis`): para tortas de la familia, canjes, etc. **Descuenta el stock igual** (el `consumo` no cambia) pero **factura $0** (`total: 0` → no suma en la facturación de Ventas ni en Gestión, automáticamente, porque todo suma `v.total`). Los `items` conservan su `precioUnitario` snapshot como **valor de referencia**: se muestra tachado en el historial, el detalle y Gestión, con badge "🎁 Gratis" en lugar del total. Al editar una venta gratis el tilde viene precargado; destildarlo vuelve a facturar al precio snapshot. Ventas viejas sin el campo = comportamiento normal.
 
