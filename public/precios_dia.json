@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-07-21T10:36:48.859Z",
+  "generadoEn": "2026-07-28T11:03:48.542Z",
   "fuente": "Día",
   "items": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 1.89,
+      "precio": 1.99,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1890,
+      "diaPrecioTotal": 1990,
       "match": "curado"
     },
     {
@@ -134,22 +134,22 @@
     },
     {
       "nombre": "Chocolate",
-      "precio": 33.4688,
+      "precio": 26.9,
       "unidad": "g",
-      "producto": "Chocolate Con Leche Baton 16 Gr.",
-      "diaQty": 16,
+      "producto": "Chocolate para Taza DIA 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 535.5,
+      "diaPrecioTotal": 2690,
       "match": "auto"
     },
     {
       "nombre": "Chocolinas",
-      "precio": 9.68,
+      "precio": 10.9922,
       "unidad": "g",
-      "producto": "Galletitas Chocolate Chocolinas 250 Gr.",
-      "diaQty": 250,
+      "producto": "Galletitas Negro Chocolinas 258 Gr.",
+      "diaQty": 258,
       "diaUnit": "g",
-      "diaPrecioTotal": 2420,
+      "diaPrecioTotal": 2836,
       "match": "curado"
     },
     {
@@ -174,12 +174,12 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 10.005,
+      "precio": 10.45,
       "unidad": "g",
-      "producto": "Crema de Leche DIA Larga Vida 200 Ml.",
+      "producto": "Crema De Leche Dia 200 Ml.",
       "diaQty": 200,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2001,
+      "diaPrecioTotal": 2090,
       "match": "curado"
     },
     {
@@ -204,12 +204,12 @@
     },
     {
       "nombre": "Frutilla",
-      "precio": 4990,
+      "precio": 4590,
       "unidad": "u",
       "producto": "Frutilla en Cubeta 250 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 4990,
+      "diaPrecioTotal": 4590,
       "match": "auto"
     },
     {
@@ -244,12 +244,12 @@
     },
     {
       "nombre": "grasa",
-      "precio": 6.8,
+      "precio": 7.3,
       "unidad": "g",
       "producto": "Grasa Vacuna Dia 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6800,
+      "diaPrecioTotal": 7300,
       "match": "curado"
     },
     {
@@ -374,12 +374,12 @@
     },
     {
       "nombre": "Manteca",
-      "precio": 18.2,
+      "precio": 18.75,
       "unidad": "g",
       "producto": "Manteca DIA Calidad Extra 200 Gr.",
       "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 3640,
+      "diaPrecioTotal": 3750,
       "match": "curado"
     },
     {
@@ -474,22 +474,22 @@
     },
     {
       "nombre": "Oregano",
-      "precio": 35,
+      "precio": 61.48,
       "unidad": "g",
-      "producto": "Orégano Dia 50 Gr.",
-      "diaQty": 50,
+      "producto": "Oregano Alicante 25 Gr.",
+      "diaQty": 25,
       "diaUnit": "g",
-      "diaPrecioTotal": 1750,
+      "diaPrecioTotal": 1537,
       "match": "curado"
     },
     {
       "nombre": "Oreos",
-      "precio": 18.8136,
+      "precio": 17.9944,
       "unidad": "g",
       "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 6660,
+      "diaPrecioTotal": 6370,
       "match": "curado"
     },
     {
@@ -524,12 +524,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 10.7107,
+      "precio": 10.925,
       "unidad": "g",
       "producto": "Queso Crema Clasico Ricrem 280 Gr.",
       "diaQty": 280,
       "diaUnit": "g",
-      "diaPrecioTotal": 2999,
+      "diaPrecioTotal": 3059,
       "match": "curado"
     },
     {
@@ -584,22 +584,22 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 6.99,
+      "precio": 7.59,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6990,
+      "diaPrecioTotal": 7590,
       "match": "curado"
     },
     {
       "nombre": "Vainillas",
-      "precio": 1576,
+      "precio": 1718,
       "unidad": "u",
       "producto": "Vainillas Dia 148 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1576,
+      "diaPrecioTotal": 1718,
       "match": "auto"
     },
     {
