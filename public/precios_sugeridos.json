@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-07-28T11:00:18.820Z",
+  "generadoEn": "2026-08-04T11:10:46.955Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -104,12 +104,12 @@
     },
     {
       "nombre": "Margarina",
-      "precio": 6.8,
+      "precio": 5.8,
       "unidad": "g",
       "producto": "Margarina Hojaldre Premium Calsa 5 Kg",
       "granateQty": 5000,
       "granateUnit": "g",
-      "granatePrecioTotal": 34000,
+      "granatePrecioTotal": 29000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1194-margarina-hojaldre-premium-calsa-5-kg-4227"
     },
     {
