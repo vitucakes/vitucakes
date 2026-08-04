@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-07-28T11:04:17.374Z",
+  "generadoEn": "2026-08-04T11:32:06.427Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -106,7 +106,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-07-28T11:04:18.104Z"
+      "updatedAt": "2026-08-04T11:32:07.375Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -241,7 +241,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-07-28T11:04:19.349Z"
+      "updatedAt": "2026-08-04T11:32:08.721Z"
     },
     {
       "id": "silnari",
@@ -469,7 +469,7 @@
           "slug": "torta-rogel",
           "nombre": "Torta Rogel",
           "descripcion": "El rogel de siempre, con el toque Silnari que lo lleva a otro nivel.Ocho discos de masa crocante y hojaldrada, unidos por capas generosas de dulce de leche repostero y coronados co",
-          "precio": 44100,
+          "precio": 49000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-rogel"
         },
         {
@@ -507,19 +507,1227 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-07-28T11:04:21.485Z"
+      "updatedAt": "2026-08-04T11:32:11.126Z"
     },
     {
       "id": "delicias-del-corazon",
       "nombre": "Delicias del Corazón",
       "fuente": "https://deliciasdelcorazon.com.ar",
-      "productos": [],
-      "errores": [
+      "productos": [
         {
-          "error": "Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON"
+          "slug": "alfajores-de-chocolate-cajita-por-6",
+          "nombre": "Alfajores de Chocolate cajita por 6",
+          "descripcion": "",
+          "precio": 19000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/alfajores-de-chocolate-cajita-por-6/"
+        },
+        {
+          "slug": "alfajorcitos-de-maicena-con-cubierta-de-chocolate",
+          "nombre": "Alfajorcitos de maicena con cubierta de chocolate",
+          "descripcion": "El precio corresponde a una docena (12 unidades).-",
+          "precio": 8415,
+          "url": "https://deliciasdelcorazon.com.ar/producto/alfajorcitos-de-maicena-con-cubierta-de-chocolate/"
+        },
+        {
+          "slug": "alfajorcitos-de-chocolate",
+          "nombre": "Alfajorcitos de chocolate",
+          "descripcion": "El precio corresponde a una docena (12 unidades).-",
+          "precio": 12180,
+          "url": "https://deliciasdelcorazon.com.ar/producto/alfajorcitos-de-chocolate/"
+        },
+        {
+          "slug": "alfajorcitos-de-maicena",
+          "nombre": "Alfajorcitos de maicena",
+          "descripcion": "El precio corresponde a una docena (12 unidades).-",
+          "precio": 6705,
+          "url": "https://deliciasdelcorazon.com.ar/producto/alfajorcitos-de-maicena/"
+        },
+        {
+          "slug": "drip-cake-30",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-30/"
+        },
+        {
+          "slug": "drip-cake-29",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-29/"
+        },
+        {
+          "slug": "drip-cake-mariposas-y-macarons",
+          "nombre": "Drip Cake Mariposas y Macarons",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-mariposas-y-macarons/"
+        },
+        {
+          "slug": "drip-cake-jirafa",
+          "nombre": "Drip Cake Jirafa",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-jirafa/"
+        },
+        {
+          "slug": "drip-cake-con-macarons-2",
+          "nombre": "Drip Cake con Macarons",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-con-macarons-2/"
+        },
+        {
+          "slug": "drip-cake-mujer",
+          "nombre": "Drip Cake Mujer",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-mujer/"
+        },
+        {
+          "slug": "modelo-comunion-10",
+          "nombre": "Modelo Comunion",
+          "descripcion": "",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/modelo-comunion-10/"
+        },
+        {
+          "slug": "drip-cake-chicago-bulls",
+          "nombre": "Drip Cake Chicago Bulls",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-chicago-bulls/"
+        },
+        {
+          "slug": "drip-cake-28",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-28/"
+        },
+        {
+          "slug": "drip-cake-27",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-27/"
+        },
+        {
+          "slug": "modelo-comunion-9",
+          "nombre": "Modelo Comunion",
+          "descripcion": "",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/modelo-comunion-9/"
+        },
+        {
+          "slug": "drip-cake-frida",
+          "nombre": "Drip Cake Frida",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-frida/"
+        },
+        {
+          "slug": "drip-cake-26",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-26/"
+        },
+        {
+          "slug": "comic-cake",
+          "nombre": "Comic Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/comic-cake/"
+        },
+        {
+          "slug": "modelo-comunion-8",
+          "nombre": "Modelo Comunion",
+          "descripcion": "",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/modelo-comunion-8/"
+        },
+        {
+          "slug": "drip-cake-rosas-y-detalles-oro",
+          "nombre": "Drip Cake Rosas y detalles oro",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-rosas-y-detalles-oro/"
+        },
+        {
+          "slug": "drip-cake-golden",
+          "nombre": "Drip Cake Golden",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-golden/"
+        },
+        {
+          "slug": "drip-cake-elefantito",
+          "nombre": "Drip Cake Elefantito",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-elefantito/"
+        },
+        {
+          "slug": "drip-cake-ferrero-rocher",
+          "nombre": "Drip Cake Ferrero Rocher",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-ferrero-rocher/"
+        },
+        {
+          "slug": "drip-cake-oreo",
+          "nombre": "Drip Cake Oreo",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-oreo/"
+        },
+        {
+          "slug": "drip-cake-chocotorta-blackpink",
+          "nombre": "Drip Cake Chocotorta Blackpink",
+          "descripcion": "Novedad marzo 2022!!!!",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-chocotorta-blackpink/"
+        },
+        {
+          "slug": "drip-cake-chocotorta",
+          "nombre": "Drip Cake Chocotorta",
+          "descripcion": "Novedad julio 2024!!!!",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-chocotorta/"
+        },
+        {
+          "slug": "drip-cake-cumpleanos-con-rosa",
+          "nombre": "Drip Cake Cumpleaños con rosa",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-cumpleanos-con-rosa/"
+        },
+        {
+          "slug": "drip-cake-choco-oreo",
+          "nombre": "Drip Cake Choco Oreo",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-choco-oreo/"
+        },
+        {
+          "slug": "drip-cake-blanca-y-negra",
+          "nombre": "Drip Cake blanca y negra",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-blanca-y-negra/"
+        },
+        {
+          "slug": "drip-cake-con-macarons",
+          "nombre": "Drip Cake con macarons",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-con-macarons/"
+        },
+        {
+          "slug": "drip-cake-frutos-del-bosque",
+          "nombre": "Drip Cake frutos del bosque",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-frutos-del-bosque/"
+        },
+        {
+          "slug": "drip-cake-frutos-rojos",
+          "nombre": "Drip Cake frutos rojos",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-frutos-rojos/"
+        },
+        {
+          "slug": "drip-cake-chocolate-intenso",
+          "nombre": "Drip Cake Chocolate intenso",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-chocolate-intenso/"
+        },
+        {
+          "slug": "drip-cake-black-deep",
+          "nombre": "Drip Cake Black Deep",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-black-deep/"
+        },
+        {
+          "slug": "drip-cake-happy",
+          "nombre": "Drip Cake Happy",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-happy/"
+        },
+        {
+          "slug": "drip-cake-cumpleanos-2",
+          "nombre": "Drip Cake cumpleaños",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-cumpleanos-2/"
+        },
+        {
+          "slug": "drip-cake-river-plate-2",
+          "nombre": "Drip Cake River Plate",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-river-plate-2/"
+        },
+        {
+          "slug": "drip-cake-bosque",
+          "nombre": "Drip cake bosque",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-bosque/"
+        },
+        {
+          "slug": "drip-cake-con-paletas-heladas",
+          "nombre": "Drip cake con Paletas heladas",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-con-paletas-heladas/"
+        },
+        {
+          "slug": "drip-cake-deluxe-con-champagne",
+          "nombre": "Drip cake Deluxe con botellita de Champagne",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-deluxe-con-champagne/"
+        },
+        {
+          "slug": "drip-cake-rosas-rojas",
+          "nombre": "Drip cake Rosas Rojas",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-rosas-rojas/"
+        },
+        {
+          "slug": "drip-cake-roblox",
+          "nombre": "Drip Cake Roblox",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-roblox/"
+        },
+        {
+          "slug": "drip-cake-sirenita",
+          "nombre": "Drip Cake Sirenita",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-sirenita/"
+        },
+        {
+          "slug": "drip-cake-yoga",
+          "nombre": "Drip Cake Yoga",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-yoga/"
+        },
+        {
+          "slug": "drip-cake-cumpleanos",
+          "nombre": "Drip Cake cumpleaños",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-cumpleanos/"
+        },
+        {
+          "slug": "drip-cake-colores",
+          "nombre": "Drip Cake colores",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-colores/"
+        },
+        {
+          "slug": "drip-cake-walking-dead",
+          "nombre": "Drip Cake Walking Dead",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-walking-dead/"
+        },
+        {
+          "slug": "drip-cake-star-war",
+          "nombre": "Drip Cake Star War",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-star-war/"
+        },
+        {
+          "slug": "drip-cake-caballito",
+          "nombre": "Drip Cake Caballito",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-caballito/"
+        },
+        {
+          "slug": "drip-cake-25",
+          "nombre": "Drip Cake Mariposas",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-25/"
+        },
+        {
+          "slug": "drip-cake-spider-man",
+          "nombre": "Drip Cake Spider Man",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-spider-man/"
+        },
+        {
+          "slug": "drip-cake-24",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-24/"
+        },
+        {
+          "slug": "drip-cake-23",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-23/"
+        },
+        {
+          "slug": "drip-cake-mujer-maravilla",
+          "nombre": "Drip Cake Mujer Maravilla",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-mujer-maravilla/"
+        },
+        {
+          "slug": "drip-cake-sueno-dorado",
+          "nombre": "Drip Cake Sueño dorado",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-sueno-dorado/"
+        },
+        {
+          "slug": "drip-cake-ferrero",
+          "nombre": "Drip Cake Ferrero",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-ferrero/"
+        },
+        {
+          "slug": "drip-cake-super-heroes",
+          "nombre": "Drip Cake Super Heroes",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-super-heroes/"
+        },
+        {
+          "slug": "drip-cake-poco-yo",
+          "nombre": "Drip Cake Poco yo",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-poco-yo/"
+        },
+        {
+          "slug": "drip-cake-15-anos",
+          "nombre": "Drip Cake 15 años",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-15-anos/"
+        },
+        {
+          "slug": "drip-cake-among-us",
+          "nombre": "Drip Cake Among Us",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-among-us/"
+        },
+        {
+          "slug": "drip-cake-crazy-night",
+          "nombre": "Drip Cake Crazy Night",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-crazy-night/"
+        },
+        {
+          "slug": "drip-cake-frozen-2",
+          "nombre": "Drip Cake Frozen 2",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-frozen-2/"
+        },
+        {
+          "slug": "drip-cake-la-casita-de-calamardo",
+          "nombre": "Drip cake La casita de Calamardo",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-la-casita-de-calamardo/"
+        },
+        {
+          "slug": "drip-cake-pocoyo-y-sus-amigos",
+          "nombre": "Drip Cake Pocoyo y sus amigos",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-pocoyo-y-sus-amigos/"
+        },
+        {
+          "slug": "drip-cake-baby-dog",
+          "nombre": "Drip Cake Baby Dog",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-baby-dog/"
+        },
+        {
+          "slug": "drip-cake-harry-styles",
+          "nombre": "Drip Cake Harry Styles",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-harry-styles/"
+        },
+        {
+          "slug": "mini-drip-cake",
+          "nombre": "Mini Drip Cake 2Kg",
+          "descripcion": "",
+          "precio": 65000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/mini-drip-cake/"
+        },
+        {
+          "slug": "drip-cake-22",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-22/"
+        },
+        {
+          "slug": "drip-cake-21",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-21/"
+        },
+        {
+          "slug": "drip-cake-20",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-20/"
+        },
+        {
+          "slug": "drip-cake-19",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-19/"
+        },
+        {
+          "slug": "drip-cake-river-plate",
+          "nombre": "Drip Cake River Plate",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-river-plate/"
+        },
+        {
+          "slug": "drip-cake-18",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-18/"
+        },
+        {
+          "slug": "drip-cake-17",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-17/"
+        },
+        {
+          "slug": "drip-cake-chocolatoso",
+          "nombre": "Drip Cake Chocolatoso",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-chocolatoso/"
+        },
+        {
+          "slug": "drip-cake-gold-design",
+          "nombre": "Drip Cake Gold Design",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-gold-design/"
+        },
+        {
+          "slug": "drip-cake-16",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-16/"
+        },
+        {
+          "slug": "drip-cake-15",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-15/"
+        },
+        {
+          "slug": "drip-cake-14",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-14/"
+        },
+        {
+          "slug": "drip-cake-13",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-13/"
+        },
+        {
+          "slug": "drip-cake-12",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-12/"
+        },
+        {
+          "slug": "drip-cake-11",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-11/"
+        },
+        {
+          "slug": "drip-cake-10",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-10/"
+        },
+        {
+          "slug": "drip-cake-4",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-4/"
+        },
+        {
+          "slug": "drip-cake-3",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-3/"
+        },
+        {
+          "slug": "drip-cake-9",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-9/"
+        },
+        {
+          "slug": "drip-cake-8",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-8/"
+        },
+        {
+          "slug": "drip-cake-especial-macaron-ferrero",
+          "nombre": "Drip Cake Especial Macaron + Ferrero",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-especial-macaron-ferrero/"
+        },
+        {
+          "slug": "drip-cake-rosas",
+          "nombre": "Drip Cake Rosas",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-rosas/"
+        },
+        {
+          "slug": "drip-cake-psicologia-2-choco-oreo-2-galletas-tematicas",
+          "nombre": "Drip Cake Psicologia + 2 Choco Oreo + 2 Galletas tematicas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 2 Choco Oreo y 2 Galletas tematicas a eleccion, y decorada ademas con chocolates, Oreos de Oro y los legendarios Macarons!!!! Incluye adorno tematico",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-psicologia-2-choco-oreo-2-galletas-tematicas/"
+        },
+        {
+          "slug": "drip-cake-4-choco-oreo-2-galletas-tematicas-4",
+          "nombre": "Drip Cake + 4 Choco Oreo + 2 Galletas tematicas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 4 Choco Oreo y 2 Galletas tematicas a eleccion, y decorada ademas con chocolates, Oreos de Oro y los legendarios Macarons!!!!",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-4-choco-oreo-2-galletas-tematicas-4/"
+        },
+        {
+          "slug": "drip-cake-2-choco-oreo-2-paletas-rellenas",
+          "nombre": "Drip Cake + 2 Choco Oreo + 2 Paletas rellenas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 2 Choco Oreo y 2 paletas rellenas, y decorada a eleccion!",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-2-choco-oreo-2-paletas-rellenas/"
+        },
+        {
+          "slug": "drip-cake-7",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-7/"
+        },
+        {
+          "slug": "drip-cake-4-choco-oreo-2-galletas-tematicas-3",
+          "nombre": "Drip Cake + 4 Choco Oreo + 2 Galletas tematicas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 4 Choco Oreo y 2 Galletas tematicas a eleccion, y decorada ademas con chocolates, Oreos de Oro y los legendarios Macarons!!!!",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-4-choco-oreo-2-galletas-tematicas-3/"
+        },
+        {
+          "slug": "drip-cake-4-choco-oreo-2-galletas-tematicas-2",
+          "nombre": "Drip Cake + 4 Choco Oreo + 2 Galletas tematicas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 4 Choco Oreo y 2 Galletas tematicas a eleccion, y decorada ademas con chocolates, Oreos de Oro y los legendarios Macarons!!!!",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-4-choco-oreo-2-galletas-tematicas-2/"
+        },
+        {
+          "slug": "drip-cake-4-choco-oreo-2-galletas-tematicas",
+          "nombre": "Drip Cake + 4 Choco Oreo + 2 Galletas tematicas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 4 Choco Oreo y 2 Galletas tematicas a eleccion, y decorada ademas con chocolates, Oreos de Oro y los legendarios Macarons!!!!",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-4-choco-oreo-2-galletas-tematicas/"
+        },
+        {
+          "slug": "drip-cake-2-choco-oreo-2-galletas-tematicas",
+          "nombre": "Drip Cake + 4 Choco Oreo + 2 Galletas tematicas",
+          "descripcion": "Esta increible Drip cake viene acompañada con 4 Choco Oreo y 2 Galletas tematicas a eleccion, y decorada ademas con chocolates, Oreos de Oro y los legendarios Macarons!!!!",
+          "precio": 95000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-2-choco-oreo-2-galletas-tematicas/"
+        },
+        {
+          "slug": "drip-cake-copia-2",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-copia-2/"
+        },
+        {
+          "slug": "drip-cake-6",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-6/"
+        },
+        {
+          "slug": "drip-cake-5",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-5/"
+        },
+        {
+          "slug": "drip-cake-2",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake-2/"
+        },
+        {
+          "slug": "drip-cake",
+          "nombre": "Drip Cake",
+          "descripcion": "",
+          "precio": 85000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/drip-cake/"
+        },
+        {
+          "slug": "macarons-rellenos-x-24",
+          "nombre": "Macarons rellenos x 24",
+          "descripcion": "El precio es por 2 docenas (2 sabores por docena)",
+          "precio": 45000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/macarons-rellenos-x-24/"
+        },
+        {
+          "slug": "macarons-rellenos-caja-especial-45-unidades",
+          "nombre": "Macarons rellenos x 45 Caja Especial",
+          "descripcion": "El precio es por 45 unidades (4 sabores a eleccion)",
+          "precio": 80000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/macarons-rellenos-caja-especial-45-unidades/"
+        },
+        {
+          "slug": "macarons-rellenos",
+          "nombre": "Macarons rellenos x 12",
+          "descripcion": "El precio es por 1 docena (2 sabores por docena)",
+          "precio": 25000,
+          "url": "https://deliciasdelcorazon.com.ar/producto/macarons-rellenos/"
+        },
+        {
+          "slug": "matilda",
+          "nombre": "Matilda",
+          "descripcion": "",
+          "precio": 56440,
+          "url": "https://deliciasdelcorazon.com.ar/producto/matilda/"
+        },
+        {
+          "slug": "postre-chaja",
+          "nombre": "Postre Chaja",
+          "descripcion": "",
+          "precio": 50863,
+          "url": "https://deliciasdelcorazon.com.ar/producto/postre-chaja/"
+        },
+        {
+          "slug": "torta-patagonia",
+          "nombre": "Torta Patagonia",
+          "descripcion": "",
+          "precio": 51760,
+          "url": "https://deliciasdelcorazon.com.ar/producto/torta-patagonia/"
+        },
+        {
+          "slug": "tarta-de-lima",
+          "nombre": "Tarta de Lima Key lime pie",
+          "descripcion": "",
+          "precio": 56942,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-lima/"
+        },
+        {
+          "slug": "marquise-oreo",
+          "nombre": "Marquise Oreo",
+          "descripcion": "",
+          "precio": 53190,
+          "url": "https://deliciasdelcorazon.com.ar/producto/marquise-oreo/"
+        },
+        {
+          "slug": "cheesecake-dulce-de-leche",
+          "nombre": "Cheesecake Dulce de leche",
+          "descripcion": "",
+          "precio": 49456,
+          "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-dulce-de-leche/"
+        },
+        {
+          "slug": "torta-tres-mousses",
+          "nombre": "Torta tres Mousses",
+          "descripcion": "",
+          "precio": 50863,
+          "url": "https://deliciasdelcorazon.com.ar/producto/torta-tres-mousses/"
+        },
+        {
+          "slug": "carrot-cake",
+          "nombre": "Carrot Cake",
+          "descripcion": "",
+          "precio": 50863,
+          "url": "https://deliciasdelcorazon.com.ar/producto/carrot-cake/"
+        },
+        {
+          "slug": "red-velvet",
+          "nombre": "Red Velvet",
+          "descripcion": "",
+          "precio": 51240,
+          "url": "https://deliciasdelcorazon.com.ar/producto/red-velvet/"
+        },
+        {
+          "slug": "brownies-de-chocolate-con-nuez-con-bano-de-chocolate",
+          "nombre": "Brownies de Chocolate con Nuez, con baño de chocolate",
+          "descripcion": "Precio por media docena.-",
+          "precio": 27415,
+          "url": "https://deliciasdelcorazon.com.ar/producto/brownies-de-chocolate-con-nuez-con-bano-de-chocolate/"
+        },
+        {
+          "slug": "torta-bombon",
+          "nombre": "Torta Bombon",
+          "descripcion": "",
+          "precio": 49846,
+          "url": "https://deliciasdelcorazon.com.ar/producto/torta-bombon/"
+        },
+        {
+          "slug": "torta-bon-o-bon",
+          "nombre": "Torta Bon o Bon",
+          "descripcion": "",
+          "precio": 50863,
+          "url": "https://deliciasdelcorazon.com.ar/producto/torta-bon-o-bon/"
+        },
+        {
+          "slug": "torta-oreo",
+          "nombre": "Torta Oreo",
+          "descripcion": "",
+          "precio": 50863,
+          "url": "https://deliciasdelcorazon.com.ar/producto/torta-oreo/"
+        },
+        {
+          "slug": "chocotorta-xxl-5-kilos",
+          "nombre": "Chocotorta XXL 5 kilos",
+          "descripcion": "",
+          "precio": 123632,
+          "url": "https://deliciasdelcorazon.com.ar/producto/chocotorta-xxl-5-kilos/"
+        },
+        {
+          "slug": "tarta-de-chocolate-con-dulce-de-leche",
+          "nombre": "Torta de chocolate con Dulce de leche",
+          "descripcion": "",
+          "precio": 49866,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-chocolate-con-dulce-de-leche/"
+        },
+        {
+          "slug": "modelo-corazon-para-enamorados",
+          "nombre": "Modelo Corazon para enamorados",
+          "descripcion": "",
+          "precio": 103758,
+          "url": "https://deliciasdelcorazon.com.ar/producto/modelo-corazon-para-enamorados/"
+        },
+        {
+          "slug": "tarta-de-pastelera-y-arandanos",
+          "nombre": "Tarta de pastelera y arandanos",
+          "descripcion": "",
+          "precio": 47528,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-pastelera-y-arandanos/"
+        },
+        {
+          "slug": "postre-jardin-de-los-cerezos",
+          "nombre": "Postre Jardin de los cerezos",
+          "descripcion": "",
+          "precio": 52988,
+          "url": "https://deliciasdelcorazon.com.ar/producto/postre-jardin-de-los-cerezos/"
+        },
+        {
+          "slug": "box-feliz-dia-papa",
+          "nombre": "Cajoncito Cervezero",
+          "descripcion": "",
+          "precio": 74749,
+          "url": "https://deliciasdelcorazon.com.ar/producto/box-feliz-dia-papa/"
+        },
+        {
+          "slug": "box-papa-mi-heroe",
+          "nombre": "Box «Papá, mi heroe»",
+          "descripcion": "",
+          "precio": 74749,
+          "url": "https://deliciasdelcorazon.com.ar/producto/box-papa-mi-heroe/"
+        },
+        {
+          "slug": "desayuno-campestre",
+          "nombre": "Desayuno «Campestre»",
+          "descripcion": "",
+          "precio": 74749,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-campestre/"
+        },
+        {
+          "slug": "desayuno-suena-en-grande",
+          "nombre": "Desayuno «Sueña en grande»",
+          "descripcion": "",
+          "precio": 76375,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-suena-en-grande/"
+        },
+        {
+          "slug": "party-box-para-15-personas",
+          "nombre": "Party Box para 15 personas",
+          "descripcion": "",
+          "precio": 203125,
+          "url": "https://deliciasdelcorazon.com.ar/producto/party-box-para-15-personas/"
+        },
+        {
+          "slug": "tarta-de-ricota-y-dulce-de-leche",
+          "nombre": "Tarta de ricota y Dulce de leche",
+          "descripcion": "",
+          "precio": 39016,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-ricota-y-dulce-de-leche/"
+        },
+        {
+          "slug": "mix-de-frutos-rojos",
+          "nombre": "Mix de frutos rojos",
+          "descripcion": "",
+          "precio": 43207,
+          "url": "https://deliciasdelcorazon.com.ar/producto/mix-de-frutos-rojos/"
+        },
+        {
+          "slug": "box-sweetest-thing",
+          "nombre": "Box «Sweetest thing»",
+          "descripcion": "Con Amor….Delicias del corazon",
+          "precio": 30339,
+          "url": "https://deliciasdelcorazon.com.ar/producto/box-sweetest-thing/"
+        },
+        {
+          "slug": "box-love-of-my-life",
+          "nombre": "Box «Love of my life»",
+          "descripcion": "Con Amor….Delicias del corazon",
+          "precio": 28044,
+          "url": "https://deliciasdelcorazon.com.ar/producto/box-love-of-my-life/"
+        },
+        {
+          "slug": "crumble-de-manzanas",
+          "nombre": "Crumble de Manzanas",
+          "descripcion": "",
+          "precio": 37470,
+          "url": "https://deliciasdelcorazon.com.ar/producto/crumble-de-manzanas/"
+        },
+        {
+          "slug": "pavlova-modificada",
+          "nombre": "Pavlova modificada",
+          "descripcion": "",
+          "precio": 77006,
+          "url": "https://deliciasdelcorazon.com.ar/producto/pavlova-modificada/"
+        },
+        {
+          "slug": "cheesecake-maracuya",
+          "nombre": "Cheesecake Maracuya con base de Brownie!",
+          "descripcion": "",
+          "precio": 48559,
+          "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-maracuya/"
+        },
+        {
+          "slug": "choco-oreo-2",
+          "nombre": "Choco Oreo",
+          "descripcion": "",
+          "precio": 50863,
+          "url": "https://deliciasdelcorazon.com.ar/producto/choco-oreo-2/"
+        },
+        {
+          "slug": "desayuno-te-extrano-amigo",
+          "nombre": "Desayuno «Te extraño amigo»",
+          "descripcion": "PROMOCION DIA DEL AMIGO!!!",
+          "precio": 61425,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-te-extrano-amigo/"
+        },
+        {
+          "slug": "desayuno-mateamos-a-la-distancia",
+          "nombre": "Desayuno «Mateamos a la distancia»",
+          "descripcion": "PROMOCION DIA DEL AMIGO!!!",
+          "precio": 63700,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-mateamos-a-la-distancia/"
+        },
+        {
+          "slug": "desayuno-merienda-campero",
+          "nombre": "Desayuno/Merienda Campero",
+          "descripcion": "",
+          "precio": 88498,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-campero/"
+        },
+        {
+          "slug": "party-box-para-8-personas",
+          "nombre": "Party Box para 8 personas",
+          "descripcion": "",
+          "precio": 144625,
+          "url": "https://deliciasdelcorazon.com.ar/producto/party-box-para-8-personas/"
+        },
+        {
+          "slug": "party-box-para-4-personas",
+          "nombre": "Party Box para 4 personas",
+          "descripcion": "",
+          "precio": 105625,
+          "url": "https://deliciasdelcorazon.com.ar/producto/party-box-para-4-personas/"
+        },
+        {
+          "slug": "desayuno-merienda-premium",
+          "nombre": "Desayuno/Merienda Premium",
+          "descripcion": "",
+          "precio": 64014,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-premium/"
+        },
+        {
+          "slug": "desayuno-merienda-economico",
+          "nombre": "Desayuno/Merienda Economico",
+          "descripcion": "",
+          "precio": 64350,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-economico/"
+        },
+        {
+          "slug": "desayuno-merienda-infantil",
+          "nombre": "Desayuno/Merienda Infantil",
+          "descripcion": "Precio promocional por el Dia del Niño hasta agotar stock de 50 unidades. Reserva el tuyo hoy mismo!!!",
+          "precio": 55645,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-infantil/"
+        },
+        {
+          "slug": "modelo-corazon",
+          "nombre": "Modelo Corazon para enamorados con Rosas Naturales",
+          "descripcion": "",
+          "precio": 130996,
+          "url": "https://deliciasdelcorazon.com.ar/producto/modelo-corazon/"
+        },
+        {
+          "slug": "desayuno",
+          "nombre": "Desayuno/Merienda Standard",
+          "descripcion": "",
+          "precio": 45500,
+          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno/"
+        },
+        {
+          "slug": "778",
+          "nombre": "Cheesecake Cherry",
+          "descripcion": "",
+          "precio": 43926,
+          "url": "https://deliciasdelcorazon.com.ar/producto/778/"
+        },
+        {
+          "slug": "new-york-cheesecake-con-cubierta-de-chocolate",
+          "nombre": "New york cheesecake con cubierta de chocolate",
+          "descripcion": "",
+          "precio": 43926,
+          "url": "https://deliciasdelcorazon.com.ar/producto/new-york-cheesecake-con-cubierta-de-chocolate/"
+        },
+        {
+          "slug": "pasta-frola",
+          "nombre": "Pasta frola",
+          "descripcion": "",
+          "precio": 32183,
+          "url": "https://deliciasdelcorazon.com.ar/producto/pasta-frola/"
+        },
+        {
+          "slug": "new-york-cheesecake",
+          "nombre": "New york cheesecake",
+          "descripcion": "",
+          "precio": 43926,
+          "url": "https://deliciasdelcorazon.com.ar/producto/new-york-cheesecake/"
+        },
+        {
+          "slug": "pastelera-y-frutos-rojos",
+          "nombre": "Pastelera y frutos rojos",
+          "descripcion": "",
+          "precio": 43207,
+          "url": "https://deliciasdelcorazon.com.ar/producto/pastelera-y-frutos-rojos/"
+        },
+        {
+          "slug": "tarta-bombon",
+          "nombre": "Tarta bombon",
+          "descripcion": "",
+          "precio": 35640,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-bombon/"
+        },
+        {
+          "slug": "tarta-de-duraznos",
+          "nombre": "Tarta de duraznos",
+          "descripcion": "",
+          "precio": 47190,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-duraznos/"
+        },
+        {
+          "slug": "brownie-con-frutos-rojos",
+          "nombre": "Brownie con frutos rojos",
+          "descripcion": "",
+          "precio": 41318,
+          "url": "https://deliciasdelcorazon.com.ar/producto/brownie-con-frutos-rojos/"
+        },
+        {
+          "slug": "marquise-de-chocolate",
+          "nombre": "Marquise de chocolate",
+          "descripcion": "",
+          "precio": 41870,
+          "url": "https://deliciasdelcorazon.com.ar/producto/marquise-de-chocolate/"
+        },
+        {
+          "slug": "crumble-de-frutos-rojos",
+          "nombre": "Crumble de frutos rojos",
+          "descripcion": "",
+          "precio": 41950,
+          "url": "https://deliciasdelcorazon.com.ar/producto/crumble-de-frutos-rojos/"
+        },
+        {
+          "slug": "pavlova",
+          "nombre": "Pavlova",
+          "descripcion": "",
+          "precio": 62189,
+          "url": "https://deliciasdelcorazon.com.ar/producto/pavlova/"
+        },
+        {
+          "slug": "postre-balcarce",
+          "nombre": "Postre Balcarce",
+          "descripcion": "Clasico postre Argentino",
+          "precio": 44452,
+          "url": "https://deliciasdelcorazon.com.ar/producto/postre-balcarce/"
+        },
+        {
+          "slug": "brownie",
+          "nombre": "Brownie",
+          "descripcion": "",
+          "precio": 41073,
+          "url": "https://deliciasdelcorazon.com.ar/producto/brownie/"
+        },
+        {
+          "slug": "crumble-de-peras",
+          "nombre": "Crumble de Peras",
+          "descripcion": "",
+          "precio": 41218,
+          "url": "https://deliciasdelcorazon.com.ar/producto/crumble-de-peras/"
+        },
+        {
+          "slug": "american-chocolate-cookies-chips",
+          "nombre": "Chocolate Cookies Chips!",
+          "descripcion": "Precio por media docena.-",
+          "precio": 16825,
+          "url": "https://deliciasdelcorazon.com.ar/producto/american-chocolate-cookies-chips/"
+        },
+        {
+          "slug": "tiramisu",
+          "nombre": "Tiramisu",
+          "descripcion": "",
+          "precio": 44274,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tiramisu/"
+        },
+        {
+          "slug": "cheesecake-oreo",
+          "nombre": "Cheesecake Oreo",
+          "descripcion": "",
+          "precio": 44274,
+          "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-oreo/"
+        },
+        {
+          "slug": "selva-negra",
+          "nombre": "Selva Negra",
+          "descripcion": "",
+          "precio": 45441,
+          "url": "https://deliciasdelcorazon.com.ar/producto/selva-negra/"
+        },
+        {
+          "slug": "lemon-pie",
+          "nombre": "Lemon Pie",
+          "descripcion": "",
+          "precio": 49853,
+          "url": "https://deliciasdelcorazon.com.ar/producto/lemon-pie/"
+        },
+        {
+          "slug": "tarta-de-ricota",
+          "nombre": "Tarta de ricota",
+          "descripcion": "",
+          "precio": 37066,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-ricota/"
+        },
+        {
+          "slug": "tarta-de-coco-y-dulce-de-leche",
+          "nombre": "Tarta de coco y dulce de leche",
+          "descripcion": "",
+          "precio": 39016,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-coco-y-dulce-de-leche/"
+        },
+        {
+          "slug": "torta-rogel",
+          "nombre": "Torta Rogel",
+          "descripcion": "",
+          "precio": 40388,
+          "url": "https://deliciasdelcorazon.com.ar/producto/torta-rogel/"
+        },
+        {
+          "slug": "chocotorta-cumpleanera",
+          "nombre": "Chocotorta Explosiva!",
+          "descripcion": "",
+          "precio": 66568,
+          "url": "https://deliciasdelcorazon.com.ar/producto/chocotorta-cumpleanera/"
+        },
+        {
+          "slug": "tarta-frutal",
+          "nombre": "Tarta frutal",
+          "descripcion": "",
+          "precio": 48289,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-frutal/"
+        },
+        {
+          "slug": "tarta-de-frutillas",
+          "nombre": "Tarta de frutillas",
+          "descripcion": "",
+          "precio": 53009,
+          "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-frutillas/"
+        },
+        {
+          "slug": "cheesecake-frutos-rojos",
+          "nombre": "Cheesecake frutos rojos",
+          "descripcion": "",
+          "precio": 44662,
+          "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-frutos-rojos/"
+        },
+        {
+          "slug": "chocotorta",
+          "nombre": "Chocotorta",
+          "descripcion": "",
+          "precio": 45320,
+          "url": "https://deliciasdelcorazon.com.ar/producto/chocotorta/"
         }
       ],
-      "updatedAt": "2026-07-28T11:04:26.453Z"
+      "errores": [],
+      "updatedAt": "2026-08-04T11:32:45.001Z"
     },
     {
       "id": "natis-pasteleria",
@@ -903,29 +2111,44 @@
           "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo...",
           "precio": 15500,
           "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/"
+        },
+        {
+          "slug": "franatis-tpbk8",
+          "nombre": "Franatis",
+          "descripcion": "Veganas y sin harinas (no apto celiacos) Frambuesas bañadas en chocolate blanco vegano y con chocolate semiamargo Presentacion en bolsita de 100g FOTO ILUSTR...",
+          "precio": 16100,
+          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/"
+        },
+        {
+          "slug": "porcion-natisdad-dcbas",
+          "nombre": "Porcion Natisdad",
+          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
+          "precio": 12100,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/"
+        },
+        {
+          "slug": "natisdad-4oou5",
+          "nombre": "Natisdad",
+          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
+          "precio": 55000,
+          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/"
+        },
+        {
+          "slug": "alfajores-havanatis-corazon-3-unidades-15nun",
+          "nombre": "Alfajores Havanati's corazon (3 unidades)",
+          "descripcion": "Veganos y sin gluten (no apto celiacos) Tapas de cacao con un toque de sal marina, rellenas con dulce de leche, con centro de ganache de dulce de leche y bañ...",
+          "precio": 10500,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/"
+        },
+        {
+          "slug": "alfajores-chocomani-corazon-x3-12hc4",
+          "nombre": "Alfajores Chocomani corazon x3",
+          "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
+          "precio": 10800,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/"
         }
       ],
       "errores": [
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/",
-          "error": "sin precio"
-        },
         {
           "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/",
           "error": "sin precio"
@@ -975,7 +2198,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-07-28T11:04:30.127Z"
+      "updatedAt": "2026-08-04T11:32:48.875Z"
     }
   ]
 }
