@@ -38,7 +38,7 @@ export default function VentaEditSheet({ isOpen, venta, recetas, insumos, onClos
     const orig = itemOriginal(recetaId)
     if (orig) return orig.precioUnitario
     const receta = recetas.find((r) => r.id === recetaId)
-    return receta ? calcPrecioVenta(receta, insumos) : 0
+    return receta ? calcPrecioVenta(receta, insumos, recetas) : 0
   }
 
   const setLinea = (i, patch) => setLineas((ls) => ls.map((l, idx) => (idx === i ? { ...l, ...patch } : l)))

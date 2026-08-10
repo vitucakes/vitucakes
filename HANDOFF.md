@@ -73,6 +73,7 @@ Los datos viven en **Firestore** (proyecto `vitucakes`), no en `localStorage`.
   rinde: number,                 // cuántas unidades produce (informativo; NO divide el precio)
   unidadRinde: string,           // 'unidades', 'porciones', etc.
   ingredientes: [{ insumoId: string, cantidad: number }],
+  componentes: [{ recetaId: string, cantidad: number }], // sub-productos: otras recetas que lleva. cantidad = UNIDADES del sub-producto (fracción = cantidad / sub.rinde). Opcional; ausente = []
   descripcion: string,           // texto para "Mensaje para clientes" (se le concatena el precio)
   matchesCompetencia: [{ competidoraId, productoSlug }],     // matches confirmados
   rechazadosCompetencia: [{ competidoraId, productoSlug }],  // matches rechazados
@@ -394,6 +395,11 @@ Resumen:
 
 ## Último estado (2026-07-22)
 
+- **Productos compuestos (un producto puede llevar otros productos)** — NUEVO. Además de insumos, una receta puede incluir **otras recetas ya creadas** como componentes: campo `receta.componentes: [{ recetaId, cantidad }]`, donde `cantidad` = **unidades del sub-producto** (ej: 1 alfajor de una receta que rinde 12). La fracción de la sub-receta = `cantidad / sub.rinde`. Ejemplo: un "Desayuno" que lleva 1 alfajor de "Alfajores de Nuez x12" → cantidad 1, fracción 1/12 ≈ 0,0833.
+  - **Costo** (`calcCostoInsumos` en `utils/calc.js`, ahora recursivo con param `recetas` + guarda `_seen` anti-ciclo): el componente suma el **costo de insumos CRUDO** de la sub-receta × fracción — así el 10% de indirectos y el 3x de margen se aplican una sola vez, arriba. `calcCostoReceta`/`calcPrecioVenta` toman `recetas` y hay que pasárselo en TODOS los sitios que muestran precio (RecetasPage, RecetaDetail, VentaEditSheet, App→RecetaDetail); si no se pasa, los componentes se ignoran (cuentan 0).
+  - **Stock** (`consumoDeItems` en `utils/stock.js`, ahora baja recursivamente vía `acumularConsumo`): vender un producto compuesto descuenta los insumos de sus sub-productos prorrateados por la fracción (1 alfajor = 1/12 de la nuez/harina de la receta de 12). Anidamiento multinivel OK; ciclos cortados.
+  - **UI** (`RecetaEditSheet`, prop `recetas`): sección "Lleva otros productos" con buscador de productos; entrás la cantidad en unidades y muestra la equivalencia ("1 de 12 = 0.0833 de la receta"). El selector excluye la receta misma y las que ya dependen de ella (`contieneA`, evita ciclos al armar). Se puede guardar un producto con solo componentes (sin insumos directos). El desglose de `RecetaDetail` muestra cada componente con 🧩 y su costo prorrateado. `convertirA1` también prorratea los componentes.
+  - Verificado con 18 tests (costo/consumo/ciclos/rinde 0/anidamiento) y en el browser creando un "Desayuno" real (borrado después): costo y desglose exactos.
 - **Botón "Revisar stock" en Insumos** (`pages/RevisarStockPage.jsx`, ruta `revisar-stock`, solo modo edición) — banner azul 📦 arriba de todo en la lista de Insumos. Abre la vista de reconteo masivo: TODOS los insumos con su stock actual pre-cargado y editable de una; lo que escribís **pisa** el stock (conteo de inventario, no un movimiento), campo vacío = no toca, "0" pone cero. Buscador + filtro "solo los que faltan" + barra "Guardar cambios (N)" que solo cuenta los distintos al actual. Es la vieja `StockInicialPage` (borrada el 2026-07-05) recuperada del historial de git y rebautizada — ahora para reconteos recurrentes, no solo la carga inicial.
 
 ## Antes (2026-07-20)

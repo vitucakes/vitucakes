@@ -17,18 +17,37 @@ export const fmtCant = (n) => (Number(n) || 0).toLocaleString('es-AR', { maximum
 
 const hoyISO = () => new Date().toISOString().slice(0, 10)
 
+// Acumula en `acc` (Map insumoId→cantidad) el consumo de insumos de una receta
+// multiplicado por `mult`. Si la receta lleva otros productos como componentes
+// (`componentes: [{recetaId, cantidad}]`, cantidad = unidades del sub-producto),
+// baja recursivamente: cada componente aporta su consumo × (cantidad / rinde).
+// `seen` corta ciclos (A→B→A) para no colgar el navegador.
+function acumularConsumo(acc, receta, mult, recetas, seen) {
+  if (!receta || seen.has(receta.id)) return
+  for (const ing of receta.ingredientes || []) {
+    acc.set(ing.insumoId, (acc.get(ing.insumoId) || 0) + (Number(ing.cantidad) || 0) * mult)
+  }
+  const componentes = receta.componentes || []
+  if (componentes.length === 0) return
+  const seen2 = new Set(seen)
+  seen2.add(receta.id)
+  for (const comp of componentes) {
+    const sub = recetas.find((r) => r.id === comp.recetaId)
+    if (!sub) continue
+    const rinde = Number(sub.rinde) || 1
+    const fraccion = (Number(comp.cantidad) || 0) / rinde
+    acumularConsumo(acc, sub, mult * fraccion, recetas, seen2)
+  }
+}
+
 // Consumo de insumos de una lista de items de venta [{ recetaId, cantidad }].
-// Por cada item suma ingrediente.cantidad * cantidad vendida. Devuelve la lista
+// Baja los sub-productos (componentes) a insumos reales. Devuelve la lista
 // agregada [{ insumoId, cantidad }] (un insumo puede repetirse entre recetas).
 export function consumoDeItems(items, recetas) {
   const acc = new Map()
   for (const it of items || []) {
     const receta = recetas.find((r) => r.id === it.recetaId)
-    if (!receta) continue
-    const mult = Number(it.cantidad) || 0
-    for (const ing of receta.ingredientes || []) {
-      acc.set(ing.insumoId, (acc.get(ing.insumoId) || 0) + (Number(ing.cantidad) || 0) * mult)
-    }
+    acumularConsumo(acc, receta, Number(it.cantidad) || 0, recetas, new Set())
   }
   return [...acc.entries()].map(([insumoId, cantidad]) => ({ insumoId, cantidad: round3(cantidad) }))
 }

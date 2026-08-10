@@ -143,7 +143,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
           </div>
         )}
         {filteredRecetas.map((r) => {
-          const costo = calcCostoReceta(r, insumos)
+          const costo = calcCostoReceta(r, insumos, recetas)
           // Precio de venta = costo total × margen (receta entera, no por unidad).
           const precioVenta = costo * MARGEN
           const tieneProblema = r.ingredientes.some((ing) => {
@@ -254,6 +254,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
         onClose={() => setOpen(false)}
         receta={editingReceta}
         insumos={insumos}
+        recetas={recetas}
         onSave={guardarReceta}
       />
 

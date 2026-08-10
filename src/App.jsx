@@ -193,6 +193,7 @@ export default function App() {
             receta={selectedReceta}
             insumos={insumos}
             setInsumos={setInsumos}
+            recetas={recetas}
             competidoras={competidoras}
             onBack={() => navigate(detalleOrigen)}
             onUpdate={(updated) =>

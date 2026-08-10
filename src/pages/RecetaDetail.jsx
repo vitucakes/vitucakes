@@ -8,7 +8,7 @@ import RecetaEditSheet from '../components/RecetaEditSheet'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 
-export default function RecetaDetail({ receta, insumos, setInsumos, competidoras = [], onBack, onUpdate, onDelete }) {
+export default function RecetaDetail({ receta, insumos, setInsumos, recetas = [], competidoras = [], onBack, onUpdate, onDelete }) {
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [matchManualOpen, setMatchManualOpen] = useState(false)
   const [confirmConvertir, setConfirmConvertir] = useState(false)
@@ -49,7 +49,7 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
     window.scrollTo({ top: 0 })
   }, [receta.id])
 
-  const costoInsumos = calcCostoInsumos(receta, insumos)
+  const costoInsumos = calcCostoInsumos(receta, insumos, recetas)
   const indirectos = calcGastosIndirectos(costoInsumos)
   const costo = calcCostoTotal(costoInsumos)
 
@@ -63,6 +63,15 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
   const ingredientesPorCosto = [...receta.ingredientes].sort(
     (a, b) => costoDeIngrediente(b) - costoDeIngrediente(a),
   )
+  // Sub-productos (componentes) con su costo de insumos prorrateado por rinde,
+  // para mostrarlos en el desglose igual que los ingredientes.
+  const componentesConCosto = (receta.componentes ?? []).map((comp) => {
+    const sub = recetas.find((r) => r.id === comp.recetaId)
+    const rinde = Number(sub?.rinde) || 1
+    const fraccion = (Number(comp.cantidad) || 0) / rinde
+    const costoComp = sub ? calcCostoInsumos(sub, insumos, recetas) * fraccion : 0
+    return { comp, sub, rinde, costo: costoComp }
+  }).sort((a, b) => b.costo - a.costo)
   // Precio de venta de la receta ENTERA (no por unidad). Si la receta produce
   // varias unidades pero se vende como lote, este es el precio del lote.
   // Para vender por unidad, ajustar la receta para que sea 1 unidad (botón
@@ -139,11 +148,17 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
       // Redondeamos a 2 decimales para no terminar con números raros tipo 0.0833.
       cantidad: Math.round((ing.cantidad / rindeActual) * 100) / 100,
     }))
+    // Los sub-productos también se prorratean (misma proporción que el resto).
+    const componentesAjustados = (receta.componentes ?? []).map((comp) => ({
+      ...comp,
+      cantidad: Math.round((comp.cantidad / rindeActual) * 10000) / 10000,
+    }))
     onUpdate({
       ...receta,
       rinde: 1,
       unidadRinde: receta.unidadRinde.replace(/s$/, ''),
       ingredientes: ingredientesAjustados,
+      componentes: componentesAjustados,
     })
     setConfirmConvertir(false)
   }
@@ -455,6 +470,26 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
                 </button>
               )
             })}
+            {/* Sub-productos que lleva la receta (componentes) */}
+            {componentesConCosto.map(({ comp, sub, rinde, costo: costoComp }) => {
+              const pct = costoInsumos > 0 ? (costoComp / costoInsumos) * 100 : 0
+              return (
+                <div key={comp.recetaId} className="rounded-xl px-1 py-1 -mx-1">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-sm text-gray-700 font-medium">
+                      🧩 {sub?.nombre ?? 'Producto borrado'}
+                    </span>
+                    <span className="text-sm font-semibold text-gray-800">{formatARS(costoComp)}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-1.5 bg-brand-50 rounded-full overflow-hidden">
+                      <div className="h-full bg-brand-200 rounded-full" style={{ width: `${pct}%` }} />
+                    </div>
+                    <span className="text-xs text-gray-400 w-16 text-right">{comp.cantidad} de {rinde}</span>
+                  </div>
+                </div>
+              )
+            })}
           </div>
           <div className="mt-4 pt-3 border-t border-brand-100 space-y-1.5">
             <div className="flex justify-between items-center">
@@ -524,6 +559,7 @@ export default function RecetaDetail({ receta, insumos, setInsumos, competidoras
         onClose={() => setEditandoReceta(false)}
         receta={receta}
         insumos={insumos}
+        recetas={recetas}
         onSave={guardarReceta}
       />
 
