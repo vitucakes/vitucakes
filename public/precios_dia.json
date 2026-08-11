@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-08-04T11:12:14.027Z",
+  "generadoEn": "2026-08-11T05:42:10.205Z",
   "fuente": "Día",
   "items": [
     {
@@ -124,12 +124,12 @@
     },
     {
       "nombre": "Chocolatada 200ml",
-      "precio": 6.6463,
+      "precio": 10.225,
       "unidad": "u",
       "producto": "Nesquik Extra Cacao Chocolatada Listo Para Tomar X 200 Ml.",
       "diaQty": 200,
       "diaUnit": "u",
-      "diaPrecioTotal": 1329.25,
+      "diaPrecioTotal": 2045,
       "match": "curado"
     },
     {
@@ -214,12 +214,12 @@
     },
     {
       "nombre": "Galletitas lincoln",
-      "precio": 11.329,
+      "precio": 7.9303,
       "unidad": "g",
       "producto": "Galletitas Dulces Lincoln Clásicas Terrabusi Tripack 459 Gr.",
       "diaQty": 459,
       "diaUnit": "g",
-      "diaPrecioTotal": 5200,
+      "diaPrecioTotal": 3640,
       "match": "curado"
     },
     {
@@ -414,12 +414,12 @@
     },
     {
       "nombre": "Mermelada Frambuesa",
-      "precio": 7.1586,
+      "precio": 7.3789,
       "unidad": "g",
       "producto": "Mermelada Dia Frambuesa 454 Gr.",
       "diaQty": 454,
       "diaUnit": "g",
-      "diaPrecioTotal": 3250,
+      "diaPrecioTotal": 3350,
       "match": "auto"
     },
     {
@@ -434,12 +434,12 @@
     },
     {
       "nombre": "Mix frutos secos",
-      "precio": 39.9,
+      "precio": 44.9,
       "unidad": "g",
       "producto": "Mix Frutos Secos LaSanjuanita con Coco 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 3990,
+      "diaPrecioTotal": 4490,
       "match": "auto"
     },
     {
@@ -474,22 +474,22 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 17.9944,
+      "precio": 11.2881,
       "unidad": "g",
-      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
+      "producto": "Galletitas Oreo Golden Sabor Vainilla Rellenas con Crema 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 6370,
+      "diaPrecioTotal": 3996,
       "match": "curado"
     },
     {
       "nombre": "Pasas de uva",
-      "precio": 17.5882,
+      "precio": 20.5294,
       "unidad": "g",
       "producto": "Pasas de Uva La Sanjuanita 170 Gr.",
       "diaQty": 170,
       "diaUnit": "g",
-      "diaPrecioTotal": 2990,
+      "diaPrecioTotal": 3490,
       "match": "curado"
     },
     {
@@ -514,12 +514,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 10.925,
+      "precio": 11.3143,
       "unidad": "g",
       "producto": "Queso Crema Clasico Ricrem 280 Gr.",
       "diaQty": 280,
       "diaUnit": "g",
-      "diaPrecioTotal": 3059,
+      "diaPrecioTotal": 3168,
       "match": "curado"
     },
     {
@@ -574,12 +574,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 6.49,
+      "precio": 5.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6490,
+      "diaPrecioTotal": 5990,
       "match": "curado"
     },
     {
