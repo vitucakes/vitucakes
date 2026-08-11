@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-08-04T11:10:46.955Z",
+  "generadoEn": "2026-08-11T05:39:06.755Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -174,12 +174,12 @@
     },
     {
       "nombre": "Levadura",
-      "precio": 8,
+      "precio": 8.8,
       "unidad": "g",
       "producto": "Levadura Fresca por 500 Grs Calsa",
       "granateQty": 500,
       "granateUnit": "g",
-      "granatePrecioTotal": 4000,
+      "granatePrecioTotal": 4400,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1383-levadura-fresca-por-500-grs-calsa-4406"
     },
     {
