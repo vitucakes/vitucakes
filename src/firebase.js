@@ -24,8 +24,14 @@ const app = initializeApp(firebaseConfig)
 
 // Firestore con cache offline (IndexedDB). Clave en mobile: la app sigue
 // andando sin señal y sincroniza cuando vuelve la conexión.
+//
+// `ignoreUndefinedProperties`: RED DE SEGURIDAD. Sin esto, un solo campo en
+// `undefined` en cualquier item hace que Firestore rechace el documento COMPLETO
+// y no se guarde nada (pasó en serio: editar un insumo sin `fuentePrecio`
+// tiraba "Unsupported field value: undefined" y la app parecía no guardar).
 export const db = initializeFirestore(app, {
   localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }),
+  ignoreUndefinedProperties: true,
 })
 
 export const auth = getAuth(app)

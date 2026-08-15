@@ -44,8 +44,11 @@ export default function InsumosPage({ insumos, setInsumos, recetas = [], onActua
           if (i.id !== editing.id) return i
           // Si tocó el precio a mano, la fuente pasa a "A mano"; si no, se conserva
           // (ej. cambió solo el nombre/unidad y el precio venía de Día/El Granate).
-          const fuentePrecio = data.precioPorUnidad !== editing.precioPorUnidad ? 'A mano' : i.fuentePrecio
-          return { ...i, ...data, fechaActualizacion: todayISO(), updatedAt: Date.now(), fuentePrecio }
+          // OJO: si el insumo no tiene fuentePrecio, NO escribir la clave en
+          // undefined — Firestore rechaza el documento entero y no guarda nada.
+          const next = { ...i, ...data, fechaActualizacion: todayISO(), updatedAt: Date.now() }
+          if (data.precioPorUnidad !== editing.precioPorUnidad) next.fuentePrecio = 'A mano'
+          return next
         }),
       )
     } else {

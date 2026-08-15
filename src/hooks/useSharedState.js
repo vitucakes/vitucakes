@@ -9,6 +9,23 @@ import { db } from '../firebase'
 //   vitucakes/meta                 -> { value: { seeded: true, ... } }
 const COL = 'vitucakes'
 
+// Si una escritura falla, el user TIENE que enterarse: antes fallaba en
+// silencio (la pantalla mostraba el cambio y después volvía atrás sola) y
+// parecía que la app "no guarda". Avisamos una sola vez por tabla.
+const yaAvisado = new Set()
+function avisarFalloDeGuardado(name, error) {
+  console.error(`useSharedState(${name}) write:`, error)
+  if (yaAvisado.has(name)) return
+  yaAvisado.add(name)
+  setTimeout(() => {
+    yaAvisado.delete(name)
+    alert(
+      'No se pudo guardar el último cambio 😕\n\n' +
+        'Revisá tu conexión y volvé a intentar. Si sigue pasando, avisá para revisarlo.',
+    )
+  }, 0)
+}
+
 // Hook con la MISMA interfaz que useLocalStorage: [value, setValue].
 // Diferencias:
 //   - Los datos viven en Firestore (compartidos entre todos los dispositivos).
@@ -49,11 +66,19 @@ export function useSharedState(name, initialValue) {
     if (next === null) return
     pending.current = null
     enVuelo.current += 1
-    setDoc(doc(db, COL, name), { value: next }, { merge: true })
-      .catch((e) => console.error(`useSharedState(${name}) write:`, e))
-      .finally(() => {
-        enVuelo.current = Math.max(0, enVuelo.current - 1)
-      })
+    // setDoc puede tirar SINCRÓNICAMENTE si el dato es inválido (ej. un campo
+    // en undefined): un .catch() no lo agarra y el error queda "Uncaught",
+    // así que el guardado falla en silencio. Por eso el try/catch.
+    try {
+      setDoc(doc(db, COL, name), { value: next }, { merge: true })
+        .catch((e) => avisarFalloDeGuardado(name, e))
+        .finally(() => {
+          enVuelo.current = Math.max(0, enVuelo.current - 1)
+        })
+    } catch (e) {
+      enVuelo.current = Math.max(0, enVuelo.current - 1)
+      avisarFalloDeGuardado(name, e)
+    }
   }, [name])
 
   // En mobile la pestaña se congela/descarta al pasar a background o bloquear
