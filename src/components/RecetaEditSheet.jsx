@@ -15,7 +15,7 @@ import BottomSheet from './BottomSheet'
 // sub-producto (ej: 1 alfajor de una receta que rinde 12 → cantidad 1, que
 // equivale a 1/12 de esa receta). El costo y el stock se prorratean por rinde.
 
-const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [], componentes: [], descripcion: '' }
+const EMPTY_RECETA = { nombre: '', rinde: '', unidadRinde: 'unidades', ingredientes: [], componentes: [], descripcion: '', precioFijo: '' }
 const EMPTY_ING = { insumoId: '', cantidad: '' }
 const EMPTY_COMP = { recetaId: '', cantidad: '' }
 
@@ -48,6 +48,7 @@ export default function RecetaEditSheet({ isOpen, onClose, receta, insumos, rece
             ingredientes: [...receta.ingredientes],
             componentes: [...(receta.componentes ?? [])],
             descripcion: receta.descripcion ?? '',
+            precioFijo: receta.precioFijo != null ? String(receta.precioFijo) : '',
           }
         : EMPTY_RECETA,
     )
@@ -123,6 +124,7 @@ export default function RecetaEditSheet({ isOpen, onClose, receta, insumos, rece
     const rinde = parseFloat(form.rinde)
     // Puede tener solo insumos, solo componentes, o ambos — pero algo debe llevar.
     if (!nombre || isNaN(rinde) || rinde <= 0 || (form.ingredientes.length === 0 && form.componentes.length === 0)) return
+    const precioFijo = parseFloat(form.precioFijo)
     onSave({
       nombre,
       rinde,
@@ -130,6 +132,8 @@ export default function RecetaEditSheet({ isOpen, onClose, receta, insumos, rece
       ingredientes: form.ingredientes,
       componentes: form.componentes,
       descripcion: form.descripcion?.trim() ?? '',
+      // Anotación aparte: NO reemplaza al precio sugerido por la app.
+      precioFijo: Number.isFinite(precioFijo) && precioFijo > 0 ? Math.round(precioFijo * 100) / 100 : null,
     })
   }
 
@@ -334,6 +338,24 @@ export default function RecetaEditSheet({ isOpen, onClose, receta, insumos, rece
               Podés incluir otro producto ya creado (ej: un desayuno que lleva 1 alfajor). {recetas.length <= 1 ? 'Creá más productos primero.' : ''}
             </p>
           )}
+        </div>
+
+        {/* Precio fijo: anotación aparte de lo que cobrás en la práctica. NO
+            reemplaza al precio que calcula la app (ese sigue mandando en
+            ventas, gestión y comparación con la competencia). */}
+        <div>
+          <label className="label">Precio fijo que cobrás ($, opcional)</label>
+          <input
+            type="number"
+            inputMode="decimal"
+            value={form.precioFijo}
+            onChange={(e) => setForm((f) => ({ ...f, precioFijo: e.target.value }))}
+            placeholder="Dejalo vacío para usar solo el sugerido"
+            className="input"
+          />
+          <p className="text-[11px] text-gray-400 mt-1">
+            Es solo una anotación tuya. El precio que manda en la app sigue siendo el sugerido (costo × {3}).
+          </p>
         </div>
 
         {/* Descripción para copy/paste a clientes. El precio se concatena

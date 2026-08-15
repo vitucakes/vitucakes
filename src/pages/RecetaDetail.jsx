@@ -342,6 +342,23 @@ export default function RecetaDetail({ receta, insumos, setInsumos, recetas = []
           </div>
         </div>
 
+        {/* Precio fijo: anotación discreta, aparte del sugerido. El que manda
+            en ventas/gestión/competencia sigue siendo el de arriba. */}
+        {receta.precioFijo > 0 && (
+          <div className="flex items-center justify-between px-1 -mt-1">
+            <span className="text-[11px] text-gray-400">
+              Precio fijo que cobrás
+              {precioVenta > 0 && (
+                <span className="ml-1">
+                  ({receta.precioFijo >= precioVenta ? '+' : ''}
+                  {Math.round(((receta.precioFijo - precioVenta) / precioVenta) * 100)}% vs sugerido)
+                </span>
+              )}
+            </span>
+            <span className="text-sm font-semibold text-gray-500">{formatARS(receta.precioFijo)}</span>
+          </div>
+        )}
+
         {/* Comparador con competencia — siempre visible si hay competidoras cargadas */}
         {hayCompetidorasCargadas && (
           <div className="bg-white rounded-2xl p-4 shadow-sm border border-brand-50">
