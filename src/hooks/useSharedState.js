@@ -25,15 +25,17 @@ export function useSharedState(name, initialValue) {
   // Espejo síncrono del valor actual: necesario para soportar el patrón
   // setValue(prev => ...) sin depender del closure de React.
   const valueRef = useRef(initialValue)
-  // JSON de lo último que ESTE cliente escribió, para ignorar el "eco" del
-  // listener cuando Firestore nos devuelve nuestra propia escritura.
-  const lastWrittenJson = useRef(null)
   const initialRef = useRef(initialValue)
   const writeTimer = useRef(null)
   // Escritura pendiente (todavía en el debounce). Si la app se cierra/pasa a
   // background antes de que dispare el timer, se pierde el cambio → por eso
   // hay que poder mandarla YA (flush).
   const pending = useRef(null)
+  // Escrituras nuestras ya enviadas pero sin confirmar. Mientras haya alguna
+  // (o algo pendiente), lo LOCAL manda y se ignoran los snapshots: si no, el
+  // eco de una escritura vieja pisa la nueva y el cambio se ve "no guardado"
+  // (y peor: la edición siguiente parte de ese valor viejo y lo borra).
+  const enVuelo = useRef(0)
 
   // Manda la escritura pendiente sin esperar el debounce. Firestore tiene
   // cache offline (IndexedDB): con que setDoc se LLAME, el dato queda guardado
@@ -46,9 +48,12 @@ export function useSharedState(name, initialValue) {
     const next = pending.current
     if (next === null) return
     pending.current = null
-    setDoc(doc(db, COL, name), { value: next }, { merge: true }).catch((e) =>
-      console.error(`useSharedState(${name}) write:`, e),
-    )
+    enVuelo.current += 1
+    setDoc(doc(db, COL, name), { value: next }, { merge: true })
+      .catch((e) => console.error(`useSharedState(${name}) write:`, e))
+      .finally(() => {
+        enVuelo.current = Math.max(0, enVuelo.current - 1)
+      })
   }, [name])
 
   // En mobile la pestaña se congela/descarta al pasar a background o bloquear
@@ -73,12 +78,18 @@ export function useSharedState(name, initialValue) {
     const unsub = onSnapshot(
       ref,
       (snap) => {
+        // Mientras tengamos cambios propios sin confirmar, lo LOCAL manda: un
+        // snapshot que llega en el medio es más viejo que lo que tenemos acá.
+        // Cuando se confirmen, el siguiente snapshot ya trae todo junto.
+        if (pending.current !== null || enVuelo.current > 0) {
+          setLoaded(true)
+          return
+        }
         const remote = snap.exists() ? snap.data().value : undefined
         const next = remote === undefined ? initialRef.current : remote
-        const json = JSON.stringify(next)
-        // Si coincide con lo que acabamos de escribir nosotros, es el eco:
-        // no re-seteamos para evitar parpadeos / loops.
-        if (json !== lastWrittenJson.current) {
+        // Si es idéntico a lo que ya tenemos (el eco de nuestra escritura),
+        // no re-seteamos: evita re-renders y parpadeos al pedo.
+        if (JSON.stringify(next) !== JSON.stringify(valueRef.current)) {
           valueRef.current = next
           setValueState(next)
         }
@@ -100,8 +111,6 @@ export function useSharedState(name, initialValue) {
       const next = updater instanceof Function ? updater(valueRef.current) : updater
       valueRef.current = next
       setValueState(next)
-      const json = JSON.stringify(next)
-      lastWrittenJson.current = json
       pending.current = next
       if (writeTimer.current) clearTimeout(writeTimer.current)
       writeTimer.current = setTimeout(flush, 350)
