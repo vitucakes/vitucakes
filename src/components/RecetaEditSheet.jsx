@@ -261,7 +261,9 @@ export default function RecetaEditSheet({ isOpen, onClose, receta, insumos, rece
                   <div key={comp.recetaId} className="flex items-center justify-between bg-brand-50 rounded-xl px-3 py-2">
                     <div className="min-w-0">
                       <span className="text-sm font-medium text-gray-700 break-words">{sub?.nombre ?? 'Producto borrado'}</span>
-                      <p className="text-[11px] text-gray-400">= {Math.round((comp.cantidad / rinde) * 10000) / 10000} de la receta (rinde {rinde})</p>
+                      <p className="text-[11px] text-gray-400">
+                        = {Math.round((comp.cantidad / rinde) * 10000) / 100}% de la receta (rinde {rinde})
+                      </p>
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <span className="text-sm text-brand-500 font-semibold">{comp.cantidad} {sub?.unidadRinde ?? 'u'}</span>
@@ -323,7 +325,7 @@ export default function RecetaEditSheet({ isOpen, onClose, receta, insumos, rece
               </div>
               {compSel && parseFloat(compForm.cantidad) > 0 && (
                 <p className="text-[11px] text-gray-500 px-1">
-                  {compForm.cantidad} de {compSel.rinde} = {Math.round((parseFloat(compForm.cantidad) / compRinde) * 10000) / 10000} de la receta de <span className="font-semibold">{compSel.nombre}</span>
+                  {compForm.cantidad} de {compSel.rinde} = {Math.round((parseFloat(compForm.cantidad) / compRinde) * 10000) / 100}% de la receta de <span className="font-semibold">{compSel.nombre}</span>
                 </p>
               )}
             </div>

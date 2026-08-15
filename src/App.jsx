@@ -206,11 +206,15 @@ export default function App() {
           />
         )}
       </main>
+      {/* Pantallas internas (con "←" propio) NO llevan la barra de abajo: si la
+          llevan, tapa los botones fijos de la pantalla (ej. "Guardar cambios"
+          de Revisar stock, que quedaba debajo del menú y no se podía tocar). */}
       {page !== 'detalle' &&
         page !== 'actualizar-precios' &&
         page !== 'resolver-matches' &&
         page !== 'agregar-competidora' &&
         page !== 'marcar-papeleria' &&
+        page !== 'revisar-stock' &&
         page !== 'backup' && <BottomNav current={page} onChange={(p) => navigate(p)} canEdit={canEdit} />}
     </div>
   )

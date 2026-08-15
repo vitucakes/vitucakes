@@ -30,6 +30,43 @@ export function useSharedState(name, initialValue) {
   const lastWrittenJson = useRef(null)
   const initialRef = useRef(initialValue)
   const writeTimer = useRef(null)
+  // Escritura pendiente (todavía en el debounce). Si la app se cierra/pasa a
+  // background antes de que dispare el timer, se pierde el cambio → por eso
+  // hay que poder mandarla YA (flush).
+  const pending = useRef(null)
+
+  // Manda la escritura pendiente sin esperar el debounce. Firestore tiene
+  // cache offline (IndexedDB): con que setDoc se LLAME, el dato queda guardado
+  // localmente y sincroniza solo cuando vuelve la app/conexión.
+  const flush = useCallback(() => {
+    if (writeTimer.current) {
+      clearTimeout(writeTimer.current)
+      writeTimer.current = null
+    }
+    const next = pending.current
+    if (next === null) return
+    pending.current = null
+    setDoc(doc(db, COL, name), { value: next }, { merge: true }).catch((e) =>
+      console.error(`useSharedState(${name}) write:`, e),
+    )
+  }, [name])
+
+  // En mobile la pestaña se congela/descarta al pasar a background o bloquear
+  // la pantalla, y los timers no llegan a correr. Estos dos eventos son la
+  // última chance de escribir: 'pagehide' (iOS Safari) y 'visibilitychange'.
+  useEffect(() => {
+    const alGuardar = () => flush()
+    window.addEventListener('pagehide', alGuardar)
+    const alOcultar = () => {
+      if (document.visibilityState === 'hidden') flush()
+    }
+    document.addEventListener('visibilitychange', alOcultar)
+    return () => {
+      window.removeEventListener('pagehide', alGuardar)
+      document.removeEventListener('visibilitychange', alOcultar)
+      flush() // por las dudas, al desmontar
+    }
+  }, [flush])
 
   useEffect(() => {
     const ref = doc(db, COL, name)
@@ -54,7 +91,6 @@ export function useSharedState(name, initialValue) {
     )
     return () => {
       unsub()
-      if (writeTimer.current) clearTimeout(writeTimer.current)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name])
@@ -66,14 +102,11 @@ export function useSharedState(name, initialValue) {
       setValueState(next)
       const json = JSON.stringify(next)
       lastWrittenJson.current = json
+      pending.current = next
       if (writeTimer.current) clearTimeout(writeTimer.current)
-      writeTimer.current = setTimeout(() => {
-        setDoc(doc(db, COL, name), { value: next }, { merge: true }).catch((e) =>
-          console.error(`useSharedState(${name}) write:`, e),
-        )
-      }, 350)
+      writeTimer.current = setTimeout(flush, 350)
     },
-    [name],
+    [name, flush],
   )
 
   return [value, setValue, loaded]

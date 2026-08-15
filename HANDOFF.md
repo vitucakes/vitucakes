@@ -74,6 +74,7 @@ Los datos viven en **Firestore** (proyecto `vitucakes`), no en `localStorage`.
   unidadRinde: string,           // 'unidades', 'porciones', etc.
   ingredientes: [{ insumoId: string, cantidad: number }],
   componentes: [{ recetaId: string, cantidad: number }], // sub-productos: otras recetas que lleva. cantidad = UNIDADES del sub-producto (fracción = cantidad / sub.rinde). Opcional; ausente = []
+  verificada: boolean,           // el user la cocinó y confirmó que las cantidades están bien. Opcional; ausente = sin verificar
   descripcion: string,           // texto para "Mensaje para clientes" (se le concatena el precio)
   matchesCompetencia: [{ competidoraId, productoSlug }],     // matches confirmados
   rechazadosCompetencia: [{ competidoraId, productoSlug }],  // matches rechazados
@@ -393,7 +394,15 @@ Resumen:
 - Build estático: `bash publicar.sh` (o `npm run build`) → `dist/` se puede subir a Netlify Drop, Cloudflare Pages, Vercel, o servidor propio
 - Datos del user: viven en **Firestore** (nube), ya NO se pierden al cambiar de celu. La pantalla **BackupPage** (💾 en Productos) baja una copia JSON extra. **Ojo**: si reconstruís la app en otro hosting sin el mismo proyecto Firebase (config en `src/firebase.js`), no vas a tener los datos — necesitás ese proyecto o sembrar de cero desde un backup. Para correr 100% offline/sin nube habría que volver a `useLocalStorage` (ver git antes de la migración a Firebase).
 
-## Último estado (2026-07-22)
+## Último estado (2026-07-24)
+
+- 🐞 **BUG ARREGLADO — "el stock no se guardaba"**: la ruta `revisar-stock` no estaba en la lista de pantallas que ocultan el `BottomNav` en `App.jsx`. La barra "Guardar cambios" (`fixed bottom-0 z-40`) quedaba **debajo del menú** (mismo `bottom-0`, mismo z, pero el nav se renderiza después) → tocar "Guardar" en el celu en realidad tocaba el 🛒 de Compras y navegaba, sin guardar nada. Diagnosticado con `document.elementFromPoint` sobre el centro del botón (devolvía "🛒"). **Regla para el futuro: toda pantalla interna con botón fijo abajo TIENE que estar en esa lista de exclusión del nav.**
+- **Guardado más robusto en mobile** (`useSharedState`): las escrituras se debouncean 350 ms; si la app pasaba a background/se cerraba en esa ventana, el `setDoc` nunca se llamaba y el cambio se perdía (reproducido con reload inmediato). Ahora hay un `flush()` que manda la escritura pendiente al toque, enganchado a **`pagehide`** (iOS Safari) y **`visibilitychange` → hidden**, y al desmontar. Con la cache offline de Firestore, alcanza con que `setDoc` se LLAME: el dato queda en IndexedDB y sincroniza al reabrir.
+- **Confirmación visual al guardar stock**: tras "Guardar cambios (N)" la barra muestra **"✓ Guardado (N)"** por 2,5 s.
+- **TODO a 2 decimales** (decisión del user): `utils/stock.js` pasó de `round3` a `round2` (se eliminó `round3`) y `fmtCant` muestra hasta 2 decimales; también se redondean a 2 el parser de tickets, la calculadora de paquetes, el merge de fotos y `convertirA1`. La plata ya estaba en 2 (`formatARS`). Excepción justificada: la **fracción** de un sub-producto NO se redondea en el cálculo (1/12 = 0,0833; redondear a 0,08 daría 4% de error en el costo) — se muestra como **porcentaje con 2 decimales** ("8,33% de la receta"). ⚠️ Quedan 7 insumos con 3 decimales de antes (Azúcar 19220.625, etc.); se normalizan solos al próximo movimiento de stock.
+- **Tilde "Receta verificada"** — NUEVO (`receta.verificada`). En el detalle del producto hay un toggle grande ("Marcar receta como verificada" ↔ "Receta verificada", verde) para que Vitu confirme, a medida que cocina, que las cantidades de esa receta están bien. En la lista sale un badge ✓ al lado del nombre y el header cuenta "N verificadas ✓" (solo en modo edición). Sirve para ir depurando la precarga con el uso real.
+
+### Antes (2026-07-22)
 
 - **Productos compuestos (un producto puede llevar otros productos)** — NUEVO. Además de insumos, una receta puede incluir **otras recetas ya creadas** como componentes: campo `receta.componentes: [{ recetaId, cantidad }]`, donde `cantidad` = **unidades del sub-producto** (ej: 1 alfajor de una receta que rinde 12). La fracción de la sub-receta = `cantidad / sub.rinde`. Ejemplo: un "Desayuno" que lleva 1 alfajor de "Alfajores de Nuez x12" → cantidad 1, fracción 1/12 ≈ 0,0833.
   - **Costo** (`calcCostoInsumos` en `utils/calc.js`, ahora recursivo con param `recetas` + guarda `_seen` anti-ciclo): el componente suma el **costo de insumos CRUDO** de la sub-receta × fracción — así el 10% de indirectos y el 3x de margen se aplican una sola vez, arriba. `calcCostoReceta`/`calcPrecioVenta` toman `recetas` y hay que pasárselo en TODOS los sitios que muestran precio (RecetasPage, RecetaDetail, VentaEditSheet, App→RecetaDetail); si no se pasa, los componentes se ignoran (cuentan 0).

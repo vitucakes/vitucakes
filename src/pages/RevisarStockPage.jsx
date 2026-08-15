@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useEditGate, LockToggle } from '../hooks/useEditGate'
-import { stockDe, fmtCant } from '../utils/stock'
+import { stockDe, fmtCant, round2 } from '../utils/stock'
 
 // Revisión MASIVA de stock: una lista con TODOS los insumos y su stock actual
 // editable, para hacer un reconteo de inventario de una. Setea el stock directo
@@ -11,6 +11,7 @@ export default function RevisarStockPage({ insumos, setInsumos, onBack }) {
   const [search, setSearch] = useState('')
   const [soloFaltan, setSoloFaltan] = useState(false)
   const [draft, setDraft] = useState({}) // { [insumoId]: string }
+  const [guardado, setGuardado] = useState(0) // cuántos se guardaron (para el aviso ✓)
 
   const valorDe = (ins) =>
     draft[ins.id] !== undefined ? draft[ins.id] : ins.stock != null ? String(ins.stock) : ''
@@ -32,14 +33,18 @@ export default function RevisarStockPage({ insumos, setInsumos, onBack }) {
     if (v === '') return false
     const ins = insumos.find((i) => i.id === id)
     if (!ins) return false
-    return (parseFloat(v) || 0) !== stockDe(ins)
+    return round2(parseFloat(v)) !== stockDe(ins)
   })
 
   const guardar = () => {
     if (cambios.length === 0) return
-    const map = new Map(cambios.map(([id, v]) => [id, parseFloat(v) || 0]))
+    const map = new Map(cambios.map(([id, v]) => [id, round2(parseFloat(v))]))
     setInsumos((prev) => prev.map((i) => (map.has(i.id) ? { ...i, stock: map.get(i.id) } : i)))
     setDraft({})
+    // Aviso de que quedó guardado (el dato ya está a salvo: Firestore lo
+    // persiste en el cache offline aunque cierres la app enseguida).
+    setGuardado(map.size)
+    setTimeout(() => setGuardado(0), 2500)
   }
 
   return (
@@ -122,14 +127,20 @@ export default function RevisarStockPage({ insumos, setInsumos, onBack }) {
       </div>
 
       {/* Barra de guardar (sticky abajo) */}
-      {canEdit && cambios.length > 0 && (
+      {canEdit && (cambios.length > 0 || guardado > 0) && (
         <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-brand-100 px-4 py-3 z-40">
-          <button
-            onClick={guardar}
-            className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base active:scale-95 transition-transform"
-          >
-            Guardar cambios ({cambios.length})
-          </button>
+          {cambios.length > 0 ? (
+            <button
+              onClick={guardar}
+              className="w-full py-3.5 rounded-2xl bg-brand-500 text-white font-bold text-base active:scale-95 transition-transform"
+            >
+              Guardar cambios ({cambios.length})
+            </button>
+          ) : (
+            <p className="w-full py-3.5 rounded-2xl bg-emerald-50 text-emerald-700 font-bold text-base text-center">
+              ✓ Guardado ({guardado})
+            </p>
+          )}
         </div>
       )}
     </div>

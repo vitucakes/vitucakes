@@ -10,7 +10,7 @@ const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '', paquetes: '',
 // app (cantidad = paquetes × contenido). Si no, la cantidad se escribe directo.
 const usaPaquetes = (l) => parseFloat(l.paquetes) > 0 && parseFloat(l.porPaquete) > 0
 const cantidadFinal = (l) =>
-  usaPaquetes(l) ? String(Math.round(parseFloat(l.paquetes) * parseFloat(l.porPaquete) * 1000) / 1000) : l.cantidad
+  usaPaquetes(l) ? String(Math.round(parseFloat(l.paquetes) * parseFloat(l.porPaquete) * 100) / 100) : l.cantidad
 
 // Sheet para registrar o EDITAR una COMPRA. Una compra puede tener varias
 // líneas (lo que trajiste en una misma ida). Cada línea suma stock al insumo;
@@ -90,7 +90,7 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
         const suma = (a, b) => {
           const x = parseFloat(a) || 0
           const y = parseFloat(b) || 0
-          return x + y > 0 ? String(Math.round((x + y) * 1000) / 1000) : ''
+          return x + y > 0 ? String(Math.round((x + y) * 100) / 100) : ''
         }
         for (const s of sugeridas) {
           const ex = resultado.find((l) => l.insumoId === s.insumoId)

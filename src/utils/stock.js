@@ -5,15 +5,16 @@
 // Regla de oro respetada acá: una compra NUNCA baja el precio de un insumo
 // (solo lo sube si pagaste más por unidad).
 
-// Redondeo a 3 decimales: evita el drift de floats (0.1 + 0.2 = 0.3000000004).
-export const round3 = (n) => Math.round((Number(n) || 0) * 1000) / 1000
+// Redondeo a 2 decimales: evita el drift de floats (0.1 + 0.2 = 0.3000000004)
+// y mantiene los números legibles. Decisión del user (2026-07-22): TODO va con
+// 2 decimales como máximo — cantidades, stock y plata.
 export const round2 = (n) => Math.round((Number(n) || 0) * 100) / 100
 
 // Stock de un insumo como número (0 si no tiene).
-export const stockDe = (ins) => round3(ins?.stock)
+export const stockDe = (ins) => round2(ins?.stock)
 
-// Formato de cantidad para mostrar (es-AR, hasta 3 decimales).
-export const fmtCant = (n) => (Number(n) || 0).toLocaleString('es-AR', { maximumFractionDigits: 3 })
+// Formato de cantidad para mostrar (es-AR, hasta 2 decimales).
+export const fmtCant = (n) => (Number(n) || 0).toLocaleString('es-AR', { maximumFractionDigits: 2 })
 
 const hoyISO = () => new Date().toISOString().slice(0, 10)
 
@@ -49,7 +50,7 @@ export function consumoDeItems(items, recetas) {
     const receta = recetas.find((r) => r.id === it.recetaId)
     acumularConsumo(acc, receta, Number(it.cantidad) || 0, recetas, new Set())
   }
-  return [...acc.entries()].map(([insumoId, cantidad]) => ({ insumoId, cantidad: round3(cantidad) }))
+  return [...acc.entries()].map(([insumoId, cantidad]) => ({ insumoId, cantidad: round2(cantidad) }))
 }
 
 // Suma (signo +1) o resta (signo -1) deltas de stock sobre la lista de insumos.
@@ -60,7 +61,7 @@ export function aplicarDeltasStock(insumos, deltas, signo = 1) {
   return insumos.map((ins) => {
     const d = map.get(ins.id)
     if (d == null) return ins
-    return { ...ins, stock: round3(stockDe(ins) + signo * d) }
+    return { ...ins, stock: round2(stockDe(ins) + signo * d) }
   })
 }
 
@@ -81,7 +82,7 @@ export function aplicarCompraAInsumos(insumos, compra) {
     const it = map.get(ins.id)
     if (!it) return ins
     const cant = Number(it.cantidad) || 0
-    const next = { ...ins, stock: round3(stockDe(ins) + cant) }
+    const next = { ...ins, stock: round2(stockDe(ins) + cant) }
     const total = Number(it.total) || 0
     if (total > 0 && cant > 0 && it.actualizaPrecio !== false) {
       const precioUnit = total / cant

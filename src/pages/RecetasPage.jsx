@@ -28,6 +28,7 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
 
   // Papelería: si no hay ninguno marcado, pedimos marcarlos. Si hay, avisamos
   // qué productos no incluyen packaging en su receta.
+  const verificadas = useMemo(() => recetas.filter((r) => r.verificada).length, [recetas])
   const algunaPapeleria = useMemo(() => hayPapeleriaMarcada(insumos), [insumos])
   const sinPackaging = useMemo(() => productosSinPackaging(recetas, insumos), [recetas, insumos])
 
@@ -58,7 +59,10 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
           <img src={`${import.meta.env.BASE_URL}logo.jpg`} alt="Vitucakes" className="w-12 h-12 rounded-full object-cover flex-shrink-0" />
           <div className="flex-1 min-w-0">
             <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
-            <p className="text-xs text-gray-400 mt-0.5">{recetas.length} producto{recetas.length !== 1 ? 's' : ''}</p>
+            <p className="text-xs text-gray-400 mt-0.5">
+              {recetas.length} producto{recetas.length !== 1 ? 's' : ''}
+              {canEdit && verificadas > 0 ? ` · ${verificadas} verificada${verificadas !== 1 ? 's' : ''} ✓` : ''}
+            </p>
           </div>
           <LockToggle />
           {/* Pill de competencia: aparece siempre que hay competidoras cargadas.
@@ -170,6 +174,11 @@ export default function RecetasPage({ recetas, setRecetas, insumos, competidoras
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <p className="font-bold text-gray-800 text-base break-words">{r.nombre}</p>
+                      {r.verificada && (
+                        <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 flex-shrink-0" title="Receta verificada">
+                          ✓
+                        </span>
+                      )}
                       {tieneProblema && <span className="text-base flex-shrink-0">⚠️</span>}
                     </div>
                     <p className="text-xs text-gray-400 mt-0.5">

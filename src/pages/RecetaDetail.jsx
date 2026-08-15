@@ -151,7 +151,7 @@ export default function RecetaDetail({ receta, insumos, setInsumos, recetas = []
     // Los sub-productos también se prorratean (misma proporción que el resto).
     const componentesAjustados = (receta.componentes ?? []).map((comp) => ({
       ...comp,
-      cantidad: Math.round((comp.cantidad / rindeActual) * 10000) / 10000,
+      cantidad: Math.round((comp.cantidad / rindeActual) * 100) / 100,
     }))
     onUpdate({
       ...receta,
@@ -226,6 +226,39 @@ export default function RecetaDetail({ receta, insumos, setInsumos, recetas = []
         <p className="text-sm text-gray-500">
           Rinde <span className="font-semibold text-gray-700">{receta.rinde} {receta.unidadRinde}</span>
         </p>
+
+        {/* Receta verificada: Vitu la tilda cuando la cocinó y confirmó que las
+            cantidades están bien. Sirve para ir depurando la precarga con el uso. */}
+        {canEdit && onUpdate ? (
+          <button
+            onClick={() => onUpdate({ ...receta, verificada: !receta.verificada })}
+            className={`mt-3 w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-left active:scale-[0.99] transition-transform border ${
+              receta.verificada
+                ? 'bg-emerald-50 border-emerald-200'
+                : 'bg-gray-50 border-gray-200'
+            }`}
+          >
+            <span
+              className={`w-6 h-6 rounded-md flex items-center justify-center text-sm flex-shrink-0 ${
+                receta.verificada ? 'bg-emerald-500 text-white' : 'bg-white border border-gray-300 text-transparent'
+              }`}
+            >
+              ✓
+            </span>
+            <div className="min-w-0">
+              <p className={`text-sm font-semibold ${receta.verificada ? 'text-emerald-800' : 'text-gray-600'}`}>
+                {receta.verificada ? 'Receta verificada' : 'Marcar receta como verificada'}
+              </p>
+              <p className="text-[11px] text-gray-400">
+                {receta.verificada
+                  ? 'La cocinaste y confirmaste que las cantidades están bien.'
+                  : 'Tildala cuando la cocines y confirmes que las cantidades están bien.'}
+              </p>
+            </div>
+          </button>
+        ) : receta.verificada ? (
+          <p className="mt-2 text-xs font-semibold text-emerald-700">✓ Receta verificada</p>
+        ) : null}
       </div>
 
       <div className="flex-1 px-4 py-4 space-y-4">

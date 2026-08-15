@@ -229,7 +229,7 @@ export function parsearTicket(texto, insumos) {
 
   const lineas = [...porInsumo.values()].map((it) => ({
     insumoId: it.insumo.id,
-    cantidad: it.cantidad != null ? String(Math.round(it.cantidad * 1000) / 1000) : '',
+    cantidad: it.cantidad != null ? String(Math.round(it.cantidad * 100) / 100) : '',
     total: it.total != null ? String(Math.round(it.total * 100) / 100) : '',
   }))
 
