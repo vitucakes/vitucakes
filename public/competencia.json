@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-08-11T05:42:32.200Z",
+  "generadoEn": "2026-08-18T03:12:53.682Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -113,7 +113,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-08-11T05:42:33.567Z"
+      "updatedAt": "2026-08-18T03:12:55.063Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -248,7 +248,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-08-11T05:42:35.173Z"
+      "updatedAt": "2026-08-18T03:12:56.647Z"
     },
     {
       "id": "silnari",
@@ -514,7 +514,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-08-11T05:42:38.446Z"
+      "updatedAt": "2026-08-18T03:12:59.742Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1734,7 +1734,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-08-11T05:43:01.151Z"
+      "updatedAt": "2026-08-18T03:13:18.611Z"
     },
     {
       "id": "natis-pasteleria",
@@ -1787,7 +1787,7 @@
           "slug": "natilda",
           "nombre": "Natilda",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada. Bizcocho humedo de chocolate relleno con dos capas de ganache de chocolate semiamargo y cubierto con...",
-          "precio": 118000,
+          "precio": 120000,
           "url": "https://www.natispasteleria.com.ar/productos/natilda/"
         },
         {
@@ -1815,7 +1815,7 @@
           "slug": "crumble-de-manzana",
           "nombre": "Crumble de manzana",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base de masa sablée de vainilla, manzanas en almibar con un toque de canela y crumble de almendras. No apto c...",
-          "precio": 75000,
+          "precio": 76000,
           "url": "https://www.natispasteleria.com.ar/productos/crumble-de-manzana/"
         },
         {
@@ -1906,7 +1906,7 @@
           "slug": "alfajores-almendra-mousse",
           "nombre": "Alfajores almendra mousse",
           "descripcion": "Veganos, sin azucar refinada agregada y sin gluten (NO APTO CELIACOS). Tapas de sablée de almendras endulzadas con azucar de coco, lo que le da un fino sabor...",
-          "precio": 54000,
+          "precio": 60000,
           "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse/"
         },
         {
@@ -1948,7 +1948,7 @@
           "slug": "alfajores-de-choco-con-corazon-de-frambuesa",
           "nombre": "Alfajores de choco con corazon de frambuesa",
           "descripcion": "Alfajores sin azucar refinada agregada y sin gluten (no apto para celiacos) Tapas de masa sablée con un fino sabor a almendras acarameladas, relleno de ganac...",
-          "precio": 57000,
+          "precio": 60000,
           "url": "https://www.natispasteleria.com.ar/productos/alfajores-de-choco-con-corazon-de-frambuesa/"
         },
         {
@@ -1962,7 +1962,7 @@
           "slug": "limon-y-albahaca1",
           "nombre": "Limon y albahaca",
           "descripcion": "Vegana, bajo contenido de azucar refinada y sin gluten (no apto celiacos) Base sablee de almendras, cremoso de limon y albahaca y merengue. Tamaño: Grande: ...",
-          "precio": 72000,
+          "precio": 75000,
           "url": "https://www.natispasteleria.com.ar/productos/limon-y-albahaca1/"
         },
         {
@@ -1999,109 +1999,184 @@
           "descripcion": "Vegana, sin azucar refinada agregada y sin harina (no apta para celiacos) Bombon helado de chocolate semiamargo con mix de frutos secos en su base y bañado e...",
           "precio": 28000,
           "url": "https://www.natispasteleria.com.ar/productos/bombona-frozen/"
+        },
+        {
+          "slug": "regina",
+          "nombre": "Regina",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada (no apta para celiacxs). Bizcocho humedo de chocolate con naranja, cremoso de chocolate semiamargo, n...",
+          "precio": 95000,
+          "url": "https://www.natispasteleria.com.ar/productos/regina/"
+        },
+        {
+          "slug": "porcion-regina",
+          "nombre": "Porcion Regina",
+          "descripcion": "Torta vegana y sin gluten (no apta para celiacxs). Bizcocho humedo de chocolate con naranja endulzado con azucar mascabo, cremoso de chocolate semiamargo, na...",
+          "precio": 15500,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-regina/"
+        },
+        {
+          "slug": "alfajores-havanatis",
+          "nombre": "Alfajores Havanati's",
+          "descripcion": "Veganos y sin gluten (no apto celiacos) Tapas de cacao con un toque de sal marina, rellenas con dulce de leche, con centro de ganache de dulce de leche y bañ...",
+          "precio": 45000,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis/"
+        },
+        {
+          "slug": "alfajores-havanatis-3-unidades",
+          "nombre": "Alfajores Havanati's (3 unidades)",
+          "descripcion": "Veganos y sin gluten (no apto celiacos) Tapas de cacao con un toque de sal marina, rellenas con dulce de leche, con centro de ganache de dulce de leche y bañ...",
+          "precio": 12000,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-3-unidades/"
+        },
+        {
+          "slug": "alfajores-chocomani-x3",
+          "nombre": "Alfajores Chocomani x3",
+          "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
+          "precio": 12000,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-x3/"
+        },
+        {
+          "slug": "alfajores-chocomani",
+          "nombre": "Alfajores Chocomani",
+          "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
+          "precio": 44000,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani/"
+        },
+        {
+          "slug": "garrapinadas-de-avellanas",
+          "nombre": "Garrapiñadas de avellanas",
+          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
+          "precio": 13500,
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-avellanas/"
+        },
+        {
+          "slug": "garrapinadas-de-almendras",
+          "nombre": "Garrapiñadas de almendras",
+          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
+          "precio": 11300,
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-almendras/"
+        },
+        {
+          "slug": "carrot-cake",
+          "nombre": "Carrot cake",
+          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, relleno y cubierto con frosting de tofu...",
+          "precio": 98000,
+          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/"
+        },
+        {
+          "slug": "pan-dulce-750g",
+          "nombre": "Pan dulce 750g",
+          "descripcion": "Vegano, sin gluten (no apto celiacos) y sin azucar. Presentacion de 750g. Endulzado con dátiles, contiene almendras, nueces y castañas de caju. Decorado con ...",
+          "precio": 44200,
+          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-750g/"
+        },
+        {
+          "slug": "porcion-chocotorta",
+          "nombre": "Porcion Chocotorta",
+          "descripcion": "Torta vegana y sin trigo (no apto celiacos) Base de chocolinas veganas procesadas, 3 generosas capas de crema de dulce de leche vegana, intercaladas con choc...",
+          "precio": 13500,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-chocotorta/"
+        },
+        {
+          "slug": "chocotorta",
+          "nombre": "Chocotorta",
+          "descripcion": "Torta vegana y sin trigo (no apto celiacos) 3 generosas capas de crema de dulce de leche vegana, intercaladas con chocolinas veganas enteras. Las chocolinas ...",
+          "precio": 82000,
+          "url": "https://www.natispasteleria.com.ar/productos/chocotorta/"
+        },
+        {
+          "slug": "porcion-carrot-cake",
+          "nombre": "Porcion carrot cake",
+          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, con relleno y cobertura de tofu y caju ...",
+          "precio": 13500,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/"
+        },
+        {
+          "slug": "porcion-cheesecake-proteica",
+          "nombre": "Porcion Cheesecake proteica",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
+          "precio": 13100,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/"
+        },
+        {
+          "slug": "cheesecake-proteica",
+          "nombre": "Cheesecake proteica",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
+          "precio": 80000,
+          "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/"
+        },
+        {
+          "slug": "carrot-cake-navidena-8kh37",
+          "nombre": "Carrot cake navideña",
+          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, cubierto con frosting de tofu y caju sa...",
+          "precio": 65000,
+          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/"
+        },
+        {
+          "slug": "garrapinadas-de-pistacho-aoz0n",
+          "nombre": "Garrapiñadas de pistacho",
+          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo...",
+          "precio": 15500,
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/"
+        },
+        {
+          "slug": "franatis-tpbk8",
+          "nombre": "Franatis",
+          "descripcion": "Veganas y sin harinas (no apto celiacos) Frambuesas bañadas en chocolate blanco vegano y con chocolate semiamargo Presentacion en bolsita de 100g FOTO ILUSTR...",
+          "precio": 16100,
+          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/"
+        },
+        {
+          "slug": "porcion-natisdad-dcbas",
+          "nombre": "Porcion Natisdad",
+          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
+          "precio": 12100,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/"
+        },
+        {
+          "slug": "natisdad-4oou5",
+          "nombre": "Natisdad",
+          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
+          "precio": 55000,
+          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/"
+        },
+        {
+          "slug": "alfajores-havanatis-corazon-3-unidades-15nun",
+          "nombre": "Alfajores Havanati's corazon (3 unidades)",
+          "descripcion": "Veganos y sin gluten (no apto celiacos) Tapas de cacao con un toque de sal marina, rellenas con dulce de leche, con centro de ganache de dulce de leche y bañ...",
+          "precio": 10500,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/"
+        },
+        {
+          "slug": "alfajores-chocomani-corazon-x3-12hc4",
+          "nombre": "Alfajores Chocomani corazon x3",
+          "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
+          "precio": 10800,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/"
+        },
+        {
+          "slug": "alfajores-almendra-mousse-corazon-3-unidades-bd51g",
+          "nombre": "Alfajores almendra mousse corazon (3 unidades)",
+          "descripcion": "Veganos, sin azucar refinada y sin harinas con gluten. Tapas de sablée de almendras con un fino sabor a caramelo, relleno de ganache de chocolate semiamargo ...",
+          "precio": 14000,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/"
+        },
+        {
+          "slug": "huevo-snicker-sin-azucar",
+          "nombre": "Huevo Snicker",
+          "descripcion": "Huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar relleno de caramelo salado de datil y mani tostado sin sal, ganache de ...",
+          "precio": 47900,
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-snicker-sin-azucar/"
+        },
+        {
+          "slug": "huevo-bombona-sin-azucar",
+          "nombre": "Huevo Bombona",
+          "descripcion": "Medio huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar, relleno de cremoso de chocolate semiamargo sin azúcar y praliné ...",
+          "precio": 56500,
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-bombona-sin-azucar/"
         }
       ],
       "errores": [
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/regina/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-regina/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-3-unidades/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-x3/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-avellanas/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-almendras/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-750g/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-chocotorta/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/chocotorta/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-snicker-sin-azucar/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-bombona-sin-azucar/",
-          "error": "sin precio"
-        },
         {
           "url": "https://www.natispasteleria.com.ar/productos/huevo-key-lime-pie-sin-azucar/",
           "error": "sin precio"
@@ -2139,7 +2214,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-08-11T05:43:05.515Z"
+      "updatedAt": "2026-08-18T03:13:23.853Z"
     }
   ]
 }
