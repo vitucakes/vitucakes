@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-08-11T05:42:10.205Z",
+  "generadoEn": "2026-08-18T03:11:08.062Z",
   "fuente": "Día",
   "items": [
     {
@@ -104,12 +104,12 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 1.69,
+      "precio": 1.99,
       "unidad": "g",
       "producto": "Cebolla Comercial en bolsa malla x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1690,
+      "diaPrecioTotal": 1990,
       "match": "curado"
     },
     {
@@ -134,10 +134,10 @@
     },
     {
       "nombre": "Chocolate",
-      "precio": 26.9,
+      "precio": 33.625,
       "unidad": "g",
-      "producto": "Chocolate para Taza DIA 100 Gr.",
-      "diaQty": 100,
+      "producto": "Chocolate con leche DIA 80 Gr.",
+      "diaQty": 80,
       "diaUnit": "g",
       "diaPrecioTotal": 2690,
       "match": "auto"
@@ -214,12 +214,12 @@
     },
     {
       "nombre": "Galletitas lincoln",
-      "precio": 7.9303,
+      "precio": 11.329,
       "unidad": "g",
       "producto": "Galletitas Dulces Lincoln Clásicas Terrabusi Tripack 459 Gr.",
       "diaQty": 459,
       "diaUnit": "g",
-      "diaPrecioTotal": 3640,
+      "diaPrecioTotal": 5200,
       "match": "curado"
     },
     {
@@ -284,12 +284,12 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 32.45,
+      "precio": 33.2667,
       "unidad": "g",
-      "producto": "Jamón Cocido Fetas Finas Dia 200 Gr.",
-      "diaQty": 200,
+      "producto": "Jamón Cocido Lario Feteado 150 Gr.",
+      "diaQty": 150,
       "diaUnit": "g",
-      "diaPrecioTotal": 6490,
+      "diaPrecioTotal": 4990,
       "match": "curado"
     },
     {
@@ -354,12 +354,12 @@
     },
     {
       "nombre": "Maicena",
-      "precio": 8.178,
+      "precio": 7.1,
       "unidad": "g",
       "producto": "Almidón De Maíz Maizena Clásica Sin Tacc 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 4089,
+      "diaPrecioTotal": 3550,
       "match": "curado"
     },
     {
@@ -374,12 +374,12 @@
     },
     {
       "nombre": "Manzana Verde",
-      "precio": 5.99,
+      "precio": 6.49,
       "unidad": "g",
       "producto": "Manzana Verde x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5990,
+      "diaPrecioTotal": 6490,
       "match": "curado"
     },
     {
@@ -476,7 +476,7 @@
       "nombre": "Oreos",
       "precio": 11.2881,
       "unidad": "g",
-      "producto": "Galletitas Oreo Golden Sabor Vainilla Rellenas con Crema 354 Gr.",
+      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
       "diaPrecioTotal": 3996,
@@ -514,12 +514,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 11.3143,
+      "precio": 11.3929,
       "unidad": "g",
       "producto": "Queso Crema Clasico Ricrem 280 Gr.",
       "diaQty": 280,
       "diaUnit": "g",
-      "diaPrecioTotal": 3168,
+      "diaPrecioTotal": 3190,
       "match": "curado"
     },
     {
@@ -574,12 +574,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 5.99,
+      "precio": 6.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5990,
+      "diaPrecioTotal": 6990,
       "match": "curado"
     },
     {
