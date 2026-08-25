@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-08-18T03:11:08.062Z",
+  "generadoEn": "2026-08-25T03:14:24.934Z",
   "fuente": "Día",
   "items": [
     {
@@ -134,22 +134,22 @@
     },
     {
       "nombre": "Chocolate",
-      "precio": 33.625,
+      "precio": 26.9,
       "unidad": "g",
-      "producto": "Chocolate con leche DIA 80 Gr.",
-      "diaQty": 80,
+      "producto": "Chocolate para Taza DIA 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
       "diaPrecioTotal": 2690,
       "match": "auto"
     },
     {
       "nombre": "Chocolinas",
-      "precio": 10.9922,
+      "precio": 10.472,
       "unidad": "g",
-      "producto": "Galletitas Negro Chocolinas 258 Gr.",
-      "diaQty": 258,
+      "producto": "Galletitas Chocolate Chocolinas 250 Gr.",
+      "diaQty": 250,
       "diaUnit": "g",
-      "diaPrecioTotal": 2836,
+      "diaPrecioTotal": 2618,
       "match": "curado"
     },
     {
@@ -204,12 +204,12 @@
     },
     {
       "nombre": "frutos rojos congelados",
-      "precio": 22.8286,
+      "precio": 23.6857,
       "unidad": "g",
       "producto": "Frutos Rojos Congelados Dia 350 Gr",
       "diaQty": 350,
       "diaUnit": "g",
-      "diaPrecioTotal": 7990,
+      "diaPrecioTotal": 8290,
       "match": "curado"
     },
     {
@@ -244,12 +244,12 @@
     },
     {
       "nombre": "Harina 000",
-      "precio": 0.915,
+      "precio": 0.905,
       "unidad": "g",
-      "producto": "Harina de Trigo 000 DIA 1 Kg.",
+      "producto": "Harina 000  Caserita 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 915,
+      "diaPrecioTotal": 905,
       "match": "curado"
     },
     {
@@ -314,12 +314,12 @@
     },
     {
       "nombre": "Leche",
-      "precio": 1.975,
+      "precio": 2.285,
       "unidad": "ml",
       "producto": "Leche fresca La Serenisima Reducida en Lactosa 1 Lt.",
       "diaQty": 1000,
       "diaUnit": "ml",
-      "diaPrecioTotal": 1975,
+      "diaPrecioTotal": 2285,
       "match": "curado"
     },
     {
@@ -574,12 +574,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 6.99,
+      "precio": 7.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6990,
+      "diaPrecioTotal": 7990,
       "match": "curado"
     },
     {
@@ -594,12 +594,12 @@
     },
     {
       "nombre": "Zanahoria",
-      "precio": 1.99,
+      "precio": 1.89,
       "unidad": "g",
       "producto": "Zanahoria x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1990,
+      "diaPrecioTotal": 1890,
       "match": "curado"
     },
     {
