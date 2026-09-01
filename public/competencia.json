@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-08-25T03:22:53.379Z",
+  "generadoEn": "2026-09-01T07:53:24.118Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -105,13 +105,8 @@
           "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
         }
       ],
-      "errores": [
-        {
-          "url": "https://candelitte.mitiendanube.com/productos/box-de-la-ninez-xm9si/",
-          "error": "sin nombre"
-        }
-      ],
-      "updatedAt": "2026-08-25T03:22:54.605Z"
+      "errores": [],
+      "updatedAt": "2026-09-01T07:53:24.913Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -246,13 +241,20 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-08-25T03:22:56.628Z"
+      "updatedAt": "2026-09-01T07:53:26.261Z"
     },
     {
       "id": "silnari",
       "nombre": "Silnari",
       "fuente": "https://www.silnari.com",
       "productos": [
+        {
+          "slug": "torta-de-chocolate-con-mousse-de-baileys",
+          "nombre": "Torta de Chocolate con Mousse de Baileys",
+          "descripcion": "Torta de Chocolate con Mousse de BaileysUna base de bizcocho húmedo e intenso, combinada con una mousse tan ligera y cremosa que se funde en la boca, potenciada con el inconfundib",
+          "precio": 58000,
+          "url": "https://www.silnari.com/tortas-y-tartas/torta-de-chocolate-con-mousse-de-baileys"
+        },
         {
           "slug": "box-dia-del-padre",
           "nombre": "Box Dia del Padre",
@@ -275,11 +277,11 @@
           "url": "https://www.silnari.com/tortas-y-tartas/torta-patagonica"
         },
         {
-          "slug": "devils-cake-pistachos",
-          "nombre": "Devil's Cake Pistachos",
+          "slug": "devil-cake-pistachos",
+          "nombre": "Devil Cake Pistachos",
           "descripcion": "Para los que aman el chocolate... y los pistachos.Nuestra Devil Cake con un giro irresistible: tres capas de bizcochuelo de chocolate premium, rellenas de buttercream de chocolate",
           "precio": 55000,
-          "url": "https://www.silnari.com/tortas-y-tartas/devils-cake-pistachos"
+          "url": "https://www.silnari.com/tortas-y-tartas/devil-cake-pistachos"
         },
         {
           "slug": "degustacion-mini-cakes",
@@ -466,7 +468,7 @@
         {
           "slug": "torta-brownie",
           "nombre": "Torta Brownie",
-          "descripcion": "Intensa, sorprendente y con un toque que no esperás.Una base de brownie de chocolate intenso que se lleva de maravilla con el contraste del pistacho salado, la cremosidad del dulc",
+          "descripcion": "Elaborada con materias primas Tregar, en molde de 22 cm. Ideal para 10 a 12 porciones.⏱ Reservá con 24 hs de anticipación. Coordiná fecha y horario de entrega por WhatsApp al",
           "precio": 50000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-brownie"
         },
@@ -512,7 +514,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-08-25T03:23:02.258Z"
+      "updatedAt": "2026-09-01T07:53:28.532Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -523,28 +525,28 @@
           "slug": "alfajores-de-chocolate-cajita-por-6",
           "nombre": "Alfajores de Chocolate cajita por 6",
           "descripcion": "",
-          "precio": 19000,
+          "precio": 38000,
           "url": "https://deliciasdelcorazon.com.ar/producto/alfajores-de-chocolate-cajita-por-6/"
         },
         {
           "slug": "alfajorcitos-de-maicena-con-cubierta-de-chocolate",
           "nombre": "Alfajorcitos de maicena con cubierta de chocolate",
           "descripcion": "El precio corresponde a una docena (12 unidades).-",
-          "precio": 8415,
+          "precio": 16830,
           "url": "https://deliciasdelcorazon.com.ar/producto/alfajorcitos-de-maicena-con-cubierta-de-chocolate/"
         },
         {
           "slug": "alfajorcitos-de-chocolate",
           "nombre": "Alfajorcitos de chocolate",
           "descripcion": "El precio corresponde a una docena (12 unidades).-",
-          "precio": 12180,
+          "precio": 24360,
           "url": "https://deliciasdelcorazon.com.ar/producto/alfajorcitos-de-chocolate/"
         },
         {
           "slug": "alfajorcitos-de-maicena",
           "nombre": "Alfajorcitos de maicena",
           "descripcion": "El precio corresponde a una docena (12 unidades).-",
-          "precio": 6705,
+          "precio": 13410,
           "url": "https://deliciasdelcorazon.com.ar/producto/alfajorcitos-de-maicena/"
         },
         {
@@ -1258,63 +1260,63 @@
           "slug": "matilda",
           "nombre": "Matilda",
           "descripcion": "",
-          "precio": 56440,
+          "precio": 67728,
           "url": "https://deliciasdelcorazon.com.ar/producto/matilda/"
         },
         {
           "slug": "postre-chaja",
           "nombre": "Postre Chaja",
           "descripcion": "",
-          "precio": 50863,
+          "precio": 61036,
           "url": "https://deliciasdelcorazon.com.ar/producto/postre-chaja/"
         },
         {
           "slug": "torta-patagonia",
           "nombre": "Torta Patagonia",
           "descripcion": "",
-          "precio": 51760,
+          "precio": 62112,
           "url": "https://deliciasdelcorazon.com.ar/producto/torta-patagonia/"
         },
         {
           "slug": "tarta-de-lima",
           "nombre": "Tarta de Lima Key lime pie",
           "descripcion": "",
-          "precio": 56942,
+          "precio": 68330,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-lima/"
         },
         {
           "slug": "marquise-oreo",
           "nombre": "Marquise Oreo",
           "descripcion": "",
-          "precio": 53190,
+          "precio": 63828,
           "url": "https://deliciasdelcorazon.com.ar/producto/marquise-oreo/"
         },
         {
           "slug": "cheesecake-dulce-de-leche",
           "nombre": "Cheesecake Dulce de leche",
           "descripcion": "",
-          "precio": 49456,
+          "precio": 59347,
           "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-dulce-de-leche/"
         },
         {
           "slug": "torta-tres-mousses",
           "nombre": "Torta tres Mousses",
           "descripcion": "",
-          "precio": 50863,
+          "precio": 61036,
           "url": "https://deliciasdelcorazon.com.ar/producto/torta-tres-mousses/"
         },
         {
           "slug": "carrot-cake",
           "nombre": "Carrot Cake",
           "descripcion": "",
-          "precio": 50863,
+          "precio": 61036,
           "url": "https://deliciasdelcorazon.com.ar/producto/carrot-cake/"
         },
         {
           "slug": "red-velvet",
           "nombre": "Red Velvet",
           "descripcion": "",
-          "precio": 51240,
+          "precio": 61488,
           "url": "https://deliciasdelcorazon.com.ar/producto/red-velvet/"
         },
         {
@@ -1328,35 +1330,35 @@
           "slug": "torta-bombon",
           "nombre": "Torta Bombon",
           "descripcion": "",
-          "precio": 49846,
+          "precio": 59815,
           "url": "https://deliciasdelcorazon.com.ar/producto/torta-bombon/"
         },
         {
           "slug": "torta-bon-o-bon",
           "nombre": "Torta Bon o Bon",
           "descripcion": "",
-          "precio": 50863,
+          "precio": 61036,
           "url": "https://deliciasdelcorazon.com.ar/producto/torta-bon-o-bon/"
         },
         {
           "slug": "torta-oreo",
           "nombre": "Torta Oreo",
           "descripcion": "",
-          "precio": 50863,
+          "precio": 61036,
           "url": "https://deliciasdelcorazon.com.ar/producto/torta-oreo/"
         },
         {
           "slug": "chocotorta-xxl-5-kilos",
           "nombre": "Chocotorta XXL 5 kilos",
           "descripcion": "",
-          "precio": 123632,
+          "precio": 148358,
           "url": "https://deliciasdelcorazon.com.ar/producto/chocotorta-xxl-5-kilos/"
         },
         {
           "slug": "tarta-de-chocolate-con-dulce-de-leche",
           "nombre": "Torta de chocolate con Dulce de leche",
           "descripcion": "",
-          "precio": 49866,
+          "precio": 59839,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-chocolate-con-dulce-de-leche/"
         },
         {
@@ -1370,42 +1372,35 @@
           "slug": "tarta-de-pastelera-y-arandanos",
           "nombre": "Tarta de pastelera y arandanos",
           "descripcion": "",
-          "precio": 47528,
+          "precio": 57034,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-pastelera-y-arandanos/"
         },
         {
           "slug": "postre-jardin-de-los-cerezos",
           "nombre": "Postre Jardin de los cerezos",
           "descripcion": "",
-          "precio": 52988,
+          "precio": 63586,
           "url": "https://deliciasdelcorazon.com.ar/producto/postre-jardin-de-los-cerezos/"
         },
         {
           "slug": "box-feliz-dia-papa",
           "nombre": "Cajoncito Cervezero",
           "descripcion": "",
-          "precio": 74749,
+          "precio": 108386,
           "url": "https://deliciasdelcorazon.com.ar/producto/box-feliz-dia-papa/"
-        },
-        {
-          "slug": "box-papa-mi-heroe",
-          "nombre": "Box «Papá, mi heroe»",
-          "descripcion": "",
-          "precio": 74749,
-          "url": "https://deliciasdelcorazon.com.ar/producto/box-papa-mi-heroe/"
         },
         {
           "slug": "desayuno-campestre",
           "nombre": "Desayuno «Campestre»",
           "descripcion": "",
-          "precio": 74749,
+          "precio": 108386,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-campestre/"
         },
         {
           "slug": "desayuno-suena-en-grande",
           "nombre": "Desayuno «Sueña en grande»",
           "descripcion": "",
-          "precio": 76375,
+          "precio": 110744,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-suena-en-grande/"
         },
         {
@@ -1419,77 +1414,63 @@
           "slug": "tarta-de-ricota-y-dulce-de-leche",
           "nombre": "Tarta de ricota y Dulce de leche",
           "descripcion": "",
-          "precio": 39016,
+          "precio": 46819,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-ricota-y-dulce-de-leche/"
         },
         {
           "slug": "mix-de-frutos-rojos",
           "nombre": "Mix de frutos rojos",
           "descripcion": "",
-          "precio": 43207,
+          "precio": 51848,
           "url": "https://deliciasdelcorazon.com.ar/producto/mix-de-frutos-rojos/"
         },
         {
           "slug": "box-sweetest-thing",
           "nombre": "Box «Sweetest thing»",
           "descripcion": "Con Amor….Delicias del corazon",
-          "precio": 30339,
+          "precio": 60678,
           "url": "https://deliciasdelcorazon.com.ar/producto/box-sweetest-thing/"
         },
         {
           "slug": "box-love-of-my-life",
           "nombre": "Box «Love of my life»",
           "descripcion": "Con Amor….Delicias del corazon",
-          "precio": 28044,
+          "precio": 56088,
           "url": "https://deliciasdelcorazon.com.ar/producto/box-love-of-my-life/"
         },
         {
           "slug": "crumble-de-manzanas",
           "nombre": "Crumble de Manzanas",
           "descripcion": "",
-          "precio": 37470,
+          "precio": 44964,
           "url": "https://deliciasdelcorazon.com.ar/producto/crumble-de-manzanas/"
         },
         {
           "slug": "pavlova-modificada",
           "nombre": "Pavlova modificada",
           "descripcion": "",
-          "precio": 77006,
+          "precio": 85000,
           "url": "https://deliciasdelcorazon.com.ar/producto/pavlova-modificada/"
         },
         {
           "slug": "cheesecake-maracuya",
           "nombre": "Cheesecake Maracuya con base de Brownie!",
           "descripcion": "",
-          "precio": 48559,
+          "precio": 58271,
           "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-maracuya/"
         },
         {
           "slug": "choco-oreo-2",
           "nombre": "Choco Oreo",
           "descripcion": "",
-          "precio": 50863,
+          "precio": 61036,
           "url": "https://deliciasdelcorazon.com.ar/producto/choco-oreo-2/"
-        },
-        {
-          "slug": "desayuno-te-extrano-amigo",
-          "nombre": "Desayuno «Te extraño amigo»",
-          "descripcion": "PROMOCION DIA DEL AMIGO!!!",
-          "precio": 61425,
-          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-te-extrano-amigo/"
-        },
-        {
-          "slug": "desayuno-mateamos-a-la-distancia",
-          "nombre": "Desayuno «Mateamos a la distancia»",
-          "descripcion": "PROMOCION DIA DEL AMIGO!!!",
-          "precio": 63700,
-          "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-mateamos-a-la-distancia/"
         },
         {
           "slug": "desayuno-merienda-campero",
           "nombre": "Desayuno/Merienda Campero",
           "descripcion": "",
-          "precio": 88498,
+          "precio": 128322,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-campero/"
         },
         {
@@ -1510,21 +1491,21 @@
           "slug": "desayuno-merienda-premium",
           "nombre": "Desayuno/Merienda Premium",
           "descripcion": "",
-          "precio": 64014,
+          "precio": 92820,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-premium/"
         },
         {
           "slug": "desayuno-merienda-economico",
           "nombre": "Desayuno/Merienda Economico",
           "descripcion": "",
-          "precio": 64350,
+          "precio": 93308,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-economico/"
         },
         {
           "slug": "desayuno-merienda-infantil",
           "nombre": "Desayuno/Merienda Infantil",
           "descripcion": "Precio promocional por el Dia del Niño hasta agotar stock de 50 unidades. Reserva el tuyo hoy mismo!!!",
-          "precio": 55645,
+          "precio": 80685,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno-merienda-infantil/"
         },
         {
@@ -1538,201 +1519,201 @@
           "slug": "desayuno",
           "nombre": "Desayuno/Merienda Standard",
           "descripcion": "",
-          "precio": 45500,
+          "precio": 65975,
           "url": "https://deliciasdelcorazon.com.ar/producto/desayuno/"
         },
         {
           "slug": "778",
           "nombre": "Cheesecake Cherry",
           "descripcion": "",
-          "precio": 43926,
+          "precio": 52711,
           "url": "https://deliciasdelcorazon.com.ar/producto/778/"
         },
         {
           "slug": "new-york-cheesecake-con-cubierta-de-chocolate",
           "nombre": "New york cheesecake con cubierta de chocolate",
           "descripcion": "",
-          "precio": 43926,
+          "precio": 52711,
           "url": "https://deliciasdelcorazon.com.ar/producto/new-york-cheesecake-con-cubierta-de-chocolate/"
         },
         {
           "slug": "pasta-frola",
           "nombre": "Pasta frola",
           "descripcion": "",
-          "precio": 32183,
+          "precio": 38620,
           "url": "https://deliciasdelcorazon.com.ar/producto/pasta-frola/"
         },
         {
           "slug": "new-york-cheesecake",
           "nombre": "New york cheesecake",
           "descripcion": "",
-          "precio": 43926,
+          "precio": 52711,
           "url": "https://deliciasdelcorazon.com.ar/producto/new-york-cheesecake/"
         },
         {
           "slug": "pastelera-y-frutos-rojos",
           "nombre": "Pastelera y frutos rojos",
           "descripcion": "",
-          "precio": 43207,
+          "precio": 51848,
           "url": "https://deliciasdelcorazon.com.ar/producto/pastelera-y-frutos-rojos/"
         },
         {
           "slug": "tarta-bombon",
           "nombre": "Tarta bombon",
           "descripcion": "",
-          "precio": 35640,
+          "precio": 42768,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-bombon/"
         },
         {
           "slug": "tarta-de-duraznos",
           "nombre": "Tarta de duraznos",
           "descripcion": "",
-          "precio": 47190,
+          "precio": 56628,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-duraznos/"
         },
         {
           "slug": "brownie-con-frutos-rojos",
           "nombre": "Brownie con frutos rojos",
           "descripcion": "",
-          "precio": 41318,
+          "precio": 49582,
           "url": "https://deliciasdelcorazon.com.ar/producto/brownie-con-frutos-rojos/"
         },
         {
           "slug": "marquise-de-chocolate",
           "nombre": "Marquise de chocolate",
           "descripcion": "",
-          "precio": 41870,
+          "precio": 50244,
           "url": "https://deliciasdelcorazon.com.ar/producto/marquise-de-chocolate/"
         },
         {
           "slug": "crumble-de-frutos-rojos",
           "nombre": "Crumble de frutos rojos",
           "descripcion": "",
-          "precio": 41950,
+          "precio": 50340,
           "url": "https://deliciasdelcorazon.com.ar/producto/crumble-de-frutos-rojos/"
         },
         {
           "slug": "pavlova",
           "nombre": "Pavlova",
           "descripcion": "",
-          "precio": 62189,
+          "precio": 74627,
           "url": "https://deliciasdelcorazon.com.ar/producto/pavlova/"
         },
         {
           "slug": "postre-balcarce",
           "nombre": "Postre Balcarce",
           "descripcion": "Clasico postre Argentino",
-          "precio": 44452,
+          "precio": 53342,
           "url": "https://deliciasdelcorazon.com.ar/producto/postre-balcarce/"
         },
         {
           "slug": "brownie",
           "nombre": "Brownie",
           "descripcion": "",
-          "precio": 41073,
+          "precio": 49288,
           "url": "https://deliciasdelcorazon.com.ar/producto/brownie/"
         },
         {
           "slug": "crumble-de-peras",
           "nombre": "Crumble de Peras",
           "descripcion": "",
-          "precio": 41218,
+          "precio": 49462,
           "url": "https://deliciasdelcorazon.com.ar/producto/crumble-de-peras/"
         },
         {
           "slug": "american-chocolate-cookies-chips",
           "nombre": "Chocolate Cookies Chips!",
           "descripcion": "Precio por media docena.-",
-          "precio": 16825,
+          "precio": 29999,
           "url": "https://deliciasdelcorazon.com.ar/producto/american-chocolate-cookies-chips/"
         },
         {
           "slug": "tiramisu",
           "nombre": "Tiramisu",
           "descripcion": "",
-          "precio": 44274,
+          "precio": 53129,
           "url": "https://deliciasdelcorazon.com.ar/producto/tiramisu/"
         },
         {
           "slug": "cheesecake-oreo",
           "nombre": "Cheesecake Oreo",
           "descripcion": "",
-          "precio": 44274,
+          "precio": 53129,
           "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-oreo/"
         },
         {
           "slug": "selva-negra",
           "nombre": "Selva Negra",
           "descripcion": "",
-          "precio": 45441,
+          "precio": 54529,
           "url": "https://deliciasdelcorazon.com.ar/producto/selva-negra/"
         },
         {
           "slug": "lemon-pie",
           "nombre": "Lemon Pie",
           "descripcion": "",
-          "precio": 49853,
+          "precio": 59824,
           "url": "https://deliciasdelcorazon.com.ar/producto/lemon-pie/"
         },
         {
           "slug": "tarta-de-ricota",
           "nombre": "Tarta de ricota",
           "descripcion": "",
-          "precio": 37066,
+          "precio": 44479,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-ricota/"
         },
         {
           "slug": "tarta-de-coco-y-dulce-de-leche",
           "nombre": "Tarta de coco y dulce de leche",
           "descripcion": "",
-          "precio": 39016,
+          "precio": 46819,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-coco-y-dulce-de-leche/"
         },
         {
           "slug": "torta-rogel",
           "nombre": "Torta Rogel",
           "descripcion": "",
-          "precio": 40388,
+          "precio": 48466,
           "url": "https://deliciasdelcorazon.com.ar/producto/torta-rogel/"
         },
         {
           "slug": "chocotorta-cumpleanera",
           "nombre": "Chocotorta Explosiva!",
           "descripcion": "",
-          "precio": 66568,
+          "precio": 79882,
           "url": "https://deliciasdelcorazon.com.ar/producto/chocotorta-cumpleanera/"
         },
         {
           "slug": "tarta-frutal",
           "nombre": "Tarta frutal",
           "descripcion": "",
-          "precio": 48289,
+          "precio": 57947,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-frutal/"
         },
         {
           "slug": "tarta-de-frutillas",
           "nombre": "Tarta de frutillas",
           "descripcion": "",
-          "precio": 53009,
+          "precio": 63611,
           "url": "https://deliciasdelcorazon.com.ar/producto/tarta-de-frutillas/"
         },
         {
           "slug": "cheesecake-frutos-rojos",
           "nombre": "Cheesecake frutos rojos",
           "descripcion": "",
-          "precio": 44662,
+          "precio": 53594,
           "url": "https://deliciasdelcorazon.com.ar/producto/cheesecake-frutos-rojos/"
         },
         {
           "slug": "chocotorta",
           "nombre": "Chocotorta",
           "descripcion": "",
-          "precio": 45320,
+          "precio": 54384,
           "url": "https://deliciasdelcorazon.com.ar/producto/chocotorta/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-08-25T03:23:21.900Z"
+      "updatedAt": "2026-09-01T07:53:59.919Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2053,105 +2034,177 @@
           "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
           "precio": 11300,
           "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-almendras/"
+        },
+        {
+          "slug": "carrot-cake",
+          "nombre": "Carrot cake",
+          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, relleno y cubierto con frosting de tofu...",
+          "precio": 98000,
+          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/"
+        },
+        {
+          "slug": "pan-dulce-750g",
+          "nombre": "Pan dulce 750g",
+          "descripcion": "Vegano, sin gluten (no apto celiacos) y sin azucar. Presentacion de 750g. Endulzado con dátiles, contiene almendras, nueces y castañas de caju. Decorado con ...",
+          "precio": 44200,
+          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-750g/"
+        },
+        {
+          "slug": "porcion-chocotorta",
+          "nombre": "Porcion Chocotorta",
+          "descripcion": "Torta vegana y sin trigo (no apto celiacos) Base de chocolinas veganas procesadas, 3 generosas capas de crema de dulce de leche vegana, intercaladas con choc...",
+          "precio": 13500,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-chocotorta/"
+        },
+        {
+          "slug": "chocotorta",
+          "nombre": "Chocotorta",
+          "descripcion": "Torta vegana y sin trigo (no apto celiacos) 3 generosas capas de crema de dulce de leche vegana, intercaladas con chocolinas veganas enteras. Las chocolinas ...",
+          "precio": 82000,
+          "url": "https://www.natispasteleria.com.ar/productos/chocotorta/"
+        },
+        {
+          "slug": "porcion-carrot-cake",
+          "nombre": "Porcion carrot cake",
+          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, con relleno y cobertura de tofu y caju ...",
+          "precio": 13500,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/"
+        },
+        {
+          "slug": "porcion-cheesecake-proteica",
+          "nombre": "Porcion Cheesecake proteica",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
+          "precio": 13100,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/"
+        },
+        {
+          "slug": "cheesecake-proteica",
+          "nombre": "Cheesecake proteica",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
+          "precio": 80000,
+          "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/"
+        },
+        {
+          "slug": "carrot-cake-navidena-8kh37",
+          "nombre": "Carrot cake navideña",
+          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, cubierto con frosting de tofu y caju sa...",
+          "precio": 65000,
+          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/"
+        },
+        {
+          "slug": "garrapinadas-de-pistacho-aoz0n",
+          "nombre": "Garrapiñadas de pistacho",
+          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo...",
+          "precio": 15500,
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/"
+        },
+        {
+          "slug": "franatis-tpbk8",
+          "nombre": "Franatis",
+          "descripcion": "Veganas y sin harinas (no apto celiacos) Frambuesas bañadas en chocolate blanco vegano y con chocolate semiamargo Presentacion en bolsita de 100g FOTO ILUSTR...",
+          "precio": 16100,
+          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/"
+        },
+        {
+          "slug": "porcion-natisdad-dcbas",
+          "nombre": "Porcion Natisdad",
+          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
+          "precio": 12100,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/"
+        },
+        {
+          "slug": "natisdad-4oou5",
+          "nombre": "Natisdad",
+          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
+          "precio": 55000,
+          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/"
+        },
+        {
+          "slug": "alfajores-havanatis-corazon-3-unidades-15nun",
+          "nombre": "Alfajores Havanati's corazon (3 unidades)",
+          "descripcion": "Veganos y sin gluten (no apto celiacos) Tapas de cacao con un toque de sal marina, rellenas con dulce de leche, con centro de ganache de dulce de leche y bañ...",
+          "precio": 10500,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/"
+        },
+        {
+          "slug": "alfajores-chocomani-corazon-x3-12hc4",
+          "nombre": "Alfajores Chocomani corazon x3",
+          "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
+          "precio": 10800,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/"
+        },
+        {
+          "slug": "alfajores-almendra-mousse-corazon-3-unidades-bd51g",
+          "nombre": "Alfajores almendra mousse corazon (3 unidades)",
+          "descripcion": "Veganos, sin azucar refinada y sin harinas con gluten. Tapas de sablée de almendras con un fino sabor a caramelo, relleno de ganache de chocolate semiamargo ...",
+          "precio": 14000,
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/"
+        },
+        {
+          "slug": "huevo-snicker-sin-azucar",
+          "nombre": "Huevo Snicker",
+          "descripcion": "Huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar relleno de caramelo salado de datil y mani tostado sin sal, ganache de ...",
+          "precio": 47900,
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-snicker-sin-azucar/"
+        },
+        {
+          "slug": "huevo-bombona-sin-azucar",
+          "nombre": "Huevo Bombona",
+          "descripcion": "Medio huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar, relleno de cremoso de chocolate semiamargo sin azúcar y praliné ...",
+          "precio": 56500,
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-bombona-sin-azucar/"
+        },
+        {
+          "slug": "huevo-key-lime-pie-sin-azucar",
+          "nombre": "Huevo Key lime pie",
+          "descripcion": "Huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar relleno de cremoso de lima y crema tipo chantilly casera a base de cajú...",
+          "precio": 49300,
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-key-lime-pie-sin-azucar/"
+        },
+        {
+          "slug": "rosca-de-pascua",
+          "nombre": "Rosca de Pascua",
+          "descripcion": "Rosca de Pascua vegana, sin trigo y sin azúcar. Rosca 100% a base de plantas, sin harina de trigo y sin azúcar. La masa esta endulzada con dátiles y la crema...",
+          "precio": 47500,
+          "url": "https://www.natispasteleria.com.ar/productos/rosca-de-pascua/"
+        },
+        {
+          "slug": "bombona-sin-azucar",
+          "nombre": "Bombona",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar. Base de chocolate con almendras, cremoso de chocolate semiamargo y praline de frutas secas (almendras, avellanas y man...",
+          "precio": 120000,
+          "url": "https://www.natispasteleria.com.ar/productos/bombona-sin-azucar/"
+        },
+        {
+          "slug": "porcion-snicker-u5qmg",
+          "nombre": "Porcion Snicker",
+          "descripcion": "Vegana, sin trigo y sin azucar Base sablee de cacao endulzada con eritritol, caramelo salado de datil con mani tostado y ganache de chocolate semiamargo sin ...",
+          "precio": 14200,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-snicker-u5qmg/"
+        },
+        {
+          "slug": "tarta-snicker-54r3y",
+          "nombre": "Tarta Snicker",
+          "descripcion": "Vegana, sin trigo y sin azucar Base sablee de cacao endulzada con eritritol, caramelo salado de datil con mani tostado y ganache de chocolate semiamargo sin ...",
+          "precio": 85000,
+          "url": "https://www.natispasteleria.com.ar/productos/tarta-snicker-54r3y/"
+        },
+        {
+          "slug": "tableta-key-lime-pie-wgodv",
+          "nombre": "Tableta Key lime pie",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de cremoso de lima con crunchy de coco Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Con...",
+          "precio": 38500,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-key-lime-pie-wgodv/"
+        },
+        {
+          "slug": "tableta-frambuesa-y-pistacho-1e5y7",
+          "nombre": "Tableta Frambuesa y Pistacho",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de pulpa concentrada de frambuesa y pistachos tostados. Sin lácteos, huevo, harina ni azúcar Pe...",
+          "precio": 47500,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/"
         }
       ],
       "errores": [
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-750g/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-chocotorta/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/chocotorta/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-snicker-sin-azucar/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-bombona-sin-azucar/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-key-lime-pie-sin-azucar/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/rosca-de-pascua/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/bombona-sin-azucar/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-snicker-u5qmg/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/tarta-snicker-54r3y/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-key-lime-pie-wgodv/",
-          "error": "sin precio"
-        },
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/",
-          "error": "sin precio"
-        },
         {
           "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/",
           "error": "sin precio"
@@ -2161,7 +2214,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-08-25T03:23:26.656Z"
+      "updatedAt": "2026-09-01T07:54:03.486Z"
     }
   ]
 }
