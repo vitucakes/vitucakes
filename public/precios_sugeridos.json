@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-01T07:37:12.165Z",
+  "generadoEn": "2026-09-08T07:08:38.633Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Azúcar",
-      "precio": 1.2,
+      "precio": 1.1,
       "unidad": "g",
       "producto": "Azúcar Común Tipo &#34;A&#34; 10 Kg",
       "granateQty": 10000,
       "granateUnit": "g",
-      "granatePrecioTotal": 12000,
+      "granatePrecioTotal": 11000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1478-azucar-comun-tipo-a-10-kg-4500"
     },
     {
