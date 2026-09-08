@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-01T07:53:24.118Z",
+  "generadoEn": "2026-09-08T07:19:06.835Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -103,10 +103,17 @@
           "descripcion": "Alimonada! Bizcochos húmedos de limón, relleno con frosting de chocolate blanco y limón, y mermelada de arándanos. Tiene 20cm y rinde entre 18/20 porciones! ...",
           "precio": 70900,
           "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
+        },
+        {
+          "slug": "mini-cake-1ktob",
+          "nombre": "Mini Cake Día del Maestro",
+          "descripcion": "Un regalo que dice \"Gracias\" de la forma más dulce ✨ Nuestra Mini Cake Día del Maestro es de 9cm de diámetro, bizcocho de vainilla, relleno...",
+          "precio": 18500,
+          "url": "https://candelitte.mitiendanube.com/productos/mini-cake-1ktob/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-01T07:53:24.913Z"
+      "updatedAt": "2026-09-08T07:19:07.843Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -241,7 +248,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-01T07:53:26.261Z"
+      "updatedAt": "2026-09-08T07:19:09.539Z"
     },
     {
       "id": "silnari",
@@ -514,7 +521,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-09-01T07:53:28.532Z"
+      "updatedAt": "2026-09-08T07:19:12.857Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1713,7 +1720,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-01T07:53:59.919Z"
+      "updatedAt": "2026-09-08T07:19:32.863Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2202,19 +2209,24 @@
           "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de pulpa concentrada de frambuesa y pistachos tostados. Sin lácteos, huevo, harina ni azúcar Pe...",
           "precio": 47500,
           "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/"
-        }
-      ],
-      "errores": [
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/",
-          "error": "sin precio"
         },
         {
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/",
-          "error": "sin precio"
+          "slug": "tableta-chocomani-ok236",
+          "nombre": "Tableta Chocomani",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de maní y maní tostado Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Conserva...",
+          "precio": 38500,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/"
+        },
+        {
+          "slug": "tableta-almendra-chai-1tdht",
+          "nombre": "Tableta almendra chai",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de chocolate especiada (canela, jengibre y cardamomo) con almendras tostadas. Sin lá...",
+          "precio": 45400,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/"
         }
       ],
-      "updatedAt": "2026-09-01T07:54:03.486Z"
+      "errores": [],
+      "updatedAt": "2026-09-08T07:19:35.508Z"
     }
   ]
 }
