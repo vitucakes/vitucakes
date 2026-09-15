@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-08T07:17:13.692Z",
+  "generadoEn": "2026-09-15T07:48:36.575Z",
   "fuente": "Día",
   "items": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 2.99,
+      "precio": 3.29,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 2990,
+      "diaPrecioTotal": 3290,
       "match": "curado"
     },
     {
@@ -124,12 +124,12 @@
     },
     {
       "nombre": "Chocolatada 200ml",
-      "precio": 10.225,
+      "precio": 10.95,
       "unidad": "u",
       "producto": "Nesquik Extra Cacao Chocolatada Listo Para Tomar X 200 Ml.",
       "diaQty": 200,
       "diaUnit": "u",
-      "diaPrecioTotal": 2045,
+      "diaPrecioTotal": 2190,
       "match": "curado"
     },
     {
@@ -144,12 +144,12 @@
     },
     {
       "nombre": "Chocolinas",
-      "precio": 10.472,
+      "precio": 10.9922,
       "unidad": "g",
-      "producto": "Galletitas Chocolate Chocolinas 250 Gr.",
-      "diaQty": 250,
+      "producto": "Galletitas Negro Chocolinas 258 Gr.",
+      "diaQty": 258,
       "diaUnit": "g",
-      "diaPrecioTotal": 2618,
+      "diaPrecioTotal": 2836,
       "match": "curado"
     },
     {
@@ -174,22 +174,22 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 10.45,
+      "precio": 11,
       "unidad": "g",
       "producto": "Crema De Leche Dia 200 Ml.",
       "diaQty": 200,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2090,
+      "diaPrecioTotal": 2200,
       "match": "curado"
     },
     {
       "nombre": "Dulce de leche",
-      "precio": 7,
+      "precio": 7.1,
       "unidad": "g",
-      "producto": "Dulce de Leche Dia 400 Gr.",
-      "diaQty": 400,
+      "producto": "Dulce de Leche DIA 1 Kg.",
+      "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 2800,
+      "diaPrecioTotal": 7100,
       "match": "curado"
     },
     {
@@ -294,12 +294,12 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 33.2667,
+      "precio": 34.26,
       "unidad": "g",
       "producto": "Jamón Cocido Lario Feteado 150 Gr.",
       "diaQty": 150,
       "diaUnit": "g",
-      "diaPrecioTotal": 4990,
+      "diaPrecioTotal": 5139,
       "match": "curado"
     },
     {
@@ -334,12 +334,12 @@
     },
     {
       "nombre": "LECHE CONDENSADA",
-      "precio": 8.6203,
+      "precio": 11.6456,
       "unidad": "g",
-      "producto": "Leche Condensada Sabor Limon Nestle 395 Gr.",
+      "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3405,
+      "diaPrecioTotal": 4600,
       "match": "auto"
     },
     {
@@ -376,7 +376,7 @@
       "nombre": "Manteca",
       "precio": 18.75,
       "unidad": "g",
-      "producto": "Manteca DIA Calidad Extra 200 Gr.",
+      "producto": "Manteca Sin Sal Dia 200 Gr.",
       "diaQty": 200,
       "diaUnit": "g",
       "diaPrecioTotal": 3750,
@@ -534,12 +534,12 @@
     },
     {
       "nombre": "Queso semiduro",
-      "precio": 9.9621,
+      "precio": 10.3103,
       "unidad": "g",
       "producto": "Queso Cremoso Clásico Dia 290 Gr.",
       "diaQty": 290,
       "diaUnit": "g",
-      "diaPrecioTotal": 2889,
+      "diaPrecioTotal": 2990,
       "match": "curado"
     },
     {
@@ -584,32 +584,32 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 11.5,
+      "precio": 12.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 11500,
+      "diaPrecioTotal": 12990,
       "match": "curado"
     },
     {
       "nombre": "Vainillas",
-      "precio": 1718,
+      "precio": 1890,
       "unidad": "u",
       "producto": "Vainillas Dia 148 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1718,
+      "diaPrecioTotal": 1890,
       "match": "auto"
     },
     {
       "nombre": "Zanahoria",
-      "precio": 1.89,
+      "precio": 2.29,
       "unidad": "g",
       "producto": "Zanahoria x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1890,
+      "diaPrecioTotal": 2290,
       "match": "curado"
     },
     {
@@ -624,12 +624,12 @@
     },
     {
       "nombre": "Leche condensada",
-      "precio": 8.6203,
+      "precio": 11.6456,
       "unidad": "g",
-      "producto": "Leche Condensada Sabor Limon Nestle 395 Gr.",
+      "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3405,
+      "diaPrecioTotal": 4600,
       "match": "curado"
     },
     {
