@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-08T07:19:06.835Z",
+  "generadoEn": "2026-09-15T07:53:41.797Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -103,17 +103,10 @@
           "descripcion": "Alimonada! Bizcochos húmedos de limón, relleno con frosting de chocolate blanco y limón, y mermelada de arándanos. Tiene 20cm y rinde entre 18/20 porciones! ...",
           "precio": 70900,
           "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
-        },
-        {
-          "slug": "mini-cake-1ktob",
-          "nombre": "Mini Cake Día del Maestro",
-          "descripcion": "Un regalo que dice \"Gracias\" de la forma más dulce ✨ Nuestra Mini Cake Día del Maestro es de 9cm de diámetro, bizcocho de vainilla, relleno...",
-          "precio": 18500,
-          "url": "https://candelitte.mitiendanube.com/productos/mini-cake-1ktob/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-08T07:19:07.843Z"
+      "updatedAt": "2026-09-15T07:53:42.529Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -248,7 +241,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-08T07:19:09.539Z"
+      "updatedAt": "2026-09-15T07:53:43.778Z"
     },
     {
       "id": "silnari",
@@ -261,13 +254,6 @@
           "descripcion": "Torta de Chocolate con Mousse de BaileysUna base de bizcocho húmedo e intenso, combinada con una mousse tan ligera y cremosa que se funde en la boca, potenciada con el inconfundib",
           "precio": 58000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-de-chocolate-con-mousse-de-baileys"
-        },
-        {
-          "slug": "box-dia-del-padre",
-          "nombre": "Box Dia del Padre",
-          "descripcion": "Porque papá se merece una experiencia gourmet inolvidable, diseñamos este box único combinando lo mejor del mundo salado y nuestro toque artesanal.¿Qué incluye el Box? 🧀 Se",
-          "precio": 65000,
-          "url": "https://www.silnari.com/tortas-y-tartas/box-dia-del-padre"
         },
         {
           "slug": "key-lime-pie",
@@ -410,13 +396,6 @@
           "url": "https://www.silnari.com/cannoli-siciliani/kit-cannoli-para-armar"
         },
         {
-          "slug": "torta-arco-iris",
-          "nombre": "Torta Arco Iris",
-          "descripcion": "Siete capas de color y una sonrisa garantizada.La Torta Arco Iris es nuestra creación más vistosa: siete capas de bizcochuelo de colores vibrantes, unidas por una suave crema de",
-          "precio": 94800,
-          "url": "https://www.silnari.com/tortas-y-tartas/torta-arco-iris"
-        },
-        {
           "slug": "mousse-de-chocolate",
           "nombre": "Mousse de Chocolate",
           "descripcion": "Para los que no se conforman con poco chocolate.Una torta que seduce desde el primer bocado: base de pionono de vainilla que aporta suavidad y contraste, rellena con una mousse de",
@@ -508,11 +487,11 @@
           "url": "https://www.silnari.com/cheesecakes/cheesecake-chocotorta"
         },
         {
-          "slug": "cheesecake-de-frutos-rojos",
-          "nombre": "Cheesecake de Frutos Rojos",
+          "slug": "new-york-cheesecake-frutos-rojos",
+          "nombre": "New York Cheesecake Frutos Rojos",
           "descripcion": "Fresca, colorida y con el balance justo entre dulce y ácido.Una cheesecake cremosa y suave coronada con un coulis de frutos rojos y un topping de frutillas, arándanos y frambuesa",
           "precio": 50000,
-          "url": "https://www.silnari.com/cheesecakes/cheesecake-de-frutos-rojos"
+          "url": "https://www.silnari.com/cheesecakes/new-york-cheesecake-frutos-rojos"
         }
       ],
       "errores": [
@@ -521,7 +500,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-09-08T07:19:12.857Z"
+      "updatedAt": "2026-09-15T07:53:46.020Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1720,7 +1699,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-08T07:19:32.863Z"
+      "updatedAt": "2026-09-15T07:54:10.702Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2209,24 +2188,19 @@
           "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de pulpa concentrada de frambuesa y pistachos tostados. Sin lácteos, huevo, harina ni azúcar Pe...",
           "precio": 47500,
           "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/"
-        },
-        {
-          "slug": "tableta-chocomani-ok236",
-          "nombre": "Tableta Chocomani",
-          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de maní y maní tostado Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Conserva...",
-          "precio": 38500,
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/"
-        },
-        {
-          "slug": "tableta-almendra-chai-1tdht",
-          "nombre": "Tableta almendra chai",
-          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de chocolate especiada (canela, jengibre y cardamomo) con almendras tostadas. Sin lá...",
-          "precio": 45400,
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/"
         }
       ],
-      "errores": [],
-      "updatedAt": "2026-09-08T07:19:35.508Z"
+      "errores": [
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/",
+          "error": "sin precio"
+        }
+      ],
+      "updatedAt": "2026-09-15T07:54:13.966Z"
     }
   ]
 }
