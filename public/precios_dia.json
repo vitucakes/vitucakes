@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-15T07:48:36.575Z",
+  "generadoEn": "2026-09-22T07:45:02.919Z",
   "fuente": "Día",
   "items": [
     {
@@ -104,12 +104,12 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 1.99,
+      "precio": 3.49,
       "unidad": "g",
       "producto": "Cebolla Comercial en bolsa malla x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1990,
+      "diaPrecioTotal": 3490,
       "match": "curado"
     },
     {
@@ -164,12 +164,12 @@
     },
     {
       "nombre": "Coco rayado",
-      "precio": 43.4,
+      "precio": 30,
       "unidad": "g",
-      "producto": "Coco Rallado Alicante 50 Gr.",
-      "diaQty": 50,
+      "producto": "Coco Rallado Dia 25 Gr.",
+      "diaQty": 25,
       "diaUnit": "g",
-      "diaPrecioTotal": 2170,
+      "diaPrecioTotal": 750,
       "match": "curado"
     },
     {
@@ -244,32 +244,32 @@
     },
     {
       "nombre": "grasa",
-      "precio": 7.3,
+      "precio": 7.5,
       "unidad": "g",
       "producto": "Grasa Vacuna Dia 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 7300,
+      "diaPrecioTotal": 7500,
       "match": "curado"
     },
     {
       "nombre": "Harina 000",
-      "precio": 0.6,
+      "precio": 1.039,
       "unidad": "g",
-      "producto": "Harina 000 Pureza Ultra Refinada 1 Kg.",
+      "producto": "Harina De Trigo 000 Chacabuco 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 600,
+      "diaPrecioTotal": 1039,
       "match": "curado"
     },
     {
       "nombre": "Harina 0000",
-      "precio": 1.1,
+      "precio": 1.05,
       "unidad": "g",
       "producto": "Harina de Trigo 0000 DIA 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1100,
+      "diaPrecioTotal": 1050,
       "match": "curado"
     },
     {
@@ -294,12 +294,12 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 34.26,
+      "precio": 36.45,
       "unidad": "g",
-      "producto": "Jamón Cocido Lario Feteado 150 Gr.",
-      "diaQty": 150,
+      "producto": "Jamón Cocido Fetas Finas Dia 200 Gr.",
+      "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 5139,
+      "diaPrecioTotal": 7290,
       "match": "curado"
     },
     {
@@ -344,12 +344,12 @@
     },
     {
       "nombre": "Lechuga",
-      "precio": 5.69,
+      "precio": 5.99,
       "unidad": "g",
       "producto": "Lechuga x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5690,
+      "diaPrecioTotal": 5990,
       "match": "auto"
     },
     {
@@ -374,22 +374,22 @@
     },
     {
       "nombre": "Manteca",
-      "precio": 18.75,
+      "precio": 18.8,
       "unidad": "g",
-      "producto": "Manteca Sin Sal Dia 200 Gr.",
-      "diaQty": 200,
+      "producto": "Manteca Sin Sal Dia 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 3750,
+      "diaPrecioTotal": 1880,
       "match": "curado"
     },
     {
       "nombre": "Manzana Verde",
-      "precio": 6.49,
+      "precio": 6.69,
       "unidad": "g",
       "producto": "Manzana Verde x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6490,
+      "diaPrecioTotal": 6690,
       "match": "curado"
     },
     {
@@ -444,22 +444,22 @@
     },
     {
       "nombre": "Mix frutos secos",
-      "precio": 44.9,
+      "precio": 45.9,
       "unidad": "g",
       "producto": "Mix Frutos Secos LaSanjuanita con Coco 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 4490,
+      "diaPrecioTotal": 4590,
       "match": "auto"
     },
     {
       "nombre": "Nuez",
-      "precio": 49.9,
+      "precio": 59.9,
       "unidad": "g",
       "producto": "Nueces Peladas Dia 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 4990,
+      "diaPrecioTotal": 5990,
       "match": "curado"
     },
     {
@@ -474,12 +474,12 @@
     },
     {
       "nombre": "Oregano",
-      "precio": 68.76,
+      "precio": 35,
       "unidad": "g",
-      "producto": "Oregano Alicante 25 Gr.",
-      "diaQty": 25,
+      "producto": "Orégano Dia 50 Gr.",
+      "diaQty": 50,
       "diaUnit": "g",
-      "diaPrecioTotal": 1719,
+      "diaPrecioTotal": 1750,
       "match": "curado"
     },
     {
@@ -524,12 +524,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 9.25,
+      "precio": 11.4375,
       "unidad": "g",
-      "producto": "Queso Crema Clasico Ricrem 280 Gr.",
-      "diaQty": 280,
+      "producto": "Queso Crema Clásico Dia 480 Gr.",
+      "diaQty": 480,
       "diaUnit": "g",
-      "diaPrecioTotal": 2590,
+      "diaPrecioTotal": 5490,
       "match": "curado"
     },
     {
@@ -584,12 +584,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 12.99,
+      "precio": 13.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 12990,
+      "diaPrecioTotal": 13990,
       "match": "curado"
     },
     {
@@ -604,12 +604,12 @@
     },
     {
       "nombre": "Zanahoria",
-      "precio": 2.29,
+      "precio": 2.99,
       "unidad": "g",
       "producto": "Zanahoria x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 2290,
+      "diaPrecioTotal": 2990,
       "match": "curado"
     },
     {
@@ -654,12 +654,12 @@
     },
     {
       "nombre": "Queso Mascarpone",
-      "precio": 18.5,
+      "precio": 19.96,
       "unidad": "g",
       "producto": "Queso Mascarpone Festa 250 Gr.",
       "diaQty": 250,
       "diaUnit": "g",
-      "diaPrecioTotal": 4625,
+      "diaPrecioTotal": 4990,
       "match": "curado"
     },
     {
