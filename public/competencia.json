@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-15T07:53:41.797Z",
+  "generadoEn": "2026-09-22T07:48:34.273Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -106,13 +106,20 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-15T07:53:42.529Z"
+      "updatedAt": "2026-09-22T07:48:35.486Z"
     },
     {
       "id": "memo-la-pasteleria",
       "nombre": "Memo La Pastelería",
       "fuente": "https://memolapasteleria.empretienda.com.ar",
       "productos": [
+        {
+          "slug": "cremoso-de-limon",
+          "nombre": "CREMOSO DE LIMON",
+          "descripcion": "CREMOSO DE LIMON buenoooo es una tarta muy espectacular, sablee de cacao y tiene un cremoso de limon leche condensada muy lo más!! DECO CREMATamaño 22cm rinde aprox 12 porc",
+          "precio": 55000,
+          "url": "https://memolapasteleria.empretienda.com.ar/alfamola/cremoso-de-limon"
+        },
         {
           "slug": "desayuno-premium",
           "nombre": "DESAYUNO premium",
@@ -131,36 +138,29 @@
           "slug": "nube-de-nuez",
           "nombre": "NUBE DE NUEZ",
           "descripcion": "Tal como el nombre lo indica, una nubeeee! textura única, super liviana, solo nueces con ddl, reducción de frutos rojos y crema!La verdad que es lo maaaaas! MEGA RECOMIENDO",
-          "precio": 55000,
+          "precio": 59000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/nube-de-nuez"
         },
         {
           "slug": "marquise-oreo",
           "nombre": "Marquise OREO",
           "descripcion": "Marquise OREO base muyyyyy suave y humeda de chocolate sin harinas, con dulce de leche y crema oreo, con muchas oreos de deco!Tamaño 24cm rinde 15 porciones aproxxxxTodos nuestros",
-          "precio": 53000,
+          "precio": 56000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/marquise-oreo"
         },
         {
           "slug": "molanui",
           "nombre": "Molanui",
           "descripcion": "MolanuiNuestra amada tartaaaaa, sablee de cacao con ddl, reducción de frutos rojos, frambuesas y ganache de chocolate blanco! LITERAL UNA LOCURA DE RICAAAAATamaño 24cm rinde 12/1",
-          "precio": 47000,
+          "precio": 55000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/molanui"
         },
         {
           "slug": "chocotorta",
           "nombre": "Chocotorta",
           "descripcion": "Todo el detalle de Chocotorta en nuestra tienda online",
-          "precio": 53000,
+          "precio": 59000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/chocotorta"
-        },
-        {
-          "slug": "mega-chocotorta",
-          "nombre": "mega CHOCOTORTA",
-          "descripcion": "Mega CHOCOTORTA la mas ricaaaaaaaaaa! Es enorme, tamaño rectangular ideal para compartir y disfrutar en tus festejos.Todos nuestros productos son realizados de manera artesanal, s",
-          "precio": 68000,
-          "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/mega-chocotorta"
         },
         {
           "slug": "box-12-unidades-mini-postres",
@@ -180,7 +180,7 @@
           "slug": "lemon-cheese",
           "nombre": "Lemon CHEESE",
           "descripcion": "La mejor combinación de sabores y texturas en una sola torta, para los fanáticos del LEMON PIE Y CHEESECAKE. Te ofrecemos esta bomba, base de NY cheesecake, crema de limón y mer",
-          "precio": 63000,
+          "precio": 69000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/lemon-cheese"
         },
         {
@@ -194,54 +194,54 @@
           "slug": "lemon-pie",
           "nombre": "LEMON PIE",
           "descripcion": "Clásico lemon pie, base sablee rellena con crema de limón y cubierta con merengue italiano. Tamaño grande 24cm rinde entre 12 y 15 porciones.Todos nuestros productos son realiza",
-          "precio": 42000,
+          "precio": 49000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/lemon-pie"
         },
         {
           "slug": "matilda",
           "nombre": "MATILDA",
           "descripcion": "MATILDA, TU PUEDES BRUCE!Torta MEGA CHOCOLATOSA rellena con dulce de leche y cubierta con ganache de chocolate. Tamaño grande 24cm rinde un montón entre 15 y 20 porciones!Todos n",
-          "precio": 65000,
+          "precio": 69000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/matilda"
         },
         {
           "slug": "rogel",
           "nombre": "ROGEL",
           "descripcion": "SR. ROGELIO el rogel más ricooo 8 capas crocantes rellenas de mucho dulce de leche. Cubierto con merengue italiano. Tamaño grande de 24cm rinde entre 15 y 18 porciones aprox.Todo",
-          "precio": 55000,
+          "precio": 59000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/rogel"
         },
         {
           "slug": "marquise-alpina",
           "nombre": "Marquise ALPINA",
           "descripcion": "MARQUISE ALPINA base húmeda de chocolate sin harina, con dulce de leche, crema y merengue italiano. Decorada con hilos de chocolate.Tamaño grande 24cm rinde entre 15 aprox.Todos",
-          "precio": 53000,
+          "precio": 56000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/marquise-alpina"
         },
         {
           "slug": "marquise-patagonia",
           "nombre": "Marquise PATAGONIA",
           "descripcion": "MARQUISE PATAGONIA Base húmeda de chocolate sin harinas, con dulce de leche, crema, reducción de frutos rojos y frutos rojos por encima. Tamaño grande 24cm rinde entre 15 y 18 p",
-          "precio": 56000,
+          "precio": 59000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/marquise-patagonia"
         },
         {
           "slug": "anita",
           "nombre": "ANITA",
           "descripcion": "ANITA torta hermosamente ricaaa, bizcochuelo húmedo a base de cacao y café, relleno con ganache de choco negro y reducción de frutos rojos. Cubierto con ganache de chocolate bla",
-          "precio": 65000,
+          "precio": 72000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/anita"
         },
         {
           "slug": "ny-cheesecake",
           "nombre": "NY cheesecake",
           "descripcion": "NY cheesecake, torta mega cremosa a base de queso crema con salsa de frutos rojos y frutos por encima. Tamaño XL 24cm rinde entre 15 y 18 porciones aprox.Todos nuestros productos",
-          "precio": 63000,
+          "precio": 69000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/ny-cheesecake"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-15T07:53:43.778Z"
+      "updatedAt": "2026-09-22T07:48:37.203Z"
     },
     {
       "id": "silnari",
@@ -500,7 +500,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-09-15T07:53:46.020Z"
+      "updatedAt": "2026-09-22T07:48:40.454Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1699,7 +1699,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-15T07:54:10.702Z"
+      "updatedAt": "2026-09-22T07:49:00.087Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2188,19 +2188,24 @@
           "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de pulpa concentrada de frambuesa y pistachos tostados. Sin lácteos, huevo, harina ni azúcar Pe...",
           "precio": 47500,
           "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/"
-        }
-      ],
-      "errores": [
-        {
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/",
-          "error": "sin precio"
         },
         {
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/",
-          "error": "sin precio"
+          "slug": "tableta-chocomani-ok236",
+          "nombre": "Tableta Chocomani",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de maní y maní tostado Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Conserva...",
+          "precio": 38500,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/"
+        },
+        {
+          "slug": "tableta-almendra-chai-1tdht",
+          "nombre": "Tableta almendra chai",
+          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de chocolate especiada (canela, jengibre y cardamomo) con almendras tostadas. Sin lá...",
+          "precio": 45400,
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/"
         }
       ],
-      "updatedAt": "2026-09-15T07:54:13.966Z"
+      "errores": [],
+      "updatedAt": "2026-09-22T07:49:01.733Z"
     }
   ]
 }
