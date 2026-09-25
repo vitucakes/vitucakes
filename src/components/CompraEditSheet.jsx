@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import BottomSheet from './BottomSheet'
 import PickerBuscador from './PickerBuscador'
 import { parsearTicket } from '../utils/ticket'
+import { precioSospechoso } from '../utils/stock'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const emptyLinea = () => ({ insumoId: '', cantidad: '', total: '', paquetes: '', porPaquete: '' })
@@ -14,14 +15,15 @@ const cantidadFinal = (l) =>
 
 // Sheet para registrar o EDITAR una COMPRA. Una compra puede tener varias
 // líneas (lo que trajiste en una misma ida). Cada línea suma stock al insumo;
-// si cargás el total pagado, además puede actualizar el precio (nunca lo baja).
+// si cargás el total pagado, además puede actualizar el costo (sube o baja,
+// siempre con confirmación del user; ver `aplicarCompraAInsumos`).
 // `compra` null = nueva; objeto = edición (el padre revierte el efecto viejo
 // en el stock y aplica el nuevo).
 export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSubmit }) {
   const [fecha, setFecha] = useState(todayISO())
   const [lineas, setLineas] = useState([emptyLinea()])
-  // Confirmación antes de guardar: líneas que subirían el costo del insumo.
-  // null = sin modal; array = [{ insumoId, nombre, unidad, actual, nuevo, aplicar }]
+  // Confirmación antes de guardar: líneas que cambiarían el costo del insumo.
+  // null = sin modal; array = [{ insumoId, nombre, unidad, actual, nuevo, baja, sospechoso, aplicar }]
   const [confirmPrecios, setConfirmPrecios] = useState(null)
   // Lectura de foto del ticket (OCR en el dispositivo, Tesseract.js):
   // null | { fase: 'leyendo', progreso } | { fase: 'listo', n, sinMatch } | { fase: 'error', msg }
@@ -135,38 +137,37 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
   const submit = () => {
     if (!puedeGuardar) return
     const items = buildItems()
-    // Líneas donde el precio pagado por unidad supera el costo actual: antes
-    // de aplicar se pregunta cuáles actualizar (una compra de emergencia puede
-    // no representar el costo real). Si no hay ninguna, se guarda directo.
-    const suben = items
+    // Líneas donde lo pagado por unidad es DISTINTO al costo actual: antes de
+    // aplicar se pregunta cuáles actualizar. Si subió, puede ser una compra de
+    // emergencia; si bajó, el costo pasa a ser lo pagado (decisión del user,
+    // 2026-09-25). Las que dan un número sospechoso (probable error de carga)
+    // arrancan DESTILDADAS. Si no cambia nada, se guarda directo.
+    const cambios = items
       .map((it) => {
         const ins = insumos.find((i) => i.id === it.insumoId)
         if (!ins || !(it.total > 0) || !(it.cantidad > 0)) return null
+        const actual = Number(ins.precioPorUnidad) || 0
         const nuevo = it.total / it.cantidad
-        if (nuevo <= (Number(ins.precioPorUnidad) || 0)) return null
-        // Al editar, si esa línea ya tenía el "no actualizar" elegido, se
-        // respeta como default (destildada).
+        if (Math.round(nuevo * 100) === Math.round(actual * 100)) return null
+        const sospechoso = precioSospechoso(nuevo, actual)
+        // Al editar, se respeta lo que se había elegido para esa línea.
         const original = compra?.items?.find((x) => x.insumoId === it.insumoId)
-        return {
-          insumoId: it.insumoId,
-          nombre: ins.nombre,
-          unidad: ins.unidad,
-          actual: Number(ins.precioPorUnidad) || 0,
-          nuevo,
-          aplicar: original ? original.actualizaPrecio !== false : true,
-        }
+        const aplicar = typeof original?.actualizaPrecio === 'boolean' ? original.actualizaPrecio : !sospechoso
+        return { insumoId: it.insumoId, nombre: ins.nombre, unidad: ins.unidad, actual, nuevo, baja: nuevo < actual, sospechoso, aplicar }
       })
       .filter(Boolean)
-    if (suben.length === 0) {
+    if (cambios.length === 0) {
       guardar(items)
       return
     }
-    setConfirmPrecios(suben)
+    setConfirmPrecios(cambios)
   }
 
   const confirmarGuardado = () => {
-    const noAplicar = new Set(confirmPrecios.filter((c) => !c.aplicar).map((c) => c.insumoId))
-    const items = buildItems().map((it) => (noAplicar.has(it.insumoId) ? { ...it, actualizaPrecio: false } : it))
+    // Flag explícito por línea: para BAJAR un costo hace falta `true` (una
+    // compra sin confirmar nunca baja); `false` = no tocar el costo.
+    const decision = new Map(confirmPrecios.map((c) => [c.insumoId, c.aplicar]))
+    const items = buildItems().map((it) => (decision.has(it.insumoId) ? { ...it, actualizaPrecio: decision.get(it.insumoId) } : it))
     setConfirmPrecios(null)
     guardar(items)
   }
@@ -219,7 +220,10 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
             const cant = parseFloat(cantidadFinal(l)) || 0
             const total = parseFloat(l.total) || 0
             const precioUnit = cant > 0 && total > 0 ? total / cant : null
-            const subePrecio = ins && precioUnit != null && precioUnit > (Number(ins.precioPorUnidad) || 0)
+            const costoActual = Number(ins?.precioPorUnidad) || 0
+            const subePrecio = ins && precioUnit != null && precioUnit > costoActual
+            const bajaPrecio = ins && precioUnit != null && precioUnit < costoActual
+            const sospecha = ins && precioUnit != null ? precioSospechoso(precioUnit, costoActual) : null
             return (
               <div key={i} className="bg-brand-50 rounded-2xl p-3 space-y-2 relative">
                 {lineas.length > 1 && (
@@ -301,12 +305,23 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
                   </p>
                 )}
                 {precioUnit != null && ins && (
-                  <p className={`text-[11px] ${subePrecio ? 'text-emerald-700 font-semibold' : 'text-gray-400'}`}>
-                    {precioUnit.toLocaleString('es-AR', { maximumFractionDigits: 2 })} $/{ins.unidad}
-                    {subePrecio
-                      ? ` · más caro que el costo actual ($${Number(ins.precioPorUnidad).toLocaleString('es-AR')}): al guardar te pregunta si actualizarlo`
-                      : ` · no cambia el precio (actual $${Number(ins.precioPorUnidad).toLocaleString('es-AR')})`}
-                  </p>
+                  sospecha ? (
+                    <p className="text-[11px] text-red-600 font-semibold leading-snug">
+                      ⚠️ {precioUnit.toLocaleString('es-AR', { maximumFractionDigits: 2 })} $/{ins.unidad}{' '}
+                      {sospecha.tipo === 'sube'
+                        ? `es ${sospecha.veces.toLocaleString('es-AR', { maximumFractionDigits: 1 })} veces tu costo actual ($${costoActual.toLocaleString('es-AR')}). ¿Cargaste el peso de un solo paquete? Usá "Paquetes × ${ins.unidad} por paquete".`
+                        : `es mucho menos que tu costo actual ($${costoActual.toLocaleString('es-AR')}). Revisá la cantidad: ¿se escapó un cero?`}
+                    </p>
+                  ) : (
+                    <p className={`text-[11px] ${subePrecio ? 'text-amber-700 font-semibold' : bajaPrecio ? 'text-emerald-700 font-semibold' : 'text-gray-400'}`}>
+                      {precioUnit.toLocaleString('es-AR', { maximumFractionDigits: 2 })} $/{ins.unidad}
+                      {subePrecio
+                        ? ` · más caro que tu costo actual ($${costoActual.toLocaleString('es-AR')}): al guardar te pregunta si actualizarlo`
+                        : bajaPrecio
+                          ? ` · más barato que tu costo actual ($${costoActual.toLocaleString('es-AR')}): al guardar te pregunta si bajarlo`
+                          : ` · igual a tu costo actual`}
+                    </p>
+                  )
                 )}
               </div>
             )
@@ -329,8 +344,8 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
         </button>
         <p className="text-[11px] text-gray-400 text-center">
           {compra
-            ? 'Al guardar se recalcula el stock: se deshace lo que había sumado esta compra y se aplica lo nuevo. Si pagaste más caro, te pregunta si actualizar el costo (nunca lo baja).'
-            : 'Suma el stock de cada insumo. Si cargás el total y pagaste más caro que el costo actual, te pregunta si actualizarlo (nunca lo baja).'}
+            ? 'Al guardar se recalcula el stock: se deshace lo que había sumado esta compra y se aplica lo nuevo. Si pagaste distinto a tu costo actual, te pregunta si actualizarlo.'
+            : 'Suma el stock de cada insumo. Si cargás el total y pagaste distinto a tu costo actual, te pregunta si actualizarlo.'}
         </p>
       </div>
 
@@ -341,7 +356,7 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
           <div className="relative bg-white rounded-3xl p-5 w-full max-w-sm shadow-2xl">
             <p className="text-base font-bold text-gray-800 text-center mb-1">¿Actualizar el costo de estos insumos?</p>
             <p className="text-xs text-gray-500 text-center mb-4">
-              Pagaste más caro que el costo actual. Destildá lo que fue una compra de emergencia y no representa el costo real (el stock se suma igual).
+              Pagaste distinto a tu costo actual. Destildá lo que no sea tu costo real (compra de emergencia, oferta puntual). El stock se suma igual.
             </p>
             <div className="space-y-2 max-h-56 overflow-y-auto mb-4">
               {confirmPrecios.map((c) => (
@@ -360,11 +375,18 @@ export default function CompraEditSheet({ isOpen, compra, insumos, onClose, onSu
                     <p className="text-sm font-semibold text-gray-800 break-words">{c.nombre}</p>
                     <p className="text-[11px] text-gray-500">
                       ${c.actual.toLocaleString('es-AR', { maximumFractionDigits: 2 })} →{' '}
-                      <span className="font-semibold text-emerald-700">
-                        ${c.nuevo.toLocaleString('es-AR', { maximumFractionDigits: 2 })}
+                      <span className={`font-semibold ${c.baja ? 'text-emerald-700' : 'text-amber-700'}`}>
+                        {c.baja ? '↓ ' : '↑ '}${c.nuevo.toLocaleString('es-AR', { maximumFractionDigits: 2 })}
                       </span>{' '}
                       el {c.unidad}
                     </p>
+                    {c.sospechoso && (
+                      <p className="text-[11px] text-red-600 font-semibold leading-snug mt-0.5">
+                        ⚠️ {c.sospechoso.tipo === 'sube'
+                          ? `${c.sospechoso.veces.toLocaleString('es-AR', { maximumFractionDigits: 1 })} veces tu costo: ¿cargaste el peso de un solo paquete? Volvé y revisá la cantidad.`
+                          : 'Mucho menos que tu costo: ¿se escapó un cero en la cantidad? Volvé y revisala.'}
+                      </p>
+                    )}
                   </div>
                 </label>
               ))}

@@ -75,6 +75,12 @@ export const deltasDeCompra = (compra) =>
 // Excepción: item con `actualizaPrecio: false` (el user dijo que NO al guardar,
 // ej. compra de emergencia pagada más cara que el costo real) → suma stock
 // pero no toca el precio. Ausente o true = comportamiento de siempre.
+//
+// Desde 2026-09-25 una compra también puede BAJAR el costo, pero SOLO si el
+// user lo confirmó explícito en el modal de guardado (`actualizaPrecio: true`).
+// Decisión del user: "el costo pasa a ser lo que pagaste, aunque sea más
+// barato" (compró en El Granate más barato que los precios de Día). Compras
+// viejas o sin esa confirmación nunca bajan un costo.
 export function aplicarCompraAInsumos(insumos, compra) {
   const map = new Map((compra?.items || []).map((it) => [it.insumoId, it]))
   const hoy = hoyISO()
@@ -84,9 +90,12 @@ export function aplicarCompraAInsumos(insumos, compra) {
     const cant = Number(it.cantidad) || 0
     const next = { ...ins, stock: round2(stockDe(ins) + cant) }
     const total = Number(it.total) || 0
-    if (total > 0 && cant > 0 && it.actualizaPrecio !== false) {
+    if (total > 0 && cant > 0) {
       const precioUnit = total / cant
-      if (precioUnit > (Number(ins.precioPorUnidad) || 0)) {
+      const actual = Number(ins.precioPorUnidad) || 0
+      const sube = precioUnit > actual && it.actualizaPrecio !== false
+      const baja = precioUnit < actual && it.actualizaPrecio === true
+      if (sube || baja) {
         next.precioPorUnidad = round2(precioUnit)
         next.fuentePrecio = 'Compra'
         next.fechaActualizacion = hoy
@@ -95,4 +104,21 @@ export function aplicarCompraAInsumos(insumos, compra) {
     }
     return next
   })
+}
+
+// Precio pagado MUY lejos del costo actual: casi siempre es un error de carga.
+// Pasó en serio (2026-09-25): Oreos/Chocolinas/Lincoln con el peso de UN
+// paquete y el total de varios (el costo se fue a 6-10×), y Manteca con un
+// cero de más en la cantidad (quedaba a 1/15). Umbrales asimétricos a
+// propósito: bajar a 0,3-0,5× es normal al pasar de precio de súper a
+// distribuidora, subir 2,5× o más casi nunca es real.
+export const SOSPECHOSO_SUBE = 2.5
+export const SOSPECHOSO_BAJA = 0.2
+export function precioSospechoso(nuevo, actual) {
+  const a = Number(actual) || 0
+  if (!(a > 0) || !(nuevo > 0)) return null
+  const r = nuevo / a
+  if (r >= SOSPECHOSO_SUBE) return { tipo: 'sube', veces: r }
+  if (r <= SOSPECHOSO_BAJA) return { tipo: 'baja', veces: r }
+  return null
 }
