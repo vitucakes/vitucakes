@@ -17,6 +17,7 @@ React 18 + Vite + Tailwind, datos en **Firebase/Firestore**, deploy a GitHub Pag
 
 ## Reglas que NO se rompen
 - 🥇 **NUNCA bajar el precio de un insumo** (solo se sugiere/actualiza si SUBE). El user lo recalcó con énfasis.
+  - **Única excepción, acordada con el user el 2026-09-25:** El Granate (fuente principal) puede sugerir **bajar** un precio **solo si el precio actual vino de Día** (`fuentePrecio === 'Día'`). Se muestra marcado "↓ más barato" y el user confirma uno por uno. Precios de **Compra, A mano o del Excel** (sin `fuentePrecio`) siguen **100% protegidos**. No "arreglar" esta excepción: es a propósito (ver HANDOFF 2026-09-25).
 - "Recetas" se muestra como **"Productos"** en la UI, pero el código sigue usando `receta`/`recetas` (no romper datos). Margen fijo **3x**, gastos indirectos **10%**. Idioma: **español rioplatense** (vos, "tocá").
 
 ## Git / merge — repo PÚBLICO (importante)

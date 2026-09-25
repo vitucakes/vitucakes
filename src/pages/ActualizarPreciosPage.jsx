@@ -26,28 +26,35 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
   const [progress, setProgress] = useState(null)
   const [confirmando, setConfirmando] = useState(false)
 
-  // Carga inicial: cache local primero, fallback al JSON del cron semanal
+  // Carga inicial: el JSON del cron semanal vs. el cache del último scrape
+  // manual — gana el MÁS NUEVO (por `generadoEn`). Antes el cache ganaba
+  // SIEMPRE: si alguna vez se tocó "Actualizar manualmente", ese dispositivo
+  // no volvía a ver nunca más los precios del cron de los lunes.
   useEffect(() => {
     setLoading(true)
     setError(null)
+    let cached = null
     try {
-      const cached = localStorage.getItem(CACHE_KEY)
-      if (cached) {
-        setData(JSON.parse(cached))
-        setLoading(false)
-        return
-      }
+      const c = localStorage.getItem(CACHE_KEY)
+      if (c) cached = JSON.parse(c)
     } catch {}
-    fetch(`${import.meta.env.BASE_URL}precios_sugeridos.json`)
+    if (cached?.items?.length) setData(cached) // algo para mostrar ya mismo
+    fetch(`${import.meta.env.BASE_URL}precios_sugeridos.json`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('No se pudo cargar el archivo'))))
-      .then((d) => setData(d))
-      .catch((e) => setError(e.message))
+      .then((d) => {
+        const tCron = Date.parse(d?.generadoEn) || 0
+        const tCache = Date.parse(cached?.generadoEn) || 0
+        if (!cached?.items?.length || tCron >= tCache) setData(d)
+      })
+      .catch((e) => {
+        if (!cached?.items?.length) setError(e.message)
+      })
       .finally(() => setLoading(false))
   }, [])
 
   // Precios de Día (supermercado): solo del cron semanal (sin scrape manual).
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}precios_dia.json`)
+    fetch(`${import.meta.env.BASE_URL}precios_dia.json`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => d && setDataDia(d))
       .catch(() => {})
@@ -59,6 +66,9 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     setProgress({ stage: 'sitemap', done: 0, total: 0 })
     try {
       const fresh = await scrapeGranate((p) => setProgress(p))
+      // Si el scrape vino vacío (proxy caído, El Granate cambió la web), NO
+      // pisamos lo que había: un cache vacío escondía El Granate para siempre.
+      if (!fresh?.items?.length) throw new Error('El Granate no devolvió precios. Probá más tarde.')
       setData(fresh)
       try { localStorage.setItem(CACHE_KEY, JSON.stringify(fresh)) } catch {}
     } catch (e) {
@@ -83,13 +93,25 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
     ]
     const out = []
     for (const { items, fuente } of fuentes) {
+      const esGranate = nombreFuente(fuente) === 'El Granate'
       for (const item of items || []) {
         const ins = insumos.find((i) => i.nombre === item.nombre)
         if (!ins) continue
         // REGLA DE ORO — NUNCA bajar un precio de insumo: solo sugerimos si el
         // precio nuevo es MAYOR al actual. Un precio menor o igual se descarta.
-        if (item.precio <= ins.precioPorUnidad) continue
+        //
+        // ÚNICA EXCEPCIÓN (acordada con el user el 2026-09-25): El Granate es la
+        // fuente PRINCIPAL y puede CORREGIR hacia abajo un precio que vino de
+        // Día. Motivo: cuando El Granate estuvo caído (mayo y junio 2026), Día
+        // cubrió todo con paquetitos minoristas (25-100 g, 2-3× más caros por
+        // gramo) y a veces con productos equivocados; la regla dejaba esos
+        // precios trabados arriba para siempre. Precios de Compra, A mano o del
+        // Excel siguen 100% protegidos. Siempre es sugerencia: el user confirma.
+        const baja = item.precio < ins.precioPorUnidad
+        const corrigeDia = esGranate && baja && ins.fuentePrecio === 'Día'
+        if (item.precio <= ins.precioPorUnidad && !corrigeDia) continue
         out.push({
+          baja: corrigeDia,
           key: `${ins.id}|${fuente}`,
           insumoId: ins.id,
           nombre: ins.nombre,
@@ -104,7 +126,12 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
         })
       }
     }
-    return out.sort((a, b) => b.precioSugerido / b.precioActual - a.precioSugerido / a.precioActual)
+    // Primero las que suben (mayor aumento arriba); después las correcciones a
+    // la baja de El Granate sobre Día (mayor baja arriba).
+    const ratio = (s) => s.precioSugerido / s.precioActual
+    const suben = out.filter((s) => !s.baja).sort((a, b) => ratio(b) - ratio(a))
+    const bajan = out.filter((s) => s.baja).sort((a, b) => ratio(a) - ratio(b))
+    return [...suben, ...bajan]
   }, [data, dataDia, insumos])
 
   // Default: nada seleccionado. El user tilda lo que quiere aplicar.
@@ -211,9 +238,18 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
                       <div className="flex items-center gap-2 text-sm">
                         <span className="text-gray-400 line-through">{formatARS(s.precioActual)}/{s.unidadVitu}</span>
                         <span className="text-gray-300">→</span>
-                        <span className="font-bold text-brand-500">{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
-                        <span className="ml-auto text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">+{pct.toFixed(0)}%</span>
+                        <span className={`font-bold ${s.baja ? 'text-emerald-600' : 'text-brand-500'}`}>{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
+                        {s.baja ? (
+                          <span className="ml-auto text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full whitespace-nowrap">↓ {Math.abs(pct).toFixed(0)}%</span>
+                        ) : (
+                          <span className="ml-auto text-xs font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">+{pct.toFixed(0)}%</span>
+                        )}
                       </div>
+                      {s.baja && (
+                        <p className="text-[11px] text-emerald-700 mt-1.5 leading-snug">
+                          ↓ Más barato. Tu precio actual vino de Día (paquete de súper). Revisá que el producto de arriba sea el que usás.
+                        </p>
+                      )}
                       {s.fechaActual && (
                         <p className="text-[11px] text-gray-400 mt-1">Tu precio del {formatDate(s.fechaActual)}</p>
                       )}
@@ -272,7 +308,9 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
                   <span className="text-gray-700 font-medium break-words flex-1">
                     {s.nombre} <span className="text-gray-400 text-xs">· {nombreFuente(s.fuente)}</span>
                   </span>
-                  <span className="text-brand-600 font-semibold flex-shrink-0">{formatARS(s.precioSugerido)}/{s.unidadVitu}</span>
+                  <span className={`font-semibold flex-shrink-0 ${s.baja ? 'text-emerald-600' : 'text-brand-600'}`}>
+                    {s.baja ? '↓ ' : ''}{formatARS(s.precioSugerido)}/{s.unidadVitu}
+                  </span>
                 </div>
               ))}
             </div>
