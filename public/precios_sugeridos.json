@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-27T23:01:13.139Z",
+  "generadoEn": "2026-09-27T23:18:02.427Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -104,13 +104,13 @@
     },
     {
       "nombre": "Margarina",
-      "precio": 5,
+      "precio": 5.6,
       "unidad": "g",
-      "producto": "Margarina Hojaldre Premium Calsa 5 Kg",
+      "producto": "Margarina MTK Calsa para Masa 5 Kg",
       "granateQty": 5000,
       "granateUnit": "g",
-      "granatePrecioTotal": 25000,
-      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1194-margarina-hojaldre-premium-calsa-5-kg-4227"
+      "granatePrecioTotal": 28000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1553-margarina-mtk-calsa-para-masa-5-kg-4572"
     },
     {
       "nombre": "Chips de chocolate",

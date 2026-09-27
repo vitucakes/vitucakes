@@ -20,7 +20,7 @@ const QUERIES = [
   { nombre: 'Cacao', unidad: 'g', keywords: ['cacao-fenix-56n','cacao-especial','cacao-amargo','cacao-en-polvo'], exclude: ['alcalino','alcalinizado','chocolate','manteca','nesquik'] },
   { nombre: 'Fecula de Mandioca', unidad: 'g', keywords: ['fecula-de-mandioca'], exclude: [] },
   { nombre: 'Manteca', unidad: 'g', keywords: ['manteca-'], exclude: ['cacao','aroma','kolaroma','esencia'] },
-  { nombre: 'Margarina', unidad: 'g', keywords: ['margarina','oleomargarina'], exclude: [] },
+  { nombre: 'Margarina', unidad: 'g', keywords: ['margarina','oleomargarina'], exclude: ['hojaldre'] }, // la de Vitu es para masa (pan, grisines), no de hojaldre
   { nombre: 'Chips de chocolate', unidad: 'g', keywords: ['chips-'], exclude: ['blanco'] },
   { nombre: 'Chocolate', unidad: 'g', keywords: ['chocolate-alpino-pins-con-leche'], exclude: [] },
   { nombre: 'Coco rayado', unidad: 'g', keywords: ['coco-rallado'], exclude: [] },
