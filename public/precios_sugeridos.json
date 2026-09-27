@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-27T22:53:59.176Z",
+  "generadoEn": "2026-09-27T23:01:13.139Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -541,6 +541,126 @@
       "granateUnit": "g",
       "granatePrecioTotal": 12500,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1347-mayonesa-hellmann-s-por-2-750-kg-4370"
+    },
+    {
+      "nombre": "Maicena",
+      "precio": 1.9,
+      "unidad": "g",
+      "producto": "Almidón de Maíz por 10 Kg",
+      "granateQty": 10000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 19000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1391-almidon-de-maiz-por-10-kg-4413"
+    },
+    {
+      "nombre": "frutos rojos congelados",
+      "precio": 14,
+      "unidad": "g",
+      "producto": "Frutos del Bosque Congelados por 1Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 14000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1330-frutos-del-bosque-congelados-por-1kg-4354"
+    },
+    {
+      "nombre": "granas de color",
+      "precio": 5,
+      "unidad": "g",
+      "producto": "Granas Multicolor por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 5000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1628-granas-multicolor-por-1-kilo-4771"
+    },
+    {
+      "nombre": "Azúcar granulada",
+      "precio": 5.5,
+      "unidad": "g",
+      "producto": "Azúcar Granella 1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 5500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1268-azucar-granella-1-kg-4298"
+    },
+    {
+      "nombre": "Ricota",
+      "precio": 7.6,
+      "unidad": "g",
+      "producto": "Ricotta García x 500grs",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 3800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1911-ricotta-garcia-x-500grs-4892"
+    },
+    {
+      "nombre": "Frutas abrillantadas",
+      "precio": 6,
+      "unidad": "g",
+      "producto": "Fruta Escurrida Especial Con Quinotos y Cerezas -  1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 6000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1209-fruta-escurrida-especial-con-quinotos-y-cerezas-1-kg-4241"
+    },
+    {
+      "nombre": "Rocklets Argentina",
+      "precio": 18,
+      "unidad": "g",
+      "producto": "Rocklets Arcor por 1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 18000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1528-rocklets-arcor-por-1-kg-4550"
+    },
+    {
+      "nombre": "Crema de chocolate",
+      "precio": 11,
+      "unidad": "g",
+      "producto": "Crema Ledevit Chocolate por 1 Litro",
+      "granateQty": 1000,
+      "granateUnit": "ml",
+      "granatePrecioTotal": 11000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1435-crema-ledevit-chocolate-por-1-litro-4457"
+    },
+    {
+      "nombre": "grasa",
+      "precio": 3.5,
+      "unidad": "g",
+      "producto": "Grasa Ramgras por 10 Kg",
+      "granateQty": 10000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 35000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1392-grasa-ramgras-por-10-kg-4414"
+    },
+    {
+      "nombre": "Lata de durazno",
+      "precio": 3800,
+      "unidad": "u",
+      "producto": "Duraznos por 850 Grs",
+      "granateQty": 1,
+      "granateUnit": "u",
+      "granatePrecioTotal": 3800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1380-duraznos-por-850-grs-4403"
+    },
+    {
+      "nombre": "atun",
+      "precio": 2400,
+      "unidad": "u",
+      "producto": "Atún En Aceite y agua por 170 Grs",
+      "granateQty": 1,
+      "granateUnit": "u",
+      "granatePrecioTotal": 2400,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1167-atun-en-aceite-y-agua-por-170-grs-4201"
+    },
+    {
+      "nombre": "Ferrero rocher",
+      "precio": 1133.3333,
+      "unidad": "u",
+      "producto": "Ferrero Rocher 3 Unidades",
+      "granateQty": 3,
+      "granateUnit": "u",
+      "granatePrecioTotal": 3400,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1341-ferrero-rocher-3-unidades-4365"
     }
   ],
   "errores": []

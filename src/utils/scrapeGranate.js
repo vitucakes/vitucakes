@@ -66,6 +66,21 @@ const QUERIES = [
   { nombre: 'Sal', unidad: 'g', keywords: ['sal-fina'], exclude: [] },
   { nombre: 'Leche', unidad: 'ml', keywords: ['leche-entera'], exclude: [] },
   { nombre: 'Mayonesa', unidad: 'g', keywords: ['mayonesa'], exclude: [] },
+  // ── Agregados 2026-09-27 (2da tanda): revisados los 124 insumos restantes.
+  { nombre: 'Maicena', unidad: 'g', keywords: ['almidon-de-maiz'], exclude: [] },
+  { nombre: 'frutos rojos congelados', unidad: 'g', keywords: ['frutos-del-bosque-congelados'], exclude: [] },
+  { nombre: 'granas de color', unidad: 'g', keywords: ['granas-'], exclude: [] },
+  { nombre: 'Azúcar granulada', unidad: 'g', keywords: ['azucar-granella'], exclude: [] }, // la de la rosca de pascua
+  { nombre: 'Ricota', unidad: 'g', keywords: ['ricotta','ricota'], exclude: [] },
+  { nombre: 'Frutas abrillantadas', unidad: 'g', keywords: ['fruta-escurrida'], exclude: [] }, // pan dulce / budín inglés
+  { nombre: 'Rocklets Argentina', unidad: 'g', keywords: ['rocklets'], exclude: ['mini'] },
+  { nombre: 'Crema de chocolate', unidad: 'g', keywords: ['crema-ledevit-chocolate'], exclude: [], allowMlToG: true }, // tortas Ferrero; Vitu usa Ledevit
+  { nombre: 'grasa', unidad: 'g', keywords: ['grasa-ramgras'], exclude: [] },
+  // Por UNIDAD: `porEnvase` = cada producto es 1 u (una lata); si el slug dice
+  // "N-unidades" se divide por N (Ferrero x3 → precio por bombón).
+  { nombre: 'Lata de durazno', unidad: 'u', keywords: ['duraznos-por'], exclude: [], porEnvase: true },
+  { nombre: 'atun', unidad: 'u', keywords: ['atun-en-aceite','atun-desmenuzado'], exclude: [], porEnvase: true },
+  { nombre: 'Ferrero rocher', unidad: 'u', keywords: ['ferrero-rocher'], exclude: [] },
 ]
 
 const fetchProxied = (url) => fetch(PROXY + encodeURIComponent(url)).then((r) => {
@@ -76,6 +91,15 @@ const fetchProxied = (url) => fetch(PROXY + encodeURIComponent(url)).then((r) =>
 // El slug de Odoo es todo lo que va después de /shop/ (incluye ref numérica al
 // inicio y el id de Odoo al final; el peso va en el medio, ej. "por-1-kg").
 const slugOf = (url) => url.split('/shop/')[1] || ''
+
+// Insumos contados por unidad ('u'): la cantidad sale del slug ("ferrero-rocher-3-unidades")
+// o, con `porEnvase`, cada producto vale 1 u (una lata de duraznos = 1 u).
+const parseUnidades = (q, slug) => {
+  const m = slug.match(/(?:por-|x-)?(\d+)-unidades\b/)
+  if (m) return { qty: parseInt(m[1]), unit: 'u' }
+  if (q.porEnvase) return { qty: 1, unit: 'u' }
+  return null
+}
 
 const parseWeight = (slug) => {
   // kilos / litros decimales: "por-2-5-kg" = 2,5 kg
@@ -185,8 +209,8 @@ export async function scrapeGranate(onProgress) {
 
     let lastErr = null
     for (const url of cands.slice(0, MAX_TRY)) {
-      const w = parseWeight(slugOf(url))
-      if (!w) { lastErr = { error: 'sin peso en slug', url }; continue }
+      const w = q.unidad === 'u' ? parseUnidades(q, slugOf(url)) : parseWeight(slugOf(url))
+      if (!w) { lastErr = { error: q.unidad === 'u' ? 'sin cantidad de unidades' : 'sin peso en slug', url }; continue }
       const unitOk = w.unit === q.unidad
         || (q.allowMlToG && w.unit === 'ml' && q.unidad === 'g')
         || (q.allowGToMl && w.unit === 'g' && q.unidad === 'ml')
