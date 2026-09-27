@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { formatARS } from '../utils/calc'
 import { scrapeGranate } from '../utils/scrapeGranate'
+import { round2 } from '../utils/stock'
 
 const todayISO = () => new Date().toISOString().slice(0, 10)
 const formatDate = (iso) => {
@@ -165,7 +166,8 @@ export default function ActualizarPreciosPage({ insumos, setInsumos, onBack }) {
       stamp += 1
       const { precio, fuente } = byInsumo.get(i.id)
       // Guardamos de dónde salió el precio (El Granate / Día) para mostrarlo en la lista.
-      return { ...i, precioPorUnidad: precio, fechaActualizacion: fecha, updatedAt: stamp, fuentePrecio: fuente }
+      // Redondeo a 2 decimales (regla del user: todo con 2 decimales como máximo).
+      return { ...i, precioPorUnidad: round2(precio), fechaActualizacion: fecha, updatedAt: stamp, fuentePrecio: fuente }
     }))
     setAppliedToast(`Se actualizaron ${cantidad} insumo${cantidad !== 1 ? 's' : ''}`)
     setSelected(new Set())
