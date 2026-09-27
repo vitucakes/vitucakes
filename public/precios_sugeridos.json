@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-22T07:34:42.084Z",
+  "generadoEn": "2026-09-27T22:53:59.176Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -234,13 +234,13 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 11,
+      "precio": 9.3333,
       "unidad": "g",
-      "producto": "Crema de Leche Milkaut por 5 Litros",
-      "granateQty": 5000,
+      "producto": "Crema de Leche Ramolac por 3 Litros Pouch",
+      "granateQty": 3000,
       "granateUnit": "ml",
-      "granatePrecioTotal": 55000,
-      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1136-crema-de-leche-milkaut-por-5-litros-4170"
+      "granatePrecioTotal": 28000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/crema-de-leche-ramolac-por-3-litros-pouch-4931"
     },
     {
       "nombre": "Leche condensada",
@@ -341,6 +341,206 @@
       "granateUnit": "g",
       "granatePrecioTotal": 22000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1529-mix-de-frutos-secos-por-1-kg-4551"
+    },
+    {
+      "nombre": "Oreos",
+      "precio": 14.5299,
+      "unidad": "g",
+      "producto": "Oreos por 117 Grs",
+      "granateQty": 117,
+      "granateUnit": "g",
+      "granatePrecioTotal": 1700,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1339-oreos-por-117-grs-4363"
+    },
+    {
+      "nombre": "Chocolinas",
+      "precio": 7.6,
+      "unidad": "g",
+      "producto": "Chocolinas por 250 Grs",
+      "granateQty": 250,
+      "granateUnit": "g",
+      "granatePrecioTotal": 1900,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1196-chocolinas-por-250-grs-4228"
+    },
+    {
+      "nombre": "Galletitas lincoln",
+      "precio": 10.4575,
+      "unidad": "g",
+      "producto": "Galletitas Lincoln por 153 Grs",
+      "granateQty": 153,
+      "granateUnit": "g",
+      "granatePrecioTotal": 1600,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1160-galletitas-lincoln-por-153-grs-4194"
+    },
+    {
+      "nombre": "Queso Crema",
+      "precio": 6.5,
+      "unidad": "g",
+      "producto": "Queso crema La Paulina por 4kg",
+      "granateQty": 4000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 26000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1658-queso-crema-la-paulina-por-4kg-4823"
+    },
+    {
+      "nombre": "Cacao alcalino",
+      "precio": 22,
+      "unidad": "g",
+      "producto": "Cacao Amargo Alcalino Mayana por 1 kilo",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 22000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1674-cacao-amargo-alcalino-mayana-por-1-kilo-4840"
+    },
+    {
+      "nombre": "Canela",
+      "precio": 16,
+      "unidad": "g",
+      "producto": "Canela por 1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 16000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1026-canela-por-1-kg-4065"
+    },
+    {
+      "nombre": "Cebolla deshidratada",
+      "precio": 17,
+      "unidad": "g",
+      "producto": "Cebolla deshidratada por 500Grs",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 8500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1424-cebolla-deshidratada-por-500grs-4446"
+    },
+    {
+      "nombre": "Oregano",
+      "precio": 7,
+      "unidad": "g",
+      "producto": "Orégano por 1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 7000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1421-oregano-por-1-kg-4443"
+    },
+    {
+      "nombre": "Pan rallado",
+      "precio": 1.96,
+      "unidad": "g",
+      "producto": "Pan Rallado 5 Kg",
+      "granateQty": 5000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 9800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1017-pan-rallado-5-kg-4056"
+    },
+    {
+      "nombre": "Pasas de uva",
+      "precio": 6,
+      "unidad": "g",
+      "producto": "Pasas de Uva Sultaninas Sin Semillas 1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 6000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1530-pasas-de-uva-sultaninas-sin-semillas-1-kg-4552"
+    },
+    {
+      "nombre": "Albúmina",
+      "precio": 128.5714,
+      "unidad": "g",
+      "producto": "Albumina por 70Grs",
+      "granateQty": 70,
+      "granateUnit": "g",
+      "granatePrecioTotal": 9000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1321-albumina-por-70grs-4345"
+    },
+    {
+      "nombre": "LECHE CONDENSADA",
+      "precio": 10.1266,
+      "unidad": "g",
+      "producto": "Leche Condensada por 395Grs",
+      "granateQty": 395,
+      "granateUnit": "g",
+      "granatePrecioTotal": 4000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1077-leche-condensada-por-395grs-4111"
+    },
+    {
+      "nombre": "Membrillo",
+      "precio": 3.75,
+      "unidad": "g",
+      "producto": "Dulce de Membrillo Cayfar por 2 kilos",
+      "granateQty": 2000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 7500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1335-dulce-de-membrillo-cayfar-por-2-kilos-4359"
+    },
+    {
+      "nombre": "Rocklets",
+      "precio": 18,
+      "unidad": "g",
+      "producto": "Rocklets Arcor por 1 Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 18000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1528-rocklets-arcor-por-1-kg-4550"
+    },
+    {
+      "nombre": "Frambuesas",
+      "precio": 25,
+      "unidad": "g",
+      "producto": "Frambuesas Congeladas por 1Kg",
+      "granateQty": 1000,
+      "granateUnit": "g",
+      "granatePrecioTotal": 25000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1249-frambuesas-congeladas-por-1kg-4280"
+    },
+    {
+      "nombre": "Cerezas",
+      "precio": 8.3871,
+      "unidad": "g",
+      "producto": "Cerezas Al Marrasquino Carleti por 3,100 Kg",
+      "granateQty": 3100,
+      "granateUnit": "g",
+      "granatePrecioTotal": 26000,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1413-cerezas-al-marrasquino-carleti-por-3-100-kg-4435"
+    },
+    {
+      "nombre": "Aceite",
+      "precio": 4.9333,
+      "unidad": "ml",
+      "producto": "Aceite Natura por 3 Litros",
+      "granateQty": 3000,
+      "granateUnit": "ml",
+      "granatePrecioTotal": 14800,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1279-aceite-natura-por-3-litros-4309"
+    },
+    {
+      "nombre": "Sal",
+      "precio": 3.2,
+      "unidad": "g",
+      "producto": "Sal Fina Celusal por 500 Grs",
+      "granateQty": 500,
+      "granateUnit": "g",
+      "granatePrecioTotal": 1600,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1280-sal-fina-celusal-por-500-grs-4310"
+    },
+    {
+      "nombre": "Leche",
+      "precio": 2.2,
+      "unidad": "ml",
+      "producto": "Leche Entera La Serenisima por 12 Litros",
+      "granateQty": 12000,
+      "granateUnit": "ml",
+      "granatePrecioTotal": 26400,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1355-leche-entera-la-serenisima-por-12-litros-4378"
+    },
+    {
+      "nombre": "Mayonesa",
+      "precio": 4.5455,
+      "unidad": "g",
+      "producto": "Mayonesa Hellmann&#39;S por 2,750 Kg",
+      "granateQty": 2750,
+      "granateUnit": "g",
+      "granatePrecioTotal": 12500,
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1347-mayonesa-hellmann-s-por-2-750-kg-4370"
     }
   ],
   "errores": []

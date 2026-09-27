@@ -51,6 +51,28 @@ const QUERIES = [
   { nombre: 'Pasta ballina', unidad: 'g', keywords: ['pasta-ballina'], exclude: ['goma','color','chocolate','cacao'] },
   { nombre: 'Pasta de goma', unidad: 'g', keywords: ['pasta-de-goma'], exclude: [] },
   { nombre: 'Mix frutos secos', unidad: 'g', keywords: ['mix-de-frutos','mix-frutos'], exclude: [] },
+  // ── Agregados 2026-09-27: insumos que El Granate SÍ vende y no se buscaban
+  // (el user los compra ahí; sin esto caían en Día). Nombres EXACTOS del insumo.
+  { nombre: 'Oreos', unidad: 'g', keywords: ['oreos'], exclude: [] },
+  { nombre: 'Chocolinas', unidad: 'g', keywords: ['chocolinas'], exclude: ['blancas'] },
+  { nombre: 'Galletitas lincoln', unidad: 'g', keywords: ['galletitas-lincoln'], exclude: [] },
+  { nombre: 'Queso Crema', unidad: 'g', keywords: ['queso-crema'], exclude: ['milkaut','290grs','doble-crema'] }, // La Paulina 4 kg (el user compra 4 kg)
+  { nombre: 'Cacao alcalino', unidad: 'g', keywords: ['cacao-amargo-alcalino','alcalino'], exclude: [] },
+  { nombre: 'Canela', unidad: 'g', keywords: ['canela-'], exclude: ['esencia','rama'] },
+  { nombre: 'Cebolla deshidratada', unidad: 'g', keywords: ['cebolla-deshidratada'], exclude: [] },
+  { nombre: 'Oregano', unidad: 'g', keywords: ['oregano'], exclude: [] },
+  { nombre: 'Pan rallado', unidad: 'g', keywords: ['pan-rallado'], exclude: [] },
+  { nombre: 'Pasas de uva', unidad: 'g', keywords: ['pasas-de-uva'], exclude: ['cobertura','chocolate'] },
+  { nombre: 'Albúmina', unidad: 'g', keywords: ['albumina'], exclude: [] },
+  { nombre: 'LECHE CONDENSADA', unidad: 'g', keywords: ['leche-condensada'], exclude: ['vegana'] }, // insumo duplicado de "Leche condensada"
+  { nombre: 'Membrillo', unidad: 'g', keywords: ['dulce-de-membrillo'], exclude: [] },
+  { nombre: 'Rocklets', unidad: 'g', keywords: ['rocklets'], exclude: ['mini'] },
+  { nombre: 'Frambuesas', unidad: 'g', keywords: ['frambuesas-congeladas'], exclude: [] },
+  { nombre: 'Cerezas', unidad: 'g', keywords: ['cerezas-'], exclude: ['fruta-escurrida','quinotos'] },
+  { nombre: 'Aceite', unidad: 'ml', keywords: ['aceite-natura','aceite-de-girasol'], exclude: ['oliva','aerosol'] },
+  { nombre: 'Sal', unidad: 'g', keywords: ['sal-fina'], exclude: [] },
+  { nombre: 'Leche', unidad: 'ml', keywords: ['leche-entera'], exclude: [] },
+  { nombre: 'Mayonesa', unidad: 'g', keywords: ['mayonesa'], exclude: [] },
 ];
 
 function get(url) {
