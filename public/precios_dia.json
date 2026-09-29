@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-22T07:45:02.919Z",
+  "generadoEn": "2026-09-29T08:36:14.684Z",
   "fuente": "Día",
   "items": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 3.29,
+      "precio": 3.19,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3290,
+      "diaPrecioTotal": 3190,
       "match": "curado"
     },
     {
@@ -104,12 +104,12 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 3.49,
+      "precio": 4.69,
       "unidad": "g",
       "producto": "Cebolla Comercial en bolsa malla x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3490,
+      "diaPrecioTotal": 4690,
       "match": "curado"
     },
     {
@@ -216,7 +216,7 @@
       "nombre": "frutos rojos congelados",
       "precio": 23.6857,
       "unidad": "g",
-      "producto": "Frutos Rojos Congelados Dia 350 Gr",
+      "producto": "Frutos Rojos Congelados Dia 350 Gr.",
       "diaQty": 350,
       "diaUnit": "g",
       "diaPrecioTotal": 8290,
@@ -264,12 +264,12 @@
     },
     {
       "nombre": "Harina 0000",
-      "precio": 1.05,
+      "precio": 1.2,
       "unidad": "g",
       "producto": "Harina de Trigo 0000 DIA 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1050,
+      "diaPrecioTotal": 1200,
       "match": "curado"
     },
     {
@@ -284,12 +284,12 @@
     },
     {
       "nombre": "Huevo",
-      "precio": 349.1667,
+      "precio": 365.8333,
       "unidad": "u",
       "producto": "Huevo Blanco Grande 12 Ud.",
       "diaQty": 12,
       "diaUnit": "u",
-      "diaPrecioTotal": 4190,
+      "diaPrecioTotal": 4390,
       "match": "curado"
     },
     {
@@ -304,23 +304,13 @@
     },
     {
       "nombre": "Jugo de limón",
-      "precio": 2100,
+      "precio": 2230,
       "unidad": "u",
-      "producto": "Jugo De Limón Dia 500 Ml.",
+      "producto": "Jugo de Limón Minerva 250 Ml.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2100,
+      "diaPrecioTotal": 2230,
       "match": "auto"
-    },
-    {
-      "nombre": "Lata de durazno",
-      "precio": 3190,
-      "unidad": "u",
-      "producto": "Durazno en Mitades DIA 820 Gr.",
-      "diaQty": 1,
-      "diaUnit": "u",
-      "diaPrecioTotal": 3190,
-      "match": "curado"
     },
     {
       "nombre": "Leche",
@@ -374,12 +364,12 @@
     },
     {
       "nombre": "Manteca",
-      "precio": 18.8,
+      "precio": 18.7875,
       "unidad": "g",
-      "producto": "Manteca Sin Sal Dia 100 Gr.",
-      "diaQty": 100,
+      "producto": "Manteca La Serenísima 200 Gr.",
+      "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 1880,
+      "diaPrecioTotal": 3757.5,
       "match": "curado"
     },
     {
@@ -584,12 +574,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 13.99,
+      "precio": 14.9,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 13990,
+      "diaPrecioTotal": 14900,
       "match": "curado"
     },
     {
@@ -698,6 +688,11 @@
       "nombre": "Azúcar impalpable",
       "error": "sin candidato válido",
       "encontrados": 0
+    },
+    {
+      "nombre": "Lata de durazno",
+      "error": "sin candidato válido",
+      "encontrados": 27
     },
     {
       "nombre": "Polvo de hornear",
