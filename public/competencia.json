@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-22T07:48:34.273Z",
+  "generadoEn": "2026-09-29T08:44:51.957Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -106,7 +106,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-22T07:48:35.486Z"
+      "updatedAt": "2026-09-29T08:44:52.889Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -187,7 +187,7 @@
           "slug": "bizcochuelo-clasico",
           "nombre": "Bizcochuelo clásico",
           "descripcion": "Clásico bizcochuelo de vainilla o cacao, bien húmedo con dos cortes de relleno.Opciones de rellenos: dulce de leche, dulce de leche con oreo, crema, crema con frutos rojos, crema",
-          "precio": 67000,
+          "precio": 72000,
           "url": "https://memolapasteleria.empretienda.com.ar/tortas-xl/bizcochuelo-clasico"
         },
         {
@@ -241,13 +241,20 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-22T07:48:37.203Z"
+      "updatedAt": "2026-09-29T08:44:54.577Z"
     },
     {
       "id": "silnari",
       "nombre": "Silnari",
       "fuente": "https://www.silnari.com",
       "productos": [
+        {
+          "slug": "caja-dia-de-la-madre",
+          "nombre": "CAJA DÍA DE LA MADRE",
+          "descripcion": "BOX FELIZ DÍA DE LA MADRE - Edición LimitadaPara la que nos enseñó que el amor se demuestra en los detalles 🤍Creamos una caja pensada para emocionarla desde que la ve. Prese",
+          "precio": 60000,
+          "url": "https://www.silnari.com/tortas-y-tartas/caja-dia-de-la-madre"
+        },
         {
           "slug": "torta-de-chocolate-con-mousse-de-baileys",
           "nombre": "Torta de Chocolate con Mousse de Baileys",
@@ -500,7 +507,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-09-22T07:48:40.454Z"
+      "updatedAt": "2026-09-29T08:44:58.173Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1699,7 +1706,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-22T07:49:00.087Z"
+      "updatedAt": "2026-09-29T08:45:17.552Z"
     },
     {
       "id": "natis-pasteleria",
@@ -1801,7 +1808,7 @@
           "slug": "porcion-banana-paradise",
           "nombre": "Porción Banana Paradise",
           "descripcion": "Torta vegana y sin gluten. Base húmeda de banana, chantilly de chocolate semiamargo, crema moka y lluvia de chocolate rallado y nueces trozadas. No apto celí...",
-          "precio": 10000,
+          "precio": 12000,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-banana-paradise/"
         },
         {
@@ -1822,7 +1829,7 @@
           "slug": "porcion-choconatis",
           "nombre": "Porcion Choconati's",
           "descripcion": "Vegana y sin gluten. Base de galletitas tipo Chocolinas veganas y sin gluten, ganache de chocolate semiamargo, ganache de chocolate blanco vegano y dulce de ...",
-          "precio": 12350,
+          "precio": 12500,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-choconatis/"
         },
         {
@@ -2202,10 +2209,17 @@
           "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de chocolate especiada (canela, jengibre y cardamomo) con almendras tostadas. Sin lá...",
           "precio": 45400,
           "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/"
+        },
+        {
+          "slug": "porcion-frutillas-con-pastelera-1y6qb",
+          "nombre": "Porcion Frutillas con pastelera",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso de vainilla a base de castañas de cajú endulza...",
+          "precio": 14200,
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-frutillas-con-pastelera-1y6qb/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-22T07:49:01.733Z"
+      "updatedAt": "2026-09-29T08:45:22.018Z"
     }
   ]
 }
