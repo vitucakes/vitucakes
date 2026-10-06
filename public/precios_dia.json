@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-29T08:36:14.684Z",
+  "generadoEn": "2026-10-06T09:02:24.089Z",
   "fuente": "Día",
   "items": [
     {
@@ -94,12 +94,12 @@
     },
     {
       "nombre": "carne picada",
-      "precio": 14,
+      "precio": 9,
       "unidad": "g",
-      "producto": "Carne Picada común Atmósfera Modificada 600 Gr.",
-      "diaQty": 600,
+      "producto": "Carne Picada De Nalga 500 Gr.",
+      "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 8400,
+      "diaPrecioTotal": 4500,
       "match": "curado"
     },
     {
@@ -124,12 +124,12 @@
     },
     {
       "nombre": "Chocolatada 200ml",
-      "precio": 10.95,
+      "precio": 1100,
       "unidad": "u",
-      "producto": "Nesquik Extra Cacao Chocolatada Listo Para Tomar X 200 Ml.",
-      "diaQty": 200,
+      "producto": "Leche Chocolatada DIA Larga Vida 200 Ml.",
+      "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2190,
+      "diaPrecioTotal": 1100,
       "match": "curado"
     },
     {
@@ -144,22 +144,22 @@
     },
     {
       "nombre": "Chocolinas",
-      "precio": 10.9922,
+      "precio": 9.64,
       "unidad": "g",
-      "producto": "Galletitas Negro Chocolinas 258 Gr.",
-      "diaQty": 258,
+      "producto": "Galletitas Chocolate Chocolinas 250 Gr.",
+      "diaQty": 250,
       "diaUnit": "g",
-      "diaPrecioTotal": 2836,
+      "diaPrecioTotal": 2410,
       "match": "curado"
     },
     {
       "nombre": "Cinta",
-      "precio": 2240,
+      "precio": 2330,
       "unidad": "u",
       "producto": "Cinta Embalar Transparente Candela 1 Ud.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2240,
+      "diaPrecioTotal": 2330,
       "match": "auto"
     },
     {
@@ -184,12 +184,12 @@
     },
     {
       "nombre": "Dulce de leche",
-      "precio": 7.1,
+      "precio": 5.5,
       "unidad": "g",
       "producto": "Dulce de Leche DIA 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 7100,
+      "diaPrecioTotal": 5500,
       "match": "curado"
     },
     {
@@ -294,42 +294,52 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 36.45,
+      "precio": 5.1515,
       "unidad": "g",
-      "producto": "Jamón Cocido Fetas Finas Dia 200 Gr.",
+      "producto": "Jamón Cocido DIA Sin Tacc en Fetas 200 Gr.",
       "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 7290,
+      "diaPrecioTotal": 1030.3,
       "match": "curado"
     },
     {
       "nombre": "Jugo de limón",
-      "precio": 2230,
+      "precio": 2229,
       "unidad": "u",
       "producto": "Jugo de Limón Minerva 250 Ml.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2230,
+      "diaPrecioTotal": 2229,
       "match": "auto"
     },
     {
+      "nombre": "Lata de durazno",
+      "precio": 3190,
+      "unidad": "u",
+      "producto": "Durazno en Mitades DIA 820 Gr.",
+      "diaQty": 1,
+      "diaUnit": "u",
+      "diaPrecioTotal": 3190,
+      "match": "curado"
+    },
+    {
       "nombre": "Leche",
-      "precio": 2.29,
+      "precio": 2.39,
       "unidad": "ml",
       "producto": "Leche Entera DIA Larga Vida 1 Lt.",
       "diaQty": 1000,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2290,
+      "diaPrecioTotal": 2390,
       "match": "curado"
     },
     {
       "nombre": "LECHE CONDENSADA",
-      "precio": 11.6456,
+      "precio": 8.8608,
       "unidad": "g",
       "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 4600,
+      "diaPrecioTotal": 3500,
       "match": "auto"
     },
     {
@@ -354,22 +364,22 @@
     },
     {
       "nombre": "Maicena",
-      "precio": 7.1,
+      "precio": 6.6,
       "unidad": "g",
       "producto": "Almidón De Maíz Maizena Clásica Sin Tacc 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 3550,
+      "diaPrecioTotal": 3300,
       "match": "curado"
     },
     {
       "nombre": "Manteca",
-      "precio": 18.7875,
+      "precio": 18.8,
       "unidad": "g",
-      "producto": "Manteca La Serenísima 200 Gr.",
-      "diaQty": 200,
+      "producto": "Manteca Sin Sal Dia 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 3757.5,
+      "diaPrecioTotal": 1880,
       "match": "curado"
     },
     {
@@ -394,32 +404,32 @@
     },
     {
       "nombre": "Mayonesa",
-      "precio": 3.6998,
+      "precio": 3.55,
       "unidad": "g",
-      "producto": "Mayonesa Dia 846 Gr.",
-      "diaQty": 846,
+      "producto": "Mayonesa Cañuelas 500 Gr.",
+      "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 3130,
+      "diaPrecioTotal": 1775,
       "match": "curado"
     },
     {
       "nombre": "Membrillo",
-      "precio": 5.2,
+      "precio": 5.82,
       "unidad": "g",
       "producto": "Dulce De Membrillo Dia 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 2600,
+      "diaPrecioTotal": 2910,
       "match": "curado"
     },
     {
       "nombre": "Mermelada Frambuesa",
-      "precio": 7.3789,
+      "precio": 6.3877,
       "unidad": "g",
       "producto": "Mermelada Dia Frambuesa 454 Gr.",
       "diaQty": 454,
       "diaUnit": "g",
-      "diaPrecioTotal": 3350,
+      "diaPrecioTotal": 2900,
       "match": "auto"
     },
     {
@@ -474,12 +484,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 18.7825,
+      "precio": 20.1695,
       "unidad": "g",
       "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 6649,
+      "diaPrecioTotal": 7140,
       "match": "curado"
     },
     {
@@ -514,12 +524,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 11.4375,
+      "precio": 10.8125,
       "unidad": "g",
       "producto": "Queso Crema Clásico Dia 480 Gr.",
       "diaQty": 480,
       "diaUnit": "g",
-      "diaPrecioTotal": 5490,
+      "diaPrecioTotal": 5190,
       "match": "curado"
     },
     {
@@ -564,22 +574,22 @@
     },
     {
       "nombre": "Tomate",
-      "precio": 1.99,
+      "precio": 6.29,
       "unidad": "g",
-      "producto": "Tomate Comercial en bolsa malla x 1 Kg.",
+      "producto": "Tomate Redondo x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1990,
+      "diaPrecioTotal": 6290,
       "match": "curado"
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 14.9,
+      "precio": 14.49,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 14900,
+      "diaPrecioTotal": 14490,
       "match": "curado"
     },
     {
@@ -614,22 +624,22 @@
     },
     {
       "nombre": "Leche condensada",
-      "precio": 11.6456,
+      "precio": 8.8608,
       "unidad": "g",
       "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 4600,
+      "diaPrecioTotal": 3500,
       "match": "curado"
     },
     {
       "nombre": "Limas",
-      "precio": 3.99,
+      "precio": 4.99,
       "unidad": "g",
       "producto": "Lima x 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3990,
+      "diaPrecioTotal": 4990,
       "match": "curado"
     },
     {
@@ -688,11 +698,6 @@
       "nombre": "Azúcar impalpable",
       "error": "sin candidato válido",
       "encontrados": 0
-    },
-    {
-      "nombre": "Lata de durazno",
-      "error": "sin candidato válido",
-      "encontrados": 27
     },
     {
       "nombre": "Polvo de hornear",
