@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-09-29T08:44:51.957Z",
+  "generadoEn": "2026-10-06T09:07:57.624Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -103,10 +103,17 @@
           "descripcion": "Alimonada! Bizcochos húmedos de limón, relleno con frosting de chocolate blanco y limón, y mermelada de arándanos. Tiene 20cm y rinde entre 18/20 porciones! ...",
           "precio": 70900,
           "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
+        },
+        {
+          "slug": "box-dia-de-la-madre-12va8",
+          "nombre": "Box Día de la Madre",
+          "descripcion": " BOX DÍA DE LA MADRE  Un box pensado para sorprender a mamá con un poquito de todo lo rico 殺 Incluye:- Porción de budín de limón y ...",
+          "precio": 45500,
+          "url": "https://candelitte.mitiendanube.com/productos/box-dia-de-la-madre-12va8/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-29T08:44:52.889Z"
+      "updatedAt": "2026-10-06T09:07:58.758Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -241,7 +248,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-29T08:44:54.577Z"
+      "updatedAt": "2026-10-06T09:08:00.320Z"
     },
     {
       "id": "silnari",
@@ -507,7 +514,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-09-29T08:44:58.173Z"
+      "updatedAt": "2026-10-06T09:08:03.405Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1706,7 +1713,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-29T08:45:17.552Z"
+      "updatedAt": "2026-10-06T09:08:25.226Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2216,10 +2223,17 @@
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso de vainilla a base de castañas de cajú endulza...",
           "precio": 14200,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-frutillas-con-pastelera-1y6qb/"
+        },
+        {
+          "slug": "frutillas-con-pastelera-1y2y9",
+          "nombre": "Frutillas con pastelera",
+          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso de vainilla a base de castañas de cajú endulza...",
+          "precio": 88400,
+          "url": "https://www.natispasteleria.com.ar/productos/frutillas-con-pastelera-1y2y9/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-09-29T08:45:22.018Z"
+      "updatedAt": "2026-10-06T09:08:28.297Z"
     }
   ]
 }
