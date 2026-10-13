@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-06T09:07:57.624Z",
+  "generadoEn": "2026-10-13T09:34:43.290Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -113,7 +113,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-10-06T09:07:58.758Z"
+      "updatedAt": "2026-10-13T09:34:44.888Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -248,7 +248,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-10-06T09:08:00.320Z"
+      "updatedAt": "2026-10-13T09:34:46.609Z"
     },
     {
       "id": "silnari",
@@ -259,252 +259,252 @@
           "slug": "caja-dia-de-la-madre",
           "nombre": "CAJA DÍA DE LA MADRE",
           "descripcion": "BOX FELIZ DÍA DE LA MADRE - Edición LimitadaPara la que nos enseñó que el amor se demuestra en los detalles 🤍Creamos una caja pensada para emocionarla desde que la ve. Prese",
-          "precio": 60000,
+          "precio": 66000,
           "url": "https://www.silnari.com/tortas-y-tartas/caja-dia-de-la-madre"
         },
         {
           "slug": "torta-de-chocolate-con-mousse-de-baileys",
           "nombre": "Torta de Chocolate con Mousse de Baileys",
           "descripcion": "Torta de Chocolate con Mousse de BaileysUna base de bizcocho húmedo e intenso, combinada con una mousse tan ligera y cremosa que se funde en la boca, potenciada con el inconfundib",
-          "precio": 58000,
+          "precio": 63800,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-de-chocolate-con-mousse-de-baileys"
         },
         {
           "slug": "key-lime-pie",
           "nombre": "Key Lime Pie",
           "descripcion": "Fresca, cítrica y con el equilibrio justo entre dulce y ácido.Una tarta clásica del sur de Estados Unidos con base crocante de galletitas, relleno cremoso de lima y una suave co",
-          "precio": 44000,
+          "precio": 50000,
           "url": "https://www.silnari.com/tortas-y-tartas/key-lime-pie"
         },
         {
           "slug": "torta-patagonica",
           "nombre": "Torta Patagónica",
           "descripcion": "En una sola cucharada, un mundo de texturas y sabores.Una torta que conquista en capas: base de brownie húmedo de chocolate al 80%, dulce de leche repostero, crema chantilly, mere",
-          "precio": 50000,
+          "precio": 55000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-patagonica"
         },
         {
           "slug": "devil-cake-pistachos",
           "nombre": "Devil Cake Pistachos",
           "descripcion": "Para los que aman el chocolate... y los pistachos.Nuestra Devil Cake con un giro irresistible: tres capas de bizcochuelo de chocolate premium, rellenas de buttercream de chocolate",
-          "precio": 55000,
+          "precio": 60500,
           "url": "https://www.silnari.com/tortas-y-tartas/devil-cake-pistachos"
         },
         {
           "slug": "degustacion-mini-cakes",
           "nombre": "Degustación Mini Cakes",
           "descripcion": "Cuatro unidades de degustaciónLemon PieSablee de FrutillasSablee de Pistachos y ChocolatePavlovason unidades de 9 cm de diámetro y 200 gramos cada una.",
-          "precio": 42000,
+          "precio": 50000,
           "url": "https://www.silnari.com/tortas-y-tartas/degustacion-mini-cakes"
         },
         {
           "slug": "combo-ebook-las-recetas-de-silnari-vol-i-y-vol-ii",
           "nombre": "Combo Ebook Las Recetas de Silnari Vol I y Vol II",
           "descripcion": "Los dos volúmenes juntos, con descuento.Más de 40 recetas entre los dos libros: tortas, cheesecakes, cookies, panes artesanales, réplicas de golosinas y mucho más. Todo el univ",
-          "precio": 58000,
+          "precio": 63800,
           "url": "https://www.silnari.com/e-book/combo-ebook-las-recetas-de-silnari-vol-i-y-vol-ii"
         },
         {
           "slug": "las-recetas-de-silnari-vol-ii",
           "nombre": "Las recetas de Silnari Vol. II",
           "descripcion": "20 recetas nuevas para los que ya no se conforman con poco.El segundo volumen de la colección trae tortas, cookies, panes artesanales y mucho más. Recetas probadas, con el sello",
-          "precio": 38000,
+          "precio": 41800,
           "url": "https://www.silnari.com/e-book/las-recetas-de-silnari-vol-ii"
         },
         {
           "slug": "banoffee",
           "nombre": "Banoffee",
           "descripcion": "El clásico británico que conquista a primera cucharada.Una base de masa sablée crocante con una generosa capa de caramelo, bananas frescas y una suave crema chantilly con chocol",
-          "precio": 48000,
+          "precio": 53000,
           "url": "https://www.silnari.com/tortas-y-tartas/banoffee"
         },
         {
           "slug": "torta-vasca",
           "nombre": "Torta Vasca",
           "descripcion": "Sencilla por fuera, adictiva por dentro.Nuestra Torta Vasca es una cheesecake al estilo San Sebastián: sin base, sin complicaciones. Solo queso de calidad, horneado a alta tempera",
-          "precio": 48000,
+          "precio": 53000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-vasca"
         },
         {
           "slug": "recetario-para-cafeterias",
           "nombre": "Recetario para Cafeterías",
           "descripcion": "18 recetas probadas y listas para vender.Diseñado especialmente para emprendedores y dueños de cafeterías que quieren elevar su oferta con productos que ya demostraron ser un bo",
-          "precio": 60000,
+          "precio": 66000,
           "url": "https://www.silnari.com/e-book/recetario-para-cafeterias"
         },
         {
           "slug": "torta-chaja",
           "nombre": "Torta Chaja",
           "descripcion": "Un clásico uruguayo que nunca pasa de moda.Nuestra Torta Chajá respeta la receta de siempre: bizcochuelo esponjoso, crema chantilly, duraznos y merengue crocante en cada capa. El",
-          "precio": 52000,
+          "precio": 57000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-chaja"
         },
         {
           "slug": "torta-humeda-de-crema-de-pistachos",
           "nombre": "Torta Húmeda de Crema de Pistachos",
           "descripcion": "Una torta que enamora desde el primer bocado.Húmeda, suave y con un sabor inconfundible: nuestra Torta de Crema de Pistachos tiene un corazón escondido de frambuesas frescas que",
-          "precio": 52000,
+          "precio": 58000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-humeda-de-crema-de-pistachos"
         },
         {
           "slug": "torta-franui",
           "nombre": "Torta Franui",
           "descripcion": "El postre que todos reconocen y nadie puede resistir.Nuestra Torta Franui tiene base de biscuit de chocolate y viene en dos variantes para elegir: relleno de crema de dulce de lech",
-          "precio": 50000,
+          "precio": 60000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-franui"
         },
         {
           "slug": "cheesecake-de-pistachos-y-caramelo-salado",
           "nombre": "Cheesecake de pistachos y caramelo salado",
           "descripcion": "Dulce, salado y completamente irresistible.Una base de biscuit de pistachos da paso a una suave crema de queso con mascarpone y pistachos, realzada por el contraste perfecto del ca",
-          "precio": 55000,
+          "precio": 60500,
           "url": "https://www.silnari.com/cheesecakes/cheesecake-de-pistachos-y-caramelo-salado"
         },
         {
           "slug": "club-cocinen-las-recetas-de-silnari",
           "nombre": "#Club Cocinen Las Recetas de Silnari",
           "descripcion": "El punto de partida para cocinar como Silnari.Más de 20 recetas de pastelería, panadería y réplicas de golosinas icónicas, pensadas para que cualquiera pueda hacerlas en casa.",
-          "precio": 25000,
+          "precio": 27500,
           "url": "https://www.silnari.com/e-book/club-cocinen-las-recetas-de-silnari"
         },
         {
           "slug": "torta-concorde",
           "nombre": "Torta Concorde",
           "descripcion": "Chocolate en todas sus formas, en una sola torta.La Concorde es un clásico de la pastelería francesa que Silnari trae en todo su esplendor: tres discos de merengue de cacao cruji",
-          "precio": 58000,
+          "precio": 65000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-concorde"
         },
         {
           "slug": "pavlova",
           "nombre": "Pavlova",
           "descripcion": "Liviana, espectacular y con ese crocante que sorprende siempre.Una base de merengue cocido con costra crocante y centro suave, cubierta con crema chantilly, crema de limón, frutos",
-          "precio": 49000,
+          "precio": 55000,
           "url": "https://www.silnari.com/tortas-y-tartas/pavlova"
         },
         {
           "slug": "marquise-sin-harina-libre-de-tacc",
           "nombre": "Marquise Sin Harina (libre de TACC)",
           "descripcion": "Todo el placer del chocolate, sin TACC.Una marquise de chocolate húmeda y sin harinas, ideal para quienes cuidan su alimentación sin querer resignar sabor. Lleva dulce de leche y",
-          "precio": 52000,
+          "precio": 58000,
           "url": "https://www.silnari.com/tortas-y-tartas/marquise-sin-harina-libre-de-tacc"
         },
         {
           "slug": "torta-balcarce",
           "nombre": "Torta Balcarce",
           "descripcion": "Un clásico argentino que nunca defrauda.La Torta Balcarce de Silnari respeta la receta de siempre con la calidad que nos distingue: capas de biscuit de vainilla y coco, dulce de l",
-          "precio": 52000,
+          "precio": 58000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-balcarce"
         },
         {
           "slug": "red-velvet",
           "nombre": "Red Velvet",
           "descripcion": "Clásica, elegante e irresistible.Nuestra Red Velvet es todo lo que esperás de este ícono de la pastelería: tres capas de bizcochuelo aterciopelado en su característico color r",
-          "precio": 50000,
+          "precio": 55000,
           "url": "https://www.silnari.com/tortas-y-tartas/red-velvet"
         },
         {
           "slug": "kit-cannoli-para-armar",
           "nombre": "Kit Cannoli para Armar",
           "descripcion": "La experiencia siciliana en tu casa.Todo lo que necesitás para armar y disfrutar 6 cannoli auténticos: los tubos crocantes, una manga de relleno a tu elección y los toppings ya",
-          "precio": 30000,
+          "precio": 40000,
           "url": "https://www.silnari.com/cannoli-siciliani/kit-cannoli-para-armar"
         },
         {
           "slug": "mousse-de-chocolate",
           "nombre": "Mousse de Chocolate",
           "descripcion": "Para los que no se conforman con poco chocolate.Una torta que seduce desde el primer bocado: base de pionono de vainilla que aporta suavidad y contraste, rellena con una mousse de",
-          "precio": 55000,
+          "precio": 65000,
           "url": "https://www.silnari.com/tortas-y-tartas/mousse-de-chocolate"
         },
         {
           "slug": "cheesecake-chocolate-blanco-y-frambuesa",
           "nombre": "Cheesecake Chocolate Blanco y Frambuesa",
           "descripcion": "Suave, elegante y con un toque frutal que sorprende.Base de biscuit de chocolate con una estructura cremosa de queso y chocolate blanco, decorada con frambuesas frescas y lajas de",
-          "precio": 60000,
+          "precio": 70000,
           "url": "https://www.silnari.com/cheesecakes/cheesecake-chocolate-blanco-y-frambuesa"
         },
         {
           "slug": "devil-cake-matilda",
           "nombre": "Devil Cake Matilda",
           "descripcion": "La Devil Cake definitiva, by Silnari.Tres capas de bizcochuelo de chocolate premium, rellenas de buttercream de chocolate y cubiertas con una lustrosa ganache de chocolate. Intensa",
-          "precio": 58000,
+          "precio": 65000,
           "url": "https://www.silnari.com/tortas-y-tartas/devil-cake-matilda"
         },
         {
           "slug": "tarta-frutal-con-crema-a-eleccion",
           "nombre": "Tarta Frutal con crema a eleccion",
           "descripcion": "Fresca, liviana y hecha con lo mejor de cada estación.Una base de masa sablée crocante rellena con la crema de tu preferencia — chantilly o pastelera — y coronada con frutas",
-          "precio": 45000,
+          "precio": 50000,
           "url": "https://www.silnari.com/tortas-y-tartas/tarta-frutal-con-crema-a-eleccion"
         },
         {
           "slug": "lemon-pie",
           "nombre": "Lemon Pie",
           "descripcion": "Ácido, dulce y con ese merengue que no podés parar de comer.Una base de masa sablée crocante rellena con un lemon curd intenso y bien citroso, coronada con una generosa capa de",
-          "precio": 48000,
+          "precio": 55000,
           "url": "https://www.silnari.com/tortas-y-tartas/lemon-pie"
         },
         {
           "slug": "sablee-de-frutos-rojos",
           "nombre": "Sableé de Frutos Rojos",
           "descripcion": "Colorida, fresca y difícil de ignorar.Una base de masa sablée crocante con relleno a tu elección — crema pastelera o chantilly — y cubierta con una generosa combinación de",
-          "precio": 52000,
+          "precio": 60000,
           "url": "https://www.silnari.com/tortas-y-tartas/sablee-de-frutos-rojos"
         },
         {
           "slug": "tiramisu-artesanal",
           "nombre": "Tiramisu Artesanal",
           "descripcion": "🍰 Torta entera para 10 a 12 personas — $4.000 por porciónItalia en cada cuchara. Vainillas embebidas en café espresso real, capas de crema de mascarpone y un toque de cacao",
-          "precio": 44000,
+          "precio": 50000,
           "url": "https://www.silnari.com/tortas-y-tartas/tiramisu-artesanal"
         },
         {
           "slug": "carrot-cake",
           "nombre": "Carrot Cake",
           "descripcion": "El clásico que siempre convence.Nuestra Carrot Cake es húmeda, especiada y con la textura perfecta que solo se logra con una buena receta y las mejores materias primas. Lleva nue",
-          "precio": 52000,
+          "precio": 59000,
           "url": "https://www.silnari.com/tortas-y-tartas/carrot-cake"
         },
         {
           "slug": "torta-brownie",
           "nombre": "Torta Brownie",
           "descripcion": "Elaborada con materias primas Tregar, en molde de 22 cm. Ideal para 10 a 12 porciones.⏱ Reservá con 24 hs de anticipación. Coordiná fecha y horario de entrega por WhatsApp al",
-          "precio": 50000,
+          "precio": 55000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-brownie"
         },
         {
           "slug": "torta-rogel",
           "nombre": "Torta Rogel",
           "descripcion": "El rogel de siempre, con el toque Silnari que lo lleva a otro nivel.Ocho discos de masa crocante y hojaldrada, unidos por capas generosas de dulce de leche repostero y coronados co",
-          "precio": 49000,
+          "precio": 55000,
           "url": "https://www.silnari.com/tortas-y-tartas/torta-rogel"
         },
         {
           "slug": "chocotorta-oreo",
           "nombre": "Chocotorta Oreo",
           "descripcion": "La combinación que nadie puede resistir.Base de galletitas chocolinas con una suave crema de queso y Oreo encima. El resultado es una torta cremosa, con el sabor de chocolate y va",
-          "precio": 50000,
+          "precio": 55000,
           "url": "https://www.silnari.com/cheesecakes/chocotorta-oreo"
         },
         {
           "slug": "cheesecake-de-dulce-de-leche-y-praline-de-nuez",
           "nombre": "Cheesecake de Dulce de Leche y Praliné de Nuez",
           "descripcion": "Para los que aman el dulce de leche... y no se conforman con poco.Base de biscuit de chocolate con una cremosa estructura de queso y dulce de leche, coronada con un praliné de nue",
-          "precio": 52000,
+          "precio": 58000,
           "url": "https://www.silnari.com/cheesecakes/cheesecake-de-dulce-de-leche-y-praline-de-nuez"
         },
         {
           "slug": "cheesecake-chocotorta",
           "nombre": "Cheesecake Chocotorta",
           "descripcion": "El sabor de la infancia en versión premium.Base de galletitas de chocolate con una crema de queso y dulce de leche suave y generosa, con galletitas de chocolate trituradas que le",
-          "precio": 44000,
+          "precio": 50000,
           "url": "https://www.silnari.com/cheesecakes/cheesecake-chocotorta"
         },
         {
           "slug": "new-york-cheesecake-frutos-rojos",
           "nombre": "New York Cheesecake Frutos Rojos",
           "descripcion": "Fresca, colorida y con el balance justo entre dulce y ácido.Una cheesecake cremosa y suave coronada con un coulis de frutos rojos y un topping de frutillas, arándanos y frambuesa",
-          "precio": 50000,
+          "precio": 60000,
           "url": "https://www.silnari.com/cheesecakes/new-york-cheesecake-frutos-rojos"
         }
       ],
@@ -514,7 +514,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-10-06T09:08:03.405Z"
+      "updatedAt": "2026-10-13T09:34:49.820Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1713,7 +1713,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-10-06T09:08:25.226Z"
+      "updatedAt": "2026-10-13T09:35:12.026Z"
     },
     {
       "id": "natis-pasteleria",
@@ -2027,213 +2027,127 @@
           "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
           "precio": 13500,
           "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-avellanas/"
-        },
-        {
-          "slug": "garrapinadas-de-almendras",
-          "nombre": "Garrapiñadas de almendras",
-          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
-          "precio": 11300,
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-almendras/"
-        },
-        {
-          "slug": "carrot-cake",
-          "nombre": "Carrot cake",
-          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, relleno y cubierto con frosting de tofu...",
-          "precio": 98000,
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/"
-        },
-        {
-          "slug": "pan-dulce-750g",
-          "nombre": "Pan dulce 750g",
-          "descripcion": "Vegano, sin gluten (no apto celiacos) y sin azucar. Presentacion de 750g. Endulzado con dátiles, contiene almendras, nueces y castañas de caju. Decorado con ...",
-          "precio": 44200,
-          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-750g/"
-        },
-        {
-          "slug": "porcion-chocotorta",
-          "nombre": "Porcion Chocotorta",
-          "descripcion": "Torta vegana y sin trigo (no apto celiacos) Base de chocolinas veganas procesadas, 3 generosas capas de crema de dulce de leche vegana, intercaladas con choc...",
-          "precio": 13500,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-chocotorta/"
-        },
-        {
-          "slug": "chocotorta",
-          "nombre": "Chocotorta",
-          "descripcion": "Torta vegana y sin trigo (no apto celiacos) 3 generosas capas de crema de dulce de leche vegana, intercaladas con chocolinas veganas enteras. Las chocolinas ...",
-          "precio": 82000,
-          "url": "https://www.natispasteleria.com.ar/productos/chocotorta/"
-        },
-        {
-          "slug": "porcion-carrot-cake",
-          "nombre": "Porcion carrot cake",
-          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, con relleno y cobertura de tofu y caju ...",
-          "precio": 13500,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/"
-        },
-        {
-          "slug": "porcion-cheesecake-proteica",
-          "nombre": "Porcion Cheesecake proteica",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
-          "precio": 13100,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/"
-        },
-        {
-          "slug": "cheesecake-proteica",
-          "nombre": "Cheesecake proteica",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
-          "precio": 80000,
-          "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/"
-        },
-        {
-          "slug": "carrot-cake-navidena-8kh37",
-          "nombre": "Carrot cake navideña",
-          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, cubierto con frosting de tofu y caju sa...",
-          "precio": 65000,
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/"
-        },
-        {
-          "slug": "garrapinadas-de-pistacho-aoz0n",
-          "nombre": "Garrapiñadas de pistacho",
-          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo...",
-          "precio": 15500,
-          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/"
-        },
-        {
-          "slug": "franatis-tpbk8",
-          "nombre": "Franatis",
-          "descripcion": "Veganas y sin harinas (no apto celiacos) Frambuesas bañadas en chocolate blanco vegano y con chocolate semiamargo Presentacion en bolsita de 100g FOTO ILUSTR...",
-          "precio": 16100,
-          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/"
-        },
-        {
-          "slug": "porcion-natisdad-dcbas",
-          "nombre": "Porcion Natisdad",
-          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
-          "precio": 12100,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/"
-        },
-        {
-          "slug": "natisdad-4oou5",
-          "nombre": "Natisdad",
-          "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
-          "precio": 55000,
-          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/"
-        },
-        {
-          "slug": "alfajores-havanatis-corazon-3-unidades-15nun",
-          "nombre": "Alfajores Havanati's corazon (3 unidades)",
-          "descripcion": "Veganos y sin gluten (no apto celiacos) Tapas de cacao con un toque de sal marina, rellenas con dulce de leche, con centro de ganache de dulce de leche y bañ...",
-          "precio": 10500,
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/"
-        },
-        {
-          "slug": "alfajores-chocomani-corazon-x3-12hc4",
-          "nombre": "Alfajores Chocomani corazon x3",
-          "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
-          "precio": 10800,
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/"
-        },
-        {
-          "slug": "alfajores-almendra-mousse-corazon-3-unidades-bd51g",
-          "nombre": "Alfajores almendra mousse corazon (3 unidades)",
-          "descripcion": "Veganos, sin azucar refinada y sin harinas con gluten. Tapas de sablée de almendras con un fino sabor a caramelo, relleno de ganache de chocolate semiamargo ...",
-          "precio": 14000,
-          "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/"
-        },
-        {
-          "slug": "huevo-snicker-sin-azucar",
-          "nombre": "Huevo Snicker",
-          "descripcion": "Huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar relleno de caramelo salado de datil y mani tostado sin sal, ganache de ...",
-          "precio": 47900,
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-snicker-sin-azucar/"
-        },
-        {
-          "slug": "huevo-bombona-sin-azucar",
-          "nombre": "Huevo Bombona",
-          "descripcion": "Medio huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar, relleno de cremoso de chocolate semiamargo sin azúcar y praliné ...",
-          "precio": 56500,
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-bombona-sin-azucar/"
-        },
-        {
-          "slug": "huevo-key-lime-pie-sin-azucar",
-          "nombre": "Huevo Key lime pie",
-          "descripcion": "Huevo vegano y sin azúcar. Media cáscara de chocolate cobertura semiamargo sin azúcar relleno de cremoso de lima y crema tipo chantilly casera a base de cajú...",
-          "precio": 49300,
-          "url": "https://www.natispasteleria.com.ar/productos/huevo-key-lime-pie-sin-azucar/"
-        },
-        {
-          "slug": "rosca-de-pascua",
-          "nombre": "Rosca de Pascua",
-          "descripcion": "Rosca de Pascua vegana, sin trigo y sin azúcar. Rosca 100% a base de plantas, sin harina de trigo y sin azúcar. La masa esta endulzada con dátiles y la crema...",
-          "precio": 47500,
-          "url": "https://www.natispasteleria.com.ar/productos/rosca-de-pascua/"
-        },
-        {
-          "slug": "bombona-sin-azucar",
-          "nombre": "Bombona",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar. Base de chocolate con almendras, cremoso de chocolate semiamargo y praline de frutas secas (almendras, avellanas y man...",
-          "precio": 120000,
-          "url": "https://www.natispasteleria.com.ar/productos/bombona-sin-azucar/"
-        },
-        {
-          "slug": "porcion-snicker-u5qmg",
-          "nombre": "Porcion Snicker",
-          "descripcion": "Vegana, sin trigo y sin azucar Base sablee de cacao endulzada con eritritol, caramelo salado de datil con mani tostado y ganache de chocolate semiamargo sin ...",
-          "precio": 14200,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-snicker-u5qmg/"
-        },
-        {
-          "slug": "tarta-snicker-54r3y",
-          "nombre": "Tarta Snicker",
-          "descripcion": "Vegana, sin trigo y sin azucar Base sablee de cacao endulzada con eritritol, caramelo salado de datil con mani tostado y ganache de chocolate semiamargo sin ...",
-          "precio": 85000,
-          "url": "https://www.natispasteleria.com.ar/productos/tarta-snicker-54r3y/"
-        },
-        {
-          "slug": "tableta-key-lime-pie-wgodv",
-          "nombre": "Tableta Key lime pie",
-          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de cremoso de lima con crunchy de coco Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Con...",
-          "precio": 38500,
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-key-lime-pie-wgodv/"
-        },
-        {
-          "slug": "tableta-frambuesa-y-pistacho-1e5y7",
-          "nombre": "Tableta Frambuesa y Pistacho",
-          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de pulpa concentrada de frambuesa y pistachos tostados. Sin lácteos, huevo, harina ni azúcar Pe...",
-          "precio": 47500,
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/"
-        },
-        {
-          "slug": "tableta-chocomani-ok236",
-          "nombre": "Tableta Chocomani",
-          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de maní y maní tostado Sin lácteos, huevo, harina ni azúcar Pesa aprox 300g Conserva...",
-          "precio": 38500,
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/"
-        },
-        {
-          "slug": "tableta-almendra-chai-1tdht",
-          "nombre": "Tableta almendra chai",
-          "descripcion": "Carcasa de Chocolate semiamargo cobertura sin azúcar, relleno de ganache de chocolate especiada (canela, jengibre y cardamomo) con almendras tostadas. Sin lá...",
-          "precio": 45400,
-          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/"
-        },
-        {
-          "slug": "porcion-frutillas-con-pastelera-1y6qb",
-          "nombre": "Porcion Frutillas con pastelera",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso de vainilla a base de castañas de cajú endulza...",
-          "precio": 14200,
-          "url": "https://www.natispasteleria.com.ar/productos/porcion-frutillas-con-pastelera-1y6qb/"
-        },
-        {
-          "slug": "frutillas-con-pastelera-1y2y9",
-          "nombre": "Frutillas con pastelera",
-          "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso de vainilla a base de castañas de cajú endulza...",
-          "precio": 88400,
-          "url": "https://www.natispasteleria.com.ar/productos/frutillas-con-pastelera-1y2y9/"
         }
       ],
-      "errores": [],
-      "updatedAt": "2026-10-06T09:08:28.297Z"
+      "errores": [
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-almendras/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-750g/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-chocotorta/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/chocotorta/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-havanatis-corazon-3-unidades-15nun/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani-corazon-x3-12hc4/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/alfajores-almendra-mousse-corazon-3-unidades-bd51g/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-snicker-sin-azucar/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-bombona-sin-azucar/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/huevo-key-lime-pie-sin-azucar/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/rosca-de-pascua/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/bombona-sin-azucar/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-snicker-u5qmg/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tarta-snicker-54r3y/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-key-lime-pie-wgodv/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-frambuesa-y-pistacho-1e5y7/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-chocomani-ok236/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/tableta-almendra-chai-1tdht/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/porcion-frutillas-con-pastelera-1y6qb/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://www.natispasteleria.com.ar/productos/frutillas-con-pastelera-1y2y9/",
+          "error": "sin precio"
+        }
+      ],
+      "updatedAt": "2026-10-13T09:35:16.512Z"
     }
   ]
 }
