@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-06T08:48:57.506Z",
+  "generadoEn": "2026-10-13T09:12:39.555Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -174,12 +174,12 @@
     },
     {
       "nombre": "Levadura",
-      "precio": 8.8,
+      "precio": 8,
       "unidad": "g",
       "producto": "Levadura Fresca por 500 Grs Calsa",
       "granateQty": 500,
       "granateUnit": "g",
-      "granatePrecioTotal": 4400,
+      "granatePrecioTotal": 4000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1383-levadura-fresca-por-500-grs-calsa-4406"
     },
     {
@@ -240,7 +240,7 @@
       "granateQty": 3000,
       "granateUnit": "ml",
       "granatePrecioTotal": 28000,
-      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/crema-de-leche-ramolac-por-3-litros-pouch-4931"
+      "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1962-crema-de-leche-ramolac-por-3-litros-pouch-4931"
     },
     {
       "nombre": "Leche condensada",
