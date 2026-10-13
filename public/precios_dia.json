@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-06T09:02:24.089Z",
+  "generadoEn": "2026-10-13T09:28:41.072Z",
   "fuente": "Día",
   "items": [
     {
@@ -24,12 +24,12 @@
     },
     {
       "nombre": "Azúcar",
-      "precio": 1.389,
+      "precio": 1.42,
       "unidad": "g",
       "producto": "Azúcar Plus DIA Común tipo A 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1389,
+      "diaPrecioTotal": 1420,
       "match": "curado"
     },
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 3.19,
+      "precio": 3.49,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3190,
+      "diaPrecioTotal": 3490,
       "match": "curado"
     },
     {
@@ -64,12 +64,12 @@
     },
     {
       "nombre": "bondiola 1kg",
-      "precio": 11.55,
+      "precio": 5,
       "unidad": "g",
-      "producto": "Bondiola Congelada x Kg.",
+      "producto": "Bondiola De Cerdo Catter Meat Envasado Al Vacío  X 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 11550,
+      "diaPrecioTotal": 5000,
       "match": "curado"
     },
     {
@@ -106,7 +106,7 @@
       "nombre": "Cebolla",
       "precio": 4.69,
       "unidad": "g",
-      "producto": "Cebolla Comercial en bolsa malla x Kg.",
+      "producto": "Cebolla Elegida Premium x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
       "diaPrecioTotal": 4690,
@@ -114,12 +114,12 @@
     },
     {
       "nombre": "Cebolla deshidratada",
-      "precio": 33.3,
+      "precio": 35.63,
       "unidad": "g",
       "producto": "Cebolla Deshidratada Knorr 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 3330,
+      "diaPrecioTotal": 3563,
       "match": "auto"
     },
     {
@@ -284,22 +284,22 @@
     },
     {
       "nombre": "Huevo",
-      "precio": 365.8333,
+      "precio": 365,
       "unidad": "u",
-      "producto": "Huevo Blanco Grande 12 Ud.",
-      "diaQty": 12,
+      "producto": "Huevos Grandes Blancos Don Ramón 6 Ud.",
+      "diaQty": 6,
       "diaUnit": "u",
-      "diaPrecioTotal": 4390,
+      "diaPrecioTotal": 2190,
       "match": "curado"
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 5.1515,
+      "precio": 36.45,
       "unidad": "g",
-      "producto": "Jamón Cocido DIA Sin Tacc en Fetas 200 Gr.",
+      "producto": "Jamón Cocido Fetas Finas Dia 200 Gr.",
       "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 1030.3,
+      "diaPrecioTotal": 7290,
       "match": "curado"
     },
     {
@@ -454,12 +454,12 @@
     },
     {
       "nombre": "Nuez",
-      "precio": 59.9,
+      "precio": 46.9,
       "unidad": "g",
-      "producto": "Nueces Peladas Dia 100 Gr.",
+      "producto": "Nuez Pelada en Cubeta 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 5990,
+      "diaPrecioTotal": 4690,
       "match": "curado"
     },
     {
@@ -574,22 +574,22 @@
     },
     {
       "nombre": "Tomate",
-      "precio": 6.29,
+      "precio": 1.99,
       "unidad": "g",
-      "producto": "Tomate Redondo x Kg.",
+      "producto": "Tomate Comercial en bolsa malla x 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6290,
+      "diaPrecioTotal": 1990,
       "match": "curado"
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 14.49,
+      "precio": 4.2,
       "unidad": "g",
-      "producto": "Tomate Cherry x Kg.",
+      "producto": "Tomates Cherry en Racimo x 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 14490,
+      "diaPrecioTotal": 4200,
       "match": "curado"
     },
     {
@@ -644,12 +644,12 @@
     },
     {
       "nombre": "Sal",
-      "precio": 2.1,
+      "precio": 2.38,
       "unidad": "g",
       "producto": "Sal Fina DIA 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 1050,
+      "diaPrecioTotal": 1190,
       "match": "curado"
     },
     {
