@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-13T09:12:39.555Z",
+  "generadoEn": "2026-10-20T07:22:24.927Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -294,12 +294,12 @@
     },
     {
       "nombre": "Salvado de trigo",
-      "precio": 1.2,
+      "precio": 1.2667,
       "unidad": "g",
       "producto": "Salvado Chacabuco por 15 Kg",
       "granateQty": 15000,
       "granateUnit": "g",
-      "granatePrecioTotal": 18000,
+      "granatePrecioTotal": 19000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1307-salvado-chacabuco-por-15-kg-4333"
     },
     {
@@ -344,22 +344,22 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 14.5299,
+      "precio": 16.2393,
       "unidad": "g",
       "producto": "Oreos por 117 Grs",
       "granateQty": 117,
       "granateUnit": "g",
-      "granatePrecioTotal": 1700,
+      "granatePrecioTotal": 1900,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1339-oreos-por-117-grs-4363"
     },
     {
       "nombre": "Chocolinas",
-      "precio": 7.6,
+      "precio": 8.4,
       "unidad": "g",
       "producto": "Chocolinas por 250 Grs",
       "granateQty": 250,
       "granateUnit": "g",
-      "granatePrecioTotal": 1900,
+      "granatePrecioTotal": 2100,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1196-chocolinas-por-250-grs-4228"
     },
     {
@@ -534,12 +534,12 @@
     },
     {
       "nombre": "Mayonesa",
-      "precio": 4.5455,
+      "precio": 5.7455,
       "unidad": "g",
       "producto": "Mayonesa Hellmann&#39;S por 2,750 Kg",
       "granateQty": 2750,
       "granateUnit": "g",
-      "granatePrecioTotal": 12500,
+      "granatePrecioTotal": 15800,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1347-mayonesa-hellmann-s-por-2-750-kg-4370"
     },
     {
@@ -624,12 +624,12 @@
     },
     {
       "nombre": "grasa",
-      "precio": 3.5,
+      "precio": 3.3,
       "unidad": "g",
       "producto": "Grasa Ramgras por 10 Kg",
       "granateQty": 10000,
       "granateUnit": "g",
-      "granatePrecioTotal": 35000,
+      "granatePrecioTotal": 33000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1392-grasa-ramgras-por-10-kg-4414"
     },
     {
