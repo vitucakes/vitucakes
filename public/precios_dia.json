@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-13T09:28:41.072Z",
+  "generadoEn": "2026-10-20T07:38:20.817Z",
   "fuente": "Día",
   "items": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 3.49,
+      "precio": 3.79,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3490,
+      "diaPrecioTotal": 3790,
       "match": "curado"
     },
     {
@@ -94,12 +94,12 @@
     },
     {
       "nombre": "carne picada",
-      "precio": 9,
+      "precio": 14,
       "unidad": "g",
-      "producto": "Carne Picada De Nalga 500 Gr.",
-      "diaQty": 500,
+      "producto": "Carne Picada común Atmósfera Modificada 600 Gr.",
+      "diaQty": 600,
       "diaUnit": "g",
-      "diaPrecioTotal": 4500,
+      "diaPrecioTotal": 8400,
       "match": "curado"
     },
     {
@@ -284,12 +284,12 @@
     },
     {
       "nombre": "Huevo",
-      "precio": 365,
+      "precio": 365.8333,
       "unidad": "u",
-      "producto": "Huevos Grandes Blancos Don Ramón 6 Ud.",
-      "diaQty": 6,
+      "producto": "Huevo Blanco Grande 12 Ud.",
+      "diaQty": 12,
       "diaUnit": "u",
-      "diaPrecioTotal": 2190,
+      "diaPrecioTotal": 4390,
       "match": "curado"
     },
     {
@@ -454,12 +454,12 @@
     },
     {
       "nombre": "Nuez",
-      "precio": 46.9,
+      "precio": 59.9,
       "unidad": "g",
-      "producto": "Nuez Pelada en Cubeta 100 Gr.",
+      "producto": "Nueces Peladas Dia 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 4690,
+      "diaPrecioTotal": 5990,
       "match": "curado"
     },
     {
@@ -484,12 +484,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 20.1695,
+      "precio": 18.7825,
       "unidad": "g",
       "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
       "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 7140,
+      "diaPrecioTotal": 6649,
       "match": "curado"
     },
     {
@@ -554,12 +554,12 @@
     },
     {
       "nombre": "Salsa de tomate",
-      "precio": 3.7221,
+      "precio": 3.7235,
       "unidad": "g",
       "producto": "Salsa de Tomate CICA Pomarola 340 Gr.",
       "diaQty": 340,
       "diaUnit": "g",
-      "diaPrecioTotal": 1265.5,
+      "diaPrecioTotal": 1266,
       "match": "curado"
     },
     {
@@ -584,12 +584,12 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 4.2,
+      "precio": 7.99,
       "unidad": "g",
-      "producto": "Tomates Cherry en Racimo x 1 Kg.",
+      "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 4200,
+      "diaPrecioTotal": 7990,
       "match": "curado"
     },
     {
@@ -634,12 +634,12 @@
     },
     {
       "nombre": "Limas",
-      "precio": 4.99,
+      "precio": 6.59,
       "unidad": "g",
       "producto": "Lima x 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 4990,
+      "diaPrecioTotal": 6590,
       "match": "curado"
     },
     {
