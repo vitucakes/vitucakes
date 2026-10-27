@@ -1,25 +1,25 @@
 {
-  "generadoEn": "2026-10-20T07:38:20.817Z",
+  "generadoEn": "2026-10-27T07:56:13.592Z",
   "fuente": "Día",
   "items": [
     {
       "nombre": "Aceite",
-      "precio": 3.83,
+      "precio": 3.0556,
       "unidad": "ml",
-      "producto": "Aceite de Girasol Dia 1,5 Lt.",
-      "diaQty": 1500,
+      "producto": "Aceite de Girasol Dia 900 Ml.",
+      "diaQty": 900,
       "diaUnit": "ml",
-      "diaPrecioTotal": 5745,
+      "diaPrecioTotal": 2750,
       "match": "curado"
     },
     {
       "nombre": "atun",
-      "precio": 1490,
+      "precio": 1190,
       "unidad": "u",
       "producto": "Atún Desmenuzado Al Natural Dia 170 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1490,
+      "diaPrecioTotal": 1190,
       "match": "curado"
     },
     {
@@ -30,6 +30,16 @@
       "diaQty": 1000,
       "diaUnit": "g",
       "diaPrecioTotal": 1420,
+      "match": "curado"
+    },
+    {
+      "nombre": "Azúcar impalpable",
+      "precio": 6,
+      "unidad": "g",
+      "producto": "Azucar Impalpable Azucel 250 Gr.",
+      "diaQty": 250,
+      "diaUnit": "g",
+      "diaPrecioTotal": 1500,
       "match": "curado"
     },
     {
@@ -44,32 +54,32 @@
     },
     {
       "nombre": "Batata",
-      "precio": 3.79,
+      "precio": 3.99,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3790,
+      "diaPrecioTotal": 3990,
       "match": "curado"
     },
     {
       "nombre": "Bicarbonato de sodio",
-      "precio": 7.13,
+      "precio": 8.32,
       "unidad": "g",
       "producto": "Bicarbonato I Love Bicarbonato 100 Gr.",
       "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 713,
+      "diaPrecioTotal": 832,
       "match": "curado"
     },
     {
       "nombre": "bondiola 1kg",
-      "precio": 5,
+      "precio": 11.55,
       "unidad": "g",
-      "producto": "Bondiola De Cerdo Catter Meat Envasado Al Vacío  X 1 Kg.",
+      "producto": "Bondiola Congelada x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5000,
+      "diaPrecioTotal": 11550,
       "match": "curado"
     },
     {
@@ -104,12 +114,12 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 4.69,
+      "precio": 3.59,
       "unidad": "g",
       "producto": "Cebolla Elegida Premium x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 4690,
+      "diaPrecioTotal": 3590,
       "match": "curado"
     },
     {
@@ -174,12 +184,12 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 11,
+      "precio": 10.2,
       "unidad": "g",
-      "producto": "Crema De Leche Dia 200 Ml.",
-      "diaQty": 200,
+      "producto": "Crema De Leche Para Cocinar Las Tres Niñas 500 Ml.",
+      "diaQty": 500,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2200,
+      "diaPrecioTotal": 5100,
       "match": "curado"
     },
     {
@@ -214,22 +224,22 @@
     },
     {
       "nombre": "frutos rojos congelados",
-      "precio": 23.6857,
+      "precio": 18.5429,
       "unidad": "g",
       "producto": "Frutos Rojos Congelados Dia 350 Gr.",
       "diaQty": 350,
       "diaUnit": "g",
-      "diaPrecioTotal": 8290,
+      "diaPrecioTotal": 6490,
       "match": "curado"
     },
     {
       "nombre": "Galletitas lincoln",
-      "precio": 11.329,
+      "precio": 12.0915,
       "unidad": "g",
       "producto": "Galletitas Dulces Lincoln Clásicas Terrabusi Tripack 459 Gr.",
       "diaQty": 459,
       "diaUnit": "g",
-      "diaPrecioTotal": 5200,
+      "diaPrecioTotal": 5550,
       "match": "curado"
     },
     {
@@ -254,12 +264,12 @@
     },
     {
       "nombre": "Harina 000",
-      "precio": 1.039,
+      "precio": 0.735,
       "unidad": "g",
-      "producto": "Harina De Trigo 000 Chacabuco 1 Kg.",
+      "producto": "Harina de Trigo 000 DIA 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1039,
+      "diaPrecioTotal": 735,
       "match": "curado"
     },
     {
@@ -274,12 +284,12 @@
     },
     {
       "nombre": "Harina leudante",
-      "precio": 1.289,
+      "precio": 1.187,
       "unidad": "g",
-      "producto": "Harina Leudante DIA 1 Kg.",
+      "producto": "Harina Leudante Caserita 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1289,
+      "diaPrecioTotal": 1187,
       "match": "curado"
     },
     {
@@ -314,42 +324,42 @@
     },
     {
       "nombre": "Lata de durazno",
-      "precio": 3190,
+      "precio": 2290,
       "unidad": "u",
       "producto": "Durazno en Mitades DIA 820 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 3190,
+      "diaPrecioTotal": 2290,
       "match": "curado"
     },
     {
       "nombre": "Leche",
-      "precio": 2.39,
+      "precio": 1.94,
       "unidad": "ml",
-      "producto": "Leche Entera DIA Larga Vida 1 Lt.",
+      "producto": "Leche Larga Vida Clásica 3% La Serenisima 1 Lt.",
       "diaQty": 1000,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2390,
+      "diaPrecioTotal": 1940,
       "match": "curado"
     },
     {
       "nombre": "LECHE CONDENSADA",
-      "precio": 8.8608,
+      "precio": 7.1646,
       "unidad": "g",
-      "producto": "Leche Condensada Dia 395 Gr.",
+      "producto": "Leche Condensada Descremada Nestle x 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3500,
+      "diaPrecioTotal": 2830,
       "match": "auto"
     },
     {
       "nombre": "Lechuga",
-      "precio": 5.99,
+      "precio": 3.99,
       "unidad": "g",
       "producto": "Lechuga x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5990,
+      "diaPrecioTotal": 3990,
       "match": "auto"
     },
     {
@@ -374,12 +384,12 @@
     },
     {
       "nombre": "Manteca",
-      "precio": 18.8,
+      "precio": 16.45,
       "unidad": "g",
-      "producto": "Manteca Sin Sal Dia 100 Gr.",
-      "diaQty": 100,
+      "producto": "Manteca Tonadita Extra calidad 200 Gr.",
+      "diaQty": 200,
       "diaUnit": "g",
-      "diaPrecioTotal": 1880,
+      "diaPrecioTotal": 3290,
       "match": "curado"
     },
     {
@@ -404,12 +414,12 @@
     },
     {
       "nombre": "Mayonesa",
-      "precio": 3.55,
+      "precio": 2.78,
       "unidad": "g",
-      "producto": "Mayonesa Cañuelas 500 Gr.",
+      "producto": "Mayonesa Pouch Danica 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 1775,
+      "diaPrecioTotal": 1390,
       "match": "curado"
     },
     {
@@ -484,12 +494,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 18.7825,
+      "precio": 12.5424,
       "unidad": "g",
-      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
-      "diaQty": 354,
+      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original Menos sodio 118 Gr.",
+      "diaQty": 118,
       "diaUnit": "g",
-      "diaPrecioTotal": 6649,
+      "diaPrecioTotal": 1480,
       "match": "curado"
     },
     {
@@ -524,12 +534,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 10.8125,
+      "precio": 9.9643,
       "unidad": "g",
-      "producto": "Queso Crema Clásico Dia 480 Gr.",
-      "diaQty": 480,
+      "producto": "Queso Crema Clasico Ricrem 280 Gr.",
+      "diaQty": 280,
       "diaUnit": "g",
-      "diaPrecioTotal": 5190,
+      "diaPrecioTotal": 2790,
       "match": "curado"
     },
     {
@@ -584,32 +594,32 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 7.99,
+      "precio": 7.59,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 7990,
+      "diaPrecioTotal": 7590,
       "match": "curado"
     },
     {
       "nombre": "Vainillas",
-      "precio": 1890,
+      "precio": 1280,
       "unidad": "u",
       "producto": "Vainillas Dia 148 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1890,
+      "diaPrecioTotal": 1280,
       "match": "auto"
     },
     {
       "nombre": "Zanahoria",
-      "precio": 2.99,
+      "precio": 1.99,
       "unidad": "g",
       "producto": "Zanahoria x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 2990,
+      "diaPrecioTotal": 1990,
       "match": "curado"
     },
     {
@@ -624,12 +634,12 @@
     },
     {
       "nombre": "Leche condensada",
-      "precio": 8.8608,
+      "precio": 7.1646,
       "unidad": "g",
-      "producto": "Leche Condensada Dia 395 Gr.",
+      "producto": "Leche Condensada Descremada Nestle x 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3500,
+      "diaPrecioTotal": 2830,
       "match": "curado"
     },
     {
@@ -694,11 +704,6 @@
     }
   ],
   "errores": [
-    {
-      "nombre": "Azúcar impalpable",
-      "error": "sin candidato válido",
-      "encontrados": 0
-    },
     {
       "nombre": "Polvo de hornear",
       "error": "sin candidato válido",
