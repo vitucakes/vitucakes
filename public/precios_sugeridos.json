@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-20T07:22:24.927Z",
+  "generadoEn": "2026-10-27T07:36:41.062Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -374,12 +374,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 6.5,
+      "precio": 7,
       "unidad": "g",
       "producto": "Queso crema La Paulina por 4kg",
       "granateQty": 4000,
       "granateUnit": "g",
-      "granatePrecioTotal": 26000,
+      "granatePrecioTotal": 28000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1658-queso-crema-la-paulina-por-4kg-4823"
     },
     {
