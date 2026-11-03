@@ -1,25 +1,25 @@
 {
-  "generadoEn": "2026-10-27T07:56:13.592Z",
+  "generadoEn": "2026-11-03T09:37:09.808Z",
   "fuente": "Día",
   "items": [
     {
       "nombre": "Aceite",
-      "precio": 3.0556,
+      "precio": 3.83,
       "unidad": "ml",
-      "producto": "Aceite de Girasol Dia 900 Ml.",
-      "diaQty": 900,
+      "producto": "Aceite de Girasol Dia 1,5 Lt.",
+      "diaQty": 1500,
       "diaUnit": "ml",
-      "diaPrecioTotal": 2750,
+      "diaPrecioTotal": 5745,
       "match": "curado"
     },
     {
       "nombre": "atun",
-      "precio": 1190,
+      "precio": 1490,
       "unidad": "u",
       "producto": "Atún Desmenuzado Al Natural Dia 170 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1190,
+      "diaPrecioTotal": 1490,
       "match": "curado"
     },
     {
@@ -54,12 +54,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 3.99,
+      "precio": 3.49,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3990,
+      "diaPrecioTotal": 3490,
       "match": "curado"
     },
     {
@@ -114,12 +114,12 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 3.59,
+      "precio": 2.99,
       "unidad": "g",
-      "producto": "Cebolla Elegida Premium x Kg.",
+      "producto": "Cebolla Comercial en bolsa malla x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3590,
+      "diaPrecioTotal": 2990,
       "match": "curado"
     },
     {
@@ -134,32 +134,32 @@
     },
     {
       "nombre": "Chocolatada 200ml",
-      "precio": 1100,
+      "precio": 6.57,
       "unidad": "u",
-      "producto": "Leche Chocolatada DIA Larga Vida 200 Ml.",
-      "diaQty": 1,
+      "producto": "Nesquik Extra Cacao Chocolatada Listo Para Tomar X 200 Ml.",
+      "diaQty": 200,
       "diaUnit": "u",
-      "diaPrecioTotal": 1100,
+      "diaPrecioTotal": 1314,
       "match": "curado"
     },
     {
       "nombre": "Chocolate",
-      "precio": 26.9,
+      "precio": 17.371,
       "unidad": "g",
-      "producto": "Chocolate para Taza DIA 100 Gr.",
-      "diaQty": 100,
+      "producto": "Chocolate Milka Con Almendras 155 Gr.",
+      "diaQty": 155,
       "diaUnit": "g",
-      "diaPrecioTotal": 2690,
+      "diaPrecioTotal": 2692.5,
       "match": "auto"
     },
     {
       "nombre": "Chocolinas",
-      "precio": 9.64,
+      "precio": 10.9922,
       "unidad": "g",
-      "producto": "Galletitas Chocolate Chocolinas 250 Gr.",
-      "diaQty": 250,
+      "producto": "Galletitas Negro Chocolinas 258 Gr.",
+      "diaQty": 258,
       "diaUnit": "g",
-      "diaPrecioTotal": 2410,
+      "diaPrecioTotal": 2836,
       "match": "curado"
     },
     {
@@ -184,22 +184,22 @@
     },
     {
       "nombre": "Crema de leche",
-      "precio": 10.2,
+      "precio": 9.9875,
       "unidad": "g",
-      "producto": "Crema De Leche Para Cocinar Las Tres Niñas 500 Ml.",
-      "diaQty": 500,
+      "producto": "Crema de Leche DIA Larga Vida 200 Ml.",
+      "diaQty": 200,
       "diaUnit": "ml",
-      "diaPrecioTotal": 5100,
+      "diaPrecioTotal": 1997.5,
       "match": "curado"
     },
     {
       "nombre": "Dulce de leche",
-      "precio": 5.5,
+      "precio": 7.1,
       "unidad": "g",
       "producto": "Dulce de Leche DIA 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 5500,
+      "diaPrecioTotal": 7100,
       "match": "curado"
     },
     {
@@ -224,12 +224,12 @@
     },
     {
       "nombre": "frutos rojos congelados",
-      "precio": 18.5429,
+      "precio": 18.1929,
       "unidad": "g",
       "producto": "Frutos Rojos Congelados Dia 350 Gr.",
       "diaQty": 350,
       "diaUnit": "g",
-      "diaPrecioTotal": 6490,
+      "diaPrecioTotal": 6367.5,
       "match": "curado"
     },
     {
@@ -244,12 +244,12 @@
     },
     {
       "nombre": "Gelatina Sin Sabor",
-      "precio": 52.5,
+      "precio": 47,
       "unidad": "g",
       "producto": "Gelatina Reducida Sabor Frambuesa 20 Gr.",
       "diaQty": 20,
       "diaUnit": "g",
-      "diaPrecioTotal": 1050,
+      "diaPrecioTotal": 940,
       "match": "auto"
     },
     {
@@ -264,12 +264,12 @@
     },
     {
       "nombre": "Harina 000",
-      "precio": 0.735,
+      "precio": 1.039,
       "unidad": "g",
-      "producto": "Harina de Trigo 000 DIA 1 Kg.",
+      "producto": "Harina De Trigo 000 Chacabuco 1 Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 735,
+      "diaPrecioTotal": 1039,
       "match": "curado"
     },
     {
@@ -304,12 +304,12 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 36.45,
+      "precio": 32.6667,
       "unidad": "g",
-      "producto": "Jamón Cocido Fetas Finas Dia 200 Gr.",
-      "diaQty": 200,
+      "producto": "Jamón Cocido Lario Feteado 150 Gr.",
+      "diaQty": 150,
       "diaUnit": "g",
-      "diaPrecioTotal": 7290,
+      "diaPrecioTotal": 4900,
       "match": "curado"
     },
     {
@@ -324,32 +324,32 @@
     },
     {
       "nombre": "Lata de durazno",
-      "precio": 2290,
+      "precio": 3190,
       "unidad": "u",
       "producto": "Durazno en Mitades DIA 820 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2290,
+      "diaPrecioTotal": 3190,
       "match": "curado"
     },
     {
       "nombre": "Leche",
-      "precio": 1.94,
+      "precio": 2.39,
       "unidad": "ml",
-      "producto": "Leche Larga Vida Clásica 3% La Serenisima 1 Lt.",
+      "producto": "Leche Entera DIA Larga Vida 1 Lt.",
       "diaQty": 1000,
       "diaUnit": "ml",
-      "diaPrecioTotal": 1940,
+      "diaPrecioTotal": 2390,
       "match": "curado"
     },
     {
       "nombre": "LECHE CONDENSADA",
-      "precio": 7.1646,
+      "precio": 5.0291,
       "unidad": "g",
-      "producto": "Leche Condensada Descremada Nestle x 395 Gr.",
+      "producto": "Leche Condensada Sabor Limon Nestle 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 2830,
+      "diaPrecioTotal": 1986.5,
       "match": "auto"
     },
     {
@@ -374,12 +374,12 @@
     },
     {
       "nombre": "Maicena",
-      "precio": 6.6,
+      "precio": 7.14,
       "unidad": "g",
       "producto": "Almidón De Maíz Maizena Clásica Sin Tacc 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 3300,
+      "diaPrecioTotal": 3570,
       "match": "curado"
     },
     {
@@ -394,12 +394,12 @@
     },
     {
       "nombre": "Manzana Verde",
-      "precio": 6.69,
+      "precio": 5.99,
       "unidad": "g",
       "producto": "Manzana Verde x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 6690,
+      "diaPrecioTotal": 5990,
       "match": "curado"
     },
     {
@@ -414,12 +414,12 @@
     },
     {
       "nombre": "Mayonesa",
-      "precio": 2.78,
+      "precio": 3.02,
       "unidad": "g",
       "producto": "Mayonesa Pouch Danica 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 1390,
+      "diaPrecioTotal": 1510,
       "match": "curado"
     },
     {
@@ -434,22 +434,22 @@
     },
     {
       "nombre": "Mermelada Frambuesa",
-      "precio": 6.3877,
+      "precio": 7.8855,
       "unidad": "g",
       "producto": "Mermelada Dia Frambuesa 454 Gr.",
       "diaQty": 454,
       "diaUnit": "g",
-      "diaPrecioTotal": 2900,
+      "diaPrecioTotal": 3580,
       "match": "auto"
     },
     {
       "nombre": "Miel",
-      "precio": 18.8298,
+      "precio": 20.7143,
       "unidad": "ml",
-      "producto": "Miel Liquida Aleluya 470 Gr.",
-      "diaQty": 470,
+      "producto": "Miel de abejas DIA 210 Gr.",
+      "diaQty": 210,
       "diaUnit": "g",
-      "diaPrecioTotal": 8850,
+      "diaPrecioTotal": 4350,
       "match": "curado"
     },
     {
@@ -494,12 +494,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 12.5424,
+      "precio": 18.4,
       "unidad": "g",
-      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original Menos sodio 118 Gr.",
-      "diaQty": 118,
+      "producto": "Galletitas Oreo Mini Rellenas Con Crema Sabor Original 50 Gr.",
+      "diaQty": 50,
       "diaUnit": "g",
-      "diaPrecioTotal": 1480,
+      "diaPrecioTotal": 920,
       "match": "curado"
     },
     {
@@ -534,22 +534,22 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 9.9643,
+      "precio": 10.3958,
       "unidad": "g",
-      "producto": "Queso Crema Clasico Ricrem 280 Gr.",
-      "diaQty": 280,
+      "producto": "Queso Crema Clásico Dia 480 Gr.",
+      "diaQty": 480,
       "diaUnit": "g",
-      "diaPrecioTotal": 2790,
+      "diaPrecioTotal": 4990,
       "match": "curado"
     },
     {
       "nombre": "Queso semiduro",
-      "precio": 10.3103,
+      "precio": 10.6552,
       "unidad": "g",
       "producto": "Queso Cremoso Clásico Dia 290 Gr.",
       "diaQty": 290,
       "diaUnit": "g",
-      "diaPrecioTotal": 2990,
+      "diaPrecioTotal": 3090,
       "match": "curado"
     },
     {
@@ -574,12 +574,12 @@
     },
     {
       "nombre": "Taza",
-      "precio": 3250,
+      "precio": 2000,
       "unidad": "u",
       "producto": "Taza Mug Badem Gris Linea Hogar 1 Ud.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 3250,
+      "diaPrecioTotal": 2000,
       "match": "auto"
     },
     {
@@ -594,32 +594,32 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 7.59,
+      "precio": 10.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 7590,
+      "diaPrecioTotal": 10990,
       "match": "curado"
     },
     {
       "nombre": "Vainillas",
-      "precio": 1280,
+      "precio": 1890,
       "unidad": "u",
       "producto": "Vainillas Dia 148 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1280,
+      "diaPrecioTotal": 1890,
       "match": "auto"
     },
     {
       "nombre": "Zanahoria",
-      "precio": 1.99,
+      "precio": 2.99,
       "unidad": "g",
       "producto": "Zanahoria x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 1990,
+      "diaPrecioTotal": 2990,
       "match": "curado"
     },
     {
@@ -634,12 +634,12 @@
     },
     {
       "nombre": "Leche condensada",
-      "precio": 7.1646,
+      "precio": 5.0291,
       "unidad": "g",
-      "producto": "Leche Condensada Descremada Nestle x 395 Gr.",
+      "producto": "Leche Condensada Sabor Limon Nestle 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 2830,
+      "diaPrecioTotal": 1986.5,
       "match": "curado"
     },
     {
@@ -694,12 +694,12 @@
     },
     {
       "nombre": "Film",
-      "precio": 4300,
+      "precio": 2365,
       "unidad": "u",
       "producto": "Film Transparente Dia 30 Mt.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 4300,
+      "diaPrecioTotal": 2365,
       "match": "auto"
     }
   ],
