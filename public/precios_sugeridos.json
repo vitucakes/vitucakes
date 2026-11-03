@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-10-27T07:36:41.062Z",
+  "generadoEn": "2026-11-03T09:18:11.140Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -414,12 +414,12 @@
     },
     {
       "nombre": "Oregano",
-      "precio": 7,
+      "precio": 9.5,
       "unidad": "g",
       "producto": "Orégano por 1 Kg",
       "granateQty": 1000,
       "granateUnit": "g",
-      "granatePrecioTotal": 7000,
+      "granatePrecioTotal": 9500,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1421-oregano-por-1-kg-4443"
     },
     {
