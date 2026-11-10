@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-11-03T09:44:56.347Z",
+  "generadoEn": "2026-11-10T10:06:14.996Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -103,10 +103,17 @@
           "descripcion": "Alimonada! Bizcochos húmedos de limón, relleno con frosting de chocolate blanco y limón, y mermelada de arándanos. Tiene 20cm y rinde entre 18/20 porciones! ...",
           "precio": 70900,
           "url": "https://candelitte.mitiendanube.com/productos/alimonada/"
+        },
+        {
+          "slug": "box-shots-dulces-krcc2",
+          "nombre": "Box Shots Dulces",
+          "descripcion": "Box Shots Dulces ¡Un mix irresistible para compartir y disfrutar! Nuestra box incluye 16 shots dulces en cuatro variedades: • 4 Cheesecake de frutos rojos • ...",
+          "precio": 65900,
+          "url": "https://candelitte.mitiendanube.com/productos/box-shots-dulces-krcc2/"
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-03T09:44:57.252Z"
+      "updatedAt": "2026-11-10T10:06:16.571Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -241,7 +248,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-03T09:44:58.490Z"
+      "updatedAt": "2026-11-10T10:06:18.247Z"
     },
     {
       "id": "silnari",
@@ -507,7 +514,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-11-03T09:45:01.401Z"
+      "updatedAt": "2026-11-10T10:06:22.147Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1706,7 +1713,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-03T09:45:26.702Z"
+      "updatedAt": "2026-11-10T10:06:44.552Z"
     },
     {
       "id": "natis-pasteleria",
@@ -1752,7 +1759,7 @@
           "slug": "francesca",
           "nombre": "Francesca",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada. Base de masa sablée sin gluten, gelée de frambuesa y cremoso de chocolate semiamargo. No apto celíac...",
-          "precio": 114000,
+          "precio": 115000,
           "url": "https://www.natispasteleria.com.ar/productos/francesca/"
         },
         {
@@ -1787,14 +1794,14 @@
           "slug": "crumble-de-manzana",
           "nombre": "Crumble de manzana",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base de masa sablée de vainilla, manzanas en almibar con un toque de canela y crumble de almendras. No apto c...",
-          "precio": 76000,
+          "precio": 77000,
           "url": "https://www.natispasteleria.com.ar/productos/crumble-de-manzana/"
         },
         {
           "slug": "nube-de-pera1",
           "nombre": "Nube de pera",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base de masa sablée de vainilla, peras en almibar con un toque de canela, crema de caju con un toque de canel...",
-          "precio": 71000,
+          "precio": 77000,
           "url": "https://www.natispasteleria.com.ar/productos/nube-de-pera1/"
         },
         {
@@ -1822,14 +1829,14 @@
           "slug": "mini-bombona1",
           "nombre": "Mini bombona",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada. Base de chocolate con almendras, cremoso de chocolate semiamargo y praline de frutas secas (almendra...",
-          "precio": 15300,
+          "precio": 16000,
           "url": "https://www.natispasteleria.com.ar/productos/mini-bombona1/"
         },
         {
           "slug": "porcion-choconatis",
           "nombre": "Porcion Choconati's",
           "descripcion": "Vegana y sin gluten. Base de galletitas tipo Chocolinas veganas y sin gluten, ganache de chocolate semiamargo, ganache de chocolate blanco vegano y dulce de ...",
-          "precio": 12500,
+          "precio": 13000,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-choconatis/"
         },
         {
@@ -1906,7 +1913,7 @@
           "slug": "no-ricota",
           "nombre": "No ricota",
           "descripcion": "Vegana, sin gluten.y sin azucar refinada Base sablée de almendras y relleno de no ricota, todo con un toque de limon. Tamaños: Grande: Mide 24cm de diámetro ...",
-          "precio": 75000,
+          "precio": 77000,
           "url": "https://www.natispasteleria.com.ar/productos/no-ricota/"
         },
         {
@@ -1976,14 +1983,14 @@
           "slug": "regina",
           "nombre": "Regina",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada agregada (no apta para celiacxs). Bizcocho humedo de chocolate con naranja, cremoso de chocolate semiamargo, n...",
-          "precio": 95000,
+          "precio": 96000,
           "url": "https://www.natispasteleria.com.ar/productos/regina/"
         },
         {
           "slug": "porcion-regina",
           "nombre": "Porcion Regina",
           "descripcion": "Torta vegana y sin gluten (no apta para celiacxs). Bizcocho humedo de chocolate con naranja endulzado con azucar mascabo, cremoso de chocolate semiamargo, na...",
-          "precio": 15500,
+          "precio": 15900,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-regina/"
         },
         {
@@ -2011,7 +2018,7 @@
           "slug": "alfajores-chocomani",
           "nombre": "Alfajores Chocomani",
           "descripcion": "Veganos, sin azucar refinada agregada, sin gluten (no aptos para celiacos) Tapas de cacao de harina de trigo sarraceno y mani, relleno de crema de chocolate ...",
-          "precio": 44000,
+          "precio": 45000,
           "url": "https://www.natispasteleria.com.ar/productos/alfajores-chocomani/"
         },
         {
@@ -2032,7 +2039,7 @@
           "slug": "carrot-cake",
           "nombre": "Carrot cake",
           "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, relleno y cubierto con frosting de tofu...",
-          "precio": 98000,
+          "precio": 100000,
           "url": "https://www.natispasteleria.com.ar/productos/carrot-cake/"
         },
         {
@@ -2060,14 +2067,14 @@
           "slug": "porcion-carrot-cake",
           "nombre": "Porcion carrot cake",
           "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, con relleno y cobertura de tofu y caju ...",
-          "precio": 13500,
+          "precio": 14300,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-carrot-cake/"
         },
         {
           "slug": "porcion-cheesecake-proteica",
           "nombre": "Porcion Cheesecake proteica",
           "descripcion": "Torta vegana, sin gluten y sin azúcar refinada. Base sableé de almendras endulzada con azucar de coco, cremoso a base de tofu orgánico endulzado con eritrito...",
-          "precio": 13100,
+          "precio": 13300,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-cheesecake-proteica/"
         },
         {
@@ -2179,7 +2186,7 @@
           "slug": "tarta-snicker-54r3y",
           "nombre": "Tarta Snicker",
           "descripcion": "Vegana, sin trigo y sin azucar Base sablee de cacao endulzada con eritritol, caramelo salado de datil con mani tostado y ganache de chocolate semiamargo sin ...",
-          "precio": 85000,
+          "precio": 86000,
           "url": "https://www.natispasteleria.com.ar/productos/tarta-snicker-54r3y/"
         },
         {
@@ -2226,7 +2233,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-03T09:45:29.668Z"
+      "updatedAt": "2026-11-10T10:06:48.962Z"
     }
   ]
 }
