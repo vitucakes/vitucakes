@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-11-10T09:55:42.562Z",
+  "generadoEn": "2026-11-17T10:47:32.027Z",
   "fuente": "Día",
   "items": [
     {
@@ -46,7 +46,7 @@
       "nombre": "Baggio",
       "precio": 999,
       "unidad": "u",
-      "producto": "Jugo Listo Multifrutas Con Vitaminas Baggio 200 Ml.",
+      "producto": "Jugo Listo Con Vitaminas Naranja Baggio 200 Ml.",
       "diaQty": 1,
       "diaUnit": "u",
       "diaPrecioTotal": 999,
@@ -54,12 +54,12 @@
     },
     {
       "nombre": "Batata",
-      "precio": 3.89,
+      "precio": 3.79,
       "unidad": "g",
       "producto": "Batata x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 3890,
+      "diaPrecioTotal": 3790,
       "match": "curado"
     },
     {
@@ -114,12 +114,12 @@
     },
     {
       "nombre": "Cebolla",
-      "precio": 2.69,
+      "precio": 2.19,
       "unidad": "g",
       "producto": "Cebolla Comercial en bolsa malla x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 2690,
+      "diaPrecioTotal": 2190,
       "match": "curado"
     },
     {
@@ -244,12 +244,12 @@
     },
     {
       "nombre": "Gelatina Sin Sabor",
-      "precio": 52.5,
+      "precio": 47,
       "unidad": "g",
       "producto": "Gelatina Reducida Sabor Frambuesa 20 Gr.",
       "diaQty": 20,
       "diaUnit": "g",
-      "diaPrecioTotal": 1050,
+      "diaPrecioTotal": 940,
       "match": "auto"
     },
     {
@@ -304,22 +304,22 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 32.6667,
+      "precio": 36.6,
       "unidad": "g",
       "producto": "Jamón Cocido Lario Feteado 150 Gr.",
       "diaQty": 150,
       "diaUnit": "g",
-      "diaPrecioTotal": 4900,
+      "diaPrecioTotal": 5490,
       "match": "curado"
     },
     {
       "nombre": "Jugo de limón",
-      "precio": 2229,
+      "precio": 2340,
       "unidad": "u",
       "producto": "Jugo de Limón Minerva 250 Ml.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 2229,
+      "diaPrecioTotal": 2340,
       "match": "auto"
     },
     {
@@ -344,12 +344,12 @@
     },
     {
       "nombre": "LECHE CONDENSADA",
-      "precio": 10.0582,
+      "precio": 11.6456,
       "unidad": "g",
-      "producto": "Leche Condensada Sabor Limon Nestle 395 Gr.",
+      "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3973,
+      "diaPrecioTotal": 4600,
       "match": "auto"
     },
     {
@@ -364,22 +364,22 @@
     },
     {
       "nombre": "Levadura",
-      "precio": 8.34,
+      "precio": 9.99,
       "unidad": "g",
-      "producto": "Levadura Fresca con Masa Madre Calsa 50 Gr",
-      "diaQty": 50,
+      "producto": "Levadura Familiar Calsa 100 Gr.",
+      "diaQty": 100,
       "diaUnit": "g",
-      "diaPrecioTotal": 417,
+      "diaPrecioTotal": 999,
       "match": "auto"
     },
     {
       "nombre": "Maicena",
-      "precio": 7.958,
+      "precio": 7.14,
       "unidad": "g",
       "producto": "Almidón De Maíz Maizena Clásica Sin Tacc 500 Gr.",
       "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 3979,
+      "diaPrecioTotal": 3570,
       "match": "curado"
     },
     {
@@ -414,12 +414,12 @@
     },
     {
       "nombre": "Mayonesa",
-      "precio": 3.6998,
+      "precio": 3.02,
       "unidad": "g",
-      "producto": "Mayonesa Dia 846 Gr.",
-      "diaQty": 846,
+      "producto": "Mayonesa Pouch Danica 500 Gr.",
+      "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 3130,
+      "diaPrecioTotal": 1510,
       "match": "curado"
     },
     {
@@ -494,12 +494,12 @@
     },
     {
       "nombre": "Oreos",
-      "precio": 18.4,
+      "precio": 20.1695,
       "unidad": "g",
-      "producto": "Galletitas Oreo Mini Rellenas Con Crema Sabor Original 50 Gr.",
-      "diaQty": 50,
+      "producto": "Galletitas Oreo Rellenas con Crema Sabor Original 354 Gr.",
+      "diaQty": 354,
       "diaUnit": "g",
-      "diaPrecioTotal": 920,
+      "diaPrecioTotal": 7140,
       "match": "curado"
     },
     {
@@ -534,12 +534,12 @@
     },
     {
       "nombre": "Queso Crema",
-      "precio": 11.4375,
+      "precio": 10.3958,
       "unidad": "g",
       "producto": "Queso Crema Clásico Dia 480 Gr.",
       "diaQty": 480,
       "diaUnit": "g",
-      "diaPrecioTotal": 5490,
+      "diaPrecioTotal": 4990,
       "match": "curado"
     },
     {
@@ -574,12 +574,12 @@
     },
     {
       "nombre": "Taza",
-      "precio": 5000,
+      "precio": 2500,
       "unidad": "u",
       "producto": "Taza Mug Badem Gris Linea Hogar 1 Ud.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 5000,
+      "diaPrecioTotal": 2500,
       "match": "auto"
     },
     {
@@ -634,12 +634,12 @@
     },
     {
       "nombre": "Leche condensada",
-      "precio": 10.0582,
+      "precio": 11.6456,
       "unidad": "g",
-      "producto": "Leche Condensada Sabor Limon Nestle 395 Gr.",
+      "producto": "Leche Condensada Dia 395 Gr.",
       "diaQty": 395,
       "diaUnit": "g",
-      "diaPrecioTotal": 3973,
+      "diaPrecioTotal": 4600,
       "match": "curado"
     },
     {
