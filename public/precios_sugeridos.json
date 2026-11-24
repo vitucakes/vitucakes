@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-11-17T10:27:51.043Z",
+  "generadoEn": "2026-11-24T12:16:44.466Z",
   "fuente": "Distribuidora El Granate",
   "items": [
     {
@@ -44,12 +44,12 @@
     },
     {
       "nombre": "Azúcar",
-      "precio": 1.2,
+      "precio": 1.1,
       "unidad": "g",
       "producto": "Azúcar Común Tipo &#34;A&#34; 10 Kg",
       "granateQty": 10000,
       "granateUnit": "g",
-      "granatePrecioTotal": 12000,
+      "granatePrecioTotal": 11000,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1478-azucar-comun-tipo-a-10-kg-4500"
     },
     {
@@ -644,12 +644,12 @@
     },
     {
       "nombre": "atun",
-      "precio": 2400,
+      "precio": 2600,
       "unidad": "u",
       "producto": "Atún En Aceite y agua por 170 Grs",
       "granateQty": 1,
       "granateUnit": "u",
-      "granatePrecioTotal": 2400,
+      "granatePrecioTotal": 2600,
       "sourceUrl": "https://www.distribuidoraelgranate.com.ar/shop/1167-atun-en-aceite-y-agua-por-170-grs-4201"
     },
     {
