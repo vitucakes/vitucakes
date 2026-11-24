@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-11-17T10:47:32.027Z",
+  "generadoEn": "2026-11-24T12:33:29.457Z",
   "fuente": "Día",
   "items": [
     {
@@ -104,12 +104,12 @@
     },
     {
       "nombre": "carne picada",
-      "precio": 14,
+      "precio": 22,
       "unidad": "g",
-      "producto": "Carne Picada común Atmósfera Modificada 600 Gr.",
-      "diaQty": 600,
+      "producto": "Carne picada Especial Atmósfera Modificada 500 Gr.",
+      "diaQty": 500,
       "diaUnit": "g",
-      "diaPrecioTotal": 8400,
+      "diaPrecioTotal": 11000,
       "match": "curado"
     },
     {
@@ -304,12 +304,12 @@
     },
     {
       "nombre": "Jamón cocido",
-      "precio": 36.6,
+      "precio": 33.5933,
       "unidad": "g",
       "producto": "Jamón Cocido Lario Feteado 150 Gr.",
       "diaQty": 150,
       "diaUnit": "g",
-      "diaPrecioTotal": 5490,
+      "diaPrecioTotal": 5039,
       "match": "curado"
     },
     {
@@ -514,12 +514,12 @@
     },
     {
       "nombre": "Pechuga de pollo",
-      "precio": 13.49,
+      "precio": 22.5,
       "unidad": "g",
-      "producto": "Suprema de Pollo x Kg.",
+      "producto": "Suprema Pollo Cristal x kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 13490,
+      "diaPrecioTotal": 22500,
       "match": "curado"
     },
     {
@@ -594,22 +594,22 @@
     },
     {
       "nombre": "Tomate cherry",
-      "precio": 9.99,
+      "precio": 8.99,
       "unidad": "g",
       "producto": "Tomate Cherry x Kg.",
       "diaQty": 1000,
       "diaUnit": "g",
-      "diaPrecioTotal": 9990,
+      "diaPrecioTotal": 8990,
       "match": "curado"
     },
     {
       "nombre": "Vainillas",
-      "precio": 1890,
+      "precio": 1990,
       "unidad": "u",
       "producto": "Vainillas Dia 148 Gr.",
       "diaQty": 1,
       "diaUnit": "u",
-      "diaPrecioTotal": 1890,
+      "diaPrecioTotal": 1990,
       "match": "auto"
     },
     {
