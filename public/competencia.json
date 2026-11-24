@@ -1,5 +1,5 @@
 {
-  "generadoEn": "2026-11-17T10:52:46.000Z",
+  "generadoEn": "2026-11-24T12:42:29.680Z",
   "competidoras": [
     {
       "id": "candelitte",
@@ -112,8 +112,17 @@
           "url": "https://candelitte.mitiendanube.com/productos/box-shots-dulces-krcc2/"
         }
       ],
-      "errores": [],
-      "updatedAt": "2026-11-17T10:52:46.820Z"
+      "errores": [
+        {
+          "url": "https://candelitte.mitiendanube.com/productos/box-navideno-grande-1cafe/",
+          "error": "sin precio"
+        },
+        {
+          "url": "https://candelitte.mitiendanube.com/productos/box-navideno-chico-1qmdf/",
+          "error": "sin precio"
+        }
+      ],
+      "updatedAt": "2026-11-24T12:42:30.740Z"
     },
     {
       "id": "memo-la-pasteleria",
@@ -248,7 +257,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-17T10:52:48.521Z"
+      "updatedAt": "2026-11-24T12:42:32.483Z"
     },
     {
       "id": "silnari",
@@ -256,11 +265,25 @@
       "fuente": "https://www.silnari.com",
       "productos": [
         {
-          "slug": "caja-dia-de-la-madre",
-          "nombre": "CAJA DÍA DE LA MADRE",
-          "descripcion": "BOX FELIZ DÍA DE LA MADRE - Edición LimitadaPara la que nos enseñó que el amor se demuestra en los detalles 🤍Creamos una caja pensada para emocionarla desde que la ve. Prese",
-          "precio": 72600,
-          "url": "https://www.silnari.com/tortas-y-tartas/caja-dia-de-la-madre"
+          "slug": "box-seleccion-navidad-artesanal-silnari-pasteleria",
+          "nombre": "Box Selección Navidad Artesanal",
+          "descripcion": "⚠️ ¡Preventa exclusiva con descuento hasta el 01/12 inclusive o hasta agotar stock! Edición limitada, pocas unidades disponibles.El regalo definitivo para estas Fiestas o par",
+          "precio": 98000,
+          "url": "https://www.silnari.com/navidad/box-seleccion-navidad-artesanal-silnari-pasteleria"
+        },
+        {
+          "slug": "box-navidad-clasica",
+          "nombre": "Box Navidad Clásica",
+          "descripcion": "⚠️ ¡Preventa exclusiva con descuento hasta el 01/12 inclusive o hasta agotar stock! Edición limitada, pocas unidades disponibles.Disfrutá y compartí lo mejor de la pasteler",
+          "precio": 70000,
+          "url": "https://www.silnari.com/navidad/box-navidad-clasica"
+        },
+        {
+          "slug": "panettone-artesanal-500g",
+          "nombre": "Panettone Artesanal",
+          "descripcion": "⚠️ ¡Preventa exclusiva con descuento hasta el 01/12 inclusive o hasta agotar stock! Edición limitada, pocas unidades disponibles.Panettone Artesanal de Autor (500 g) - Silnar",
+          "precio": 29000,
+          "url": "https://www.silnari.com/navidad/panettone-artesanal-500g"
         },
         {
           "slug": "torta-de-chocolate-con-mousse-de-baileys",
@@ -514,7 +537,7 @@
           "error": "sin precio"
         }
       ],
-      "updatedAt": "2026-11-17T10:52:51.798Z"
+      "updatedAt": "2026-11-24T12:42:36.132Z"
     },
     {
       "id": "delicias-del-corazon",
@@ -1713,7 +1736,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-17T10:53:12.305Z"
+      "updatedAt": "2026-11-24T12:42:59.119Z"
     },
     {
       "id": "natis-pasteleria",
@@ -1952,10 +1975,17 @@
           "url": "https://www.natispasteleria.com.ar/productos/alfajores-de-choco-y-dulce-de-leche/"
         },
         {
+          "slug": "pan-dulce-120g",
+          "nombre": "Pan dulce 100g (pack de 6 y 12 unidades)",
+          "descripcion": "Vegano, sin gluten (no apto celiacos) y sin azucar refinada. Presentacion de 100g. Endulzado con datiles y eritritol, contiene almendras, nueces, castañas de...",
+          "precio": 45000,
+          "url": "https://www.natispasteleria.com.ar/productos/pan-dulce-120g/"
+        },
+        {
           "slug": "turron-de-choco-y-mani",
           "nombre": "Turron chocomani",
-          "descripcion": "Vegano, sin azucar refinada agregada y sin harinas (no apto para celiacos) Turron de chocolate y mani con frutas secas (almendras, mani y avellanas), cubiert...",
-          "precio": 29121,
+          "descripcion": "Vegano, sin azucar refinada y sin harinas (no apto para celiacos) Turron de chocolate y mani con frutas secas (almendras, mani y avellanas), cubierto con cho...",
+          "precio": 40000,
           "url": "https://www.natispasteleria.com.ar/productos/turron-de-choco-y-mani/"
         },
         {
@@ -1969,7 +1999,7 @@
           "slug": "porcion-key-lime-pie",
           "nombre": "Porcion key lime pie",
           "descripcion": "Vegana, bajo contenido de azucar refinada y sin gluten (no apto celiacos) Base sablee de almendras, cremoso de lima y crema tipo chantilly. La porcion corres...",
-          "precio": 12000,
+          "precio": 14450,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-key-lime-pie/"
         },
         {
@@ -2025,14 +2055,14 @@
           "slug": "garrapinadas-de-avellanas",
           "nombre": "Garrapiñadas de avellanas",
           "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
-          "precio": 13500,
+          "precio": 18000,
           "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-avellanas/"
         },
         {
           "slug": "garrapinadas-de-almendras",
           "nombre": "Garrapiñadas de almendras",
           "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Avellanas tostadas, garrapiñadas con azucar de coco y bañadas con chocolate semiamargo...",
-          "precio": 11300,
+          "precio": 15000,
           "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-almendras/"
         },
         {
@@ -2085,38 +2115,31 @@
           "url": "https://www.natispasteleria.com.ar/productos/cheesecake-proteica/"
         },
         {
-          "slug": "carrot-cake-navidena-8kh37",
-          "nombre": "Carrot cake navideña",
-          "descripcion": "Vegana, sin azucar y sin harina de trigo Cake de zanahoria, endulzado con eritritol, con un toque de canela y nueces, cubierto con frosting de tofu y caju sa...",
-          "precio": 65000,
-          "url": "https://www.natispasteleria.com.ar/productos/carrot-cake-navidena-8kh37/"
-        },
-        {
           "slug": "garrapinadas-de-pistacho-aoz0n",
           "nombre": "Garrapiñadas de pistacho",
-          "descripcion": "Veganas, sin azucar refinada agregada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo...",
-          "precio": 15500,
+          "descripcion": "Veganas, sin azucar refinada y sin harinas (no apto celiacos) Pistachos tostados, garrapiñados con azucar de coco y bañados con chocolate semiamargo Presenta...",
+          "precio": 19000,
           "url": "https://www.natispasteleria.com.ar/productos/garrapinadas-de-pistacho-aoz0n/"
         },
         {
           "slug": "franatis-tpbk8",
           "nombre": "Franatis",
           "descripcion": "Veganas y sin harinas (no apto celiacos) Frambuesas bañadas en chocolate blanco vegano y con chocolate semiamargo Presentacion en bolsita de 100g FOTO ILUSTR...",
-          "precio": 16100,
+          "precio": 17500,
           "url": "https://www.natispasteleria.com.ar/productos/franatis-tpbk8/"
         },
         {
           "slug": "porcion-natisdad-dcbas",
           "nombre": "Porcion Natisdad",
           "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
-          "precio": 12100,
+          "precio": 15000,
           "url": "https://www.natispasteleria.com.ar/productos/porcion-natisdad-dcbas/"
         },
         {
           "slug": "natisdad-4oou5",
           "nombre": "Natisdad",
           "descripcion": "Torta vegana y sin gluten. Bizcocho humedo de chocolate relleno con ganache de chocolate blanco montada y frutillas y cubierto con mas ganache. No apto celía...",
-          "precio": 55000,
+          "precio": 60000,
           "url": "https://www.natispasteleria.com.ar/productos/natisdad-4oou5/"
         },
         {
@@ -2233,7 +2256,7 @@
         }
       ],
       "errores": [],
-      "updatedAt": "2026-11-17T10:53:15.018Z"
+      "updatedAt": "2026-11-24T12:43:01.047Z"
     }
   ]
 }
